@@ -2,112 +2,144 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
+    <div id="index">
+      <div className="banner">
+        경희대학교 소프트웨어 해커톤 khu<b>thon</b>,<br />
+        {/* @if($event && $event->isRegistering()==0 && $event->isEventing()==-1)
+      잠시 후에 시작됩니다!
+    @elseif($event && $event->isRegistering()==1)
+      지금 참가 접수 하세요!
+    @elseif($event && $event->isEventing()==1)
+      모두가 개발에 빠져있습니다!
+    @elseif($event && $event->isEventing()==0)
+      내년에 또 만나요!
+    @else */}
+        여러분과 함께 하고 싶습니다!
+        {/* @endif */}
+      </div>
+
+      <div className="registering">
+        {/* @if($event)
+      <h5>참가 접수 @if($event->isRegistering()==1) <span>접수 중</span> @endif </h5>
+      <p><span className="nowrap">{{$event->getRegisterStartAt('kor')}}</span> <span className="nowrap">~ {{$event->getRegisterEndAt('kor')}}</span></p>
+      <p className="description">
+        @if($event->individual)
+          재학생으로 구성된 1~4명의 팀으로 접수하거나, 행사 당일 다른 팀에 포함될 수 있는 개인 단위로 접수할 수 있습니다.
+        @else
+          재학생으로 구성된 1~4명의 팀으로<br />접수할 수 있습니다.
+        @endif
+      </p>
+      <h5>해커톤 행사 @if($event->isEventing()==1) <span>진행 중</span> @endif </h5>
+      <p><span className="nowrap">{{$event->getEventStartAt('kor')}}</span> <span className="nowrap">~ {{$event->getEventEndAt('kor')}}</span></p>
+    @else */}
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <h5>기대해주세요!</h5>
+        <p>
+          <span className="nowrap">아직 행사가 기획 중에 있습니다!</span>
         </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
+        {/* @endif */}
+      </div>
+      <div className="clear"></div>
+
+      <div className="relative">
+        <div className="notice">
+          <h4>
+            <a href="{{url('/notice')}}">공지사항</a>
+          </h4>
+          <ul>
+            {/* @foreach($documents['notice'] as $doc)
+          <li><a href="{{url('/'.$doc->board.'/'.$doc->id)}}"><span className="title">{{$doc->title}}</span></a></li>
+        @endforeach */}
+          </ul>
+        </div>
+        <div className="gallery">
+          <div className="image_wrap image relative">
             <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
+              src="https://thon.khlug.org/images/2018/01.jpg"
+              alt="첫번째 이미지"
+              fill
+              className="object-cover"
             />
-          </a>
+          </div>
+          <div className="image_wrap image relative">
+            <Image
+              src="https://thon.khlug.org/images/2017/01.jpg"
+              alt="두번째 이미지"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="image_wrap image relative">
+            <Image
+              src="https://thon.khlug.org/images/2018/06.jpg"
+              alt="세번째 이미지"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="image_wrap image relative">
+            <Image
+              src="https://thon.khlug.org/images/2018/07.jpg"
+              alt="네번째 이미지"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="image_wrap image relative">
+            <Image
+              src="https://thon.khlug.org/images/2017/04.jpg"
+              alt="다섯번째 이미지"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="image_wrap image relative">
+            <Image
+              src="https://thon.khlug.org/images/2018/08.jpg"
+              alt="여섯번째 이미지"
+              fill
+              className="object-cover"
+            />
+          </div>
+
+          <div className="image_wrap image relative">
+            <Image
+              src="https://thon.khlug.org/images/2018/03.jpg"
+              alt="일곱번째 이미지"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="image_wrap image relative">
+            <Image
+              src="https://thon.khlug.org/images/2017/09.jpg"
+              alt="여덟번째 이미지"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="image_wrap image relative">
+            <Image
+              src="https://thon.khlug.org/images/2018/10.jpg"
+              alt="아홉번째 이미지"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="clear"></div>
         </div>
       </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+      <div className="clear"></div>
+    </div>
   );
 }
