@@ -837,32 +837,6 @@ body {
 #body .list li.item .thumbnail:hover span {
   opacity: 1;
 }
-#body .list li.item .name {
-  padding: 5px 0 0 0;
-  font-size: 20px;
-}
-#body .list li.item .idea {
-  color: #999;
-  line-height: 1.5;
-  font-size: 14px;
-}
-#body .list li.item .member {
-  padding: 10px 0;
-  font-size: 14px;
-}
-#body .list li.item .member .m {
-  font-size: 14px;
-  margin: 5px 10px 5px 0;
-  white-space: nowrap;
-}
-#body .list li.item .member .club {
-  font-size: 11px;
-  padding: 0 3px;
-  background: #00a0e9;
-  color: #fff;
-  position: relative;
-  top: -1px;
-}
 
 #body .board {
   margin: 20px 27px;

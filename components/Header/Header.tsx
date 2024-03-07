@@ -1,18 +1,16 @@
 "use client";
 
-import classNames from "classnames";
-import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { Cube } from "../Cube/Cube";
+import { NavItem } from "./NavItem";
 
 export function Header() {
-  const path = usePathname();
-
   return (
     <div id="header">
       <h1 className="logo">
-        <a href="{{url('/')}}">
+        <Link href="/">
           <span className="blind">khuthon</span>
-        </a>
+        </Link>
       </h1>
 
       <Cube
@@ -31,38 +29,10 @@ export function Header() {
 
       <div className="navigation">
         <ul>
-          <li>
-            <a
-              href="{{url('/about')}}"
-              className={classNames({ active: path === "/about" })}
-            >
-              해커톤 소개
-            </a>
-          </li>
-          <li>
-            <a
-              href="{{url('/notice')}}"
-              className={classNames({ active: path === "/forum" })}
-            >
-              포럼
-            </a>
-          </li>
-          <li>
-            <a
-              href="{{url('/register')}}"
-              className={classNames({ active: path === "/register" })}
-            >
-              참가 접수
-            </a>
-          </li>
-          <li>
-            <a
-              href="{{url('/page')}}"
-              className={classNames({ active: path === "/page" })}
-            >
-              팀 페이지
-            </a>
-          </li>
+          <NavItem href="/about">해커톤 소개</NavItem>
+          <NavItem href="/notice">공지</NavItem>
+          <NavItem href="/register">참가 접수</NavItem>
+          <NavItem href="/team">팀 페이지</NavItem>
         </ul>
       </div>
 
