@@ -1,13 +1,16 @@
 "use client";
 
-import { AwardResult } from "@khlug/components/AwardResult/AwardResult";
-import { WinnerTeam } from "@khlug/components/WinnerTeam/WinnerTeam";
 import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
+import "dayjs/locale/ko";
+
+import { AwardResult } from "@khlug/components/AwardResult/AwardResult";
+import { WinnerTeam } from "@khlug/components/WinnerTeam/WinnerTeam";
 
 dayjs.extend(timezone);
 dayjs.extend(utc);
+dayjs.locale("ko");
 
 type Props = {
   params: {
@@ -44,7 +47,7 @@ function calcCurrentTimeStatus(range: TimeRange): CurrentTimeStatus {
 }
 
 function formatDate(date: dayjs.Dayjs): string {
-  return date.format("YYYY년 MM월 DD일 HH:mm");
+  return date.format("YYYY년 MM월 DD일 ddd요일 HH:mm");
 }
 
 function formatDateRange(range: TimeRange): string {
@@ -58,7 +61,7 @@ export default function YearAbout({ params }: Props) {
   const thumbnail = "/images/favicon.png";
 
   return (
-    <div>
+    <>
       {/* <div className="gallery">
     <div className="image_wrap"><div className="image" style="background-image:url('/images/2022/01.jpg')"></div></div>
     <div className="image_wrap"><div className="image" style="background-image:url('/images/2022/07.jpg')"></div></div>
@@ -264,6 +267,6 @@ export default function YearAbout({ params }: Props) {
           </li>
         </ul>
       </div>
-    </div>
+    </>
   );
 }
