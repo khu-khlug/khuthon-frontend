@@ -1,9 +1,8 @@
 @import url("https://fonts.googleapis.com/earlyaccess/notosanskr.css");
 @import url("https://khlug.org/styles/common.css");
-/* @import url("/styles/xeicon.css"); */
+@import url("https://khlug.org/styles/content.css");
+@import url("https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css");
 
-/* @tailwind base; */
-/* @tailwind components; */
 @tailwind utilities;
 
 body {
