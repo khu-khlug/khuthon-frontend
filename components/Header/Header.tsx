@@ -29,7 +29,7 @@ export function Header() {
 
       <div className="navigation">
         <ul>
-          <NavItem href="/about">해커톤 소개</NavItem>
+          <NavItem href="/about">소개</NavItem>
           <NavItem href="/notice">공지</NavItem>
           <NavItem href="/register">참가 접수</NavItem>
           <NavItem href="/team">팀 페이지</NavItem>
