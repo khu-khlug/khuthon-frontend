@@ -1,0 +1,11 @@
+#body .complete {
+  margin: 12px 18px;
+  padding: 70px 20px;
+  font-size: 30px;
+  line-height: 1.5;
+  background: url("https://khlug.org/images/favicon_white.gif") #333 no-repeat
+    right 10px bottom 10px;
+  background-size: 20px 20px;
+  color: #fff;
+  text-align: center;
+}

@@ -672,21 +672,6 @@ body {
   color: #999;
 }
 
-#body .complete {
-  margin: 20px 27px;
-  padding: 70px 20px;
-  font-size: 30px;
-  background: url("https://khlug.org/images/favicon_white.gif") #333 no-repeat
-    right 10px bottom 10px;
-  line-height: 1.5;
-  background-size: 20px 20px;
-  color: #fff;
-  text-align: center;
-}
-#body .container .complete {
-  margin: 30px 27px 10px 27px;
-}
-
 #body .team {
   margin: 20px 27px;
   background: #333;
