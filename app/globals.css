@@ -1434,6 +1434,15 @@ body {
   white-space: nowrap;
 }
 
+.pdf_button {
+  display: inline-block;
+  color: #fff !important;
+  margin: -5px 0 10px 15px !important;
+  background: #999;
+  padding: 2px 5px !important;
+  font-size: 14px;
+}
+
 @media only screen and (max-width: 800px) {
   .cube {
     width: 30px;
