@@ -11,8 +11,6 @@ type Props = {
 export default function AboutLayout({ children }: Props) {
   const path = usePathname();
 
-  console.log(path);
-
   return (
     <>
       <div className="navigation">
