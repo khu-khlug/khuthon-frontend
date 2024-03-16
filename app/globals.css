@@ -5,6 +5,10 @@
 
 @tailwind utilities;
 
+.Text__Main-Color {
+  color: #00a0e9;
+}
+
 body {
   background: url("/images/background.jpg") #eee repeat center center;
   background-attachment: fixed;
