@@ -14,21 +14,24 @@ export default function AboutLayout({ children }: Props) {
   return (
     <>
       <div className="navigation">
-        <a href="/judge" className={classNames({ active: path === "/judge" })}>
+        <Link
+          href="/judge"
+          className={classNames({ active: path === "/judge" })}
+        >
           대시보드
-        </a>
-        <a
+        </Link>
+        <Link
           href="/judge/team"
           className={classNames({ active: path === "/judge/team" }, "ml-2")}
         >
           팀 현황
-        </a>
-        <a
+        </Link>
+        <Link
           href="/judge/judging"
           className={classNames({ active: path === "/judge/judging" }, "ml-2")}
         >
           심사
-        </a>
+        </Link>
       </div>
       {children}
     </>
