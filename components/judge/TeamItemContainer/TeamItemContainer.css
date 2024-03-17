@@ -1,0 +1,9 @@
+.TeamItemContainer__Expandable {
+  transition: max-height 0.5s ease-in-out;
+  overflow: hidden;
+  max-height: 0px;
+}
+
+.TeamItemContainer__Expandable.expand {
+  max-height: 512px;
+}

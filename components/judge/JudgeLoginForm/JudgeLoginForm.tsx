@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Container from "../Container/Container";
+import Container from "../../Container/Container";
 
 export default function JudgeLoginForm() {
   const [message, setMessage] = useState<string | null>(null);
