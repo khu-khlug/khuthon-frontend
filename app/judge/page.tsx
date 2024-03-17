@@ -6,6 +6,7 @@ import { MemberState, University } from "@khlug/constant";
 import JudgingCriteriaContainer from "@khlug/components/judge/JudgingCriteriaContainer/JudgingCriteriaContainer";
 import TeamItemContainer from "@khlug/components/judge/TeamItemContainer/TeamItemContainer";
 import { useState } from "react";
+import JudgeListenerProvider from "@khlug/components/judge/JudgeListenerProvider/JudgeListenerProvider";
 
 export default function JudgePage() {
   const mockIsLogin = true;
@@ -18,10 +19,10 @@ export default function JudgePage() {
     judgeEndAt: "2023년 11월 25일 토요일 23:59",
     judgeRange: "BETWEEN" as const,
   };
-  const mockTeam = {
-    id: "teamId1",
-    name: "팀1",
-    idea: "아이디어1",
+  const mockTeams = Array.from({ length: 20 }, (_, idx) => ({
+    id: `teamId${idx}`,
+    name: `팀${idx + 1}`,
+    idea: `아이디어${idx + 1}`,
     members: [
       {
         id: "memberId1",
@@ -35,10 +36,10 @@ export default function JudgePage() {
       },
     ],
     file: {
-      name: "파일1",
+      name: "file1",
       url: "/file1",
     },
-  };
+  }));
   const mockJudge = {
     creativity: 0,
     practicality: 0,
@@ -47,17 +48,29 @@ export default function JudgePage() {
     completeness: 0,
   };
 
+  const [selectedTeamId, setSelectedTeamId] = useState<string | null>(null);
+
+  const handleTeamItemClick = (teamId: string) => {
+    setSelectedTeamId(teamId);
+  };
+
   return mockIsLogin ? (
-    <>
+    <JudgeListenerProvider
+      onJudge={(teamId, judge) => console.log(teamId, judge)}
+    >
       <ParticipantCounterContainer />
       <JudgingCriteriaContainer />
-      <TeamItemContainer
-        event={mockEvent}
-        team={mockTeam}
-        judge={mockJudge}
-        expand={true}
-      />
-    </>
+      {mockTeams.map((team) => (
+        <TeamItemContainer
+          key={team.id}
+          event={mockEvent}
+          team={team}
+          judge={mockJudge}
+          expand={team.id === selectedTeamId}
+          onClick={handleTeamItemClick}
+        />
+      ))}
+    </JudgeListenerProvider>
   ) : (
     <JudgeLoginForm />
   );

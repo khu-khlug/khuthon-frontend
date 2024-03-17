@@ -2,14 +2,8 @@
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-
-export type Judge = {
-  creativity: number;
-  practicality: number;
-  skill: number;
-  design: number;
-  completeness: number;
-};
+import { Judge } from "@khlug/types/Judge";
+import { useJudgeListener } from "@khlug/components/judge/JudgeListenerProvider/JudgeListenerProvider";
 
 type JudgeFormValue = { [K in keyof Judge]: string };
 
@@ -17,11 +11,15 @@ type Props = {
   event: {
     judgeRange: "BEFORE" | "AFTER" | "BETWEEN";
   };
+  team: {
+    id: string;
+  };
   judge: Judge;
-  onJudge: (judge: Judge) => void;
 };
 
-export default function JudgingForm({ event, judge, onJudge }: Props) {
+export default function JudgingForm({ event, team, judge }: Props) {
+  const onJudge = useJudgeListener();
+
   const { register, handleSubmit } = useForm<JudgeFormValue>({
     values: {
       creativity: judge.creativity.toString(),
@@ -62,7 +60,7 @@ export default function JudgingForm({ event, judge, onJudge }: Props) {
     }
 
     setMessage(null);
-    onJudge({
+    onJudge(team.id, {
       creativity,
       practicality,
       skill,

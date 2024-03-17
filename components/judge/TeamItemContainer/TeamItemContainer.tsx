@@ -38,6 +38,7 @@ type Props = {
     judgeRange: "BEFORE" | "AFTER" | "BETWEEN";
   };
   expand: boolean;
+  onClick: (teamId: string) => void;
 };
 
 export default function TeamItemContainer({
@@ -45,39 +46,41 @@ export default function TeamItemContainer({
   team,
   judge,
   expand,
+  onClick,
 }: Props) {
   return (
-    <Container>
-      <h4 className="mt-4">{team.name}</h4>
-      <p>{team.idea}</p>
-      <div
-        id="HelloWorld"
-        className={classNames("TeamItemContainer__Expandable", {
-          expand: expand,
-        })}
-      >
-        <Divider />
-        <MemberList members={team.members} />
-        {team.file && (
-          <>
-            <Divider />
-            <p>
-              <a
-                href={team.file.url}
-                className="no-underline text-gray-400 hover:text-gray-500"
-              >
-                <i className="xi-download"></i> {team.file.name}
-              </a>
-            </p>
-          </>
-        )}
-        <h4 className="mt-4">심사</h4>
-        <JudgingForm
-          event={event}
-          judge={judge}
-          onJudge={(judge) => console.log(judge)}
-        />
-      </div>
-    </Container>
+    <div
+      className={classNames({ "cursor-pointer": !expand })}
+      onClick={() => onClick(team.id)}
+    >
+      <Container>
+        <h4 className="mt-4">{team.name}</h4>
+        <p>{team.idea}</p>
+        <div
+          id="HelloWorld"
+          className={classNames("TeamItemContainer__Expandable", {
+            expand: expand,
+          })}
+        >
+          <Divider />
+          <MemberList members={team.members} />
+          {team.file && (
+            <>
+              <Divider />
+              <p>
+                <a
+                  href={team.file.url}
+                  className="no-underline text-gray-400 hover:text-gray-500"
+                >
+                  <i className="xi-download"></i> {team.file.name}
+                </a>
+              </p>
+            </>
+          )}
+          <h4 className="mt-4">심사</h4>
+          <JudgingForm event={event} team={team} judge={judge} />
+        </div>
+      </Container>
+    </div>
   );
 }
