@@ -1,24 +1,19 @@
 "use client";
 
+import { useState } from "react";
+import { MemberState, University } from "@khlug/constant";
+
 import ParticipantCounterContainer from "@khlug/components/ParticipantCounterContainer/ParticipantCounterContainer";
 import JudgeLoginForm from "@khlug/components/judge/JudgeLoginForm/JudgeLoginForm";
-import { MemberState, University } from "@khlug/constant";
 import JudgingCriteriaContainer from "@khlug/components/judge/JudgingCriteriaContainer/JudgingCriteriaContainer";
 import TeamItemContainer from "@khlug/components/judge/TeamItemContainer/TeamItemContainer";
-import { useState } from "react";
-import JudgeListenerProvider from "@khlug/components/judge/JudgeListenerProvider/JudgeListenerProvider";
+import { useEvent } from "@khlug/components/EventProvider/EventProvider";
+import JudgeProvider from "@khlug/components/judge/JudgeProvider/JudgeProvider";
 
 export default function JudgePage() {
+  const event = useEvent();
+
   const mockIsLogin = true;
-  const mockEvent = {
-    registerStartAt: "2023년 10월 30일 월요일 00:00",
-    registerEndAt: "2023년 11월 10일 금요일 23:59",
-    eventStartAt: "2023년 11월 20일 월요일 00:00",
-    eventEndAt: "2023년 11월 24일 금요일 23:59",
-    judgeStartAt: "2023년 11월 25일 토요일 00:00",
-    judgeEndAt: "2023년 11월 25일 토요일 23:59",
-    judgeRange: "BETWEEN" as const,
-  };
   const mockTeams = Array.from({ length: 20 }, (_, idx) => ({
     id: `teamId${idx}`,
     name: `팀${idx + 1}`,
@@ -40,37 +35,29 @@ export default function JudgePage() {
       url: "/file1",
     },
   }));
-  const mockJudge = {
-    creativity: 0,
-    practicality: 0,
-    skill: 0,
-    design: 0,
-    completeness: 0,
-  };
 
   const [selectedTeamId, setSelectedTeamId] = useState<string | null>(null);
+  const [message, setMessage] = useState<string | null>(null);
 
   const handleTeamItemClick = (teamId: string) => {
     setSelectedTeamId(teamId);
   };
 
   return mockIsLogin ? (
-    <JudgeListenerProvider
-      onJudge={(teamId, judge) => console.log(teamId, judge)}
-    >
+    <JudgeProvider onError={setMessage} initial={{}}>
+      {message && <div className="error">{message}</div>}
       <ParticipantCounterContainer />
       <JudgingCriteriaContainer />
       {mockTeams.map((team) => (
         <TeamItemContainer
           key={team.id}
-          event={mockEvent}
           team={team}
-          judge={mockJudge}
+          selectedTeamId={selectedTeamId}
           expand={team.id === selectedTeamId}
           onClick={handleTeamItemClick}
         />
       ))}
-    </JudgeListenerProvider>
+    </JudgeProvider>
   ) : (
     <JudgeLoginForm />
   );

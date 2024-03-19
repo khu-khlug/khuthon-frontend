@@ -1,3 +1,5 @@
+"use client";
+
 import { MemberState, University } from "@khlug/constant";
 import Divider from "../../Divider/Divider";
 import JudgingForm from "../JudgingForm/JudgingForm";
@@ -6,6 +8,8 @@ import MemberList from "../MemberList/MemberList";
 import classNames from "classnames";
 
 import "./TeamItemContainer.css";
+import { useEvent } from "@khlug/components/EventProvider/EventProvider";
+import { useDoJudge, useJudge } from "../JudgeProvider/JudgeProvider";
 
 type Props = {
   team: {
@@ -27,31 +31,33 @@ type Props = {
       url: string;
     } | null;
   };
-  judge: {
-    creativity: number;
-    practicality: number;
-    skill: number;
-    design: number;
-    completeness: number;
-  };
-  event: {
-    judgeRange: "BEFORE" | "AFTER" | "BETWEEN";
-  };
+  selectedTeamId: string | null;
   expand: boolean;
   onClick: (teamId: string) => void;
 };
 
 export default function TeamItemContainer({
-  event,
   team,
-  judge,
+  selectedTeamId,
   expand,
   onClick,
 }: Props) {
+  const event = useEvent();
+  const doJudge = useDoJudge();
+
+  const handleClick = () => {
+    onClick(team.id);
+
+    console.log(selectedTeamId, team.id);
+    if (selectedTeamId && selectedTeamId !== team.id) {
+      doJudge(selectedTeamId);
+    }
+  };
+
   return (
     <div
       className={classNames({ "cursor-pointer": !expand })}
-      onClick={() => onClick(team.id)}
+      onClick={handleClick}
     >
       <Container>
         <h4 className="mt-4">{team.name}</h4>
@@ -77,8 +83,12 @@ export default function TeamItemContainer({
               </p>
             </>
           )}
-          <h4 className="mt-4">심사</h4>
-          <JudgingForm event={event} team={team} judge={judge} />
+          {/* {event.judgeRange === "BETWEEN" && ( */}
+          <>
+            <h4 className="mt-4">심사</h4>
+            <JudgingForm team={team} />
+          </>
+          {/* )} */}
         </div>
       </Container>
     </div>

@@ -1,38 +1,27 @@
 "use client";
 
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { Judge } from "@khlug/types/Judge";
-import { useJudgeListener } from "@khlug/components/judge/JudgeListenerProvider/JudgeListenerProvider";
-
-type JudgeFormValue = { [K in keyof Judge]: string };
+import {
+  useDoJudge,
+  useJudge,
+} from "@khlug/components/judge/JudgeProvider/JudgeProvider";
 
 type Props = {
-  event: {
-    judgeRange: "BEFORE" | "AFTER" | "BETWEEN";
-  };
   team: {
     id: string;
   };
-  judge: Judge;
 };
 
-export default function JudgingForm({ event, team, judge }: Props) {
-  const onJudge = useJudgeListener();
+export default function JudgingForm({ team }: Props) {
+  const doJudge = useDoJudge();
+  const [judge, setJudge] = useJudge(team.id);
 
-  const { register, handleSubmit } = useForm<JudgeFormValue>({
-    values: {
-      creativity: judge.creativity.toString(),
-      practicality: judge.practicality.toString(),
-      skill: judge.skill.toString(),
-      design: judge.design.toString(),
-      completeness: judge.completeness.toString(),
-    },
-  });
   const [message, setMessage] = useState<string | null>(null);
+  const [localJudge, setLocalJudge] = useState(judge);
 
-  const validateValueAndParse = (value: string) => {
-    const parsed = parseFloat(value);
+  const validateValueAndParse = (value: string | number) => {
+    const parsed = parseFloat(value.toString());
 
     if (isNaN(parsed) || parsed < 0 || parsed > 10) {
       return null;
@@ -41,93 +30,115 @@ export default function JudgingForm({ event, team, judge }: Props) {
     return Math.floor(parsed * 100) / 100;
   };
 
-  const validate = (judge: JudgeFormValue) => {
-    const creativity = validateValueAndParse(judge.creativity);
-    const practicality = validateValueAndParse(judge.practicality);
-    const skill = validateValueAndParse(judge.skill);
-    const design = validateValueAndParse(judge.design);
-    const completeness = validateValueAndParse(judge.completeness);
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
 
     if (
-      creativity === null ||
-      practicality === null ||
-      skill === null ||
-      design === null ||
-      completeness === null
+      validateValueAndParse(localJudge.creativity) === null ||
+      validateValueAndParse(localJudge.practicality) === null ||
+      validateValueAndParse(localJudge.skill) === null ||
+      validateValueAndParse(localJudge.design) === null ||
+      validateValueAndParse(localJudge.completeness) === null
     ) {
-      setMessage("점수는 0점부터 10점까지 입력해주세요.");
+      setMessage("유효하지 않은 점수값이 있습니다.");
       return;
     }
 
     setMessage(null);
-    onJudge(team.id, {
-      creativity,
-      practicality,
-      skill,
-      design,
-      completeness,
-    });
+    doJudge(team.id);
+  };
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const name = e.target.name as keyof Judge;
+    const value = e.target.value;
+
+    const validatedValue = validateValueAndParse(value);
+    setLocalJudge((prev) => ({ ...prev, [name]: value }));
+    setJudge(team.id, { ...judge, [name]: validatedValue ?? judge[name] });
   };
 
   return (
-    event.judgeRange === "BETWEEN" && (
-      <form className="score" onSubmit={handleSubmit(validate)}>
-        {message && <div className="error">{message}</div>}
-        <table id="score">
-          <tbody>
-            <tr className="header">
-              <th>
-                독창성<span>(10)</span>
-              </th>
-              <th>
-                실용도<span>(10)</span>
-              </th>
-              <th>
-                기술력<span>(10)</span>
-              </th>
-              <th>
-                디자인<span>(10)</span>
-              </th>
-              <th>
-                완성도<span>(10)</span>
-              </th>
-            </tr>
+    <form className="score" onSubmit={handleSubmit}>
+      {message && <div className="error">{message}</div>}
+      <table id="score">
+        <tbody>
+          <tr className="header">
+            <th>
+              독창성<span>(10)</span>
+            </th>
+            <th>
+              실용도<span>(10)</span>
+            </th>
+            <th>
+              기술력<span>(10)</span>
+            </th>
+            <th>
+              디자인<span>(10)</span>
+            </th>
+            <th>
+              완성도<span>(10)</span>
+            </th>
+          </tr>
 
-            <tr className="team">
-              <td>
-                <div className="input_wrap">
-                  <input type="string" {...register("creativity")} />
-                </div>
-              </td>
-              <td>
-                <div className="input_wrap">
-                  <input type="string" {...register("practicality")} />
-                </div>
-              </td>
-              <td>
-                <div className="input_wrap">
-                  <input type="string" {...register("skill")} />
-                </div>
-              </td>
-              <td>
-                <div className="input_wrap">
-                  <input type="string" {...register("design")} />
-                </div>
-              </td>
-              <td>
-                <div className="input_wrap">
-                  <input type="string" {...register("completeness")} />
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <div className="btnArea">
-          <button type="submit" className="w-full black">
-            <span className="p-4 text-lg">저장</span>
-          </button>
-        </div>
-      </form>
-    )
+          <tr className="team">
+            <td>
+              <div className="input_wrap">
+                <input
+                  name="creativity"
+                  type="number"
+                  value={localJudge.creativity}
+                  onChange={handleChange}
+                />
+              </div>
+            </td>
+            <td>
+              <div className="input_wrap">
+                <input
+                  name="practicality"
+                  type="number"
+                  value={localJudge.practicality}
+                  onChange={handleChange}
+                />
+              </div>
+            </td>
+            <td>
+              <div className="input_wrap">
+                <input
+                  name="skill"
+                  type="number"
+                  value={localJudge.skill}
+                  onChange={handleChange}
+                />
+              </div>
+            </td>
+            <td>
+              <div className="input_wrap">
+                <input
+                  name="design"
+                  type="number"
+                  value={localJudge.design}
+                  onChange={handleChange}
+                />
+              </div>
+            </td>
+            <td>
+              <div className="input_wrap">
+                <input
+                  name="completeness"
+                  type="number"
+                  value={localJudge.completeness}
+                  onChange={handleChange}
+                />
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div className="btnArea">
+        <button type="submit" className="w-full black">
+          <span className="p-4 text-lg">저장</span>
+        </button>
+      </div>
+    </form>
   );
 }
