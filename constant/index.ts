@@ -16,3 +16,10 @@ export const UniversityName: Record<University, string> = {
   KYUNGHEE_UNIV: "경희대학교",
   AJOU_UNIV: "아주대학교",
 };
+
+export const TimeRange = {
+  BEFORE: "BEFORE",
+  BETWEEN: "BETWEEN",
+  AFTER: "AFTER",
+} as const;
+export type TimeRange = (typeof TimeRange)[keyof typeof TimeRange];

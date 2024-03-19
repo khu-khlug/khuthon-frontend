@@ -17,9 +17,8 @@ body {
 
 #header {
   position: relative;
-  z-index: 5;
   background: #eee;
-  z-index: 100000;
+  z-index: 40;
 }
 #header .logo {
   float: left;

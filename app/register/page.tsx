@@ -1,18 +1,18 @@
+"use client";
+
 import Callout from "@khlug/components/Callout/Callout";
 import Container from "@khlug/components/Container/Container";
 import EmailVerificationRequestForm from "@khlug/components/EmailVerificationRequestForm/EmailVerificationRequestForm";
+import { useEvent } from "@khlug/components/EventProvider/EventProvider";
 
-type RangeType = "BEFORE" | "BETWEEN" | "AFTER";
 type MockEvent = {
-  registerRange: RangeType;
-  eventRange: RangeType;
   isLimitExceed: boolean;
 };
 
 export default function RegisterPage() {
+  const event = useEvent();
+
   const mockEvent: MockEvent = {
-    registerRange: "BETWEEN",
-    eventRange: "BEFORE",
     isLimitExceed: false,
   };
 
@@ -80,11 +80,11 @@ export default function RegisterPage() {
       </div>
 
       <Container>
-        {!mockEvent || mockEvent.registerRange === "BEFORE" ? (
+        {event.registerRange === "BEFORE" ? (
           <Callout>접수 기간이 아닙니다.</Callout>
         ) : mockEvent.isLimitExceed ? (
           <Callout>접수 인원이 초과되었습니다.</Callout>
-        ) : mockEvent.registerRange === "AFTER" ? (
+        ) : event.registerRange === "AFTER" ? (
           <Callout>접수가 마감되었습니다.</Callout>
         ) : (
           <EmailVerificationRequestForm />

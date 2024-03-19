@@ -12,6 +12,11 @@ const nextConfig = {
         hostname: 'thon.khlug.org',
         pathname: '/images/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn.khlug.org',
+        pathname: '**',
+      },
     ]
   }
 };

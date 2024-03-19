@@ -4,11 +4,11 @@ import { Footer } from "@khlug/components/Footer/Footer";
 
 import "./globals.css";
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+type Props = Readonly<{
   children: React.ReactNode;
-}>) {
+}>;
+
+export default function RootLayout({ children }: Props) {
   return (
     <html lang="ko">
       <head>
