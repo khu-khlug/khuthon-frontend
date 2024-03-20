@@ -1,5 +1,6 @@
 "use client";
 
+import ClientProvider from "@khlug/components/ClientProvider/ClientProvider";
 import EventProvider from "@khlug/components/EventProvider/EventProvider";
 
 type Props = {
@@ -7,5 +8,9 @@ type Props = {
 };
 
 export default function RegisterLayout({ children }: Props) {
-  return <EventProvider>{children}</EventProvider>;
+  return (
+    <EventProvider>
+      <ClientProvider>{children}</ClientProvider>
+    </EventProvider>
+  );
 }

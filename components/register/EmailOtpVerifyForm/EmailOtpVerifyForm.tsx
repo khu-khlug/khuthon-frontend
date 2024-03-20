@@ -1,13 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useRegister } from "../MemberRegisterInfoProvider/MemberRegisterInfoProvider";
 
-type Props = {
-  email: string;
-};
-
-export default function EmailOtpVerifyForm({ email }: Props) {
+export default function EmailOtpVerifyForm() {
   const [message, setMessage] = useState<string | null>(null);
+  const [memberRegisterInfo, load] = useRegister();
 
   const [otp, setOtp] = useState<string>("");
 
@@ -23,7 +21,7 @@ export default function EmailOtpVerifyForm({ email }: Props) {
         담은 이메일을 찾을 수 없다면 관리자에게 연락해주세요.
       </div>
       <div className="input_wrap">
-        <input type="email" value={email} disabled />
+        <input type="email" value={memberRegisterInfo?.email} disabled />
       </div>
       <div className="input_wrap">
         <input

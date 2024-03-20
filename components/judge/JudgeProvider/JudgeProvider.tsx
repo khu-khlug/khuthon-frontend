@@ -3,7 +3,7 @@
 import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
 import { JudgeRequestDto } from "@khlug/transport/JudgeRequestDto";
 import { Judge } from "@khlug/types/Judge";
-import { getErrorMessageFromAxiosError } from "@khlug/util/getErrorMessageFromAxiosError";
+import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 import { createContext, useContext, useState } from "react";
 
 type DoJudgeFn = (teamId: string) => void;
@@ -37,7 +37,7 @@ export default function JudgeProvider({ children, initial, onError }: Props) {
       const requestDto: JudgeRequestDto = { teamId, points };
       await client.post("/judge", requestDto);
     } catch (e) {
-      onError(getErrorMessageFromAxiosError(e));
+      onError(extractErrorMessage(e));
     }
   };
 

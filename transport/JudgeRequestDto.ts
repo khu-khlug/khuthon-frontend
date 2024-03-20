@@ -1,12 +1,12 @@
-type PointDto = {
+type PointDto = Readonly<{
   creativity: number;
   practicality: number;
   skill: number;
   design: number;
   completeness: number;
-};
+}>;
 
-export type JudgeRequestDto = {
+export type JudgeRequestDto = Readonly<{
   teamId: string;
   points: PointDto;
-};
+}>;
