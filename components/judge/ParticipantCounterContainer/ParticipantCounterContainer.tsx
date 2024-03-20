@@ -1,4 +1,4 @@
-import Container from "../Container/Container";
+import Container from "../../Container/Container";
 
 export default function ParticipantCounterContainer() {
   const memberCount = 120;

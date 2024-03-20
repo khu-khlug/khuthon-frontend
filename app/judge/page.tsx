@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { MemberState, University } from "@khlug/constant";
 
-import ParticipantCounterContainer from "@khlug/components/ParticipantCounterContainer/ParticipantCounterContainer";
+import ParticipantCounterContainer from "@khlug/components/judge/ParticipantCounterContainer/ParticipantCounterContainer";
 import JudgeLoginForm from "@khlug/components/judge/JudgeLoginForm/JudgeLoginForm";
 import JudgingCriteriaContainer from "@khlug/components/judge/JudgingCriteriaContainer/JudgingCriteriaContainer";
 import TeamItemContainer from "@khlug/components/judge/TeamItemContainer/TeamItemContainer";

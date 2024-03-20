@@ -2,7 +2,7 @@
 
 import Callout from "@khlug/components/Callout/Callout";
 import Container from "@khlug/components/Container/Container";
-import EmailVerificationRequestForm from "@khlug/components/EmailVerificationRequestForm/EmailVerificationRequestForm";
+import EmailVerificationRequestForm from "@khlug/components/register/EmailVerificationRequestForm/EmailVerificationRequestForm";
 import { useEvent } from "@khlug/components/EventProvider/EventProvider";
 
 type MockEvent = {
