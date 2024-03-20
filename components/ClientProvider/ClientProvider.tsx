@@ -9,7 +9,10 @@ type Props = {
 
 type TokenSetter = (token: string) => void;
 const ClientContext = createContext<AxiosInstance | null>(null);
-const TokenSetterContext = createContext<TokenSetter>(() => {});
+const TokenContext = createContext<[string | null, TokenSetter]>([
+  null,
+  () => {},
+]);
 
 export default function ClientProvider({ children }: Props) {
   const [token, setToken] = useState<string | null>(null);
@@ -24,9 +27,9 @@ export default function ClientProvider({ children }: Props) {
 
   return (
     <ClientContext.Provider value={client}>
-      <TokenSetterContext.Provider value={setToken}>
+      <TokenContext.Provider value={[token, setToken]}>
         {children}
-      </TokenSetterContext.Provider>
+      </TokenContext.Provider>
     </ClientContext.Provider>
   );
 }
@@ -39,6 +42,6 @@ export function useClient() {
   return client;
 }
 
-export function useTokenSetter() {
-  return useContext(TokenSetterContext);
+export function useToken() {
+  return useContext(TokenContext);
 }

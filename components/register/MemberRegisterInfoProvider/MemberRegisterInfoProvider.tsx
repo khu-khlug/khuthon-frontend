@@ -9,7 +9,10 @@ import {
 } from "react";
 import { MemberState, University } from "@khlug/constant";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
-import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
+import {
+  useClient,
+  useToken,
+} from "@khlug/components/ClientProvider/ClientProvider";
 
 type Props = {
   children: React.ReactNode;
@@ -35,8 +38,13 @@ export default function MemberRegisterInfoProvider({
   const [memberRegisterInfo, setMemberRegisterInfo] =
     useState<MemberRegisterInfo | null>(null);
   const client = useClient();
+  const [token] = useToken();
 
   const load: MemberRegisterInfoLoader = useCallback(async () => {
+    if (!token) {
+      return;
+    }
+
     try {
       const { data } = await client.get<MemberRegisterInfo>("/member");
 
@@ -49,7 +57,7 @@ export default function MemberRegisterInfoProvider({
     } catch (e) {
       onError(extractErrorMessage(e));
     }
-  }, [client, onError]);
+  }, [token, client, onError]);
 
   useEffect(() => {
     load();
