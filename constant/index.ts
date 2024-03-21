@@ -17,6 +17,11 @@ export const UniversityName: Record<University, string> = {
   AJOU_UNIV: "아주대학교",
 };
 
+export const EmailDomain: Record<University, string> = {
+  [University.KYUNGHEE_UNIV]: "khu.ac.kr",
+  [University.AJOU_UNIV]: "ajou.ac.kr",
+};
+
 export const TimeRange = {
   BEFORE: "BEFORE",
   BETWEEN: "BETWEEN",
