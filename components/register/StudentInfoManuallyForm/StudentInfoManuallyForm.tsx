@@ -1,18 +1,62 @@
 "use client";
 
 import { useState } from "react";
+import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
+import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
+import { useRegister } from "@khlug/components/register/MemberRegisterInfoProvider/MemberRegisterInfoProvider";
 
 export default function StudentInfoManuallyForm() {
-  const [message, setMessage] = useState<string | null>(null);
+  const client = useClient();
+  const [, load] = useRegister();
 
+  const [message, setMessage] = useState<string | null>(null);
   const [studentNumber, setStudentNumber] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [name, setName] = useState<string>("");
   const [grade, setGrade] = useState<number | null>(null);
   const [major, setMajor] = useState<string>("");
-  const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const [phone, setPhone] = useState<string>("");
+
+  const validate = () => {
+    if (studentNumber.length < 1 || studentNumber.length > 10) {
+      setMessage("학번을 정확하게 입력해주세요.");
+      return false;
+    }
+    if (name.length < 1 || name.length > 40) {
+      setMessage("이름을 정확하게 입력해주세요.");
+      return false;
+    }
+    if (grade === null || grade < 1 || grade > 10) {
+      setMessage("학년을 정확하게 입력해주세요.");
+      return false;
+    }
+    if (major.length < 1 || major.length > 1000) {
+      setMessage("전공을 정확하게 입력해주세요.");
+      return false;
+    }
+    return true;
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!validate()) return;
+
+    try {
+      await client.put("/members/student-info", {
+        studentNumber,
+        name,
+        college: major,
+        grade,
+        phone,
+      });
+      load();
+    } catch (e) {
+      setMessage(extractErrorMessage(e));
+    }
+  };
 
   return (
-    <form method="post" action="/register/team">
+    <form method="post" onSubmit={handleSubmit}>
       {message && <div className="error">{message}</div>}
 
       <label>학적 정보 입력</label>
@@ -40,8 +84,8 @@ export default function StudentInfoManuallyForm() {
       <div className="input_wrap">
         <input
           type="text"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           placeholder="이름"
           required
         />
@@ -54,6 +98,11 @@ export default function StudentInfoManuallyForm() {
           type="text"
           value={grade ?? ""}
           onChange={(e) => {
+            if (e.target.value === "") {
+              setGrade(null);
+              return;
+            }
+
             const value = Number(e.target.value);
             if (isNaN(value)) return;
             setGrade(Number(e.target.value));
@@ -83,8 +132,8 @@ export default function StudentInfoManuallyForm() {
       <div className="input_wrap">
         <input
           type="text"
-          value={phoneNumber}
-          onChange={(e) => setPhoneNumber(e.target.value)}
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
           placeholder="전화번호"
           pattern="010-[0-9]{4}-[0-9]{4}"
           required
