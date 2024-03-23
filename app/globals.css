@@ -1350,43 +1350,6 @@ body {
 }
 
 @media only screen and (max-width: 800px) {
-  .cube {
-    width: 30px;
-    height: 30px;
-    top: 26px;
-    margin-left: -15px;
-    transform: translateZ(-15px) rotateX(-35deg) rotateY(-45deg);
-  }
-  .cube figure {
-    margin: 0;
-    width: 28px;
-    height: 28px;
-    display: block;
-    position: absolute;
-    border: 1px solid #000;
-    backface-visibility: hidden;
-  }
-  .cube .front {
-    transform: rotateY(0deg) translateZ(15px);
-    height: 29px;
-  }
-  .cube .back {
-    transform: rotateX(180deg) translateZ(15px);
-    height: 29px;
-  }
-  .cube .right {
-    transform: rotateY(90deg) translateZ(15px);
-  }
-  .cube .left {
-    transform: rotateY(-90deg) translateZ(15px);
-  }
-  .cube .top {
-    transform: rotateX(90deg) translateZ(15px);
-  }
-  .cube .bottom {
-    transform: rotateX(-90deg) translateZ(15px);
-  }
-
   #header .logo {
     padding: 24px 0 25px 17px;
   }
