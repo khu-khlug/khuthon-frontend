@@ -10,7 +10,7 @@ export default async function _2016About() {
             className="image"
             style={{
               backgroundImage:
-                "url('https://thon.khlug.org/images/2017/06.jpg')",
+                "url('https://cdn.khlug.org/images/2017/06.jpg')",
             }}
           ></div>
         </div>
@@ -19,7 +19,7 @@ export default async function _2016About() {
             className="image"
             style={{
               backgroundImage:
-                "url('https://thon.khlug.org/images/2017/01.jpg')",
+                "url('https://cdn.khlug.org/images/2017/01.jpg')",
             }}
           ></div>
         </div>
@@ -28,7 +28,7 @@ export default async function _2016About() {
             className="image"
             style={{
               backgroundImage:
-                "url('https://thon.khlug.org/images/2017/02.jpg')",
+                "url('https://cdn.khlug.org/images/2017/02.jpg')",
             }}
           ></div>
         </div>
@@ -37,7 +37,7 @@ export default async function _2016About() {
             className="image"
             style={{
               backgroundImage:
-                "url('https://thon.khlug.org/images/2017/03.jpg')",
+                "url('https://cdn.khlug.org/images/2017/03.jpg')",
             }}
           ></div>
         </div>
@@ -46,7 +46,7 @@ export default async function _2016About() {
             className="image"
             style={{
               backgroundImage:
-                "url('https://thon.khlug.org/images/2017/04.jpg')",
+                "url('https://cdn.khlug.org/images/2017/04.jpg')",
             }}
           ></div>
         </div>
@@ -55,7 +55,7 @@ export default async function _2016About() {
             className="image"
             style={{
               backgroundImage:
-                "url('https://thon.khlug.org/images/2017/05.jpg')",
+                "url('https://cdn.khlug.org/images/2017/05.jpg')",
             }}
           ></div>
         </div>
@@ -64,7 +64,7 @@ export default async function _2016About() {
             className="image"
             style={{
               backgroundImage:
-                "url('https://thon.khlug.org/images/2017/07.jpg')",
+                "url('https://cdn.khlug.org/images/2017/07.jpg')",
             }}
           ></div>
         </div>
@@ -73,7 +73,7 @@ export default async function _2016About() {
             className="image"
             style={{
               backgroundImage:
-                "url('https://thon.khlug.org/images/2017/08.jpg')",
+                "url('https://cdn.khlug.org/images/2017/08.jpg')",
             }}
           ></div>
         </div>
@@ -82,7 +82,7 @@ export default async function _2016About() {
             className="image"
             style={{
               backgroundImage:
-                "url('https://thon.khlug.org/images/2017/09.jpg')",
+                "url('https://cdn.khlug.org/images/2017/09.jpg')",
             }}
           ></div>
         </div>
@@ -91,7 +91,7 @@ export default async function _2016About() {
             className="image"
             style={{
               backgroundImage:
-                "url('https://thon.khlug.org/images/2017/10.jpg')",
+                "url('https://cdn.khlug.org/images/2017/10.jpg')",
             }}
           ></div>
         </div>
@@ -100,7 +100,7 @@ export default async function _2016About() {
             className="image"
             style={{
               backgroundImage:
-                "url('https://thon.khlug.org/images/2017/11.jpg')",
+                "url('https://cdn.khlug.org/images/2017/11.jpg')",
             }}
           ></div>
         </div>
@@ -109,7 +109,7 @@ export default async function _2016About() {
             className="image"
             style={{
               backgroundImage:
-                "url('https://thon.khlug.org/images/2017/12.jpg')",
+                "url('https://cdn.khlug.org/images/2017/12.jpg')",
             }}
           ></div>
         </div>
@@ -219,7 +219,7 @@ export default async function _2016About() {
                 className="thumbnail"
                 style={{
                   backgroundImage:
-                    "url('https://thon.khlug.org/images/2017/team28092.png')",
+                    "url('https://cdn.khlug.org/images/2017/team28092.png')",
                 }}
               ></div>
               <div className="name">O2ObyDASOM</div>
@@ -246,7 +246,7 @@ export default async function _2016About() {
                 className="thumbnail"
                 style={{
                   backgroundImage:
-                    "url('https://thon.khlug.org/images/2017/team28176.png')",
+                    "url('https://cdn.khlug.org/images/2017/team28176.png')",
                 }}
               ></div>
               <div className="name">연애하고싶습니다</div>
@@ -264,7 +264,7 @@ export default async function _2016About() {
                 className="thumbnail"
                 style={{
                   backgroundImage:
-                    "url('https://thon.khlug.org/images/2017/team28085.png')",
+                    "url('https://cdn.khlug.org/images/2017/team28085.png')",
                 }}
               ></div>
               <div className="name">ziginet</div>
@@ -291,7 +291,7 @@ export default async function _2016About() {
                 className="thumbnail"
                 style={{
                   backgroundImage:
-                    "url('https://thon.khlug.org/images/2017/team28265.png')",
+                    "url('https://cdn.khlug.org/images/2017/team28265.png')",
                 }}
               ></div>
               <div className="name">average 80kg</div>
@@ -311,7 +311,7 @@ export default async function _2016About() {
                 className="thumbnail"
                 style={{
                   backgroundImage:
-                    "url('https://thon.khlug.org/images/2017/team28321.png')",
+                    "url('https://cdn.khlug.org/images/2017/team28321.png')",
                 }}
               ></div>
               <div className="name">치팀</div>
@@ -329,7 +329,7 @@ export default async function _2016About() {
                 className="thumbnail"
                 style={{
                   backgroundImage:
-                    "url('https://thon.khlug.org/images/2017/team28296.png')",
+                    "url('https://cdn.khlug.org/images/2017/team28296.png')",
                 }}
               ></div>
               <div className="name">화목건우의 그녀는 누굴까?</div>

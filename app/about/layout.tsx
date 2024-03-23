@@ -32,7 +32,7 @@ export default function AboutLayout({ children }: Props) {
           <Link
             key={year}
             href={`/about/${year}`}
-            className={classNames({ active: year === currentYear })}
+            className={classNames({ active: year === currentYear }, "mx-2")}
           >
             {year}
           </Link>
