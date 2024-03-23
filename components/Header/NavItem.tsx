@@ -12,7 +12,10 @@ export function NavItem({ href, children }: NavItemProps) {
 
   return (
     <li>
-      <Link href={href} className={classNames({ active: path === href })}>
+      <Link
+        href={href}
+        className={classNames({ active: path.startsWith(href) })}
+      >
         {children}
       </Link>
     </li>
