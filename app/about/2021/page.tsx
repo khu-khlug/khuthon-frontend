@@ -10,7 +10,7 @@ export default async function _2020About() {
             className="image"
             style={{
               backgroundImage:
-                "url('https://cdn.khlug.org/images/2020/01.jpg')",
+                "url('https://cdn.khlug.org/images/2021/01.jpg')",
             }}
           ></div>
         </div>
@@ -19,7 +19,7 @@ export default async function _2020About() {
             className="image"
             style={{
               backgroundImage:
-                "url('https://cdn.khlug.org/images/2020/02.jpg')",
+                "url('https://cdn.khlug.org/images/2021/02.jpg')",
             }}
           ></div>
         </div>
@@ -28,7 +28,7 @@ export default async function _2020About() {
             className="image"
             style={{
               backgroundImage:
-                "url('https://cdn.khlug.org/images/2020/03.jpg')",
+                "url('https://cdn.khlug.org/images/2021/03.jpg')",
             }}
           ></div>
         </div>
@@ -38,7 +38,7 @@ export default async function _2020About() {
             className="image"
             style={{
               backgroundImage:
-                "url('https://cdn.khlug.org/images/2020/04.jpg')",
+                "url('https://cdn.khlug.org/images/2021/05.jpg')",
             }}
           ></div>
         </div>
@@ -47,7 +47,7 @@ export default async function _2020About() {
             className="image"
             style={{
               backgroundImage:
-                "url('https://cdn.khlug.org/images/2020/06.jpg')",
+                "url('https://cdn.khlug.org/images/2021/12.jpg')",
             }}
           ></div>
         </div>
@@ -56,7 +56,63 @@ export default async function _2020About() {
             className="image"
             style={{
               backgroundImage:
-                "url('https://cdn.khlug.org/images/2020/05.jpg')",
+                "url('https://cdn.khlug.org/images/2021/06.jpg')",
+            }}
+          ></div>
+        </div>
+
+        <div className="image_wrap">
+          <div
+            className="image"
+            style={{
+              backgroundImage:
+                "url('https://cdn.khlug.org/images/2021/07.jpg')",
+            }}
+          ></div>
+        </div>
+        <div className="image_wrap">
+          <div
+            className="image"
+            style={{
+              backgroundImage:
+                "url('https://cdn.khlug.org/images/2021/08.jpg')",
+            }}
+          ></div>
+        </div>
+        <div className="image_wrap">
+          <div
+            className="image"
+            style={{
+              backgroundImage:
+                "url('https://cdn.khlug.org/images/2021/04.jpg')",
+            }}
+          ></div>
+        </div>
+
+        <div className="image_wrap">
+          <div
+            className="image"
+            style={{
+              backgroundImage:
+                "url('https://cdn.khlug.org/images/2021/10.jpg')",
+            }}
+          ></div>
+        </div>
+        <div className="image_wrap">
+          <div
+            className="image"
+            style={{
+              backgroundImage:
+                "url('https://cdn.khlug.org/images/2021/11.jpg')",
+            }}
+          ></div>
+        </div>
+        <div className="image_wrap">
+          <div
+            className="image"
+            style={{
+              backgroundImage:
+                "url('https://cdn.khlug.org/images/2021/09.jpg')",
             }}
           ></div>
         </div>
@@ -66,7 +122,7 @@ export default async function _2020About() {
       <div className="container about">
         <h4>일시</h4>
         <p>
-          2020년 11월 13일 금요일 18:00 ~ 2020년 11월 14일 토요일 12:00 (무박
+          2021년 11월 12일 금요일 18:00 ~ 2021년 11월 13일 토요일 11:00 (무박
           2일)
         </p>
         <div className="desc">행사가 끝났습니다.</div>
@@ -76,7 +132,7 @@ export default async function _2020About() {
 
         <h4>주제</h4>
         <ul>
-          <li>AI에 대한 모든 것</li>
+          <li>AI로 극복하는 재난</li>
         </ul>
         <p>
           다양한 분야로 도전할 수 있습니다.
@@ -86,7 +142,7 @@ export default async function _2020About() {
 
         <h4>참가 접수</h4>
         <p>
-          2020년 10월 16일 금요일 00:00 ~ 2020년 11월 9일 월요일 23:59
+          2021년 10월 22일 금요일 00:00 ~ 2021년 11월 7일 일요일 23:59
           <br />
           <a href="https://thon.khlug.org/">https://thon.khlug.org/</a>에서 팀
           또는 개인 단위로 참가 접수
@@ -97,7 +153,7 @@ export default async function _2020About() {
           <li>
             한 팀은 최소 1명부터 최대 4명으로 구성됩니다.
             <br />
-            팀에는 반드시 1명 이상의 재학생이 포함되어야 합니다.
+            모든 팀원은 반드시 재학생이어야 합니다.
             <br />
             행사 당일 각 팀에는 개인 참가자가 포함될 수 있습니다.
             <br />
@@ -123,20 +179,21 @@ export default async function _2020About() {
         <div className="list" style={{ marginBottom: "50px" }}>
           <ul>
             <li className="item">
-              <div
+              <a
+                href="#"
                 className="thumbnail"
                 style={{
                   backgroundImage:
-                    "url('https://cdn.khlug.org/images/2020/team71454.png')",
+                    "url('https://cdn.khlug.org/images/2021/team78747.png')",
                 }}
-              ></div>
-              <div className="name">아이젠</div>
-              <div className="idea">
-                머신러닝 기법을 활용한 춤 인식 웹어플리케이션
-              </div>
+              >
+                <span>발표 자료 보기</span>
+              </a>
+              <div className="name">박민재</div>
+              <div className="idea">AI를 활용한 졸음운전 방지 서비스</div>
               <div className="member"></div>
               <div
-                id="team71454"
+                id="team78747"
                 className="pdf_viewer"
                 style={{ display: "none", height: "439.2px" }}
               ></div>
@@ -152,58 +209,63 @@ export default async function _2020About() {
         <div className="list" style={{ marginBottom: "50px" }}>
           <ul>
             <li className="item">
-              <div
+              <a
+                href="#"
                 className="thumbnail"
                 style={{
                   backgroundImage:
-                    "url('https://cdn.khlug.org/images/2020/team71646.png')",
+                    "url('https://cdn.khlug.org/images/2021/team78664.png')",
                 }}
-              ></div>
-              <div className="name">방가밥죠</div>
-              <div className="idea">
-                효율적인 웹 서핑을 위한 크롬 확장 앱, 다이빙(Diving)
-              </div>
+              >
+                <span>발표 자료 보기</span>
+              </a>
+              <div className="name">반물질</div>
+              <div className="idea">소방차의 효율적 배치</div>
               <div className="member"></div>
               <div
-                id="team71646"
+                id="team78664"
                 className="pdf_viewer"
                 style={{ display: "none", height: "439.2px" }}
               ></div>
               <div className="clear"></div>
             </li>
             <li className="item">
-              <div
+              <a
+                href="#"
                 className="thumbnail"
                 style={{
                   backgroundImage:
-                    "url('https://cdn.khlug.org/images/2020/team71693.png')",
+                    "url('https://cdn.khlug.org/images/2021/team78869.png')",
                 }}
-              ></div>
-              <div className="name">육장장이</div>
-              <div className="idea">
-                AI 화면보호기 : 비인가 사용자로부터 PC 정보보호
-              </div>
+              >
+                <span>발표 자료 보기</span>
+              </a>
+              <div className="name">Void</div>
+              <div className="idea">재난 안전 AI 스피커 폼페이</div>
               <div className="member"></div>
               <div
-                id="team71693"
+                id="team78869"
                 className="pdf_viewer"
                 style={{ display: "none", height: "439.2px" }}
               ></div>
               <div className="clear"></div>
             </li>
             <li className="item">
-              <div
+              <a
+                href="#"
                 className="thumbnail"
                 style={{
                   backgroundImage:
-                    "url('https://cdn.khlug.org/images/2020/team71671.png')",
+                    "url('https://cdn.khlug.org/images/2021/team78921.png')",
                 }}
-              ></div>
-              <div className="name">MMOHRPG</div>
-              <div className="idea">AI인 척 서로를 속이고 기만하는 게임</div>
+              >
+                <span>발표 자료 보기</span>
+              </a>
+              <div className="name">H&amp;J</div>
+              <div className="idea">수신호 분석을 통한 범죄 예방 AI</div>
               <div className="member"></div>
               <div
-                id="team71671"
+                id="team78921"
                 className="pdf_viewer"
                 style={{ display: "none", height: "439.2px" }}
               ></div>
@@ -219,92 +281,107 @@ export default async function _2020About() {
         <div className="list" style={{ marginBottom: "50px" }}>
           <ul>
             <li className="item">
-              <div
+              <a
+                href="#"
                 className="thumbnail"
                 style={{
                   backgroundImage:
-                    "url('https://cdn.khlug.org/images/2020/team72159.png')",
+                    "url('https://cdn.khlug.org/images/2021/team78964.png')",
                 }}
-              ></div>
-              <div className="name">밀당하는 오브젝트</div>
-              <div className="idea">알파KHU와 심리오목</div>
-              <div className="member"></div>
-              <div
-                id="team72159"
-                className="pdf_viewer"
-                style={{ display: "none", height: "439.2px" }}
-              ></div>
-              <div className="clear"></div>
-            </li>
-            <li className="item">
-              <div
-                className="thumbnail"
-                style={{
-                  backgroundImage:
-                    "url('https://cdn.khlug.org/images/2020/team71774.png')",
-                }}
-              ></div>
-              <div className="name">쿠쿠루삥뽕</div>
-              <div className="idea">AI 미래도시를 체험하는 AR 콘텐츠</div>
-              <div className="member"></div>
-              <div
-                id="team71774"
-                className="pdf_viewer"
-                style={{ display: "none", height: "439.2px" }}
-              ></div>
-              <div className="clear"></div>
-            </li>
-            <li className="item">
-              <div
-                className="thumbnail"
-                style={{
-                  backgroundImage:
-                    "url('https://cdn.khlug.org/images/2020/team71590.png')",
-                }}
-              ></div>
-              <div className="name">감감안감감</div>
-              <div className="idea">인공지능 BMTI 예측 모델</div>
-              <div className="member"></div>
-              <div
-                id="team71590"
-                className="pdf_viewer"
-                style={{ display: "none", height: "439.2px" }}
-              ></div>
-              <div className="clear"></div>
-            </li>
-            <li className="item">
-              <div
-                className="thumbnail"
-                style={{
-                  backgroundImage:
-                    "url('https://cdn.khlug.org/images/2020/team71351.png')",
-                }}
-              ></div>
-              <div className="name">블랙핑크</div>
-              <div className="idea">[AI 게임 개발] 버거왕 김AI</div>
-              <div className="member"></div>
-              <div
-                id="team71351"
-                className="pdf_viewer"
-                style={{ display: "none", height: "439.2px" }}
-              ></div>
-              <div className="clear"></div>
-            </li>
-            <li className="item">
-              <div
-                className="thumbnail"
-                style={{
-                  backgroundImage:
-                    "url('https://cdn.khlug.org/images/2020/team71578.png')",
-                }}
-              ></div>
-              <div className="name">깍두기들</div>
+              >
+                <span>발표 자료 보기</span>
+              </a>
+              <div className="name">김나장최</div>
               <div className="idea">
-                코파고 - AI 글자 인식을 통한 코로나 수기 출입 명부 관리자
+                미학습 AI로봇과 고독한 박사의 재난 생존 RPG 게임
               </div>
               <div className="member"></div>
               <div
-                id="team71578"
+                id="team78964"
+                className="pdf_viewer"
+                style={{ display: "none", height: "439.2px" }}
+              ></div>
+              <div className="clear"></div>
+            </li>
+            <li className="item">
+              <a
+                href="#"
+                className="thumbnail"
+                style={{
+                  backgroundImage:
+                    "url('https://cdn.khlug.org/images/2021/team78974.png')",
+                }}
+              >
+                <span>발표 자료 보기</span>
+              </a>
+              <div className="name">모아이</div>
+              <div className="idea">스마트 SNS 재난 감지 시스템</div>
+              <div className="member"></div>
+              <div
+                id="team78974"
+                className="pdf_viewer"
+                style={{ display: "none", height: "439.2px" }}
+              ></div>
+              <div className="clear"></div>
+            </li>
+            <li className="item">
+              <a
+                href="#"
+                className="thumbnail"
+                style={{
+                  backgroundImage:
+                    "url('https://cdn.khlug.org/images/2021/team78813.png')",
+                }}
+              >
+                <span>발표 자료 보기</span>
+              </a>
+              <div className="name">헬스장3주차</div>
+              <div className="idea">딥러닝 기반 화재 감지 시스템</div>
+              <div className="member"></div>
+              <div
+                id="team78813"
+                className="pdf_viewer"
+                style={{ display: "none", height: "439.2px" }}
+              ></div>
+              <div className="clear"></div>
+            </li>
+            <li className="item">
+              <a
+                href="#"
+                className="thumbnail"
+                style={{
+                  backgroundImage:
+                    "url('https://cdn.khlug.org/images/2021/team78803.png')",
+                }}
+              >
+                <span>발표 자료 보기</span>
+              </a>
+              <div className="name">우리 팀원 중에 버스 기사 있나요?</div>
+              <div className="idea">AI 면접 도우미</div>
+              <div className="member"></div>
+              <div
+                id="team78803"
+                className="pdf_viewer"
+                style={{ display: "none", height: "439.2px" }}
+              ></div>
+              <div className="clear"></div>
+            </li>
+            <li className="item">
+              <a
+                href="#"
+                className="thumbnail"
+                style={{
+                  backgroundImage:
+                    "url('https://cdn.khlug.org/images/2021/team78783.png')",
+                }}
+              >
+                <span>발표 자료 보기</span>
+              </a>
+              <div className="name">쿠정물</div>
+              <div className="idea">wichu - 우리는 아무나 동행하지 않는다.</div>
+              <div className="member"></div>
+              <div
+                id="team78783"
                 className="pdf_viewer"
                 style={{ display: "none", height: "439.2px" }}
               ></div>
@@ -320,112 +397,66 @@ export default async function _2020About() {
         <div className="list" style={{ marginBottom: "50px" }}>
           <ul>
             <li className="item">
-              <div
+              <a
+                href="#"
                 className="thumbnail"
                 style={{
                   backgroundImage:
-                    "url('https://cdn.khlug.org/images/2020/team72162.png')",
+                    "url('https://cdn.khlug.org/images/2021/team78601.png')",
                 }}
-              ></div>
-              <div className="name">죠스바 누가바 자바</div>
-              <div className="idea">한국 교통표지판 분류</div>
+              >
+                <span>발표 자료 보기</span>
+              </a>
+              <div className="name">해보봉</div>
+              <div className="idea">AI를 활용한 좀비게임</div>
               <div className="member"></div>
               <div
-                id="team72162"
+                id="team78601"
                 className="pdf_viewer"
                 style={{ display: "none", height: "439.2px" }}
               ></div>
               <div className="clear"></div>
             </li>
             <li className="item">
-              <div
+              <a
+                href="#"
                 className="thumbnail"
                 style={{
                   backgroundImage:
-                    "url('https://cdn.khlug.org/images/2020/team71413.png')",
+                    "url('https://cdn.khlug.org/images/2021/team78793.png')",
                 }}
-              ></div>
-              <div className="name">1등못하면동반입대</div>
-              <div className="idea">동영상 내용 요약 서비스</div>
+              >
+                <span>발표 자료 보기</span>
+              </a>
+              <div className="name">놀러온사람들</div>
+              <div className="idea">AI와 살아남기</div>
               <div className="member"></div>
               <div
-                id="team71413"
+                id="team78793"
                 className="pdf_viewer"
                 style={{ display: "none", height: "439.2px" }}
               ></div>
               <div className="clear"></div>
             </li>
             <li className="item">
-              <div
+              <a
+                href="#"
                 className="thumbnail"
                 style={{
                   backgroundImage:
-                    "url('https://cdn.khlug.org/images/2020/team71811.png')",
+                    "url('https://cdn.khlug.org/images/2021/team78605.png')",
                 }}
-              ></div>
-              <div className="name">계란으로 바위치기</div>
+              >
+                <span>발표 자료 보기</span>
+              </a>
+              <div className="name">Space_M</div>
               <div className="idea">
-                언택트 시대에서 소융대생이 살아남는 방법
+                태양 이미지를 활용한 우주전파재난 예측 (부제 : SDO 위성 데이터와
+                인공지능 알고리즘)
               </div>
               <div className="member"></div>
               <div
-                id="team71811"
-                className="pdf_viewer"
-                style={{ display: "none", height: "439.2px" }}
-              ></div>
-              <div className="clear"></div>
-            </li>
-            <li className="item">
-              <div
-                className="thumbnail"
-                style={{
-                  backgroundImage:
-                    "url('https://cdn.khlug.org/images/2020/team71262.png')",
-                }}
-              ></div>
-              <div className="name">승민없는 승민팀</div>
-              <div className="idea">Xmask - 마스크 미식별자 탐지 AI</div>
-              <div className="member"></div>
-              <div
-                id="team71262"
-                className="pdf_viewer"
-                style={{ display: "none", height: "439.2px" }}
-              ></div>
-              <div className="clear"></div>
-            </li>
-            <li className="item">
-              <div
-                className="thumbnail"
-                style={{
-                  backgroundImage:
-                    "url('https://cdn.khlug.org/images/2020/team71377.png')",
-                }}
-              ></div>
-              <div className="name">Maro</div>
-              <div className="idea">지하철 혼잡도 측정</div>
-              <div className="member"></div>
-              <div
-                id="team71377"
-                className="pdf_viewer"
-                style={{ display: "none", height: "439.2px" }}
-              ></div>
-              <div className="clear"></div>
-            </li>
-            <li className="item">
-              <div
-                className="thumbnail"
-                style={{
-                  backgroundImage:
-                    "url('https://cdn.khlug.org/images/2020/team71382.png')",
-                }}
-              ></div>
-              <div className="name">다비드</div>
-              <div className="idea">
-                자연어 처리를 이용한 에브리타임 연관 핫 키워드 검색
-              </div>
-              <div className="member"></div>
-              <div
-                id="team71382"
+                id="team78605"
                 className="pdf_viewer"
                 style={{ display: "none", height: "439.2px" }}
               ></div>
@@ -456,7 +487,7 @@ export default async function _2020About() {
               <td> </td>
             </tr>
             <tr>
-              <td className="time">09:00</td>
+              <td className="time">06:30</td>
               <td>발표</td>
               <td> </td>
             </tr>
@@ -512,24 +543,8 @@ export default async function _2020About() {
           </a>
         </p>
 
-        <h4>후원</h4>
-        <p>
-          <a href="http://d2.naver.com/" target="_blank" className="favicon">
-            <img
-              src="https://khlug.org/images/d2.png"
-              className="favicon"
-              alt=""
-            />{" "}
-            NAVER D2
-          </a>
-        </p>
-
         <h4>문의</h4>
         <ul>
-          <li>
-            SW중심대학사업단 한용구 교수:{" "}
-            <a href="mailto:ykhan@khu.ac.kr">ykhan@khu.ac.kr</a>
-          </li>
           <li>
             쿠러그 공식 이메일:{" "}
             <a href="mailto:we_are@khlug.org">we_are@khlug.org</a>
