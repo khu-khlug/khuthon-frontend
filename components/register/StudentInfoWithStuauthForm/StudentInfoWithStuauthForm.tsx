@@ -1,15 +1,34 @@
 "use client";
 
+import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
+import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 import { useState } from "react";
+import { useRegister } from "../MemberRegisterInfoProvider/MemberRegisterInfoProvider";
 
 export default function StudentInfoWithStuauthForm() {
-  const [message, setMessage] = useState<string | null>(null);
+  const [, load] = useRegister();
+  const client = useClient();
 
+  const [message, setMessage] = useState<string | null>(null);
   const [id, setId] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      await client.put("/members/student-info/stuauth", {
+        id,
+        password,
+      });
+      load();
+    } catch (e) {
+      setMessage(extractErrorMessage(e));
+    }
+  };
+
   return (
-    <form method="post" action="/register/team">
+    <form method="post" onSubmit={handleSubmit}>
       {message && <div className="error">{message}</div>}
 
       <label>학적 정보 입력</label>
@@ -29,7 +48,7 @@ export default function StudentInfoWithStuauthForm() {
       </div>
       <div className="input_wrap">
         <input
-          type="email"
+          type="text"
           value={id}
           onChange={(e) => setId(e.target.value)}
           placeholder="Info21 아이디"

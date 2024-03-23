@@ -1,14 +1,40 @@
 "use client";
 
+import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
 import { useState } from "react";
+import { useRegister } from "../MemberRegisterInfoProvider/MemberRegisterInfoProvider";
+import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 
 export default function CreateTeamForm() {
-  const [message, setMessage] = useState<string | null>(null);
+  const client = useClient();
+  const [, load] = useRegister();
 
+  const [message, setMessage] = useState<string | null>(null);
   const [teamName, setTeamName] = useState<string>("");
 
+  const validate = () => {
+    if (teamName.length < 1 || teamName.length > 100) {
+      setMessage("팀 이름은 1자 이상, 100자 이하여야 합니다.");
+      return false;
+    }
+    return true;
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!validate()) return;
+
+    try {
+      await client.post("/teams", { teamName });
+      load();
+    } catch (e) {
+      setMessage(extractErrorMessage(e));
+    }
+  };
+
   return (
-    <form method="post" action="/register/team">
+    <form method="post" onSubmit={handleSubmit}>
       {message && <div className="error">{message}</div>}
 
       <label>팀 생성</label>
@@ -23,6 +49,9 @@ export default function CreateTeamForm() {
       </div>
 
       <label>팀 이름</label>
+      <div className="description">
+        팀 이름은 1자 이상, 100자 이하여야 합니다.
+      </div>
       <div className="input_wrap">
         <input
           type="text"
