@@ -4,6 +4,8 @@ import classNames from "classnames";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import "./about.css";
+
 type Props = {
   children: React.ReactNode;
 };

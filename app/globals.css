@@ -650,42 +650,6 @@ body {
   background-size: cover;
   background-position: center center;
 }
-#body .gallery .image.i01 {
-  background-image: url("/images/2016_01.jpg");
-}
-#body .gallery .image.i02 {
-  background-image: url("/images/2016_02.jpg");
-}
-#body .gallery .image.i03 {
-  background-image: url("/images/2016_03.jpg");
-}
-#body .gallery .image.i04 {
-  background-image: url("/images/2016_04.jpg");
-}
-#body .gallery .image.i05 {
-  background-image: url("/images/2016_05.jpg");
-}
-#body .gallery .image.i06 {
-  background-image: url("/images/2016_06.jpg");
-}
-#body .gallery .image.i07 {
-  background-image: url("/images/2016_07.jpg");
-}
-#body .gallery .image.i08 {
-  background-image: url("/images/2016_08.jpg");
-}
-#body .gallery .image.i09 {
-  background-image: url("/images/2016_09.jpg");
-}
-#body .gallery .image.i10 {
-  background-image: url("/images/2016_10.jpg");
-}
-#body .gallery .image.i11 {
-  background-image: url("/images/2016_11.jpg");
-}
-#body .gallery .image.i12 {
-  background-image: url("/images/2016_12.jpg");
-}
 
 #body .list ul {
   margin: 30px 0 10px 0;
@@ -726,6 +690,32 @@ body {
 #body .list li.item .thumbnail:active span,
 #body .list li.item .thumbnail:hover span {
   opacity: 1;
+}
+#body .list li.item .name {
+  padding: 5px 0 0 0;
+  font-size: 20px;
+}
+#body .list li.item .idea {
+  color: #999;
+  line-height: 1.5;
+  font-size: 14px;
+}
+#body .list li.item .member {
+  padding: 10px 0;
+  font-size: 14px;
+}
+#body .list li.item .member .m {
+  font-size: 14px;
+  margin: 5px 10px 5px 0;
+  white-space: nowrap;
+}
+#body .list li.item .member .club {
+  font-size: 11px;
+  padding: 0 3px;
+  background: #00a0e9;
+  color: #fff;
+  position: relative;
+  top: -1px;
 }
 
 #body .board {
