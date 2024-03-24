@@ -1,9 +1,4 @@
-import dayjs from "dayjs";
-import timezone from "dayjs/plugin/timezone";
-import utc from "dayjs/plugin/utc";
-
-dayjs.extend(timezone);
-dayjs.extend(utc);
+import { formatDate } from "@khlug/util/formaDate";
 
 type NoticeItemProps = {
   id: string;
@@ -16,9 +11,7 @@ export function NoticeItem({ id, title, createdAt }: NoticeItemProps) {
     <a href={`/notice/${id}`}>
       <span className="title">{title}</span>
       <span className="meta">
-        <span className="created_at">
-          {dayjs.tz(createdAt, "Asia/Seoul").format("YYYY.MM.DD.")}
-        </span>
+        <span className="created_at">{formatDate(createdAt)}</span>
       </span>
     </a>
   );
