@@ -5,7 +5,7 @@ import { useMyTeam } from "../MyTeamProvider/MyTeamProvider";
 
 export default function TeamIdeaContainer() {
   const event = useEvent();
-  const myTeam = useMyTeam();
+  const [myTeam] = useMyTeam();
 
   const [idea, setIdea] = useState<string>(myTeam.idea);
 

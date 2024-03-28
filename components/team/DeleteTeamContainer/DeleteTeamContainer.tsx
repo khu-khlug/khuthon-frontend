@@ -11,7 +11,7 @@ export default function DeleteTeamContainer() {
   const [message, setMessage] = useState<string | null>(null);
 
   const client = useClient();
-  const myTeam = useMyTeam();
+  const [myTeam] = useMyTeam();
   const [, setToken] = useToken();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
