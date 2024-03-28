@@ -1,13 +1,14 @@
-import Container from "../Container/Container";
+import { useState } from "react";
+import Container from "../../Container/Container";
+import { useEvent } from "../../EventProvider/EventProvider";
+import { useMyTeam } from "../MyTeamProvider/MyTeamProvider";
 
-type Props = {
-  event: {
-    eventRange: "BEFORE" | "BETWEEN" | "AFTER";
-    judgeRange: "BEFORE" | "BETWEEN" | "AFTER";
-  };
-};
+export default function TeamIdeaContainer() {
+  const event = useEvent();
+  const myTeam = useMyTeam();
 
-export default function TeamIdeaContainer({ event }: Props) {
+  const [idea, setIdea] = useState<string>(myTeam.idea);
+
   const canEditIdea =
     event.eventRange === "BETWEEN" && event.judgeRange === "BEFORE";
 
@@ -19,7 +20,9 @@ export default function TeamIdeaContainer({ event }: Props) {
           <input
             type="text"
             name="idea"
-            value="주제를 입력해주세요."
+            value={idea}
+            onChange={(e) => setIdea(e.target.value)}
+            placeholder="주제를 입력해주세요."
             readOnly={!canEditIdea}
           />
         </div>

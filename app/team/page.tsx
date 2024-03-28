@@ -1,65 +1,53 @@
+"use client";
+
+import { useCallback, useEffect, useState } from "react";
+
 import Container from "@khlug/components/Container/Container";
 import LoginForm from "@khlug/components/LoginForm/LoginForm";
-import EditTeamContainer from "@khlug/components/EditTeamContainer/EditTeamContainer";
-import InvitationContainer from "@khlug/components/InvitationContainer/InvitationContainer";
-import MemberListContainer from "@khlug/components/MemberListContainer/MemberListContainer";
-import TeamIdeaContainer from "@khlug/components/TeamIdeaContainer/TeamIdeaContainer";
-import AttachmentContainer from "@khlug/components/AttachmentContainer/AttachmentContainer";
-import VoteContainer from "@khlug/components/VoteContainer/VoteContainer";
+import EditTeamContainer from "@khlug/components/team/EditTeamContainer/EditTeamContainer";
+import InvitationContainer from "@khlug/components/team/InvitationContainer/InvitationContainer";
+import MemberListContainer from "@khlug/components/team/MemberListContainer/MemberListContainer";
+import TeamIdeaContainer from "@khlug/components/team/TeamIdeaContainer/TeamIdeaContainer";
+import AttachmentContainer from "@khlug/components/team/AttachmentContainer/AttachmentContainer";
+import VoteContainer from "@khlug/components/team/VoteContainer/VoteContainer";
+import { useEvent } from "@khlug/components/EventProvider/EventProvider";
+import MyTeamProvider from "@khlug/components/team/MyTeamProvider/MyTeamProvider";
+import { GetMyTeamResponseDto } from "@khlug/transport/GetMyTeamResponseDto";
+import {
+  useClient,
+  useToken,
+} from "@khlug/components/ClientProvider/ClientProvider";
+import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
+import { useGlobalSpinner } from "@khlug/components/GlobalSpinnerProvider/GlobalSpinnerProvider";
 
-type RangeType = "BEFORE" | "BETWEEN" | "AFTER";
-type MockEvent = {
-  registerRange: RangeType;
-  eventRange: RangeType;
-  judgeRange: RangeType;
-  isLimitExceed: boolean;
-  eventStartAt: string;
-  judgeStartAt: string;
-  judgeEndAt: string;
-};
+const SpinnerContext = "Khuthon/TeamLoader" as const;
 
 export default function TeamPage() {
-  const mockIsLogin = true;
-  const mockTeam = {
-    id: "teamId",
-    name: "teamName",
-    note: "teamNote",
-  };
-  const mockMembers = [
-    {
-      id: "memberId1",
-      name: "memberName",
-      college: "memberCollege",
-      grade: 2,
-      studentNumber: "2021105589",
-      phone: "010-0000-0000",
-      email: "some.email@email.com",
-    },
-    {
-      id: "memberId2",
-      name: "memberName",
-      college: "memberCollege",
-      grade: 2,
-      studentNumber: "2021105589",
-      phone: "010-0000-0000",
-      email: "some.email@email.com",
-    },
-  ];
-  const mockInvitations = [
-    {
-      id: "invitationId",
-      studentNumber: "2021105589",
-    },
-  ];
-  const mockEvent: MockEvent = {
-    registerRange: "BETWEEN",
-    eventRange: "BETWEEN",
-    judgeRange: "BETWEEN",
-    isLimitExceed: false,
-    eventStartAt: "2024-03-15 00:00:00",
-    judgeStartAt: "2024-03-15 23:59:59",
-    judgeEndAt: "2024-03-16 23:59:59",
-  };
+  const [message, setMessage] = useState<string | null>(null);
+  const [team, setTeam] = useState<GetMyTeamResponseDto | null>(null);
+
+  const [addContext, removeContext] = useGlobalSpinner();
+  const [token] = useToken();
+  const client = useClient();
+  const event = useEvent();
+
+  const fetchTeam = useCallback(async () => {
+    if (!token) return;
+    addContext(SpinnerContext);
+    try {
+      const response = await client.get<GetMyTeamResponseDto>("/team");
+      setTeam(response.data);
+    } catch (e) {
+      setMessage(extractErrorMessage(e));
+    }
+    removeContext(SpinnerContext);
+  }, [token, addContext, removeContext, client]);
+
+  useEffect(() => {
+    setMessage(null);
+    fetchTeam();
+  }, [fetchTeam]);
+
   const myTeam = {
     id: "teamId",
     isVoted: false,
@@ -67,23 +55,23 @@ export default function TeamPage() {
 
   return (
     <>
-      {mockIsLogin ? (
-        mockEvent.judgeRange === "BETWEEN" ? (
-          <>
-            <TeamIdeaContainer event={mockEvent} />
-            <AttachmentContainer event={mockEvent} />
-            <VoteContainer event={mockEvent} myTeam={myTeam} />
-          </>
-        ) : (
-          <>
-            <EditTeamContainer team={mockTeam} event={mockEvent} />
-            <MemberListContainer members={mockMembers} event={mockEvent} />
-            <InvitationContainer
-              invitations={mockInvitations}
-              event={mockEvent}
-            />
-          </>
-        )
+      {team ? (
+        <MyTeamProvider team={team}>
+          {message && <div className="error">{message}</div>}
+          {event.judgeRange === "BETWEEN" ? (
+            <>
+              <TeamIdeaContainer />
+              <AttachmentContainer />
+              <VoteContainer myTeam={myTeam} />
+            </>
+          ) : (
+            <>
+              <EditTeamContainer />
+              <MemberListContainer />
+              <InvitationContainer />
+            </>
+          )}
+        </MyTeamProvider>
       ) : (
         <Container>
           <LoginForm />

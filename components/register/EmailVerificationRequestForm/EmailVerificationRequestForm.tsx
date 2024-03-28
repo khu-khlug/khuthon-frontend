@@ -45,7 +45,7 @@ export default function EmailVerificationRequestForm() {
         }
       );
       const token = response.data.token;
-      setToken(token);
+      setToken(token, { persist: false });
       load();
     } catch (e) {
       setMessage(extractErrorMessage(e));

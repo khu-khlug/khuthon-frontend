@@ -1,13 +1,17 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import axios, { AxiosInstance } from "axios";
 
 type Props = {
   children: React.ReactNode;
 };
 
-type TokenSetter = (token: string) => void;
+type TokenSetterOptions = {
+  persist?: boolean;
+};
+
+type TokenSetter = (token: string, options?: TokenSetterOptions) => void;
 const ClientContext = createContext<AxiosInstance | null>(null);
 const TokenContext = createContext<[string | null, TokenSetter]>([
   null,
@@ -15,7 +19,7 @@ const TokenContext = createContext<[string | null, TokenSetter]>([
 ]);
 
 export default function ClientProvider({ children }: Props) {
-  const [token, setToken] = useState<string | null>(null);
+  const [token, _setToken] = useState<string | null>(null);
 
   const client = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -24,6 +28,20 @@ export default function ClientProvider({ children }: Props) {
       "Content-Type": "application/json",
     },
   });
+
+  const setToken: TokenSetter = (token: string, options = {}) => {
+    if (options.persist ?? true) {
+      localStorage.setItem("token", token);
+    }
+    _setToken(token);
+  };
+
+  useEffect(() => {
+    const prevToken = localStorage.getItem("token");
+    if (prevToken) {
+      _setToken(prevToken);
+    }
+  }, []);
 
   return (
     <ClientContext.Provider value={client}>

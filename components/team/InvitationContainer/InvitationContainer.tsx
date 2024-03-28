@@ -1,21 +1,15 @@
-import Container from "../Container/Container";
+import Container from "../../Container/Container";
+import { useEvent } from "../../EventProvider/EventProvider";
+import { useMyTeam } from "../MyTeamProvider/MyTeamProvider";
 
-type Props = {
-  invitations: {
-    id: string;
-    studentNumber: string;
-  }[];
-  event: {
-    registerRange: string;
-    eventRange: string;
-  };
-};
+export default function InvitationContainer() {
+  const event = useEvent();
+  const myTeam = useMyTeam();
 
-export default function InvitationContainer({ invitations, event }: Props) {
   return (
     <Container>
       <h4>진행 중인 초대 정보</h4>
-      {invitations.map((invitation) => (
+      {myTeam.invitations.map((invitation) => (
         <form key={invitation.id}>
           <table className="timetable">
             <tbody>

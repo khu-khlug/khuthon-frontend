@@ -1,25 +1,15 @@
-import Container from "../Container/Container";
+import Container from "../../Container/Container";
+import { useEvent } from "../../EventProvider/EventProvider";
+import { useMyTeam } from "../MyTeamProvider/MyTeamProvider";
 
-type Props = {
-  members: {
-    id: string;
-    name: string;
-    college: string;
-    grade: number;
-    studentNumber: string;
-    phone: string;
-    email: string;
-  }[];
-  event: {
-    eventRange: "BEFORE" | "BETWEEN" | "AFTER";
-  };
-};
+export default function MemberListContainer() {
+  const event = useEvent();
+  const myTeam = useMyTeam();
 
-export default function MemberListContainer({ members, event }: Props) {
   return (
     <Container>
       <h4>팀 참가자 정보</h4>
-      {members.map((member) => (
+      {myTeam.members.map((member) => (
         <form key={member.id}>
           <table>
             <tbody>

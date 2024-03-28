@@ -1,15 +1,36 @@
 "use client";
 
 import { useState } from "react";
+import { useClient, useToken } from "../ClientProvider/ClientProvider";
+import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
+import { LoginAsMemberResponseDto } from "@khlug/transport/LoginAsMemberResponseDto";
 
 export default function LoginForm() {
   const [message, setMessage] = useState<string | null>(null);
-
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
+  const client = useClient();
+  const [, setToken] = useToken();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const response = await client.post<LoginAsMemberResponseDto>(
+        "/member/login",
+        {
+          email,
+          password,
+        }
+      );
+      setToken(response.data.token);
+    } catch (e) {
+      setMessage(extractErrorMessage(e));
+    }
+  };
+
   return (
-    <form method="post" action="/register/team">
+    <form method="post" onSubmit={handleSubmit}>
       {message && <div className="error">{message}</div>}
 
       <label>로그인</label>

@@ -1,18 +1,17 @@
 import classNames from "classnames";
-import Container from "../Container/Container";
+import Container from "../../Container/Container";
+import { useEvent } from "../../EventProvider/EventProvider";
+import { formatDate } from "@khlug/util/formaDate";
 
 type Props = {
-  event: {
-    judgeRange: "BETWEEN" | "BEFORE" | "AFTER";
-    judgeEndAt: string;
-  };
   myTeam: {
     id: string;
     isVoted: boolean;
   };
 };
 
-export default function VoteContainer({ event, myTeam }: Props) {
+export default function VoteContainer({ myTeam }: Props) {
+  const event = useEvent();
   // TODO[lery]: 두 팀 이상 투표하면 안되도록 로직 추가
 
   const mockTeams = [
@@ -56,7 +55,10 @@ export default function VoteContainer({ event, myTeam }: Props) {
           버튼을 눌러주세요.
         </li>
         <li>이미 한 투표는 되돌릴 수 없습니다.</li>
-        <li>최종 순위는 투표 기간이 끝난 후({event.judgeEndAt}) 공개됩니다.</li>
+        <li>
+          최종 순위는 투표 기간이 끝난 후({formatDate(event.judgeEndAt)})
+          공개됩니다.
+        </li>
       </ul>
 
       {event.judgeRange === "BETWEEN" ? (

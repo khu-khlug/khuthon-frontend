@@ -1,15 +1,10 @@
-import Container from "../Container/Container";
+import { formatDate } from "@khlug/util/formaDate";
+import Container from "../../Container/Container";
+import { useEvent } from "../../EventProvider/EventProvider";
 
-type Props = {
-  event: {
-    eventStartAt: string;
-    judgeStartAt: string;
-    eventRange: "BEFORE" | "BETWEEN" | "AFTER";
-    judgeRange: "BEFORE" | "BETWEEN" | "AFTER";
-  };
-};
+export default function AttachmentContainer() {
+  const event = useEvent();
 
-export default function AttachmentContainer({ event }: Props) {
   const canUploadAttachment =
     event.eventRange === "BETWEEN" && event.judgeRange === "BEFORE";
 
@@ -18,8 +13,10 @@ export default function AttachmentContainer({ event }: Props) {
       <h4>발표 자료</h4>
       <ul>
         <li>
-          발표 자료는 해커톤 시작({event.eventStartAt})부터 발표 시작(
-          {event.judgeStartAt}) 직전까지 업로드하거나 삭제할 수 있습니다.
+          발표 자료는 해커톤 시작({formatDate(event.eventStartAt)})부터 발표
+          시작(
+          {formatDate(event.judgeStartAt)}) 직전까지 업로드하거나 삭제할 수
+          있습니다.
         </li>
         <li>
           프로젝트 산출물을 제출할 필요는 없으며, 발표 자료만 <u>PDF 파일</u>로
