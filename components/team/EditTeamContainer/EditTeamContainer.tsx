@@ -7,7 +7,7 @@ import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 
 export default function EditTeamContainer() {
   const event = useEvent();
-  const myTeam = useMyTeam();
+  const [myTeam] = useMyTeam();
   const client = useClient();
 
   const [name, setName] = useState<string>(myTeam.name);

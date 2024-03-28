@@ -13,8 +13,6 @@ type Props = {
 };
 
 export default function InvitationItem({ invitation, onMessage }: Props) {
-  const [message, setMessage] = useState<string | null>(null);
-
   const event = useEvent();
   const client = useClient();
   const [myTeam, reload] = useMyTeam();
