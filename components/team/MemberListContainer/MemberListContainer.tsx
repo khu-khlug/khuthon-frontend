@@ -4,7 +4,7 @@ import { useMyTeam } from "../MyTeamProvider/MyTeamProvider";
 
 export default function MemberListContainer() {
   const event = useEvent();
-  const myTeam = useMyTeam();
+  const [myTeam] = useMyTeam();
 
   return (
     <Container>

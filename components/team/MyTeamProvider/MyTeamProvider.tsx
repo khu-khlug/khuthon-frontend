@@ -6,21 +6,28 @@ import { createContext, useContext } from "react";
 type Props = {
   children: React.ReactNode;
   team: GetMyTeamResponseDto;
+  reload: MyTeamReloader;
 };
 
-const MyTeamContext = createContext<GetMyTeamResponseDto | null>(null);
+type MyTeamReloader = () => void;
 
-export default function MyTeamProvider({ children, team }: Props) {
+const MyTeamContext = createContext<
+  [GetMyTeamResponseDto | null, MyTeamReloader]
+>([null, () => {}]);
+
+export default function MyTeamProvider({ children, team, reload }: Props) {
   return (
-    <MyTeamContext.Provider value={team}>{children}</MyTeamContext.Provider>
+    <MyTeamContext.Provider value={[team, reload]}>
+      {children}
+    </MyTeamContext.Provider>
   );
 }
 
-export function useMyTeam(): GetMyTeamResponseDto {
-  const team = useContext(MyTeamContext);
+export function useMyTeam(): [GetMyTeamResponseDto, MyTeamReloader] {
+  const [team, reload] = useContext(MyTeamContext);
   if (!team) {
     throw new Error("No my team");
   }
 
-  return team;
+  return [team, reload];
 }

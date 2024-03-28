@@ -35,6 +35,7 @@ export default function EditTeamContainer() {
     try {
       const teamId = myTeam.id;
       await client.patch(`/teams/${teamId}`, { name, note });
+      setMessage("팀 정보가 수정되었습니다.");
     } catch (e) {
       setMessage(extractErrorMessage(e));
     }

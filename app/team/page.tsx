@@ -58,7 +58,7 @@ export default function TeamPage() {
     <>
       {message && <div className="error">{message}</div>}
       {team ? (
-        <MyTeamProvider team={team}>
+        <MyTeamProvider team={team} reload={fetchTeam}>
           {event.judgeRange === "BETWEEN" ? (
             <>
               <TeamIdeaContainer />

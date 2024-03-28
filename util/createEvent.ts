@@ -16,16 +16,28 @@ export async function createEvent(): Promise<Event> {
     res.json()
   );
 
-  const registerStartAt = new Date(eventJson.registerStartAt);
-  const registerEndAt = new Date(eventJson.registerEndAt);
+  // const registerStartAt = new Date(eventJson.registerStartAt);
+  // const registerEndAt = new Date(eventJson.registerEndAt);
+  // const registerRange = calcTimeRange(registerStartAt, registerEndAt);
+
+  // const eventStartAt = new Date(eventJson.eventStartAt);
+  // const eventEndAt = new Date(eventJson.eventEndAt);
+  // const eventRange = calcTimeRange(eventStartAt, eventEndAt);
+
+  // const judgeStartAt = new Date(eventJson.judgeStartAt);
+  // const judgeEndAt = new Date(eventJson.judgeEndAt);
+  // const judgeRange = calcTimeRange(judgeStartAt, judgeEndAt);
+
+  const registerStartAt = new Date(2024, 2, 29, 0, 0, 0);
+  const registerEndAt = new Date(2024, 3, 1, 0, 0, 0);
   const registerRange = calcTimeRange(registerStartAt, registerEndAt);
 
-  const eventStartAt = new Date(eventJson.eventStartAt);
-  const eventEndAt = new Date(eventJson.eventEndAt);
+  const eventStartAt = new Date(2024, 3, 2, 0, 0, 0);
+  const eventEndAt = new Date(2024, 3, 3, 0, 0, 0);
   const eventRange = calcTimeRange(eventStartAt, eventEndAt);
 
-  const judgeStartAt = new Date(eventJson.judgeStartAt);
-  const judgeEndAt = new Date(eventJson.judgeEndAt);
+  const judgeStartAt = new Date(2024, 3, 2, 12, 0, 0);
+  const judgeEndAt = new Date(2024, 3, 3, 0, 0, 0);
   const judgeRange = calcTimeRange(judgeStartAt, judgeEndAt);
 
   return {
