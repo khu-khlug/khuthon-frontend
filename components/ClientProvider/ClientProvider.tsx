@@ -11,7 +11,7 @@ type TokenSetterOptions = {
   persist?: boolean;
 };
 
-type TokenSetter = (token: string, options?: TokenSetterOptions) => void;
+type TokenSetter = (token: string | null, options?: TokenSetterOptions) => void;
 const ClientContext = createContext<AxiosInstance | null>(null);
 const TokenContext = createContext<[string | null, TokenSetter]>([
   null,
@@ -29,9 +29,13 @@ export default function ClientProvider({ children }: Props) {
     },
   });
 
-  const setToken: TokenSetter = (token: string, options = {}) => {
+  const setToken: TokenSetter = (token, options = {}) => {
     if (options.persist ?? true) {
-      localStorage.setItem("token", token);
+      if (token) {
+        localStorage.setItem("token", token);
+      } else {
+        localStorage.removeItem("token");
+      }
     }
     _setToken(token);
   };

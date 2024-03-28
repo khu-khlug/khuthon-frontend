@@ -30,7 +30,7 @@ export default function LoginForm() {
   };
 
   return (
-    <form method="post" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       {message && <div className="error">{message}</div>}
 
       <label>로그인</label>

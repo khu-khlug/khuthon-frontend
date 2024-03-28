@@ -19,6 +19,7 @@ import {
 } from "@khlug/components/ClientProvider/ClientProvider";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 import { useGlobalSpinner } from "@khlug/components/GlobalSpinnerProvider/GlobalSpinnerProvider";
+import DeleteTeamContainer from "@khlug/components/team/DeleteTeamContainer/DeleteTeamContainer";
 
 const SpinnerContext = "Khuthon/TeamLoader" as const;
 
@@ -55,9 +56,9 @@ export default function TeamPage() {
 
   return (
     <>
+      {message && <div className="error">{message}</div>}
       {team ? (
         <MyTeamProvider team={team}>
-          {message && <div className="error">{message}</div>}
           {event.judgeRange === "BETWEEN" ? (
             <>
               <TeamIdeaContainer />
@@ -68,7 +69,8 @@ export default function TeamPage() {
             <>
               <EditTeamContainer />
               <MemberListContainer />
-              <InvitationContainer />
+              {event.registerRange === "BETWEEN" && <InvitationContainer />}
+              {event.registerRange === "BETWEEN" && <DeleteTeamContainer />}
             </>
           )}
         </MyTeamProvider>

@@ -34,7 +34,7 @@ export default function CreateTeamForm() {
   };
 
   return (
-    <form method="post" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       {message && <div className="error">{message}</div>}
 
       <label>팀 생성</label>

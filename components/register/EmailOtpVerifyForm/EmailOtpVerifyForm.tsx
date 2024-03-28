@@ -24,7 +24,7 @@ export default function EmailOtpVerifyForm() {
   };
 
   return (
-    <form method="post" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       {message && <div className="error">{message}</div>}
 
       <label>참가자 정보 입력</label>

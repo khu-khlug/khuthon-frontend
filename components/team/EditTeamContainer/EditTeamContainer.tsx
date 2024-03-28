@@ -44,7 +44,7 @@ export default function EditTeamContainer() {
     <Container>
       <h4>팀 정보 수정</h4>
       {message && <div className="error">{message}</div>}
-      <form method="post" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <div className="description">
           팀 이름, 참가자는 접수 마감 전까지 수정할 수 있습니다.
         </div>

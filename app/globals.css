@@ -55,9 +55,10 @@ body {
 
 #body {
   position: relative;
+  padding: 27px 20px;
 }
 #body .navigation {
-  margin: 20px 27px;
+  margin: 20px 0px;
   background: #333;
   font-size: 16px;
   white-space: nowrap;
@@ -269,7 +270,7 @@ body {
 }
 
 #body .container {
-  margin: 20px 27px;
+  margin: 20px 0px;
   background: url("/images/container.png") transparent repeat;
   background-size: 1500px 1500px;
   font-size: 15px;
@@ -718,9 +719,6 @@ body {
   top: -1px;
 }
 
-#body .board {
-  margin: 20px 27px;
-}
 #body .board a {
   text-decoration: none;
   color: inherit;
@@ -839,9 +837,6 @@ body {
   margin: 10px 0 0 0;
 }
 
-#body .document {
-  margin: 20px 27px;
-}
 #body .document a {
   color: inherit;
 }
@@ -1201,7 +1196,7 @@ body {
 }
 
 #body .error {
-  margin: 10px 2px;
+  margin: 10px 0px;
   padding: 12px 15px;
   background: url("https://khlug.org/images/favicon_white.gif") #333 no-repeat
     right 10px bottom 10px;

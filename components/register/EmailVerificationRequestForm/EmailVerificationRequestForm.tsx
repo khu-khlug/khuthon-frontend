@@ -45,7 +45,7 @@ export default function EmailVerificationRequestForm() {
         }
       );
       const token = response.data.token;
-      setToken(token, { persist: false });
+      setToken(token);
       load();
     } catch (e) {
       setMessage(extractErrorMessage(e));
@@ -53,7 +53,7 @@ export default function EmailVerificationRequestForm() {
   };
 
   return (
-    <form method="post" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       {message && <div className="error">{message}</div>}
 
       <label>참가자 정보 입력</label>
