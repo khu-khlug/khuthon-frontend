@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import axios, { AxiosInstance } from "axios";
+import axios, { AxiosInstance, isAxiosError } from "axios";
 
 type Props = {
   children: React.ReactNode;
@@ -27,6 +27,12 @@ export default function ClientProvider({ children }: Props) {
       Authorization: token ? `Bearer ${token}` : undefined,
       "Content-Type": "application/json",
     },
+  });
+  client.interceptors.response.use(null, (e) => {
+    if (isAxiosError(e) && e.response?.status === 401) {
+      setToken(null);
+    }
+    return Promise.reject(e);
   });
 
   const setToken: TokenSetter = (token, options = {}) => {
