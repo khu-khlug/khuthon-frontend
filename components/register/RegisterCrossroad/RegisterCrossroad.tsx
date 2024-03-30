@@ -25,7 +25,10 @@ export default function RegisterCrossroad() {
   ) : (
     <Callout>
       <strong>접수가 완료되었습니다.</strong>
-      <br />팀 페이지에서 팀 정보를 확인하고, 필요 시 팀원을 초대해주세요!
+      <br />
+      <span className="text-xl">
+        팀 페이지에서 팀 정보를 확인하고, 필요 시 팀원을 초대해주세요!
+      </span>
     </Callout>
   );
 }
