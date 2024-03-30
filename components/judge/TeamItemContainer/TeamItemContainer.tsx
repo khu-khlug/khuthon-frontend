@@ -9,7 +9,7 @@ import classNames from "classnames";
 
 import "./TeamItemContainer.css";
 import { useEvent } from "@khlug/components/EventProvider/EventProvider";
-import { useDoJudge, useJudge } from "../JudgeProvider/JudgeProvider";
+import { useDoJudge } from "../JudgeProvider/JudgeProvider";
 
 type Props = {
   team: {
@@ -47,8 +47,6 @@ export default function TeamItemContainer({
 
   const handleClick = () => {
     onClick(team.id);
-
-    console.log(selectedTeamId, team.id);
     if (selectedTeamId && selectedTeamId !== team.id) {
       doJudge(selectedTeamId);
     }
@@ -83,12 +81,12 @@ export default function TeamItemContainer({
               </p>
             </>
           )}
-          {/* {event.judgeRange === "BETWEEN" && ( */}
-          <>
-            <h4 className="mt-4">심사</h4>
-            <JudgingForm team={team} />
-          </>
-          {/* )} */}
+          {event.judgeRange === "BETWEEN" && (
+            <>
+              <h4 className="mt-4">심사</h4>
+              <JudgingForm team={team} />
+            </>
+          )}
         </div>
       </Container>
     </div>
