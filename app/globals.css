@@ -116,6 +116,10 @@ body {
 #body .btnArea button:focus {
   background: #00a0e9 !important;
 }
+#body .btnArea button.blue:hover,
+#body .btnArea button.blue:focus {
+  background: #56c2f4 !important;
+}
 #body .btnArea button span,
 #body .btnArea button a {
   text-decoration: none;
@@ -144,7 +148,7 @@ body {
   margin-right: 5px;
 }
 
-#body form label {
+form label {
   font-size: 18px;
   padding: 5px 0;
   color: #555;
@@ -152,19 +156,19 @@ body {
   display: inline-block;
   margin: 20px 5px 10px 1px;
 }
-#body form .description {
+form .description {
   color: #999;
   line-height: 1.5;
   font-size: 14px;
   margin: 0 0 10px 0;
 }
-#body form .select_wrap {
+form .select_wrap {
   padding: 0 3px;
 }
-#body form .select_wrap h5 {
+form .select_wrap h5 {
   margin: 20px 0;
 }
-#body form .select_wrap a {
+form .select_wrap a {
   text-decoration: none;
   color: inherit;
   line-height: 22px;
@@ -173,7 +177,7 @@ body {
   font-size: 16px;
   white-space: nowrap;
 }
-#body form .select_wrap a span {
+form .select_wrap a span {
   border-radius: 100px;
   border: 2px solid #ddd;
   display: inline-block;
@@ -183,20 +187,20 @@ body {
   color: #fff;
   margin-right: 2px;
 }
-#body form .select_wrap a:not(.active) span {
+form .select_wrap a:not(.active) span {
   background-color: #fff !important;
 }
-#body form .select_wrap a:not(.active) span i {
+form .select_wrap a:not(.active) span i {
   visibility: hidden;
 }
-#body form .input_wrap {
+form .input_wrap {
   padding: 10px;
   background: #fff;
   border: 1px solid #ddd;
   margin-bottom: -1px;
 }
-#body form .input_wrap input,
-#body form .input_wrap textarea {
+form .input_wrap input,
+form .input_wrap textarea {
   padding: 10px;
   margin: -10px;
   background: transparent;
@@ -205,15 +209,15 @@ body {
   font: inherit;
   font-size: 16px;
 }
-#body form .input_wrap textarea {
+form .input_wrap textarea {
   height: 200px;
 }
-#body form .content {
+form .content {
   margin: 0 !important;
   padding: 0 0 10px 0 !important;
   border-bottom: none;
 }
-#body form .btnArea {
+form .btnArea {
   margin: 40px 3px 10px -3px !important;
 }
 
