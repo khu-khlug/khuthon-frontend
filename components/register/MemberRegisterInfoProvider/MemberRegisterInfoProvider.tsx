@@ -16,7 +16,7 @@ import {
 
 type Props = {
   children: React.ReactNode;
-  onError: (message: string) => void;
+  onMessage: (message: string | null) => void;
 };
 
 type MemberRegisterInfo = {
@@ -33,7 +33,7 @@ const MemberRegisterInfoContext = createContext<
 
 export default function MemberRegisterInfoProvider({
   children,
-  onError,
+  onMessage,
 }: Props) {
   const [memberRegisterInfo, setMemberRegisterInfo] =
     useState<MemberRegisterInfo | null>(null);
@@ -44,6 +44,7 @@ export default function MemberRegisterInfoProvider({
     if (!token) {
       return;
     }
+    onMessage(null);
 
     try {
       const { data } = await client.get<MemberRegisterInfo>("/member");
@@ -55,9 +56,9 @@ export default function MemberRegisterInfoProvider({
         state: data.state,
       });
     } catch (e) {
-      onError(extractErrorMessage(e));
+      onMessage(extractErrorMessage(e));
     }
-  }, [token, client, onError]);
+  }, [token, client, onMessage]);
 
   useEffect(() => {
     load();

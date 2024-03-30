@@ -23,7 +23,7 @@ export default function RegisterPage() {
         ) : event.registerRange === "AFTER" ? (
           <Callout>접수가 마감되었습니다.</Callout>
         ) : (
-          <MemberRegisterInfoProvider onError={setMessage}>
+          <MemberRegisterInfoProvider onMessage={setMessage}>
             <RegisterCrossroad />
           </MemberRegisterInfoProvider>
         )}
