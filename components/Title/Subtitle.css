@@ -1,0 +1,13 @@
+.subtitle::before {
+  position: absolute;
+  top: 4px;
+  left: -20px;
+  width: 13px;
+  height: 10px;
+  background: #00a0e9;
+  content: " ";
+}
+
+.subtitle {
+  font-size: 1rem;
+}

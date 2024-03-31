@@ -346,7 +346,7 @@ form .btnArea {
   border-collapse: collapse;
   width: 100%;
 }
-#body .container table th {
+.container table th {
   padding: 10px;
   background: #ddd;
   line-height: 1.7;
@@ -491,7 +491,7 @@ form .btnArea {
   margin: 20px 3px;
   font-size: 15px;
 }
-#body .vote a {
+.vote a {
   text-decoration: none;
   color: inherit;
   padding: 0;
@@ -509,7 +509,6 @@ form .btnArea {
   font-weight: normal;
   padding: 0;
   width: 170px;
-  background: #fff;
   transition: all 0.3s ease-out;
 }
 #body .vote table tr th h4 {
@@ -530,10 +529,6 @@ form .btnArea {
 #body .vote table tr th p {
   font-size: 12px;
   margin: 0 10px;
-}
-#body .vote table tr th .wrap {
-  display: block;
-  padding: 10px;
 }
 #body .vote table tr td {
   padding: 0;
@@ -1329,8 +1324,8 @@ form .btnArea {
 .pdf_button {
   display: inline-block;
   color: #fff !important;
-  margin: -5px 0 10px 15px !important;
   background: #999;
+  margin: 16px 10px 8px 10px;
   padding: 2px 5px !important;
   font-size: 14px;
 }
