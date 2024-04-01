@@ -3,27 +3,37 @@ import {
   useToken,
 } from "@khlug/components/ClientProvider/ClientProvider";
 import { useEvent } from "@khlug/components/EventProvider/EventProvider";
-import { MemberState, University } from "@khlug/constant";
 import { ListTeamResponseDto } from "@khlug/transport/ListTeamResponseDto";
 import { useCallback, useEffect, useState } from "react";
 import JudgeProvider from "../JudgeProvider/JudgeProvider";
 import JudgingCriteriaContainer from "../JudgingCriteriaContainer/JudgingCriteriaContainer";
-import ParticipantCounterContainer from "../ParticipantCounterContainer/ParticipantCounterContainer";
 import TeamItemContainer from "../TeamItemContainer/TeamItemContainer";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 import { useGlobalSpinner } from "@khlug/components/GlobalSpinnerProvider/GlobalSpinnerProvider";
+import { GetPrevJudgeResponseDto } from "@khlug/transport/GetPrevJudgeResponseDto";
 
 const SpinnerContext = "Khuthon/TeamLoaderInJudge";
 
 export default function Judge() {
-  const event = useEvent();
   const client = useClient();
   const [addContext, removeContext] = useGlobalSpinner();
 
   const [teamList, setTeamList] = useState<ListTeamResponseDto | null>(null);
+  const [prevJudge, setPrevJudge] = useState<GetPrevJudgeResponseDto | null>(
+    null
+  );
   const [message, setMessage] = useState<string | null>(null);
 
   const [selectedTeamId, setSelectedTeamId] = useState<string | null>(null);
+
+  const loadPrevJudge = useCallback(async () => {
+    try {
+      const response = await client.get<GetPrevJudgeResponseDto>(`/judge`);
+      setPrevJudge(response.data);
+    } catch (e) {
+      setMessage(extractErrorMessage(e));
+    }
+  }, [client]);
 
   const loadTeamList = useCallback(async () => {
     try {
@@ -34,35 +44,51 @@ export default function Judge() {
     }
   }, [client]);
 
-  const loadVoteData = useCallback(async () => {
+  const loadJudgeData = useCallback(async () => {
     addContext(SpinnerContext);
-    await loadTeamList();
+    await Promise.all([loadTeamList(), loadPrevJudge()]);
     removeContext(SpinnerContext);
-  }, [addContext, removeContext, loadTeamList]);
+  }, [addContext, removeContext, loadTeamList, loadPrevJudge]);
 
   useEffect(() => {
-    loadVoteData();
-  }, [loadVoteData]);
+    loadJudgeData();
+  }, [loadJudgeData]);
 
   const handleTeamItemClick = (teamId: string) => {
     setSelectedTeamId(teamId);
   };
 
   return (
-    <JudgeProvider onError={setMessage} initial={{}}>
-      {message && <div className="error">{message}</div>}
-      <ParticipantCounterContainer />
-      <JudgingCriteriaContainer />
-      {teamList &&
-        teamList.teams.map((team) => (
-          <TeamItemContainer
-            key={team.id}
-            team={team}
-            selectedTeamId={selectedTeamId}
-            expand={team.id === selectedTeamId}
-            onClick={handleTeamItemClick}
-          />
-        ))}
-    </JudgeProvider>
+    prevJudge && (
+      <JudgeProvider
+        onError={setMessage}
+        initial={prevJudge.judges.reduce(
+          (prev, cur) => ({
+            ...prev,
+            [cur.teamId]: {
+              creativity: cur.creativity,
+              practicality: cur.practicality,
+              skill: cur.skill,
+              design: cur.design,
+              completeness: cur.completeness,
+            },
+          }),
+          {}
+        )}
+      >
+        {message && <div className="error">{message}</div>}
+        <JudgingCriteriaContainer />
+        {teamList &&
+          teamList.teams.map((team) => (
+            <TeamItemContainer
+              key={team.id}
+              team={team}
+              selectedTeamId={selectedTeamId}
+              expand={team.id === selectedTeamId}
+              onClick={handleTeamItemClick}
+            />
+          ))}
+      </JudgeProvider>
+    )
   );
 }
