@@ -53,7 +53,15 @@ export default function TeamItemContainer({
         <section className="!px-5 !py-8">
           <Subtitle>{team.name}</Subtitle>
           {enabled ? (
-            <p className="!m-0 !mt-2">{team.idea}</p>
+            <>
+              <p className="!m-0 !mt-2">{team.idea}</p>
+              <Link
+                href={team.attachmentUrl!}
+                className="!m-0 !mt-4 inline-block bg-gray-500 !text-white !p-2 no-underline"
+              >
+                발표 자료 보기
+              </Link>
+            </>
           ) : (
             <p className="!m-0 !mt-2 text-gray-400">
               아이디어 또는 발표 자료가 없어 심사할 수 없습니다.
@@ -66,14 +74,6 @@ export default function TeamItemContainer({
             expand: expand,
           })}
         >
-          {team.attachmentUrl && (
-            <Link
-              href={team.attachmentUrl!}
-              className="!m-0 inline-block bg-gray-500 !text-white !p-2 no-underline"
-            >
-              발표 자료 보기
-            </Link>
-          )}
           {event.judgeRange === "BETWEEN" && (
             <>
               <Subtitle>심사</Subtitle>

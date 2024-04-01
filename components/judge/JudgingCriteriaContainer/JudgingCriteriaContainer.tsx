@@ -33,6 +33,8 @@ export default function JudgingCriteriaContainer() {
           점수는 0점부터 10점까지, 소숫점 셋째 자리에서 반올림됩니다.
           <br />
           최종 순위는 심사/투표 기간이 끝난 후 공개됩니다.
+          <br />
+          <br />각 팀의 정보를 확인하거나 심사를 진행하려면 팀을 클릭하세요.
         </div>
       </div>
     </Container>
