@@ -25,18 +25,6 @@ export default function JudgingCriteriaContainer() {
           모두 0점 부여)
         </li>
       </ul>
-
-      <div className="btnArea">
-        <div className="description">
-          각 팀 별로 5개의 점수를 모두 입력해야 해당 팀의 점수가 반영됩니다.
-          <br />
-          점수는 0점부터 10점까지, 소숫점 셋째 자리에서 반올림됩니다.
-          <br />
-          최종 순위는 심사/투표 기간이 끝난 후 공개됩니다.
-          <br />
-          <br />각 팀의 정보를 확인하거나 심사를 진행하려면 팀을 클릭하세요.
-        </div>
-      </div>
     </Container>
   );
 }

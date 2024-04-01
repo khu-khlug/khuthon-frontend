@@ -1,16 +1,14 @@
-import {
-  useClient,
-  useToken,
-} from "@khlug/components/ClientProvider/ClientProvider";
-import { useEvent } from "@khlug/components/EventProvider/EventProvider";
+import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
 import { ListTeamResponseDto } from "@khlug/transport/ListTeamResponseDto";
 import { useCallback, useEffect, useState } from "react";
-import JudgeProvider from "../JudgeProvider/JudgeProvider";
+import JudgeProvider, { useDoJudge } from "../JudgeProvider/JudgeProvider";
 import JudgingCriteriaContainer from "../JudgingCriteriaContainer/JudgingCriteriaContainer";
 import TeamItemContainer from "../TeamItemContainer/TeamItemContainer";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 import { useGlobalSpinner } from "@khlug/components/GlobalSpinnerProvider/GlobalSpinnerProvider";
 import { GetPrevJudgeResponseDto } from "@khlug/transport/GetPrevJudgeResponseDto";
+import JudgeAutosaver from "../JudgeAutosaver/JudgeAutosaver";
+import AboutJudge from "../AboutJudge/AboutJudge";
 
 const SpinnerContext = "Khuthon/TeamLoaderInJudge";
 
@@ -77,7 +75,9 @@ export default function Judge() {
         )}
       >
         {message && <div className="error">{message}</div>}
+        <JudgeAutosaver selectedTeamId={selectedTeamId} />
         <JudgingCriteriaContainer />
+        <AboutJudge />
         {teamList &&
           teamList.teams.map((team) => (
             <TeamItemContainer
