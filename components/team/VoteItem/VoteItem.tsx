@@ -50,12 +50,12 @@ export default function VoteItem({ team, active, onClick }: Props) {
           </Link>
         </>
       ) : (
-        <p className="!mx-0 text-gray-300">
-          아이디어 또는 발표 자료가 없어 투표할 수 없습니다.
-        </p>
-      )}
-      {disabled && (
-        <div className="w-full h-full absolute top-0 left-0 bg-black/10" />
+        <>
+          <p className="!mx-0 text-gray-300">
+            아이디어 또는 발표 자료가 없어 투표할 수 없습니다.
+          </p>
+          <div className="w-full h-full absolute top-0 left-0 bg-black/10" />
+        </>
       )}
     </div>
   );

@@ -8,14 +8,12 @@ import {
 } from "@khlug/components/judge/JudgeProvider/JudgeProvider";
 
 type Props = {
-  team: {
-    id: string;
-  };
+  teamId: string;
 };
 
-export default function JudgingForm({ team }: Props) {
+export default function JudgingForm({ teamId }: Props) {
   const doJudge = useDoJudge();
-  const [judge, setJudge] = useJudge(team.id);
+  const [judge, setJudge] = useJudge(teamId);
 
   const [message, setMessage] = useState<string | null>(null);
   const [localJudge, setLocalJudge] = useState(judge);
@@ -45,7 +43,7 @@ export default function JudgingForm({ team }: Props) {
     }
 
     setMessage(null);
-    doJudge(team.id);
+    doJudge(teamId);
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -54,7 +52,7 @@ export default function JudgingForm({ team }: Props) {
 
     const validatedValue = validateValueAndParse(value);
     setLocalJudge((prev) => ({ ...prev, [name]: value }));
-    setJudge(team.id, { ...judge, [name]: validatedValue ?? judge[name] });
+    setJudge(teamId, { ...judge, [name]: validatedValue ?? judge[name] });
   };
 
   return (

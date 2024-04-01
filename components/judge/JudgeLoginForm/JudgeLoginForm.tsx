@@ -1,15 +1,40 @@
 "use client";
 
 import { useState } from "react";
-import Container from "../../Container/Container";
+
+import Container from "@khlug/components/Container/Container";
+import {
+  useClient,
+  useToken,
+} from "@khlug/components/ClientProvider/ClientProvider";
+import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
+import { LoginAsExaminerResponseDto } from "@khlug/transport/LoginAsExaminerResponseDto";
 
 export default function JudgeLoginForm() {
+  const client = useClient();
+  const [, setToken] = useToken();
+
   const [message, setMessage] = useState<string | null>(null);
   const [judgeCode, setJudgeCode] = useState<string>("");
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const response = await client.post<LoginAsExaminerResponseDto>(
+        "/examiner/login",
+        { code: judgeCode }
+      );
+
+      // 새로고침시 토큰이 사라지도록 persist 옵션을 false로 설정
+      setToken(response.data.token, { persist: false });
+    } catch (e) {
+      setMessage(extractErrorMessage(e));
+    }
+  };
+
   return (
     <Container>
-      <form method="post" action="{{url('/judge')}}">
+      <form onSubmit={handleSubmit}>
         {message && <div className="error">{message}</div>}
         <label>심사위원 코드</label>
         <div className="description">뒤에서 보고 있는 사람을 주의하세요!</div>

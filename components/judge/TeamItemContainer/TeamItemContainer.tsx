@@ -10,27 +10,12 @@ import classNames from "classnames";
 import "./TeamItemContainer.css";
 import { useEvent } from "@khlug/components/EventProvider/EventProvider";
 import { useDoJudge } from "../JudgeProvider/JudgeProvider";
+import Subtitle from "@khlug/components/Title/Subtitle";
+import { ListTeamResponseTeam } from "@khlug/transport/ListTeamResponseDto";
+import Link from "next/link";
 
 type Props = {
-  team: {
-    id: string;
-    name: string;
-    idea: string;
-    members: {
-      id: string;
-      state: MemberState;
-      name: string;
-      phone: string;
-      number: string;
-      university: University;
-      college: string;
-      grade: number;
-    }[];
-    file: {
-      name: string;
-      url: string;
-    } | null;
-  };
+  team: ListTeamResponseTeam;
   selectedTeamId: string | null;
   expand: boolean;
   onClick: (teamId: string) => void;
@@ -45,7 +30,11 @@ export default function TeamItemContainer({
   const event = useEvent();
   const doJudge = useDoJudge();
 
+  const enabled = team.idea && team.attachmentUrl;
+
   const handleClick = () => {
+    if (!enabled) return;
+
     onClick(team.id);
     if (selectedTeamId && selectedTeamId !== team.id) {
       doJudge(selectedTeamId);
@@ -54,40 +43,44 @@ export default function TeamItemContainer({
 
   return (
     <div
-      className={classNames({ "cursor-pointer": !expand })}
+      className={classNames({
+        "cursor-not-allowed": !enabled,
+        "cursor-pointer": enabled && !expand,
+      })}
       onClick={handleClick}
     >
-      <Container>
-        <h4 className="mt-4">{team.name}</h4>
-        <p>{team.idea}</p>
-        <div
+      <Container className="!p-0">
+        <section className="!px-5 !py-8">
+          <Subtitle>{team.name}</Subtitle>
+          {enabled ? (
+            <p className="!m-0 !mt-2">{team.idea}</p>
+          ) : (
+            <p className="!m-0 !mt-2 text-gray-400">
+              아이디어 또는 발표 자료가 없어 심사할 수 없습니다.
+            </p>
+          )}
+        </section>
+        <section
           id="HelloWorld"
-          className={classNames("TeamItemContainer__Expandable", {
+          className={classNames("!px-5", "TeamItemContainer__Expandable", {
             expand: expand,
           })}
         >
-          <Divider />
-          <MemberList members={team.members} />
-          {team.file && (
-            <>
-              <Divider />
-              <p>
-                <a
-                  href={team.file.url}
-                  className="no-underline text-gray-400 hover:text-gray-500"
-                >
-                  <i className="xi-download"></i> {team.file.name}
-                </a>
-              </p>
-            </>
+          {team.attachmentUrl && (
+            <Link
+              href={team.attachmentUrl!}
+              className="!m-0 inline-block bg-gray-500 !text-white !p-2 no-underline"
+            >
+              발표 자료 보기
+            </Link>
           )}
           {event.judgeRange === "BETWEEN" && (
             <>
-              <h4 className="mt-4">심사</h4>
-              <JudgingForm team={team} />
+              <Subtitle>심사</Subtitle>
+              <JudgingForm teamId={team.id} />
             </>
           )}
-        </div>
+        </section>
       </Container>
     </div>
   );

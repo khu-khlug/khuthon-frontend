@@ -18,7 +18,7 @@ export default function TeamIdeaContainer() {
 
   const validate = () => {
     if (idea.length < 1 || idea.length > 100) {
-      setMessage("주제는 1자 이상, 500자 이하여야 합니다.");
+      setMessage("아이디어는 1자 이상, 500자 이하여야 합니다.");
       return false;
     }
     return true;
@@ -31,7 +31,7 @@ export default function TeamIdeaContainer() {
 
     try {
       await client.put(`/teams/${myTeam.id}/ideas`, { idea });
-      setMessage("주제가 지정되었습니다.");
+      setMessage("아이디어가 지정되었습니다.");
     } catch (e) {
       setMessage(extractErrorMessage(e));
     }
@@ -39,7 +39,7 @@ export default function TeamIdeaContainer() {
 
   return (
     <Container>
-      <h4>주제</h4>
+      <h4>아이디어</h4>
       {message && <div className="error">{message}</div>}
       <form onSubmit={handleSubmit}>
         <div className="input_wrap">
@@ -48,14 +48,14 @@ export default function TeamIdeaContainer() {
             name="idea"
             value={idea}
             onChange={(e) => setIdea(e.target.value)}
-            placeholder="주제를 입력해주세요."
+            placeholder="아이디어를 입력해주세요."
             readOnly={!canEditIdea}
           />
         </div>
         {canEditIdea && (
           <div className="btnArea">
             <button type="submit" className="blue">
-              <span>주제 지정</span>
+              <span>아이디어 지정</span>
             </button>
           </div>
         )}
