@@ -4,11 +4,12 @@ import { useState } from "react";
 import { useClient, useToken } from "../ClientProvider/ClientProvider";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 import { LoginAsMemberResponseDto } from "@khlug/transport/LoginAsMemberResponseDto";
+import Callout from "../Callout/Callout";
 
-export default function LoginForm() {
+export default function ResetPasswordForm() {
   const [message, setMessage] = useState<string | null>(null);
   const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [submitted, setSubmitted] = useState<boolean>(false);
 
   const client = useClient();
   const [, setToken] = useToken();
@@ -17,37 +18,31 @@ export default function LoginForm() {
     e.preventDefault();
     try {
       const response = await client.post<LoginAsMemberResponseDto>(
-        "/member/login",
-        {
-          email,
-          password,
-        }
+        "/member/password-reset/request",
+        { email }
       );
       setToken(response.data.token);
+      setSubmitted(true);
     } catch (e) {
       setMessage(extractErrorMessage(e));
     }
   };
 
-  return (
+  return submitted ? (
+    <Callout>
+      <strong>비밀번호 재설정 요청이 완료되었습니다.</strong>
+      <br />
+      <span className="text-xl">
+        &apos;{email}&apos;에 도착한 이메일을 확인해주세요!
+      </span>
+    </Callout>
+  ) : (
     <form onSubmit={handleSubmit}>
       {message && <div className="error">{message}</div>}
 
-      <label>로그인</label>
+      <label>비밀번호 재설정</label>
       <div className="description">
-        팀 페이지에 접근하기 위해 로그인을 해주세요.
-        <br />
-        아직 계정이 없으시다면,{" "}
-        <a href="/register" className="text-black">
-          여기
-        </a>
-        에서 먼저 참가 접수를 진행해주세요.
-        <br />
-        비밀번호가 기억이 나지 않으면,{" "}
-        <a href="/request-reset-password" className="text-black">
-          여기
-        </a>
-        에서 비밀번호를 재설정해주세요.
+        비밀번호를 재설정할 이메일을 입력해주세요.
       </div>
       <div className="input_wrap">
         <input
@@ -58,18 +53,9 @@ export default function LoginForm() {
           required
         />
       </div>
-      <div className="input_wrap">
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="비밀번호"
-          required
-        />
-      </div>
       <div className="btnArea">
         <button type="submit" className="black w-full">
-          <span className="text-lg p-4">로그인</span>
+          <span className="text-lg p-4">재설정 요청</span>
         </button>
       </div>
     </form>
