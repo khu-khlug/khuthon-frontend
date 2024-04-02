@@ -1,10 +1,10 @@
 import Container from "@khlug/components/Container/Container";
-import ResetPasswordForm from "@khlug/components/ResetPasswordForm/ResetPasswordForm";
+import RequestPasswordResetForm from "@khlug/components/RequestPasswordResetForm/RequestPasswordResetForm";
 
 export default function RequestResetPasswordPage() {
   return (
     <Container>
-      <ResetPasswordForm />
+      <RequestPasswordResetForm />
     </Container>
   );
 }
