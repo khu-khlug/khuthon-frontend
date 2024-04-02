@@ -4,13 +4,13 @@ export default function RegisterGuideContainer() {
   return (
     <Container>
       <h4>팀 참가자 접수 절차</h4>
-      <div className="flow_diagram c3">
+      <div className="flow_diagram c4">
         <div className="cell">
           <div className="cell_wrap">
             <div className="date">접수 기간 중</div>
             <div className="event">
               <div className="event_wrap">
-                팀 등록<sup>*0 *1</sup>
+                이메일 인증<sup>*0</sup>
               </div>
             </div>
           </div>
@@ -20,7 +20,7 @@ export default function RegisterGuideContainer() {
             <div className="date">접수 기간 중</div>
             <div className="event">
               <div className="event_wrap">
-                팀원 참가 확인<sup>*0 *2 *3</sup>
+                참가자 정보 입력<sup>*1</sup>
               </div>
             </div>
           </div>
@@ -30,7 +30,17 @@ export default function RegisterGuideContainer() {
             <div className="date">접수 기간 중</div>
             <div className="event">
               <div className="event_wrap">
-                참가 접수 완료<sup>*3</sup>
+                팀원 참가 확인<sup>*2 *3</sup>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="cell">
+          <div className="cell_wrap">
+            <div className="date">접수 기간 중</div>
+            <div className="event">
+              <div className="event_wrap">
+                참가 접수 완료<sup>*4</sup>
               </div>
             </div>
           </div>
@@ -38,28 +48,32 @@ export default function RegisterGuideContainer() {
         <div className="clear"></div>
       </div>
       <p className="sup">
-        <span className="sup">*0</span>{" "}
+        <span className="sup">*0</span> 참가자의 재학 여부를 확인하기 위해 학교
+        이메일로 인증 메일이 전송됩니다.
+      </p>
+      <p className="sup">
+        <span className="sup">*1</span> 경희대학교 참가자는{" "}
         <a href="https://jajudy.khu.ac.kr/stuauth" target="_blank">
           중앙동아리연합회 전산 학생 인증 시스템
         </a>
-        을 통해 학부생 인증을 합니다.
-        <br />
+        을 통해 학부생 인증을 하고, 다른 대학교 참가자는 자신의 정보를 직접
+        입력해야 합니다.
       </p>
       <p className="sup">
-        <span className="sup">*1</span> 팀원 모두가 재학생이어야 합니다.
+        <span className="sup">*2</span> 팀원 모두가 재학생이어야 합니다.
         <br />
         팀원은 최소 1명에서 최대 4명까지 등록할 수 있습니다.
       </p>
       <p className="sup">
-        <span className="sup">*2</span> 각 팀원은 하단의 [참가 확인] 메뉴에서
+        <span className="sup">*3</span> 각 팀원은 하단의 [참가 확인] 메뉴에서
         참가자 확인을 해야합니다.
         <br />
         접수가 마감될 때까지 팀원 중 한 명이라도 신원 확인이 되지 않으면 참가
         등록이 취소됩니다.
       </p>
       <p className="sup">
-        <span className="sup">*3</span> 신원 확인 당시 종합정보시스템에 등록된
-        핸드폰 번호로 문자가 전송됩니다.
+        <span className="sup">*4</span> 신원이 확인되면 입력된 참가자의 핸드폰
+        번호로 문자가 전송됩니다.
       </p>
     </Container>
   );
