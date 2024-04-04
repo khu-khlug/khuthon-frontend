@@ -10,6 +10,7 @@ export type ListMemberResponseMember = {
   college: string | null;
   grade: number | null;
   phone: string | null;
+  attendedAt: Date | null;
   createdAt: Date;
   updatedAt: Date;
 };

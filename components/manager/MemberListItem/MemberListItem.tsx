@@ -55,6 +55,9 @@ function ActiveMemberListItem({ member }: Props) {
         <strong className="text-2xl">{member.name}</strong>
         <span className="ml-2">{member.email}</span>
         <Badge className="ml-2">접수 완료</Badge>
+        {member.attendedAt && (
+          <Badge className="ml-2 !bg-green-600">참석 확인</Badge>
+        )}
       </p>
       <p>
         <span className="text-gray-500">
