@@ -13,7 +13,7 @@ export default function Pager({ current, maxPage, onSelect }: Props) {
   };
 
   return (
-    <div className="flex justify-center space-x-2">
+    <div className="flex justify-center space-x-2 m-8">
       {Array.from({ length: maxPage }, (_, i) => i + 1).map((page) => (
         <button
           key={page}

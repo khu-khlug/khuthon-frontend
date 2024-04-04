@@ -39,7 +39,7 @@ function NeedTeamMemberListItem({ member }: Props) {
       <p>
         <span className="text-gray-500">
           {UniversityName[member.university]} {member.college} {member.grade}
-          학년
+          학년 ({member.studentNumber})
           <br />
           {member.phone}
         </span>
@@ -59,7 +59,7 @@ function ActiveMemberListItem({ member }: Props) {
       <p>
         <span className="text-gray-500">
           {UniversityName[member.university]} {member.college} {member.grade}
-          학년
+          학년 ({member.studentNumber})
           <br />
           {member.phone}
         </span>

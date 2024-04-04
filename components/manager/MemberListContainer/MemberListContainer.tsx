@@ -7,6 +7,10 @@ import { Fragment, useCallback, useEffect, useState } from "react";
 import MemberListItem from "../MemberListItem/MemberListItem";
 import Divider from "@khlug/components/Divider/Divider";
 import Pager from "@khlug/components/Pager/Pager";
+import {
+  MemberSearchBar,
+  SearchParams,
+} from "../MemberSearchBar/MemberSearchBar";
 
 export default function MemberListContainer() {
   const client = useClient();
@@ -18,11 +22,14 @@ export default function MemberListContainer() {
     null
   );
 
+  const [searchParams, setSearchParams] = useState<SearchParams>({});
+
   const fetchMemberList = useCallback(async () => {
     try {
       const dto: ListMemberRequestDto = {
         limit,
         offset: (page - 1) * limit,
+        ...searchParams,
       };
       const response = await client.get<ListMemberResponseDto>(
         "/manager/members",
@@ -32,15 +39,21 @@ export default function MemberListContainer() {
     } catch (e) {
       setMessage(extractErrorMessage(e));
     }
-  }, [client, page]);
+  }, [client, page, searchParams]);
+
+  const handleSearch = (params: SearchParams) => {
+    setSearchParams(params);
+    setPage(1);
+  };
 
   useEffect(() => {
     fetchMemberList();
   }, [fetchMemberList]);
 
   return (
-    <Container className="!bg-white">
+    <Container className="!bg-white !bg-none">
       {message && <div className="error">{message}</div>}
+      <MemberSearchBar onSearch={handleSearch} />
       {memberList && (
         <>
           {memberList.members.map((member, idx) => (
