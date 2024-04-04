@@ -15,6 +15,9 @@ export default function AboutJudge() {
           다른 팀을 선택하면 이전에 선택되어있던 팀의 심사 정보가 자동
           저장됩니다.
         </li>
+        <li>
+          <strong>보안 상의 이유로 새로고침 시 로그인이 해제됩니다.</strong>
+        </li>
       </ul>
     </Container>
   );

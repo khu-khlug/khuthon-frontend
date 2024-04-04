@@ -42,6 +42,8 @@ export default function ManagerLoginForm({ onOtpToken }: Props) {
       <label>로그인</label>
       <div className="description">
         운영 페이지에 접근하기 위해 운영진 로그인을 해주세요.
+        <br />
+        로그인 후에도 페이지 새로 고침 시 보안 상 이유로 재로그인이 필요합니다.
       </div>
       <div className="input_wrap">
         <input
