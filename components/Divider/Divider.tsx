@@ -1,11 +1,14 @@
+import classNames from "classnames";
+
 type Props = {
   margin?: number;
+  className?: string;
 };
 
-export default function Divider({ margin = 0 }: Props) {
+export default function Divider({ margin = 0, className }: Props) {
   return (
     <div
-      className="h-px bg-white box-border"
+      className={classNames(className, "h-px bg-white box-border")}
       style={{ marginLeft: margin, marginRight: margin }}
     ></div>
   );

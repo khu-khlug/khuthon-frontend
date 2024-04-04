@@ -1,8 +1,8 @@
 "use client";
 
 import { useToken } from "@khlug/components/ClientProvider/ClientProvider";
-import Judge from "@khlug/components/judge/Judge/Judge";
 import ManagerLoginContainer from "@khlug/components/manager/ManagerLoginContainer/ManagerLoginContainer";
+import MemberListContainer from "@khlug/components/manager/MemberListContainer/MemberListContainer";
 import { isTokenFor } from "@khlug/util/isTokenFor";
 
 export default function ManagerPage() {
@@ -12,5 +12,5 @@ export default function ManagerPage() {
     setToken(null);
   }
 
-  return token ? <Judge /> : <ManagerLoginContainer />;
+  return token ? <MemberListContainer /> : <ManagerLoginContainer />;
 }
