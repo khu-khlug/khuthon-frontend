@@ -3,7 +3,14 @@ import Container from "@khlug/components/Container/Container";
 import { ListMemberRequestDto } from "@khlug/transport/ListMemberRequestDto";
 import { ListMemberResponseDto } from "@khlug/transport/ListMemberResponseDto";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
-import { Fragment, useCallback, useEffect, useState } from "react";
+import {
+  Fragment,
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import MemberListItem from "../MemberListItem/MemberListItem";
 import Divider from "@khlug/components/Divider/Divider";
 import Pager from "@khlug/components/Pager/Pager";
@@ -11,6 +18,13 @@ import {
   MemberSearchBar,
   SearchParams,
 } from "../MemberSearchBar/MemberSearchBar";
+
+type MemberListReloader = () => void;
+const MemberListReloaderContext = createContext<MemberListReloader>(() => {});
+
+export function useMemberListReloader(): MemberListReloader {
+  return useContext(MemberListReloaderContext);
+}
 
 export default function MemberListContainer() {
   const client = useClient();
@@ -51,26 +65,28 @@ export default function MemberListContainer() {
   }, [fetchMemberList]);
 
   return (
-    <Container className="!bg-white !bg-none">
-      {message && <div className="error">{message}</div>}
-      <MemberSearchBar onSearch={handleSearch} />
-      {memberList && (
-        <>
-          {memberList.members.map((member, idx) => (
-            <Fragment key={member.id}>
-              <MemberListItem member={member} />
-              {idx < memberList.members.length - 1 && (
-                <Divider className="!bg-black/10" />
-              )}
-            </Fragment>
-          ))}
-          <Pager
-            current={page}
-            maxPage={Math.ceil(memberList.count / limit)}
-            onSelect={setPage}
-          />
-        </>
-      )}
-    </Container>
+    <MemberListReloaderContext.Provider value={fetchMemberList}>
+      <Container className="!bg-white !bg-none">
+        {message && <div className="error">{message}</div>}
+        <MemberSearchBar onSearch={handleSearch} />
+        {memberList && (
+          <>
+            {memberList.members.map((member, idx) => (
+              <Fragment key={member.id}>
+                <MemberListItem member={member} />
+                {idx < memberList.members.length - 1 && (
+                  <Divider className="!bg-black/10" />
+                )}
+              </Fragment>
+            ))}
+            <Pager
+              current={page}
+              maxPage={Math.ceil(memberList.count / limit)}
+              onSelect={setPage}
+            />
+          </>
+        )}
+      </Container>
+    </MemberListReloaderContext.Provider>
   );
 }
