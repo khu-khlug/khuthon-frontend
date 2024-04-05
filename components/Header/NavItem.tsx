@@ -4,20 +4,19 @@ import { usePathname } from "next/navigation";
 
 type NavItemProps = {
   href: string;
+  className?: string;
   children: React.ReactNode;
 };
 
-export function NavItem({ href, children }: NavItemProps) {
+export function NavItem({ href, className, children }: NavItemProps) {
   const path = usePathname();
 
   return (
-    <li>
-      <Link
-        href={href}
-        className={classNames({ active: path.startsWith(href) })}
-      >
-        {children}
-      </Link>
-    </li>
+    <Link
+      href={href}
+      className={classNames(className, { active: path === href })}
+    >
+      {children}
+    </Link>
   );
 }

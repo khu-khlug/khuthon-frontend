@@ -29,10 +29,18 @@ export function Header() {
 
       <div className="navigation">
         <ul>
-          <NavItem href="/about">대회 소개</NavItem>
-          <NavItem href="/notice">공지사항</NavItem>
-          <NavItem href="/register">참가 접수</NavItem>
-          <NavItem href="/team">팀 페이지</NavItem>
+          <li>
+            <NavItem href="/about">대회 소개</NavItem>
+          </li>
+          <li>
+            <NavItem href="/notice">공지사항</NavItem>
+          </li>
+          <li>
+            <NavItem href="/register">참가 접수</NavItem>
+          </li>
+          <li>
+            <NavItem href="/team">팀 페이지</NavItem>
+          </li>
         </ul>
       </div>
 

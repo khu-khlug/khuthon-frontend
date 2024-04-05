@@ -34,13 +34,13 @@ function NeedStudentInfoMemberListItem({ member }: Props) {
 
 function NeedTeamMemberListItem({ member }: Props) {
   return (
-    <div>
-      <p>
+    <div className="!m-4">
+      <p className="!m-0">
         <strong className="text-2xl">{member.name}</strong>
         <span className="ml-2">{member.email}</span>
         <Badge className="ml-2 !bg-red-400">팀 필요</Badge>
       </p>
-      <p>
+      <p className="!mt-2">
         <span className="text-gray-500">
           {UniversityName[member.university]} {member.college} {member.grade}
           학년 ({member.studentNumber})
