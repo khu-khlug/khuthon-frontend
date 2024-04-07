@@ -36,10 +36,10 @@ export default async function Home() {
               {event.registerRange === "BETWEEN" && <span>접수 중</span>}
             </h5>
             <p>
-              <span className="nowrap">
+              <span className="whitespace-nowrap">
                 {formatDate(event.registerStartAt)}
               </span>{" "}
-              <span className="nowrap">
+              <span className="whitespace-nowrap">
                 ~ {formatDate(event.registerEndAt)}
               </span>
             </p>
@@ -53,8 +53,12 @@ export default async function Home() {
               {event.eventRange === "BETWEEN" && <span>진행 중</span>}
             </h5>
             <p>
-              <span className="nowrap">{formatDate(event.eventStartAt)}</span>{" "}
-              <span className="nowrap">~ {formatDate(event.eventEndAt)}</span>
+              <span className="whitespace-nowrap">
+                {formatDate(event.eventStartAt)}
+              </span>{" "}
+              <span className="whitespace-nowrap">
+                ~ {formatDate(event.eventEndAt)}
+              </span>
             </p>
           </>
         ) : (
@@ -72,7 +76,9 @@ export default async function Home() {
             <br />
             <h5>기대해주세요!</h5>
             <p>
-              <span className="nowrap">아직 행사가 기획 중에 있습니다!</span>
+              <span className="whitespace-nowrap">
+                아직 행사가 기획 중에 있습니다!
+              </span>
             </p>
           </>
         )}
@@ -81,10 +87,10 @@ export default async function Home() {
 
       <div className="relative">
         <div className="notice">
-          <h4>
+          <h4 className="m-0">
             <a href="{{url('/notice')}}">공지사항</a>
           </h4>
-          <ul>
+          <ul className="m-0">
             {notices.slice(0, 5).map((notice) => (
               <li key={notice.id}>
                 <a href={`/notice/${notice.id}`}>

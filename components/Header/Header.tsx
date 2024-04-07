@@ -6,8 +6,8 @@ import { NavItem } from "./NavItem";
 
 export function Header() {
   return (
-    <div id="header">
-      <h1 className="logo">
+    <div id="header" className="m-0 p-0 b-0 align-baseline">
+      <h1 className="logo m-0 p-0 b-0">
         <Link href="/">
           <span className="blind">khuthon</span>
         </Link>
@@ -28,7 +28,7 @@ export function Header() {
       </a> */}
 
       <div className="navigation">
-        <ul>
+        <ul className="m-0 p-0 b-0">
           <li>
             <NavItem href="/about">대회 소개</NavItem>
           </li>

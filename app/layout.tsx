@@ -35,9 +35,11 @@ export default function RootLayout({ children }: Props) {
 
         <title>khuthon</title>
       </head>
-      <body>
+      <body className="m-0 p-0 b-0">
         <Header />
-        <div id="body">{children}</div>
+        <div id="body" className="m-0 !p-0 b-0">
+          {children}
+        </div>
         <Footer />
       </body>
     </html>

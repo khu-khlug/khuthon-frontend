@@ -1,9 +1,82 @@
 @import url("https://fonts.googleapis.com/earlyaccess/notosanskr.css");
-@import url("https://khlug.org/styles/common.css");
 @import url("https://khlug.org/styles/content.css");
 @import url("https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css");
 
 @tailwind utilities;
+
+sup {
+  position: relative;
+  top: -7px;
+  font-size: 0.5em;
+}
+sub {
+  position: relative;
+  top: 7px;
+  font-size: 0.5em;
+}
+
+input,
+textarea,
+keygen,
+select,
+button {
+  font-family: "Spoqa Han Sans", "Noto Sans KR", "맑은 고딕", "Malgun Gothic",
+    "나눔고딕", "NanumGothic", "돋움", "Dotum", "Sans-serif" !important;
+  border-radius: 0;
+}
+html {
+  min-height: 100%;
+}
+body {
+  line-height: 1;
+  min-height: 100%;
+  font-size: 13px;
+  font-family: "Spoqa Han Sans", "Noto Sans KR", "맑은 고딕", "Malgun Gothic",
+    "나눔고딕", "NanumGothic", "돋움", "Dotum", "Sans-serif";
+  background: #fff;
+  color: #000;
+  word-break: keep-all;
+  -webkit-text-size-adjust: none;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.clear {
+  display: block !important;
+  width: 100% !important;
+  height: 0 !important;
+  clear: both !important;
+  float: none !important;
+}
+
+.blind {
+  display: block !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  text-indent: -9999px !important;
+}
 
 .Text__Main-Color {
   color: #00a0e9;
