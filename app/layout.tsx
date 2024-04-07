@@ -31,15 +31,13 @@ export default function RootLayout({ children }: Props) {
         />
         <meta property="og:image" content="{{url('/images/_og.jpg')}}" />
         <meta property="og:url" content="http://thon.KHLUG.org" />
-        <Script src="https://khlug.org/scripts/jquery-2.1.4.min.js"></Script>
+        <Script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></Script>
 
         <title>khuthon</title>
       </head>
       <body className="m-0 p-0 b-0">
         <Header />
-        <div id="body" className="m-0 !p-0 b-0">
-          {children}
-        </div>
+        <div id="body">{children}</div>
         <Footer />
       </body>
     </html>
