@@ -1,6 +1,9 @@
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
 import { fetchNotice } from "@khlug/util/fetchNotice";
 import { formatDate } from "@khlug/util/formaDate";
 import { getDateDiffText } from "@khlug/util/getDateDiffText";
+import classNames from "classnames";
 
 type NoticeDetailPageProps = {
   params: {
@@ -32,11 +35,25 @@ export default async function NoticeDetailPage({
           )}
         </div>
       </div>
-      <div className="document_body">
-        <div
-          className="real_content"
-          dangerouslySetInnerHTML={{ __html: notice.content }}
-        ></div>
+      <div className="document_body p-4">
+        <ReactMarkdown
+          rehypePlugins={[rehypeRaw]}
+          components={{
+            // Use a fancy hr
+            img: ({ node, ...props }) => (
+              // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
+              <img
+                className={classNames(
+                  props.className,
+                  "object-contain w-full h-full"
+                )}
+                {...props}
+              />
+            ),
+          }}
+        >
+          {notice.content}
+        </ReactMarkdown>
         {/* TODO[lery]: 파일 관련 코드 추가 필요 */}
         {/* {mockDocument.files.length > 0 && (
           <div className="download">
