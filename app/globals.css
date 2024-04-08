@@ -1438,6 +1438,9 @@ form .btnArea {
     padding: 15px 10px;
     white-space: normal;
   }
+  #header .navigation.open {
+    display: block;
+  }
   #header .navigation a {
     display: block;
     padding: 10px;

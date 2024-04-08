@@ -3,8 +3,16 @@
 import Link from "next/link";
 import { Cube } from "../Cube/Cube";
 import { NavItem } from "./NavItem";
+import { useState } from "react";
+import classNames from "classnames";
 
 export function Header() {
+  const [navOpen, setNavOpen] = useState<boolean>(false);
+
+  const toggleNav = () => {
+    setNavOpen((prev) => !prev);
+  };
+
   return (
     <div id="header" className="m-0 p-0 b-0 align-baseline">
       <h1 className="logo m-0 p-0 b-0">
@@ -17,17 +25,16 @@ export function Header() {
         onClick={() => window.scrollTo({ left: 0, top: 0, behavior: "smooth" })}
       />
 
-      {/* <a
-        href="#"
-        className="navigation_button"
-        onClick="$('#header .navigation').slideToggle();return false"
+      <button
+        className="navigation_button border-none cursor-pointer"
+        onClick={toggleNav}
       >
         <i></i>
         <i></i>
         <i></i>
-      </a> */}
+      </button>
 
-      <div className="navigation">
+      <div className={classNames("navigation", { open: navOpen })}>
         <ul className="m-0 p-0 b-0">
           <li>
             <NavItem href="/about">대회 소개</NavItem>
