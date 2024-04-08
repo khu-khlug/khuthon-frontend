@@ -35,7 +35,7 @@ export default function RootLayout({ children }: Props) {
           property="og:image"
           content="https://cdn.khlug.org/images/_og.jpg"
         />
-        <meta property="og:url" content="http://thon.KHLUG.org" />
+        <meta property="og:url" content="http://thon.khlug.org" />
         <meta property="twitter:title" content="khuthon" />
         <meta
           property="twitter:description"
