@@ -16,6 +16,8 @@ export default function RootLayout({ children }: Props) {
           name="viewport"
           content="width=device-width,initial-scale=1,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0"
         />
+        <title>khuthon</title>
+        <meta name="description" content="경희대학교 소프트웨어 해커톤" />
 
         <meta name="robots" content="index,follow,noimageindex" />
 
@@ -29,11 +31,23 @@ export default function RootLayout({ children }: Props) {
           property="og:description"
           content="경희대학교 소프트웨어 해커톤"
         />
-        <meta property="og:image" content="{{url('/images/_og.jpg')}}" />
+        <meta
+          property="og:image"
+          content="https://cdn.khlug.org/images/_og.jpg"
+        />
         <meta property="og:url" content="http://thon.KHLUG.org" />
-        <Script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></Script>
+        <meta property="twitter:title" content="khuthon" />
+        <meta
+          property="twitter:description"
+          content="경희대학교 소프트웨어 해커톤"
+        />
+        <meta property="twitter:card" content="summary" />
+        <meta
+          property="twitter:image"
+          content="https://cdn.khlug.org/images/_og.jpg"
+        />
 
-        <title>khuthon</title>
+        <Script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></Script>
       </head>
       <body className="m-0 p-0 b-0">
         <Header />
