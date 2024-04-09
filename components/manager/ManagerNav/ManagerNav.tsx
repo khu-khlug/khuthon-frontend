@@ -19,6 +19,9 @@ export default function ManagerNav() {
         <NavItem href="/manager/notice" className="mx-2">
           공지
         </NavItem>
+        <NavItem href="/manager/managers" className="mx-2">
+          운영진
+        </NavItem>
       </div>
     )
   );

@@ -17,7 +17,7 @@ export default function TeamListItem({ team }: Props) {
         <span>{team.prize || "(수상 정보 없음)"}</span>
       </p>
       <p className="!m-0 !mt-2">
-        <ul>
+        <ul className="!m-0">
           {team.members.map((member) => (
             <li key={member.id}>
               {member.name}
