@@ -22,6 +22,9 @@ export default function ManagerNav() {
         <NavItem href="/manager/managers" className="mx-2">
           운영진
         </NavItem>
+        <NavItem href="/manager/examiners" className="mx-2">
+          심사위원
+        </NavItem>
       </div>
     )
   );
