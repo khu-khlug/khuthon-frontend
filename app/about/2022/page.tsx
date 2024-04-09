@@ -143,7 +143,7 @@ export default async function _2022About() {
         <p>
           2022년 9월 19일 월요일 00:00 ~ 2022년 9월 29일 목요일 23:59
           <br />
-          <a href="https://cdn.khlug.org/">https://cdn.khlug.org/</a>에서 팀
+          <a href="https://thon.khlug.org/">https://thon.khlug.org/</a>에서 팀
           단위로 참가 접수
           <br />
           선착순으로 32팀 또는 128명까지만 참가 신청을 받습니다.
