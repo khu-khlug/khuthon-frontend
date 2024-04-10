@@ -20,7 +20,11 @@ export default function EmailVerificationRequestForm() {
   const [password, setPassword] = useState<string>("");
 
   const validate = () => {
-    if (!Object.values(EmailDomain).some((domain) => email.endsWith(domain))) {
+    if (
+      !Object.values(EmailDomain)
+        .flat()
+        .some((domain) => email.endsWith(domain))
+    ) {
       setMessage("허용되지 않은 이메일 도메인입니다.");
       return false;
     } else if (password.length < 10 || password.length > 100) {
@@ -63,8 +67,6 @@ export default function EmailVerificationRequestForm() {
         참가 신청한 적이 없는 이메일이라면 처음부터 접수 절차가 진행되고, 절차를
         진행하던 중에 어떠한 이유로 중단된 경우에는 이어서 진행할 수 있습니다.
         <br />
-        <br />
-        현재 허용된 이메일 도메인: khu.ac.kr, ajou.ac.kr
         <br />
         비밀번호는 10자 이상 100자 이하여야 합니다.
       </div>
