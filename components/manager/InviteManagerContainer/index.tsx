@@ -5,8 +5,8 @@ import { ListManagerInvitationResponseDto } from "@khlug/transport/ListManagerIn
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 import { useState, useCallback, useEffect } from "react";
 import ManagerInvitationItem from "../ManagerInvitationItem";
-import InviteManagerForm from "../InviteManagerForm";
 import { InviteManagerRequestDto } from "@khlug/transport/InviteManagerRequestDto";
+import InviteManagerForm from "../InviteManagerForm";
 
 export default function InviteManagerContainer() {
   const client = useClient();

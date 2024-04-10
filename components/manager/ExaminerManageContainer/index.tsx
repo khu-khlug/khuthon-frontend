@@ -4,13 +4,13 @@ import Subtitle from "@khlug/components/Title/Subtitle";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 import { useState, useCallback, useEffect } from "react";
 import ManagerInvitationItem from "../ManagerInvitationItem";
-import InviteManagerForm from "../InviteManagerForm";
+import InviteManagerForm from "../CreateExaminerForm";
 import { InviteManagerRequestDto } from "@khlug/transport/InviteManagerRequestDto";
 import { useEvent } from "@khlug/components/EventProvider/EventProvider";
 import { ListExaminerResponseDto } from "@khlug/transport/ListExaminerResponseDto";
 import { CreateExaminerRequestDto } from "@khlug/transport/CreateExaminerRequestDto";
 import ExaminerItem from "../ExaminerItem";
-import CreateExaminerForm from "../InviteManagerForm";
+import CreateExaminerForm from "../CreateExaminerForm";
 
 export default function ExaminerManageContainer() {
   const event = useEvent();
