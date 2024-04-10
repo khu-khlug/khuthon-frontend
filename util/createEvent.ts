@@ -12,9 +12,9 @@ type EventJson = {
 
 export async function createEvent(): Promise<Event> {
   const eventCdnPath = "https://cdn.khlug.org/event.json";
-  const eventJson: EventJson = await fetch(eventCdnPath).then((res) =>
-    res.json()
-  );
+  const eventJson: EventJson = await fetch(eventCdnPath, {
+    cache: "no-store",
+  }).then((res) => res.json());
 
   const registerStartAt = new Date(eventJson.registerStartAt);
   const registerEndAt = new Date(eventJson.registerEndAt);

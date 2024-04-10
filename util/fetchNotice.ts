@@ -8,7 +8,7 @@ type Notice = {
 
 export async function fetchNotice(noticeId: string): Promise<Notice> {
   const eventCdnPath = `https://cdn.khlug.org/notices/${noticeId}.json`;
-  const response = await fetch(eventCdnPath);
+  const response = await fetch(eventCdnPath, { cache: "no-store" });
   const notice: Notice = await response.json();
 
   return {
