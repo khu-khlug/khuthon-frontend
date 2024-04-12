@@ -5,6 +5,8 @@ import { ListMemberResponseMember } from "@khlug/transport/ListMemberResponseDto
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 import { useState } from "react";
 import { useMemberListReloader } from "../MemberListContainer/MemberListContainer";
+import Button from "@khlug/components/Button";
+import { UpdateMemberMajorFlagRequestDto } from "@khlug/transport/UpdateMemberMajorFlagRequestDto";
 
 type Props = {
   member: ListMemberResponseMember;
@@ -60,7 +62,21 @@ function ActiveMemberListItem({ member }: Props) {
 
   const checkAttend = async () => {
     try {
+      setMessage(null);
       await client.post(`/manager/members/${member.id}/attended`);
+      reload();
+    } catch (e) {
+      setMessage(extractErrorMessage(e));
+    }
+  };
+
+  const updateMajorFlag = async (nextFlag: boolean) => {
+    try {
+      setMessage(null);
+      const dto: UpdateMemberMajorFlagRequestDto = {
+        isRelevantMajor: nextFlag,
+      };
+      await client.put(`/manager/members/${member.id}/major-flag`, dto);
       reload();
     } catch (e) {
       setMessage(extractErrorMessage(e));
@@ -74,8 +90,17 @@ function ActiveMemberListItem({ member }: Props) {
         <strong className="text-2xl">{member.name}</strong>
         <span className="ml-2">{member.email}</span>
         <Badge className="ml-2">접수 완료</Badge>
-        {member.attendedAt && (
-          <Badge className="ml-2 !bg-green-600">참석 확인</Badge>
+        {member.attendedAt ? (
+          <Badge className="ml-2 !bg-green-600">참석함</Badge>
+        ) : (
+          <Badge className="ml-2 !bg-gray-400">참석 확인 필요</Badge>
+        )}
+        {member.isRelevantMajor === null ? (
+          <Badge className="ml-2 !bg-gray-400">전공자 확인 필요</Badge>
+        ) : member.isRelevantMajor ? (
+          <Badge className="ml-2 !bg-amber-400">전공자</Badge>
+        ) : (
+          <Badge className="ml-2 !bg-amber-400">비전공자</Badge>
         )}
       </p>
       <p className="!m-0 !mt-2">
@@ -87,12 +112,17 @@ function ActiveMemberListItem({ member }: Props) {
         </span>
       </p>
       <div className="flex justify-end !mt-2">
-        <button
-          className="border-none bg-gray-700 hover:bg-gray-500 transition-colors text-white text-base px-3 py-1.5 cursor-pointer"
-          onClick={checkAttend}
-        >
-          참가 확인
-        </button>
+        <Button onClick={checkAttend}>참가 확인</Button>
+        {member.isRelevantMajor !== false && (
+          <Button className="ml-2" onClick={() => updateMajorFlag(false)}>
+            비전공자로
+          </Button>
+        )}
+        {member.isRelevantMajor !== true && (
+          <Button className="ml-2" onClick={() => updateMajorFlag(true)}>
+            전공자로
+          </Button>
+        )}
       </div>
     </div>
   );
