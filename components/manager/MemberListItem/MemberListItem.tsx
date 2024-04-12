@@ -112,7 +112,7 @@ function ActiveMemberListItem({ member }: Props) {
         </span>
       </p>
       <div className="flex justify-end !mt-2">
-        <Button onClick={checkAttend}>참가 확인</Button>
+        {!member.attendedAt && <Button onClick={checkAttend}>참가 확인</Button>}
         {member.isRelevantMajor !== false && (
           <Button className="ml-2" onClick={() => updateMajorFlag(false)}>
             비전공자로
