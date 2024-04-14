@@ -5,8 +5,22 @@ import Pager from "@khlug/components/Pager/Pager";
 import { ManagerListTeamRequestDto } from "@khlug/transport/ManagerListTeamRequestDto";
 import { ManagerListTeamResponseDto } from "@khlug/transport/ManagerListTeamResponseDto";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
-import { Fragment, useCallback, useEffect, useState } from "react";
+import {
+  Fragment,
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import TeamListItem from "../TeamListItem/TeamListItem";
+
+type TeamListReloader = () => void;
+const TeamListReloaderContext = createContext<TeamListReloader>(() => {});
+
+export function useTeamListReloader(): TeamListReloader {
+  return useContext(TeamListReloaderContext);
+}
 
 export default function TeamListContainer() {
   const client = useClient();
@@ -39,25 +53,27 @@ export default function TeamListContainer() {
   }, [fetchTeamList]);
 
   return (
-    <Container className="!bg-white !bg-none">
-      {message && <div className="error">{message}</div>}
-      {teamList && (
-        <>
-          {teamList.teams.map((team, idx) => (
-            <Fragment key={team.id}>
-              <TeamListItem team={team} />
-              {idx < teamList.teams.length - 1 && (
-                <Divider className="!bg-black/10" />
-              )}
-            </Fragment>
-          ))}
-          <Pager
-            current={page}
-            maxPage={Math.ceil(teamList.count / limit)}
-            onSelect={setPage}
-          />
-        </>
-      )}
-    </Container>
+    <TeamListReloaderContext.Provider value={fetchTeamList}>
+      <Container className="!bg-white !bg-none">
+        {message && <div className="error">{message}</div>}
+        {teamList && (
+          <>
+            {teamList.teams.map((team, idx) => (
+              <Fragment key={team.id}>
+                <TeamListItem team={team} />
+                {idx < teamList.teams.length - 1 && (
+                  <Divider className="!bg-black/10" />
+                )}
+              </Fragment>
+            ))}
+            <Pager
+              current={page}
+              maxPage={Math.ceil(teamList.count / limit)}
+              onSelect={setPage}
+            />
+          </>
+        )}
+      </Container>
+    </TeamListReloaderContext.Provider>
   );
 }

@@ -85,7 +85,7 @@ function ActiveMemberListItem({ member }: Props) {
 
   const cancelMemberRegister = async () => {
     const really = confirm(
-      "정말로 참가를 취소하시겠습니까?\n취소한 참가자는 다시 팀을 찾아야 합니다."
+      "정말로 참가자의 등록을 취소하시겠습니까?\n등록 취소된 참가자는 다시 팀에 소속되면 참가할 수 있습니다."
     );
     if (!really) return;
 
