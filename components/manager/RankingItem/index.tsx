@@ -8,7 +8,7 @@ function ValueWithLabel({ label, value }: { label: string; value: number }) {
   return (
     <span className="ml-4">
       {label}
-      <span className="text-green-600 font-bold ml-3">{value}</span>
+      <span className="text-green-600 font-bold ml-1.5">{value}</span>
     </span>
   );
 }
@@ -37,6 +37,16 @@ export default function RankingItem({ team }: Props) {
         <ValueWithLabel label="기술력" value={team.judge.skill} />
         <ValueWithLabel label="디자인" value={team.judge.design} />
         <ValueWithLabel label="완성도" value={team.judge.completeness} />
+        <ValueWithLabel
+          label="총점"
+          value={
+            team.judge.creativity +
+            team.judge.practicality +
+            team.judge.skill +
+            team.judge.design +
+            team.judge.completeness
+          }
+        />
       </p>
     </div>
   );

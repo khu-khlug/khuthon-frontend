@@ -42,7 +42,7 @@ function NeedTeamMemberListItem({ member }: Props) {
         <span className="ml-2">{member.email}</span>
         <Badge className="ml-2 !bg-red-400">팀 필요</Badge>
       </p>
-      <p className="!mt-2">
+      <p className="!m-0 !mt-2">
         <span className="text-gray-500">
           {UniversityName[member.university]} {member.college} {member.grade}
           학년 ({member.studentNumber})
@@ -77,6 +77,21 @@ function ActiveMemberListItem({ member }: Props) {
         isRelevantMajor: nextFlag,
       };
       await client.put(`/manager/members/${member.id}/major-flag`, dto);
+      reload();
+    } catch (e) {
+      setMessage(extractErrorMessage(e));
+    }
+  };
+
+  const cancelMemberRegister = async () => {
+    const really = confirm(
+      "정말로 참가를 취소하시겠습니까?\n취소한 참가자는 다시 팀을 찾아야 합니다."
+    );
+    if (!really) return;
+
+    try {
+      setMessage(null);
+      await client.delete(`/manager/members/${member.id}`);
       reload();
     } catch (e) {
       setMessage(extractErrorMessage(e));
@@ -123,6 +138,12 @@ function ActiveMemberListItem({ member }: Props) {
             전공자로
           </Button>
         )}
+        <Button
+          className="ml-2 bg-rose-700 hover:bg-rose-500"
+          onClick={() => cancelMemberRegister()}
+        >
+          등록 취소
+        </Button>
       </div>
     </div>
   );
