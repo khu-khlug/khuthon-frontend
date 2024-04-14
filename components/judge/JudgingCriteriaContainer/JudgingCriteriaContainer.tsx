@@ -4,7 +4,7 @@ export default function JudgingCriteriaContainer() {
   return (
     <Container>
       <h4>심사 기준</h4>
-      <ul>
+      <ul className="!m-0">
         <li>
           <strong>아이디어의 독창성</strong>: 얼마나 참신하게 문제를 해결했는가
         </li>

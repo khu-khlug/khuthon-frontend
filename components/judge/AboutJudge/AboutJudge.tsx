@@ -4,7 +4,7 @@ export default function AboutJudge() {
   return (
     <Container>
       <h4>심사 시 참고하실 점</h4>
-      <ul>
+      <ul className="!m-0">
         <li>
           각 팀 별로 5개의 점수를 모두 입력해야 해당 팀의 점수가 반영됩니다.
         </li>

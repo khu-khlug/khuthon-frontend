@@ -16,7 +16,7 @@ export default function VoteContainer({ myTeam }: Props) {
   return (
     <Container>
       <h4>투표</h4>
-      <ul>
+      <ul className="!m-0">
         <li>팀 이름을 눌러 팀을 선택합니다.</li>
         <li>
           각 팀은 자기 자신을 제외한 두 팀에게 투표할 수 있으며, 한 팀에 두 표를
