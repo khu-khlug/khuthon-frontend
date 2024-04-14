@@ -25,6 +25,9 @@ export default function ManagerNav() {
         <NavItem href="/manager/examiners" className="mx-2">
           심사위원
         </NavItem>
+        <NavItem href="/manager/ranking" className="mx-2">
+          순위
+        </NavItem>
         <NavItem href="/manager/logs" className="mx-2">
           로그
         </NavItem>

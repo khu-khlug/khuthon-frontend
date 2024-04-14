@@ -1,7 +1,7 @@
 import classNames from "classnames";
 
 type ContainerProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
 };
 
