@@ -31,6 +31,9 @@ export default function ManagerNav() {
         <NavItem href="/manager/logs" className="mx-2">
           로그
         </NavItem>
+        <NavItem href="/manager/files" className="mx-2">
+          파일 등록
+        </NavItem>
       </div>
     )
   );
