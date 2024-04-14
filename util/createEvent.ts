@@ -1,5 +1,6 @@
 import { Event } from "@khlug/types/Event";
 import { calcTimeRange } from "@khlug/util/calcTimeRange";
+import axios from "axios";
 
 type EventJson = {
   registerStartAt: string;
@@ -12,9 +13,8 @@ type EventJson = {
 
 export async function createEvent(): Promise<Event> {
   const eventCdnPath = "https://cdn.khlug.org/event.json";
-  const eventJson: EventJson = await fetch(eventCdnPath, {
-    cache: "no-store",
-  }).then((res) => res.json());
+  const response = await axios.get(eventCdnPath);
+  const eventJson: EventJson = response.data;
 
   const registerStartAt = new Date(eventJson.registerStartAt);
   const registerEndAt = new Date(eventJson.registerEndAt);

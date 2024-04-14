@@ -1,3 +1,5 @@
+import axios from "axios";
+
 type PartialNotice = {
   id: string;
   title: string;
@@ -6,7 +8,7 @@ type PartialNotice = {
 
 export async function fetchNoticeList(): Promise<PartialNotice[]> {
   const eventCdnPath = "https://cdn.khlug.org/notice.json";
-  const response = await fetch(eventCdnPath, { cache: "no-store" });
-  const notices: PartialNotice[] = await response.json();
+  const response = await axios.get(eventCdnPath);
+  const notices: PartialNotice[] = response.data;
   return notices;
 }
