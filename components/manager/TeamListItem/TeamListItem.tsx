@@ -16,6 +16,8 @@ export default function TeamListItem({ team }: Props) {
   const reload = useTeamListReloader();
 
   const [message, setMessage] = useState<string | null>(null);
+  const [prize, setPrize] = useState<string>("");
+  const [isUpdatingPrize, setIsUpdatingPrize] = useState<boolean>(false);
 
   const cancelTeamRegister = async () => {
     const really = confirm(
@@ -32,13 +34,25 @@ export default function TeamListItem({ team }: Props) {
     }
   };
 
+  const updateTeamPrize = async (prize: string | null) => {
+    try {
+      setMessage(null);
+      await client.put(`/manager/teams/${team.id}/prizes`, {
+        prize: prize || null, // 빈 문자열이면 null로 처리
+      });
+      reload();
+    } catch (e) {
+      setMessage(extractErrorMessage(e));
+    }
+  };
+
   return (
     <div className="!m-4">
       {message && <div className="error">{message}</div>}
       <p className="!m-0">
         <strong className="text-2xl">{team.name}</strong>
       </p>
-      <p className="!m-0 !mt-2 ">
+      <p className="!m-0 !mt-2 text-gray-500">
         <span>아이디어: {team.idea || "(아이디어 없음)"}</span>
         <br />
         <span>수상 정보: {team.prize || "(수상 정보 없음)"}</span>
@@ -72,6 +86,46 @@ export default function TeamListItem({ team }: Props) {
         </p>
       )}
       <div className="flex justify-end !mt-2">
+        {isUpdatingPrize ? (
+          <>
+            <input
+              type="text"
+              value={prize}
+              onChange={(e) => setPrize(e.target.value)}
+              className="border border-gray-300 rounded p-1"
+            />
+            <Button
+              className="ml-2 bg-green-700 hover:bg-green-500"
+              onClick={() => {
+                updateTeamPrize(prize);
+                setIsUpdatingPrize(false);
+              }}
+            >
+              저장
+            </Button>
+            <Button
+              className="ml-1 bg-rose-700 hover:bg-rose-500"
+              onClick={() => {
+                updateTeamPrize(null);
+                setIsUpdatingPrize(false);
+              }}
+            >
+              제거
+            </Button>
+            <Button className="ml-1" onClick={() => setIsUpdatingPrize(false)}>
+              취소
+            </Button>
+          </>
+        ) : (
+          <Button
+            onClick={() => {
+              setIsUpdatingPrize(true);
+              setPrize(team.prize || "");
+            }}
+          >
+            수상 등록
+          </Button>
+        )}
         <Button
           className="ml-2 bg-rose-700 hover:bg-rose-500"
           onClick={() => cancelTeamRegister()}
