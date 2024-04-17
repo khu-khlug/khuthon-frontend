@@ -3,7 +3,7 @@ import Container from "@khlug/components/Container/Container";
 export default function RegisterGuideContainer() {
   return (
     <Container>
-      <h4>팀 참가자 접수 절차</h4>
+      <h4>참가 접수 절차</h4>
       <div className="flow_diagram c4">
         <div className="cell">
           <div className="cell_wrap">
@@ -30,7 +30,7 @@ export default function RegisterGuideContainer() {
             <div className="date">접수 기간 중</div>
             <div className="event">
               <div className="event_wrap">
-                팀원 참가 확인<sup>*2 *3</sup>
+                팀 참가 또는 팀 생성<sup>*2 *3</sup>
               </div>
             </div>
           </div>
