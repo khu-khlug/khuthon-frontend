@@ -88,7 +88,7 @@ export default async function Home() {
       <div className="relative">
         <div className="notice">
           <h4 className="m-0">
-            <a href="{{url('/notice')}}">공지사항</a>
+            <a href="/notice">공지사항</a>
           </h4>
           <ul className="m-0">
             {notices.slice(0, 5).map((notice) => (
