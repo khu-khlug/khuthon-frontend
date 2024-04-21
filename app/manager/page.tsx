@@ -4,17 +4,9 @@ import Callout from "@khlug/components/Callout/Callout";
 import { useToken } from "@khlug/components/ClientProvider/ClientProvider";
 import Container from "@khlug/components/Container/Container";
 import ManagerLoginContainer from "@khlug/components/manager/ManagerLoginContainer/ManagerLoginContainer";
-import { isTokenFor } from "@khlug/util/isTokenFor";
-import { useEffect } from "react";
 
 export default function ManagerPage() {
-  const [token, setToken] = useToken();
-
-  useEffect(() => {
-    if (token && !isTokenFor(token, "MANAGER")) {
-      setToken(null);
-    }
-  }, [token, setToken]);
+  const [token] = useToken();
 
   return token ? (
     <>
