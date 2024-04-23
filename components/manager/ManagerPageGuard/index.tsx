@@ -7,7 +7,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-const managerRoot = "/manager";
+const allowedPaths = ["/manager", "/manager/invitation"];
 
 export default function ManagerPageGuard({ children }: Props) {
   const [token, setToken] = useToken();
@@ -15,9 +15,9 @@ export default function ManagerPageGuard({ children }: Props) {
 
   useEffect(() => {
     const hasValidToken = token && isTokenFor(token, "MANAGER");
-    const isManagerRoot = path === managerRoot;
+    const isAllowedPath = allowedPaths.includes(path);
 
-    if (!isManagerRoot && !hasValidToken) {
+    if (!isAllowedPath && !hasValidToken) {
       setToken(null);
       window.location.href = "/manager";
     }
