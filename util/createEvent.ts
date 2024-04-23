@@ -12,33 +12,33 @@ type EventJson = {
 };
 
 export async function createEvent(): Promise<Event> {
-  const eventCdnPath = "https://cdn.khlug.org/event.json";
-  const response = await axios.get(eventCdnPath);
-  const eventJson: EventJson = response.data;
+  // const eventCdnPath = "https://cdn.khlug.org/event.json";
+  // const response = await axios.get(eventCdnPath);
+  // const eventJson: EventJson = response.data;
 
-  const registerStartAt = new Date(eventJson.registerStartAt);
-  const registerEndAt = new Date(eventJson.registerEndAt);
-  const registerRange = calcTimeRange(registerStartAt, registerEndAt);
-
-  const eventStartAt = new Date(eventJson.eventStartAt);
-  const eventEndAt = new Date(eventJson.eventEndAt);
-  const eventRange = calcTimeRange(eventStartAt, eventEndAt);
-
-  const judgeStartAt = new Date(eventJson.judgeStartAt);
-  const judgeEndAt = new Date(eventJson.judgeEndAt);
-  const judgeRange = calcTimeRange(judgeStartAt, judgeEndAt);
-
-  // const registerStartAt = new Date(2024, 0, 1, 0, 0, 0);
-  // const registerEndAt = new Date(2024, 11, 31, 0, 0, 0);
+  // const registerStartAt = new Date(eventJson.registerStartAt);
+  // const registerEndAt = new Date(eventJson.registerEndAt);
   // const registerRange = calcTimeRange(registerStartAt, registerEndAt);
 
-  // const eventStartAt = new Date(2024, 0, 1, 0, 0, 0);
-  // const eventEndAt = new Date(2024, 11, 31, 0, 0, 0);
+  // const eventStartAt = new Date(eventJson.eventStartAt);
+  // const eventEndAt = new Date(eventJson.eventEndAt);
   // const eventRange = calcTimeRange(eventStartAt, eventEndAt);
 
-  // const judgeStartAt = new Date(2024, 2, 31, 0, 0, 0);
-  // const judgeEndAt = new Date(2024, 11, 31, 0, 0, 0);
+  // const judgeStartAt = new Date(eventJson.judgeStartAt);
+  // const judgeEndAt = new Date(eventJson.judgeEndAt);
   // const judgeRange = calcTimeRange(judgeStartAt, judgeEndAt);
+
+  const registerStartAt = new Date("2024-04-23T15:00:00.000Z");
+  const registerEndAt = new Date("2024-12-31T15:00:00.000Z");
+  const registerRange = calcTimeRange(registerStartAt, registerEndAt);
+
+  const eventStartAt = new Date("2025-01-01T00:00:00.000Z");
+  const eventEndAt = new Date("2025-12-31T00:00:00.000Z");
+  const eventRange = calcTimeRange(eventStartAt, eventEndAt);
+
+  const judgeStartAt = new Date("2025-01-01T00:00:00.000Z");
+  const judgeEndAt = new Date("2025-12-31T00:00:00.000Z");
+  const judgeRange = calcTimeRange(judgeStartAt, judgeEndAt);
 
   return {
     registerStartAt,
