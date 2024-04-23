@@ -6,5 +6,5 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 export function formatDate(date: Date): string {
-  return dayjs.tz(date, "Asia/Seoul").format("YYYY.MM.DD. HH:mm:ss");
+  return dayjs(date).tz("Asia/Seoul").format("YYYY.MM.DD. HH:mm:ss");
 }
