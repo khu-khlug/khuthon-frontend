@@ -115,7 +115,8 @@ export default function StudentInfoManuallyForm() {
 
       <label>전공</label>
       <div className="description">
-        자신의 모든 전공을 작성해주세요. 각 전공은 쉼표(,)로 구분합니다.
+        자신의 모든 전공(본 전공 및 복수 전공)을 작성해주세요. 각 전공은
+        쉼표(,)로 구분합니다.
       </div>
       <div className="input_wrap">
         <input
