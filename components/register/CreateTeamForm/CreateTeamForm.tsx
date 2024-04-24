@@ -1,7 +1,7 @@
 "use client";
 
 import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRegister } from "../MemberRegisterInfoProvider/MemberRegisterInfoProvider";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 
@@ -11,6 +11,13 @@ export default function CreateTeamForm() {
 
   const [message, setMessage] = useState<string | null>(null);
   const [teamName, setTeamName] = useState<string>("");
+
+  const joinTeam = useCallback(async () => {
+    try {
+      await client.post("/teams/join");
+      load();
+    } catch (e) {}
+  }, [client, load]);
 
   const validate = () => {
     if (teamName.length < 1 || teamName.length > 100) {
@@ -32,6 +39,10 @@ export default function CreateTeamForm() {
       setMessage(extractErrorMessage(e));
     }
   };
+
+  useEffect(() => {
+    joinTeam();
+  }, [joinTeam]);
 
   return (
     <form onSubmit={handleSubmit}>
