@@ -72,7 +72,7 @@ export default function RegisterGuideContainer() {
       </p>
       <p className="sup">
         <span className="sup">*4</span> 참가 신청이 완료되면 입력된 참가자의
-        이메일로 확인 메일이 전송됩니다.
+        전화번호로 확인 알림톡이 전송됩니다.
       </p>
     </Container>
   );
