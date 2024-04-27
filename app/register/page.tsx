@@ -4,12 +4,13 @@ import { useEffect, useState } from "react";
 
 import { useEvent } from "@khlug/components/EventProvider/EventProvider";
 import Container from "@khlug/components/Container/Container";
-import RegisterGuideContainer from "@khlug/components/register/RegisterGuideContainer/RegisterGuideContainer";
+import RegisterGuideContainer from "@khlug/components/register/RegisterGuideContainer";
 import RegisterCrossroad from "@khlug/components/register/RegisterCrossroad/RegisterCrossroad";
 import MemberRegisterInfoProvider from "@khlug/components/register/MemberRegisterInfoProvider/MemberRegisterInfoProvider";
 import Callout from "@khlug/components/Callout/Callout";
 import { useToken } from "@khlug/components/ClientProvider/ClientProvider";
 import { isTokenFor } from "@khlug/util/isTokenFor";
+import AlimtalkGuideContainer from "@khlug/components/register/AlimtalkGuideContainer";
 
 export default function RegisterPage() {
   const event = useEvent();
@@ -25,6 +26,7 @@ export default function RegisterPage() {
   return (
     <>
       <RegisterGuideContainer />
+      <AlimtalkGuideContainer />
       <Container>
         {message && <div className="error">{message}</div>}
         {event.registerRange === "BEFORE" ? (
