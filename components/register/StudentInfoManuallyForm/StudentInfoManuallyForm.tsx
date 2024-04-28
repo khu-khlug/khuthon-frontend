@@ -4,6 +4,7 @@ import { useState } from "react";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
 import { useRegister } from "@khlug/components/register/MemberRegisterInfoProvider/MemberRegisterInfoProvider";
+import Button from "@khlug/components/Button";
 
 export default function StudentInfoManuallyForm() {
   const client = useClient();
@@ -15,6 +16,7 @@ export default function StudentInfoManuallyForm() {
   const [grade, setGrade] = useState<number | null>(null);
   const [major, setMajor] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const validate = () => {
     if (studentNumber.length < 1 || studentNumber.length > 10) {
@@ -41,6 +43,8 @@ export default function StudentInfoManuallyForm() {
 
     if (!validate()) return;
 
+    setLoading(true);
+
     try {
       await client.put("/members/student-info", {
         studentNumber,
@@ -53,6 +57,8 @@ export default function StudentInfoManuallyForm() {
     } catch (e) {
       setMessage(extractErrorMessage(e));
     }
+
+    setLoading(false);
   };
 
   return (
@@ -140,11 +146,9 @@ export default function StudentInfoManuallyForm() {
           required
         />
       </div>
-      <div className="btnArea">
-        <button type="submit" className="black w-full">
-          <span className="text-lg p-4">입력하기</span>
-        </button>
-      </div>
+      <Button className="w-full py-2.5 my-4" formSubmit loading={loading}>
+        입력하기
+      </Button>
     </form>
   );
 }
