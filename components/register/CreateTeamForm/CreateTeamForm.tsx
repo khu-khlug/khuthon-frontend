@@ -4,6 +4,7 @@ import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
 import { useCallback, useEffect, useState } from "react";
 import { useRegister } from "../MemberRegisterInfoProvider/MemberRegisterInfoProvider";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
+import Button from "@khlug/components/Button";
 
 export default function CreateTeamForm() {
   const client = useClient();
@@ -11,6 +12,7 @@ export default function CreateTeamForm() {
 
   const [message, setMessage] = useState<string | null>(null);
   const [teamName, setTeamName] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const joinTeam = useCallback(async () => {
     try {
@@ -29,6 +31,7 @@ export default function CreateTeamForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
 
     if (!validate()) return;
 
@@ -38,6 +41,7 @@ export default function CreateTeamForm() {
     } catch (e) {
       setMessage(extractErrorMessage(e));
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -72,12 +76,9 @@ export default function CreateTeamForm() {
           required
         />
       </div>
-
-      <div className="btnArea">
-        <button type="submit" className="black w-full">
-          <span className="text-lg p-4">팀 만들기</span>
-        </button>
-      </div>
+      <Button className="w-full py-2.5 my-4" formSubmit loading={loading}>
+        팀 만들기
+      </Button>
     </form>
   );
 }

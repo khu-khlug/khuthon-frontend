@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRegister } from "../MemberRegisterInfoProvider/MemberRegisterInfoProvider";
 import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
+import Button from "@khlug/components/Button";
 
 export default function EmailOtpVerifyForm() {
   const [memberRegisterInfo, load] = useRegister();
@@ -11,9 +12,11 @@ export default function EmailOtpVerifyForm() {
 
   const [message, setMessage] = useState<string | null>(null);
   const [otp, setOtp] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       await client.post("/members/verify", { otp });
@@ -21,6 +24,8 @@ export default function EmailOtpVerifyForm() {
     } catch (e) {
       setMessage(extractErrorMessage(e));
     }
+
+    setLoading(false);
   };
 
   return (
@@ -46,11 +51,9 @@ export default function EmailOtpVerifyForm() {
           required
         />
       </div>
-      <div className="btnArea">
-        <button type="submit" className="black w-full">
-          <span className="text-lg p-4">인증하기</span>
-        </button>
-      </div>
+      <Button className="w-full py-2.5 my-4" formSubmit loading={loading}>
+        인증하기
+      </Button>
     </form>
   );
 }
