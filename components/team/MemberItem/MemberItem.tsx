@@ -17,7 +17,7 @@ export default function MemberItem({ member, onMessage }: Props) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const check = confirm("정말로 초대를 취소하시겠습니까?");
+    const check = confirm("정말로 팀원을 내보내시겠습니까?");
     if (!check) return;
 
     try {
