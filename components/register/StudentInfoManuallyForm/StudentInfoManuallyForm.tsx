@@ -44,6 +44,7 @@ export default function StudentInfoManuallyForm() {
     if (!validate()) return;
 
     setLoading(true);
+    if (loading) return;
 
     try {
       await client.put("/members/student-info", {

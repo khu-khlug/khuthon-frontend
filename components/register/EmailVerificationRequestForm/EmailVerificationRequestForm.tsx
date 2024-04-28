@@ -38,10 +38,12 @@ export default function EmailVerificationRequestForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
 
     const isValid = validate();
     if (!isValid) return;
+
+    setLoading(true);
+    if (loading) return;
 
     try {
       const response = await client.post<RegisterMemberResponseDto>(
