@@ -25,7 +25,7 @@ export default function Button({
       type={formSubmit ? "submit" : "button"}
       className={classNames(
         "border-none bg-gray-700 hover:bg-gray-500 transition-colors text-white text-base px-3 py-1.5 cursor-pointer",
-        { "cursor-wait bg-gray-400": loading },
+        { "cursor-wait !bg-gray-400": loading },
         className
       )}
       onClick={handleClick}

@@ -17,7 +17,9 @@ export default function StudentInfoWithStuauthForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     setLoading(true);
+    if (loading) return;
 
     try {
       await client.put("/members/student-info/stuauth", {

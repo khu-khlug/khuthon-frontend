@@ -16,7 +16,9 @@ export default function EmailOtpVerifyForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     setLoading(true);
+    if (loading) return;
 
     try {
       await client.post("/members/verify", { otp });

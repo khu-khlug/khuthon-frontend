@@ -31,9 +31,11 @@ export default function CreateTeamForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
 
     if (!validate()) return;
+
+    setLoading(true);
+    if (loading) return;
 
     try {
       await client.post("/teams", { teamName });
