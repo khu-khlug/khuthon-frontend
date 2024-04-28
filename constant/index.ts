@@ -113,7 +113,7 @@ export const EmailDomain: Record<University, string[]> = {
   [University.HANBAT_UNIV]: ["hanbat.ac.kr"],
   [University.KAIST]: ["kaist.ac.kr"],
   [University.JEONBUK_UNIV]: ["jbnu.ac.kr"],
-  [University.INHA_UNIV]: ["inha.ac.kr"],
+  [University.INHA_UNIV]: ["inha.ac.kr", "inha.edu"],
   [University.SOOKMYUNG_WOMENS_UNIV]: ["sookmyung.ac.kr"],
   [University.KOOKMIN_UNIV]: ["kookmin.ac.kr"],
   [University.KOREA_AERO_UNIV]: ["kau.ac.kr"],
