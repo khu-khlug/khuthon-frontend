@@ -27,7 +27,7 @@ export default function RegisterPage() {
     <>
       <RegisterGuideContainer />
       <AlimtalkGuideContainer />
-      <div class="container">
+      <Container>
           <h3 class="subtitle relative Text__Main-Color">접수 일시 중단 안내</h3>
           <p class="sup">현재 접수 시스템에 문제가 발생하여 접수가 원활히 진행되지 않습니다.<br>
               그러나 간단히 수정할 수 없는 사항임을 확인하여 2024년 4월 29일 현시간부로 접수를 일시 중단합니다.<br><br>
@@ -39,7 +39,7 @@ export default function RegisterPage() {
               관련 문의 사항은 we_are@khlug.org 또는 사이트 하단의 채널톡으로 부탁드립니다.<br>
               감사합니다.
           </p>
-      </div>
+      </Container>
       <Container>
         {message && <div className="error">{message}</div>}
         {event.registerRange === "BEFORE" ? (
