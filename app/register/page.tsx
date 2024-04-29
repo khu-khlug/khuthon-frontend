@@ -11,6 +11,7 @@ import Callout from "@khlug/components/Callout/Callout";
 import { useToken } from "@khlug/components/ClientProvider/ClientProvider";
 import { isTokenFor } from "@khlug/util/isTokenFor";
 import AlimtalkGuideContainer from "@khlug/components/register/AlimtalkGuideContainer";
+import Subtitle from "@khlug/components/Title/Subtitle";
 
 export default function RegisterPage() {
   const event = useEvent();
