@@ -6,6 +6,13 @@ export const MemberState = {
 } as const;
 export type MemberState = (typeof MemberState)[keyof typeof MemberState];
 
+export const MemberStateLabel: Record<MemberState, string> = {
+  NEED_VERIFICATION: "이메일 인증 필요",
+  NEED_STUDENT_INFO: "정보 입력 필요",
+  NEED_TEAM: "팀 가입 필요",
+  ACTIVE: "대회 참가자",
+};
+
 export const University = {
   KYUNGHEE_UNIV: "KYUNGHEE_UNIV",
   AJOU_UNIV: "AJOU_UNIV",
