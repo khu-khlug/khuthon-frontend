@@ -23,6 +23,11 @@ interface ManagerListTeamResponseMember {
   updatedAt: Date;
 }
 
+interface ManagerListTeamResponseInvitation {
+  id: string;
+  studentNumber: string;
+}
+
 export interface ManagerListTeamResponseTeam {
   id: string;
   name: string;
@@ -32,6 +37,7 @@ export interface ManagerListTeamResponseTeam {
   updatedAt: Date;
   attachment: ManagerListTeamResponseAttachmentFile | null;
   members: ManagerListTeamResponseMember[];
+  invitations: ManagerListTeamResponseInvitation[];
 }
 
 export interface ManagerListTeamResponseDto {
