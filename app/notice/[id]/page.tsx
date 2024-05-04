@@ -28,7 +28,7 @@ export default async function NoticeDetailPage({
 
   return (
     <div className="document">
-      <div className="bg-white p-4">
+      <div className="bg-white px-4 py-6">
         <h3 className="font-bold text-2xl m-0">{notice.title}</h3>
         <div className="mt-2">
           {formatDate(notice.createdAt)} (
@@ -51,8 +51,12 @@ export default async function NoticeDetailPage({
               />
             ),
             p: ({ node, ...props }) => (
-              <p className="leading-6 text-sm" {...props} />
+              <p className="leading-7 text-base" {...props} />
             ),
+            ul: ({ node, ...props }) => (
+              <ul className="list-disc list-inside pl-4 text-sm" {...props} />
+            ),
+            li: ({ node, ...props }) => <li className="m-1" {...props} />,
           }}
         >
           {notice.content}
