@@ -12,7 +12,6 @@
     "delete-notice": "node scripts/delete-notice.js"
   },
   "dependencies": {
-    "@toast-ui/react-editor": "^3.2.3",
     "axios": "^1.6.8",
     "classnames": "^2.5.1",
     "dayjs": "^1.11.10",
