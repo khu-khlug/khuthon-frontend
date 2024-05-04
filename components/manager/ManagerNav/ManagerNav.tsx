@@ -10,6 +10,9 @@ export default function ManagerNav() {
         <NavItem href="/manager" className="mx-2">
           홈
         </NavItem>
+        <NavItem href="/manager/statistics" className="mx-2">
+          현황
+        </NavItem>
         <NavItem href="/manager/members" className="mx-2">
           참가자
         </NavItem>
