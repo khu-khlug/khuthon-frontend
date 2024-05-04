@@ -46,8 +46,6 @@ export default function RootLayout({ children }: Props) {
           property="twitter:image"
           content="https://cdn.khlug.org/images/_og.jpg"
         />
-
-        <Script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></Script>
       </head>
       <body className="m-0 p-0 b-0">
         <Header />
