@@ -73,6 +73,12 @@ export default function TeamListItem({ team }: Props) {
               <span className="text-gray-400 ml-2">{member.phone}</span>
             </li>
           ))}
+          {team.invitations.map((invitation) => (
+            <li key={invitation.id}>
+              {invitation.studentNumber}
+              <span className="text-gray-400 ml-2">초대 진행 중</span>
+            </li>
+          ))}
         </ul>
       </div>
       {team.attachment && (
