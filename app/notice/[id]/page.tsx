@@ -1,9 +1,11 @@
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
+import classNames from "classnames";
+
 import { fetchNotice } from "@khlug/util/fetchNotice";
 import { formatDate } from "@khlug/util/formaDate";
 import { getDateDiffText } from "@khlug/util/getDateDiffText";
-import classNames from "classnames";
+import { fetchNoticeList } from "@khlug/util/fetchNoticeList";
 
 type NoticeDetailPageProps = {
   params: {
@@ -11,28 +13,26 @@ type NoticeDetailPageProps = {
   };
 };
 
+export async function generateStaticParams() {
+  const notices = await fetchNoticeList();
+  return notices.map((notice) => ({
+    id: notice.id,
+  }));
+}
+
 export default async function NoticeDetailPage({
   params,
 }: NoticeDetailPageProps) {
   const { id: noticeId } = params;
   const notice = await fetchNotice(noticeId);
 
-  const isUpdated = notice.createdAt.getTime() !== notice.updatedAt.getTime();
-
   return (
     <div className="document">
-      <div className="document_header">
-        <h3 className="title">{notice.title}</h3>
-        <div className="created_at">
+      <div className="bg-white p-4">
+        <h3 className="font-bold text-2xl m-0">{notice.title}</h3>
+        <div className="mt-2">
           {formatDate(notice.createdAt)} (
           {getDateDiffText(notice.createdAt, new Date())})
-          {isUpdated && (
-            <>
-              <br />
-              {formatDate(notice.updatedAt)} (
-              {getDateDiffText(notice.updatedAt, new Date())}) 수정{" "}
-            </>
-          )}
         </div>
       </div>
       <div className="document_body p-4">
@@ -49,6 +49,9 @@ export default async function NoticeDetailPage({
                 )}
                 {...props}
               />
+            ),
+            p: ({ node, ...props }) => (
+              <p className="leading-6 text-sm" {...props} />
             ),
           }}
         >

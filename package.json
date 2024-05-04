@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "prepare": "node scripts/init-notice.js",
     "dev": "next dev -p 3001",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "create-notice": "node scripts/create-notice.js",
+    "delete-notice": "node scripts/delete-notice.js"
   },
   "dependencies": {
     "@toast-ui/react-editor": "^3.2.3",
