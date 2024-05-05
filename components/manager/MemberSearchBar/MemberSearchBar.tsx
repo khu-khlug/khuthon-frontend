@@ -4,6 +4,8 @@ import { FormEvent, useState } from "react";
 export type SearchParams = {
   studentNumber?: string;
   name?: string;
+  email?: string;
+  phone?: string;
   state?: MemberState;
 };
 
@@ -11,7 +13,7 @@ type Props = {
   onSearch: (params: SearchParams) => void;
 };
 
-type KeywordType = "StudentNumber" | "Name";
+type KeywordType = "StudentNumber" | "Name" | "Email" | "PhoneNumber";
 const notSelected = "NotSelected" as const;
 
 export function MemberSearchBar({ onSearch }: Props) {
@@ -27,6 +29,9 @@ export function MemberSearchBar({ onSearch }: Props) {
           ? keyword
           : undefined,
       name: keywordType === "Name" && !!keyword.length ? keyword : undefined,
+      email: keywordType === "Email" && !!keyword.length ? keyword : undefined,
+      phone:
+        keywordType === "PhoneNumber" && !!keyword.length ? keyword : undefined,
       state: state ?? undefined,
     });
   };
@@ -63,6 +68,8 @@ export function MemberSearchBar({ onSearch }: Props) {
       >
         <option value="StudentNumber">학번</option>
         <option value="Name">이름</option>
+        <option value="Email">이메일</option>
+        <option value="PhoneNumber">전화번호</option>
       </select>
       <input value={keyword} onChange={(e) => setKeyword(e.target.value)} />
 
