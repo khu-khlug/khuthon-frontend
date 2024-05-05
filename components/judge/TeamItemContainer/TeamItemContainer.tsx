@@ -1,10 +1,7 @@
 "use client";
 
-import { MemberState, University } from "@khlug/constant";
-import Divider from "../../Divider/Divider";
 import JudgingForm from "../JudgingForm/JudgingForm";
 import Container from "../../Container/Container";
-import MemberList from "../MemberList/MemberList";
 import classNames from "classnames";
 
 import "./TeamItemContainer.css";
@@ -52,7 +49,11 @@ export default function TeamItemContainer({
       <Container className="!p-0">
         <section className="!px-5 !py-8">
           <Subtitle>{team.name}</Subtitle>
-          {enabled ? (
+          {event.judgeRange !== "BEFORE" ? (
+            <p className="!m-0 !mt-2 text-gray-400">
+              아직 심사 시간이 아닙니다.
+            </p>
+          ) : enabled ? (
             <>
               <p className="!m-0 !mt-2">{team.idea}</p>
               <Link
