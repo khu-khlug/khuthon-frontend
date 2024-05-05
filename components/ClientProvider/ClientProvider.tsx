@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import axios, { AxiosInstance, isAxiosError } from "axios";
 
 type Props = {
@@ -25,9 +31,14 @@ export default function ClientProvider({ children }: Props) {
   const client = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_URL,
     headers: {
-      Authorization: token ? `Bearer ${token}` : undefined,
+      Authorization: `Bearer ${token ?? "none"}`,
       "Content-Type": "application/json",
     },
+  });
+  client.interceptors.request.use((config) => {
+    const finalToken = token ?? getTokenFromStorage() ?? "none";
+    config.headers.Authorization = `Bearer ${finalToken}`;
+    return config;
   });
   client.interceptors.response.use(null, (e) => {
     if (isAxiosError(e) && e.response?.status === 401) {
@@ -35,6 +46,10 @@ export default function ClientProvider({ children }: Props) {
     }
     return Promise.reject(e);
   });
+
+  const getTokenFromStorage = useCallback(() => {
+    return localStorage.getItem("token") ?? sessionStorage.getItem("token");
+  }, []);
 
   const setToken: TokenSetter = (token, options = {}) => {
     if (options.persist ?? true) {
@@ -53,12 +68,11 @@ export default function ClientProvider({ children }: Props) {
   };
 
   useEffect(() => {
-    const prevToken =
-      localStorage.getItem("token") ?? sessionStorage.getItem("token");
+    const prevToken = getTokenFromStorage();
     if (prevToken) {
       _setToken(prevToken);
     }
-  }, []);
+  }, [getTokenFromStorage]);
 
   return (
     <ClientContext.Provider value={client}>
