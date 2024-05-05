@@ -29,15 +29,15 @@ export async function createEvent(): Promise<Event> {
   // const judgeRange = calcTimeRange(judgeStartAt, judgeEndAt);
 
   const registerStartAt = new Date("2024-04-23T15:00:00.000Z");
-  const registerEndAt = new Date("2024-12-31T15:00:00.000Z");
+  const registerEndAt = new Date("2024-05-01T15:00:00.000Z");
   const registerRange = calcTimeRange(registerStartAt, registerEndAt);
 
-  const eventStartAt = new Date("2025-01-01T00:00:00.000Z");
-  const eventEndAt = new Date("2025-12-31T00:00:00.000Z");
+  const eventStartAt = new Date("2024-05-02T00:00:00.000Z");
+  const eventEndAt = new Date("2024-05-11T00:00:00.000Z");
   const eventRange = calcTimeRange(eventStartAt, eventEndAt);
 
-  const judgeStartAt = new Date("2025-01-01T00:00:00.000Z");
-  const judgeEndAt = new Date("2025-12-31T00:00:00.000Z");
+  const judgeStartAt = new Date("2024-05-10T00:00:00.000Z");
+  const judgeEndAt = new Date("2024-05-11T00:00:00.000Z");
   const judgeRange = calcTimeRange(judgeStartAt, judgeEndAt);
 
   return {
