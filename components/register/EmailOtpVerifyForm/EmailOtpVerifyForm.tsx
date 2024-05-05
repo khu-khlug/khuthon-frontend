@@ -51,7 +51,7 @@ export default function EmailOtpVerifyForm() {
   };
 
   const reset = async () => {
-    setToken(null, { persist: true });
+    setToken(null);
     location.reload();
   };
 
