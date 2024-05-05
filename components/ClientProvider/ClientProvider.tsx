@@ -7,8 +7,9 @@ type Props = {
   children: React.ReactNode;
 };
 
+type PersistLevel = "SESSION" | "LOCAL" | false;
 type TokenSetterOptions = {
-  persist?: boolean;
+  persist?: PersistLevel;
 };
 
 type TokenSetter = (token: string | null, options?: TokenSetterOptions) => void;
@@ -38,16 +39,22 @@ export default function ClientProvider({ children }: Props) {
   const setToken: TokenSetter = (token, options = {}) => {
     if (options.persist ?? true) {
       if (token) {
-        localStorage.setItem("token", token);
+        if (options.persist === "SESSION") {
+          sessionStorage.setItem("token", token);
+        } else {
+          localStorage.setItem("token", token);
+        }
       } else {
         localStorage.removeItem("token");
+        sessionStorage.removeItem("token");
       }
     }
     _setToken(token);
   };
 
   useEffect(() => {
-    const prevToken = localStorage.getItem("token");
+    const prevToken =
+      localStorage.getItem("token") ?? sessionStorage.getItem("token");
     if (prevToken) {
       _setToken(prevToken);
     }

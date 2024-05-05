@@ -32,8 +32,7 @@ export default function ManagerOtpForm({ otpToken }: Props) {
         dto
       );
 
-      // 보안을 위해 새로고침시 토큰이 사라지도록 persist 옵션을 false로 설정
-      setToken(response.data.token, { persist: false });
+      setToken(response.data.token, { persist: "SESSION" });
     } catch (e) {
       setMessage(extractErrorMessage(e));
     }
