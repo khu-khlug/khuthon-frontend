@@ -4,7 +4,7 @@ import { UniversityName } from "@khlug/constant";
 import { ManagerListTeamResponseTeam } from "@khlug/transport/ManagerListTeamResponseDto";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 import { useState } from "react";
-import { useTeamListReloader } from "../TeamListContainer/TeamListContainer";
+import { useTeamListReloader } from "../TeamListContainer";
 import { formatDate } from "@khlug/util/formaDate";
 
 type Props = {

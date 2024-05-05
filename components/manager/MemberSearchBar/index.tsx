@@ -16,7 +16,7 @@ type Props = {
 type KeywordType = "StudentNumber" | "Name" | "Email" | "PhoneNumber";
 const notSelected = "NotSelected" as const;
 
-export function MemberSearchBar({ onSearch }: Props) {
+export default function MemberSearchBar({ onSearch }: Props) {
   const [state, setState] = useState<MemberState | null>(null);
   const [keywordType, setKeywordType] = useState<KeywordType>("StudentNumber");
   const [keyword, setKeyword] = useState("");

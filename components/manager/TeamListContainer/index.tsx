@@ -1,10 +1,3 @@
-import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
-import Container from "@khlug/components/Container/Container";
-import Divider from "@khlug/components/Divider/Divider";
-import Pager from "@khlug/components/Pager/Pager";
-import { ManagerListTeamRequestDto } from "@khlug/transport/ManagerListTeamRequestDto";
-import { ManagerListTeamResponseDto } from "@khlug/transport/ManagerListTeamResponseDto";
-import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 import {
   Fragment,
   createContext,
@@ -13,7 +6,20 @@ import {
   useEffect,
   useState,
 } from "react";
-import TeamListItem from "../TeamListItem/TeamListItem";
+
+import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
+import Container from "@khlug/components/Container/Container";
+import Divider from "@khlug/components/Divider/Divider";
+import Pager from "@khlug/components/Pager/Pager";
+import TeamListItem from "@khlug/components/manager/TeamListItem";
+import TeamSearchBar, {
+  SearchParams,
+} from "@khlug/components/manager/TeamSearchBar";
+
+import { ManagerListTeamRequestDto } from "@khlug/transport/ManagerListTeamRequestDto";
+import { ManagerListTeamResponseDto } from "@khlug/transport/ManagerListTeamResponseDto";
+
+import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 
 type TeamListReloader = () => void;
 const TeamListReloaderContext = createContext<TeamListReloader>(() => {});
@@ -32,11 +38,14 @@ export default function TeamListContainer() {
     null
   );
 
+  const [searchParams, setSearchParams] = useState<SearchParams>({});
+
   const fetchTeamList = useCallback(async () => {
     try {
       const dto: ManagerListTeamRequestDto = {
         limit,
         offset: (page - 1) * limit,
+        ...searchParams,
       };
       const response = await client.get<ManagerListTeamResponseDto>(
         "/manager/teams",
@@ -46,7 +55,12 @@ export default function TeamListContainer() {
     } catch (e) {
       setMessage(extractErrorMessage(e));
     }
-  }, [client, page]);
+  }, [client, page, searchParams]);
+
+  const handleSearch = (params: SearchParams) => {
+    setSearchParams(params);
+    setPage(1);
+  };
 
   useEffect(() => {
     fetchTeamList();
@@ -56,6 +70,7 @@ export default function TeamListContainer() {
     <TeamListReloaderContext.Provider value={fetchTeamList}>
       <Container className="!bg-white !bg-none">
         {message && <div className="error">{message}</div>}
+        <TeamSearchBar onSearch={handleSearch} />
         {teamList && (
           <>
             {teamList.teams.map((team, idx) => (
