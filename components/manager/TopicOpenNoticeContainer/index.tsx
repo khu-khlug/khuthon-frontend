@@ -60,6 +60,13 @@ export default function TopicOpenNoticeContainer() {
         location,
         enter,
       });
+
+      setMessage("알림톡이 성공적으로 발송되었습니다.");
+      setTopic("");
+      setTopicDetail("");
+      setTime("");
+      setLocation("");
+      setEnter("");
     } catch (e) {
       setMessage(extractErrorMessage(e));
     }
