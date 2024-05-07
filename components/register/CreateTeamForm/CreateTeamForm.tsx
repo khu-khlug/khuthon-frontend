@@ -34,8 +34,8 @@ export default function CreateTeamForm() {
 
     if (!validate()) return;
 
-    setLoading(true);
     if (loading) return;
+    setLoading(true);
 
     try {
       await client.post("/teams", { teamName });
