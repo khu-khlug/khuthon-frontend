@@ -1,17 +1,4 @@
-"use client";
-
-import dayjs from "dayjs";
-import timezone from "dayjs/plugin/timezone";
-import utc from "dayjs/plugin/utc";
-
-dayjs.extend(timezone);
-dayjs.extend(utc);
-
 export default function _2024About() {
-  const isBefore = dayjs().isBefore(
-    dayjs.tz("2024-05-08 00:00:00", "Asia/Seoul")
-  );
-
   return (
     <>
       <div className="container about">
@@ -28,14 +15,10 @@ export default function _2024About() {
 
         <h4>주제</h4>
         <ul className="!m-0">
-          {isBefore ? (
-            <li className="text-gray-400">행사 D-2 때 공개</li>
-          ) : (
-            <li>
-              <strong>환경과 소프트웨어</strong>: 지속가능한 지구와 인간사회를
-              위한 ESG 관점의 고찰
-            </li>
-          )}
+          <li>
+            <strong>환경과 소프트웨어</strong>: 지속가능한 지구와 인간사회를
+            위한 ESG 관점의 고찰
+          </li>
         </ul>
         <p>
           다양한 분야로 도전할 수 있습니다.
