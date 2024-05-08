@@ -52,7 +52,6 @@ export default function TopicOpenNoticeContainer() {
     setLoading(true);
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
       await client.post("/manager/alimtalk/send-topic-open", {
         topic,
         topicDetail,
