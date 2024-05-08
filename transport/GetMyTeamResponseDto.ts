@@ -28,6 +28,7 @@ export type GetMyTeamResponseDto = {
   note: string;
   members: GetMyTeamResponseMember[];
   invitations: GetMyTeamResponseInvitation[];
+  productUrl: string | null;
   createdAt: Date;
   updatedAt: Date;
 };

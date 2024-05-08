@@ -8,7 +8,7 @@ import EditTeamContainer from "@khlug/components/team/EditTeamContainer/EditTeam
 import InvitationContainer from "@khlug/components/team/InvitationContainer/InvitationContainer";
 import MemberListContainer from "@khlug/components/team/MemberListContainer/MemberListContainer";
 import TeamIdeaContainer from "@khlug/components/team/TeamIdeaContainer/TeamIdeaContainer";
-import AttachmentContainer from "@khlug/components/team/AttachmentContainer/AttachmentContainer";
+import ResultContainer from "@khlug/components/team/ResultContainer";
 import VoteContainer from "@khlug/components/team/VoteContainer/VoteContainer";
 import { useEvent } from "@khlug/components/EventProvider/EventProvider";
 import MyTeamProvider from "@khlug/components/team/MyTeamProvider/MyTeamProvider";
@@ -62,7 +62,7 @@ export default function TeamPage() {
           {event.eventRange === "BETWEEN" ? (
             <>
               <TeamIdeaContainer />
-              <AttachmentContainer />
+              <ResultContainer />
               <VoteContainer myTeam={myTeam} />
             </>
           ) : (
