@@ -63,7 +63,7 @@ export default function TeamPage() {
             <>
               <TeamIdeaContainer />
               <ResultContainer />
-              <VoteContainer myTeam={myTeam} />
+              <VoteContainer />
             </>
           ) : (
             <>

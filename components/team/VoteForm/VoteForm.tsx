@@ -1,5 +1,4 @@
 import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
-import { useGlobalSpinner } from "@khlug/components/GlobalSpinnerProvider/GlobalSpinnerProvider";
 import { FormEvent, useCallback, useEffect, useState } from "react";
 import { useMyTeam } from "../MyTeamProvider/MyTeamProvider";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
@@ -7,19 +6,18 @@ import { GetVoteResponseDto } from "@khlug/transport/GetVoteResponseDto";
 import { ListTeamResponseDto } from "@khlug/transport/ListTeamResponseDto";
 import VoteItem from "../VoteItem/VoteItem";
 import { VoteRequestDto } from "@khlug/transport/VoteRequestDto";
-
-const SpinnerContext = "Khuthon/VoteDataLoader";
+import Button from "@khlug/components/Button";
+import { toast } from "react-toastify";
 
 export default function VoteForm() {
   const client = useClient();
   const [myTeam] = useMyTeam();
-  const [addContext, removeContext] = useGlobalSpinner();
 
   const [prevVote, setPrevVote] = useState<GetVoteResponseDto | null>(null);
   const [teamList, setTeamList] = useState<ListTeamResponseDto | null>(null);
 
   const [selectedTeamIds, setSelectedTeamIds] = useState<string[]>([]);
-  const [message, setMessage] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const loadPrevVote = useCallback(async () => {
     try {
@@ -28,8 +26,9 @@ export default function VoteForm() {
         `/teams/${teamId}/vote`
       );
       setPrevVote(response.data);
+      setSelectedTeamIds(response.data.teamIds);
     } catch (e) {
-      setMessage(extractErrorMessage(e));
+      toast.error(extractErrorMessage(e));
     }
   }, [client, myTeam]);
 
@@ -38,21 +37,21 @@ export default function VoteForm() {
       const response = await client.get<ListTeamResponseDto>(`/teams`);
       setTeamList(response.data);
     } catch (e) {
-      setMessage(extractErrorMessage(e));
+      toast.error(extractErrorMessage(e));
     }
   }, [client]);
 
   const loadVoteData = useCallback(async () => {
-    addContext(SpinnerContext);
     await Promise.all([loadPrevVote(), loadTeamList()]);
-    removeContext(SpinnerContext);
-  }, [addContext, removeContext, loadPrevVote, loadTeamList]);
+  }, [loadPrevVote, loadTeamList]);
 
   useEffect(() => {
     loadVoteData();
   }, [loadVoteData]);
 
   const handleClick = (teamId: string) => {
+    if (!prevVote || prevVote.teamIds.length > 0) return;
+
     setSelectedTeamIds((prev) => {
       if (prev.includes(teamId)) {
         return prev.filter((id) => id !== teamId);
@@ -67,7 +66,7 @@ export default function VoteForm() {
 
   const validate = () => {
     if (selectedTeamIds.length !== 2) {
-      setMessage("투표할 두 팀을 선택해주세요.");
+      toast.error("투표할 두 팀을 선택해주세요.");
       return false;
     }
     return true;
@@ -76,24 +75,29 @@ export default function VoteForm() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setMessage(null);
     if (!validate()) return;
+
+    if (loading) return;
+    setLoading(true);
 
     try {
       const dto: VoteRequestDto = {
         destTeamIds: selectedTeamIds,
       };
       await client.post(`/teams/${myTeam.id}/vote`, dto);
+      toast.success("투표가 완료되었습니다.");
+      loadPrevVote();
     } catch (e) {
-      setMessage(extractErrorMessage(e));
+      toast.error(extractErrorMessage(e));
     }
+
+    setLoading(false);
   };
 
   return (
     prevVote &&
     teamList && (
       <>
-        {message && <div className="error">{message}</div>}
         {prevVote.teamIds.length > 0 && (
           <div className="error">투표가 완료되었습니다.</div>
         )}
@@ -109,12 +113,10 @@ export default function VoteForm() {
 
           {prevVote.teamIds.length === 0 && (
             <div
-              className="btnArea"
+              className="mt-2 text-right"
               style={{ margin: "15px 0 10px -3px !important" }}
             >
-              <button type="submit" className="black w-full">
-                <span className="p-4 text-lg">투표하기</span>
-              </button>
+              <Button formSubmit>투표하기</Button>
             </div>
           )}
         </form>
