@@ -1,9 +1,16 @@
+import classNames from "classnames";
+
 import "./Subtitle.css";
 
 type Props = {
   children: React.ReactNode;
+  className?: string;
 };
 
-export default function Subtitle({ children }: Props) {
-  return <h3 className="subtitle relative Text__Main-Color">{children}</h3>;
+export default function Subtitle({ children, className }: Props) {
+  return (
+    <h3 className={classNames("subtitle relative Text__Main-Color", className)}>
+      {children}
+    </h3>
+  );
 }

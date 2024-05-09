@@ -98,16 +98,14 @@ export default function VoteForm() {
           <div className="error">투표가 완료되었습니다.</div>
         )}
         <form className="vote" onSubmit={handleSubmit}>
-          {teamList.teams
-            .filter((team) => team.id !== myTeam.id)
-            .map((team) => (
-              <VoteItem
-                active={selectedTeamIds.includes(team.id)}
-                key={team.id}
-                team={team}
-                onClick={() => handleClick(team.id)}
-              />
-            ))}
+          {teamList.teams.map((team) => (
+            <VoteItem
+              active={selectedTeamIds.includes(team.id)}
+              key={team.id}
+              team={team}
+              onClick={() => handleClick(team.id)}
+            />
+          ))}
 
           {prevVote.teamIds.length === 0 && (
             <div
