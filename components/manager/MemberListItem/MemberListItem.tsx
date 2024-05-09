@@ -108,7 +108,7 @@ function ActiveMemberListItem({ member }: Props) {
         {member.attendedAt ? (
           <Badge className="ml-2 !bg-green-600">참석함</Badge>
         ) : (
-          <Badge className="ml-2 !bg-gray-400">참석 확인 필요</Badge>
+          <Badge className="ml-2 !bg-gray-400">참가 확인 필요</Badge>
         )}
         {member.isRelevantMajor === null ? (
           <Badge className="ml-2 !bg-gray-400">전공자 확인 필요</Badge>
