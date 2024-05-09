@@ -9,6 +9,7 @@ import { useGlobalSpinner } from "@khlug/components/GlobalSpinnerProvider/Global
 import { GetPrevJudgeResponseDto } from "@khlug/transport/GetPrevJudgeResponseDto";
 import JudgeAutosaver from "../JudgeAutosaver/JudgeAutosaver";
 import AboutJudge from "../AboutJudge/AboutJudge";
+import { toast } from "react-toastify";
 
 const SpinnerContext = "Khuthon/TeamLoaderInJudge";
 
@@ -20,7 +21,6 @@ export default function Judge() {
   const [prevJudge, setPrevJudge] = useState<GetPrevJudgeResponseDto | null>(
     null
   );
-  const [message, setMessage] = useState<string | null>(null);
 
   const [selectedTeamId, setSelectedTeamId] = useState<string | null>(null);
 
@@ -29,7 +29,7 @@ export default function Judge() {
       const response = await client.get<GetPrevJudgeResponseDto>(`/judge`);
       setPrevJudge(response.data);
     } catch (e) {
-      setMessage(extractErrorMessage(e));
+      toast.error(extractErrorMessage(e));
     }
   }, [client]);
 
@@ -38,7 +38,7 @@ export default function Judge() {
       const response = await client.get<ListTeamResponseDto>(`/teams`);
       setTeamList(response.data);
     } catch (e) {
-      setMessage(extractErrorMessage(e));
+      toast.error(extractErrorMessage(e));
     }
   }, [client]);
 
@@ -57,9 +57,10 @@ export default function Judge() {
   };
 
   return (
-    prevJudge && (
+    prevJudge &&
+    teamList && (
       <JudgeProvider
-        onError={setMessage}
+        onError={toast.error}
         initial={prevJudge.judges.reduce(
           (prev, cur) => ({
             ...prev,
@@ -73,21 +74,23 @@ export default function Judge() {
           }),
           {}
         )}
+        teamNameMap={teamList.teams.reduce(
+          (prev, cur) => ({ ...prev, [cur.id]: cur.name }),
+          {}
+        )}
       >
-        {message && <div className="error">{message}</div>}
         <JudgeAutosaver selectedTeamId={selectedTeamId} />
         <JudgingCriteriaContainer />
         <AboutJudge />
-        {teamList &&
-          teamList.teams.map((team) => (
-            <TeamItemContainer
-              key={team.id}
-              team={team}
-              selectedTeamId={selectedTeamId}
-              expand={team.id === selectedTeamId}
-              onClick={handleTeamItemClick}
-            />
-          ))}
+        {teamList.teams.map((team) => (
+          <TeamItemContainer
+            key={team.id}
+            team={team}
+            selectedTeamId={selectedTeamId}
+            expand={team.id === selectedTeamId}
+            onClick={handleTeamItemClick}
+          />
+        ))}
       </JudgeProvider>
     )
   );

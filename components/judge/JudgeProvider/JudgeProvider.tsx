@@ -5,25 +5,33 @@ import { JudgeRequestDto } from "@khlug/transport/JudgeRequestDto";
 import { Judge } from "@khlug/types/Judge";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 import { createContext, useContext, useState } from "react";
+import { toast } from "react-toastify";
 
-type DoJudgeFn = (teamId: string) => void;
+type DoJudgeFn = (teamId: string) => Promise<void>;
 type JudgeSetterFn = (teamId: string, judge: Judge) => void;
 
+type TeamNameMap = { [teamId: string]: string };
 type JudgeMap = { [teamId: string]: Judge };
 
 type Props = {
   children: React.ReactNode;
   initial: JudgeMap;
+  teamNameMap: TeamNameMap;
   onError: (message: string) => void;
 };
 
-const SaveJudgeContext = createContext<DoJudgeFn>(() => {});
+const SaveJudgeContext = createContext<DoJudgeFn>(async () => {});
 const JudgeStateContext = createContext<[JudgeMap, JudgeSetterFn]>([
   {},
   () => {},
 ]);
 
-export default function JudgeProvider({ children, initial, onError }: Props) {
+export default function JudgeProvider({
+  children,
+  initial,
+  teamNameMap,
+  onError,
+}: Props) {
   const [judgeMap, setJudgeMap] = useState<JudgeMap>(initial);
   const client = useClient();
 
@@ -36,6 +44,8 @@ export default function JudgeProvider({ children, initial, onError }: Props) {
 
       const requestDto: JudgeRequestDto = { teamId, points };
       await client.post("/judge", requestDto);
+
+      toast.success(`${teamNameMap[teamId]} 팀의 점수가 저장되었습니다.`);
     } catch (e) {
       onError(extractErrorMessage(e));
     }

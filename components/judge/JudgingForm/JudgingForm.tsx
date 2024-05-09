@@ -6,6 +6,8 @@ import {
   useDoJudge,
   useJudge,
 } from "@khlug/components/judge/JudgeProvider/JudgeProvider";
+import { toast } from "react-toastify";
+import Button from "@khlug/components/Button";
 
 type Props = {
   teamId: string;
@@ -15,49 +17,56 @@ export default function JudgingForm({ teamId }: Props) {
   const doJudge = useDoJudge();
   const [judge, setJudge] = useJudge(teamId);
 
-  const [message, setMessage] = useState<string | null>(null);
-  const [localJudge, setLocalJudge] = useState(judge);
+  const [loading, setLoading] = useState(false);
 
-  const validateValueAndParse = (value: string | number) => {
+  const normalizeScore = (value: string | number) => {
     const parsed = parseFloat(value.toString());
 
-    if (isNaN(parsed) || parsed < 0 || parsed > 10) {
-      return null;
+    if (isNaN(parsed)) {
+      return 0;
+    }
+
+    if (parsed < 0) {
+      return 0;
+    }
+
+    if (parsed > 10) {
+      return 10;
     }
 
     return Math.floor(parsed * 100) / 100;
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     if (
-      validateValueAndParse(localJudge.creativity) === null ||
-      validateValueAndParse(localJudge.practicality) === null ||
-      validateValueAndParse(localJudge.skill) === null ||
-      validateValueAndParse(localJudge.design) === null ||
-      validateValueAndParse(localJudge.completeness) === null
+      normalizeScore(judge.creativity) === null ||
+      normalizeScore(judge.practicality) === null ||
+      normalizeScore(judge.skill) === null ||
+      normalizeScore(judge.design) === null ||
+      normalizeScore(judge.completeness) === null
     ) {
-      setMessage("유효하지 않은 점수값이 있습니다.");
+      toast.error("유효하지 않은 점수값이 있습니다.");
       return;
     }
 
-    setMessage(null);
-    doJudge(teamId);
+    if (loading) return;
+
+    setLoading(true);
+    await doJudge(teamId);
+    setLoading(false);
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name as keyof Judge;
-    const value = e.target.value;
+    const normalizedScore = normalizeScore(e.target.value);
 
-    const validatedValue = validateValueAndParse(value);
-    setLocalJudge((prev) => ({ ...prev, [name]: value }));
-    setJudge(teamId, { ...judge, [name]: validatedValue ?? judge[name] });
+    setJudge(teamId, { ...judge, [name]: normalizedScore });
   };
 
   return (
     <form className="score" onSubmit={handleSubmit}>
-      {message && <div className="error">{message}</div>}
       <table id="score">
         <tbody>
           <tr className="header">
@@ -84,7 +93,7 @@ export default function JudgingForm({ teamId }: Props) {
                 <input
                   name="creativity"
                   type="number"
-                  value={localJudge.creativity}
+                  value={judge.creativity}
                   onChange={handleChange}
                 />
               </div>
@@ -94,7 +103,7 @@ export default function JudgingForm({ teamId }: Props) {
                 <input
                   name="practicality"
                   type="number"
-                  value={localJudge.practicality}
+                  value={judge.practicality}
                   onChange={handleChange}
                 />
               </div>
@@ -104,7 +113,7 @@ export default function JudgingForm({ teamId }: Props) {
                 <input
                   name="skill"
                   type="number"
-                  value={localJudge.skill}
+                  value={judge.skill}
                   onChange={handleChange}
                 />
               </div>
@@ -114,7 +123,7 @@ export default function JudgingForm({ teamId }: Props) {
                 <input
                   name="design"
                   type="number"
-                  value={localJudge.design}
+                  value={judge.design}
                   onChange={handleChange}
                 />
               </div>
@@ -124,7 +133,7 @@ export default function JudgingForm({ teamId }: Props) {
                 <input
                   name="completeness"
                   type="number"
-                  value={localJudge.completeness}
+                  value={judge.completeness}
                   onChange={handleChange}
                 />
               </div>
@@ -132,11 +141,9 @@ export default function JudgingForm({ teamId }: Props) {
           </tr>
         </tbody>
       </table>
-      <div className="btnArea">
-        <button type="submit" className="w-full black">
-          <span className="p-4 text-lg">저장</span>
-        </button>
-      </div>
+      <Button className="w-full py-2.5 my-4" formSubmit loading={loading}>
+        저장
+      </Button>
     </form>
   );
 }

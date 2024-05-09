@@ -116,7 +116,13 @@ export default function VoteForm() {
               className="mt-2 text-right"
               style={{ margin: "15px 0 10px -3px !important" }}
             >
-              <Button formSubmit>투표하기</Button>
+              <Button
+                className="w-full py-2.5 my-4"
+                formSubmit
+                loading={loading}
+              >
+                투표하기
+              </Button>
             </div>
           )}
         </form>

@@ -49,7 +49,7 @@ export default function TeamItemContainer({
       <Container className="!p-0">
         <section className="!px-5 !py-8">
           <Subtitle>{team.name}</Subtitle>
-          {event.judgeRange !== "BEFORE" ? (
+          {event.judgeRange === "BEFORE" ? (
             <p className="!m-0 !mt-2 text-gray-400">
               아직 심사 시간이 아닙니다.
             </p>
