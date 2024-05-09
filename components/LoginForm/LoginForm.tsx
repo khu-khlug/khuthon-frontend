@@ -4,17 +4,23 @@ import { useState } from "react";
 import { useClient, useToken } from "../ClientProvider/ClientProvider";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 import { LoginAsMemberResponseDto } from "@khlug/transport/LoginAsMemberResponseDto";
+import Button from "../Button";
+import { toast } from "react-toastify";
 
 export default function LoginForm() {
-  const [message, setMessage] = useState<string | null>(null);
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-
   const client = useClient();
   const [, setToken] = useToken();
 
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (loading) return;
+    setLoading(true);
+
     try {
       const response = await client.post<LoginAsMemberResponseDto>(
         "/member/login",
@@ -25,14 +31,14 @@ export default function LoginForm() {
       );
       setToken(response.data.token);
     } catch (e) {
-      setMessage(extractErrorMessage(e));
+      toast.error(extractErrorMessage(e));
     }
+
+    setLoading(false);
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      {message && <div className="error">{message}</div>}
-
       <label>로그인</label>
       <div className="description">
         팀 페이지에 접근하기 위해 로그인을 해주세요.
@@ -67,11 +73,9 @@ export default function LoginForm() {
           required
         />
       </div>
-      <div className="btnArea">
-        <button type="submit" className="black w-full">
-          <span className="text-lg p-4">로그인</span>
-        </button>
-      </div>
+      <Button className="w-full py-2.5 my-4" formSubmit loading={loading}>
+        로그인
+      </Button>
     </form>
   );
 }
