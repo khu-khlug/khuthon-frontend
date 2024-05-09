@@ -9,16 +9,22 @@ import {
 } from "@khlug/components/ClientProvider/ClientProvider";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 import { LoginAsExaminerResponseDto } from "@khlug/transport/LoginAsExaminerResponseDto";
+import { toast } from "react-toastify";
+import Button from "@khlug/components/Button";
 
 export default function JudgeLoginForm() {
   const client = useClient();
   const [, setToken] = useToken();
 
-  const [message, setMessage] = useState<string | null>(null);
   const [judgeCode, setJudgeCode] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (loading) return;
+    setLoading(true);
+
     try {
       const response = await client.post<LoginAsExaminerResponseDto>(
         "/examiner/login",
@@ -27,14 +33,15 @@ export default function JudgeLoginForm() {
 
       setToken(response.data.token);
     } catch (e) {
-      setMessage(extractErrorMessage(e));
+      toast.error(extractErrorMessage(e));
     }
+
+    setLoading(false);
   };
 
   return (
     <Container>
       <form onSubmit={handleSubmit}>
-        {message && <div className="error">{message}</div>}
         <label>심사위원 코드</label>
         <div className="description">뒤에서 보고 있는 사람을 주의하세요!</div>
         <div className="input_wrap">
@@ -45,11 +52,9 @@ export default function JudgeLoginForm() {
             required
           />
         </div>
-        <div className="btnArea">
-          <button className="black w-full" type="submit">
-            <span className="p-4 text-lg">접속</span>
-          </button>
-        </div>
+        <Button className="w-full py-2.5 my-4" formSubmit loading={loading}>
+          접속
+        </Button>
       </form>
     </Container>
   );

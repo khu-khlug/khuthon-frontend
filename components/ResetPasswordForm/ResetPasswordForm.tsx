@@ -1,26 +1,27 @@
 "use client";
 
 import { useState } from "react";
-import { useClient, useToken } from "../ClientProvider/ClientProvider";
+import { useClient } from "../ClientProvider/ClientProvider";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 import { LoginAsMemberResponseDto } from "@khlug/transport/LoginAsMemberResponseDto";
 import Callout from "../Callout/Callout";
+import { toast } from "react-toastify";
+import Button from "../Button";
 
 type Props = {
   token: string;
 };
 
 export default function ResetPasswordForm({ token }: Props) {
-  const [message, setMessage] = useState<string | null>(null);
   const [password, setPassword] = useState<string>("");
   const [submitted, setSubmitted] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const client = useClient();
-  const [, setToken] = useToken();
 
   const validate = () => {
     if (password.length < 10 || password.length > 100) {
-      setMessage("비밀번호는 10자 이상, 100자 이하여야 합니다.");
+      toast.error("비밀번호는 10자 이상, 100자 이하여야 합니다.");
       return false;
     }
     return true;
@@ -31,16 +32,20 @@ export default function ResetPasswordForm({ token }: Props) {
 
     if (!validate()) return;
 
+    if (loading) return;
+    setLoading(true);
+
     try {
-      const response = await client.post<LoginAsMemberResponseDto>(
-        "/member/password-reset",
-        { token, newPassword: password }
-      );
-      setToken(response.data.token);
+      await client.post<LoginAsMemberResponseDto>("/member/password-reset", {
+        token,
+        newPassword: password,
+      });
       setSubmitted(true);
     } catch (e) {
-      setMessage(extractErrorMessage(e));
+      toast.error(extractErrorMessage(e));
     }
+
+    setLoading(false);
   };
 
   return submitted ? (
@@ -52,7 +57,6 @@ export default function ResetPasswordForm({ token }: Props) {
   ) : (
     <form onSubmit={handleSubmit}>
       <label>비밀번호 재설정</label>
-      {message && <div className="error">{message}</div>}
       <div className="description">
         재설정할 비밀번호를 입력해주세요.
         <br />
@@ -67,11 +71,9 @@ export default function ResetPasswordForm({ token }: Props) {
           required
         />
       </div>
-      <div className="btnArea">
-        <button type="submit" className="black w-full">
-          <span className="text-lg p-4">재설정</span>
-        </button>
-      </div>
+      <Button className="w-full py-2.5 my-4" formSubmit loading={loading}>
+        재설정
+      </Button>
     </form>
   );
 }
