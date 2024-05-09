@@ -1,8 +1,9 @@
-import Script from "next/script";
 import { Header } from "@khlug/components/Header/Header";
 import { Footer } from "@khlug/components/Footer/Footer";
+import { Flip, ToastContainer } from "react-toastify";
 
 import "./globals.css";
+import "react-toastify/dist/ReactToastify.css";
 
 type Props = Readonly<{
   children: React.ReactNode;
@@ -51,6 +52,19 @@ export default function RootLayout({ children }: Props) {
         <Header />
         <div id="body">{children}</div>
         <Footer />
+        <ToastContainer
+          position="top-right"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          transition={Flip}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `
