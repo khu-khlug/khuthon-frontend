@@ -65,6 +65,7 @@ export default function ProductUrlForm() {
           <input
             type="text"
             value={productUrl}
+            placeholder="작품 링크를 입력해주세요."
             onChange={(e) => setProductUrl(e.target.value)}
           />
         </div>
