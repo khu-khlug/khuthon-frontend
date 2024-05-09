@@ -31,6 +31,7 @@ export default function VoteContainer({ myTeam }: Props) {
           버튼을 눌러주세요.
         </li>
         <li>이미 한 투표는 되돌릴 수 없습니다.</li>
+        <li>아래 팀 목록의 순서는 발표 순서와 동일합니다.</li>
         <li>
           최종 순위는 투표 기간이 끝난 후({formatDate(event.judgeEndAt)})
           공개됩니다.
