@@ -4,6 +4,7 @@ import { useEvent } from "../../EventProvider/EventProvider";
 import { useMyTeam } from "../MyTeamProvider/MyTeamProvider";
 import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
+import { toast } from "react-toastify";
 
 export default function EditTeamContainer() {
   const event = useEvent();
@@ -12,16 +13,15 @@ export default function EditTeamContainer() {
 
   const [name, setName] = useState<string>(myTeam.name);
   const [note, setNote] = useState<string>(myTeam.note);
-  const [message, setMessage] = useState<string | null>(null);
 
   const validate = () => {
     if (name.length < 1 || name.length > 100) {
-      setMessage("팀 이름은 1자 이상, 100자 이하여야 합니다.");
+      toast.error("팀 이름은 1자 이상, 100자 이하여야 합니다.");
       return false;
     }
 
     if (note.length > 1000) {
-      setMessage("메모는 1000자 이하여야 합니다.");
+      toast.error("메모는 1000자 이하여야 합니다.");
       return false;
     }
     return true;
@@ -35,16 +35,15 @@ export default function EditTeamContainer() {
     try {
       const teamId = myTeam.id;
       await client.patch(`/teams/${teamId}`, { name, note });
-      setMessage("팀 정보가 수정되었습니다.");
+      toast.success("팀 정보가 수정되었습니다.");
     } catch (e) {
-      setMessage(extractErrorMessage(e));
+      toast.error(extractErrorMessage(e));
     }
   };
 
   return (
     <Container>
       <h4>팀 정보 수정</h4>
-      {message && <div className="error">{message}</div>}
       <form onSubmit={handleSubmit}>
         <div className="description">
           팀 이름, 참가자는 접수 마감 전까지 수정할 수 있습니다.

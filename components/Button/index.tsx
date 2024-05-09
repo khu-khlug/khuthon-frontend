@@ -1,7 +1,8 @@
 import classNames from "classnames";
+import { MouseEvent } from "react";
 
 type Props = {
-  onClick?: () => void;
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
   loading?: boolean;
   formSubmit?: boolean;
   className?: string;
@@ -15,9 +16,9 @@ export default function Button({
   className,
   children,
 }: Props) {
-  const handleClick = () => {
+  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
     if (loading || !onClick) return;
-    onClick();
+    onClick(e);
   };
 
   return (

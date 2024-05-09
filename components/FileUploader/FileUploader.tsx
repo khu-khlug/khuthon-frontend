@@ -1,9 +1,10 @@
 import { UploadFileResponseDto } from "@khlug/transport/UploadFileResponseDto";
-import { ChangeEvent, MouseEvent, useRef } from "react";
+import { ChangeEvent, MouseEvent, useRef, useState } from "react";
 
 import "./FileUploader.css";
 import { useClient } from "../ClientProvider/ClientProvider";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
+import Button from "../Button";
 
 type Props = {
   initial?: {
@@ -18,6 +19,7 @@ export default function FileUploader({ initial, onUpload, onError }: Props) {
   const client = useClient();
 
   const hiddenFileInput = useRef<HTMLInputElement>(null);
+  const [loading, setLoading] = useState(false);
 
   const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -33,6 +35,7 @@ export default function FileUploader({ initial, onUpload, onError }: Props) {
     const formData = new FormData();
     formData.append("file", selectedFile);
 
+    setLoading(true);
     try {
       const response = await client.post<UploadFileResponseDto>(
         `/files`,
@@ -44,6 +47,7 @@ export default function FileUploader({ initial, onUpload, onError }: Props) {
     } catch (e) {
       onError(extractErrorMessage(e));
     }
+    setLoading(false);
   };
 
   return (
@@ -56,10 +60,10 @@ export default function FileUploader({ initial, onUpload, onError }: Props) {
           <i className="xi-download"></i> {initial.fileName}
         </a>
       )}
-      <div className="btnArea">
-        <button className="blue" onClick={handleClick}>
-          <span>새 파일 업로드</span>
-        </button>
+      <div className="mt-2 text-right">
+        <Button onClick={handleClick} loading={loading}>
+          새 파일 업로드
+        </Button>
       </div>
       <input
         id="file-uploader"

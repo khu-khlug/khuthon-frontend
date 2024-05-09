@@ -5,6 +5,7 @@ import Subtitle from "@khlug/components/Title/Subtitle";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 import { useState } from "react";
 import { useMyTeam } from "../MyTeamProvider/MyTeamProvider";
+import { toast } from "react-toastify";
 
 export default function ProductUrlForm() {
   const client = useClient();
@@ -12,11 +13,26 @@ export default function ProductUrlForm() {
 
   const [productUrl, setProductUrl] = useState(myTeam.productUrl ?? "");
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState<string | null>(null);
+
+  const validate = () => {
+    if (!URL.canParse(productUrl)) {
+      toast.error("올바른 URL을 입력해주세요.");
+      return false;
+    }
+
+    const parsedUrl = new URL(productUrl);
+    if (!["github.com", "swpf.khu.ac.kr"].includes(parsedUrl.hostname)) {
+      toast.error("잘못된 사이트 URL 호스트입니다.");
+      return false;
+    }
+
+    return true;
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setMessage(null);
+
+    if (!validate()) return;
 
     if (loading) return;
     setLoading(true);
@@ -24,8 +40,9 @@ export default function ProductUrlForm() {
     try {
       const teamId = myTeam.id;
       await client.put(`/teams/${teamId}/product-urls`, { productUrl });
+      toast.success("작품 링크가 저장되었습니다.");
     } catch (e) {
-      setMessage(extractErrorMessage(e));
+      toast.error(extractErrorMessage(e));
     }
 
     setLoading(false);
@@ -43,7 +60,6 @@ export default function ProductUrlForm() {
         </li>
         <li>타 대학교 학생은 깃허브 레포지토리 링크를 제출해주세요.</li>
       </ul>
-      {message && <div className="error">{message}</div>}
       <form className="mt-4" onSubmit={handleSubmit}>
         <div className="input_wrap">
           <input
@@ -52,7 +68,7 @@ export default function ProductUrlForm() {
             onChange={(e) => setProductUrl(e.target.value)}
           />
         </div>
-        <div className="text-right mt-4">
+        <div className="text-right mt-2">
           <Button loading={loading} formSubmit>
             저장
           </Button>

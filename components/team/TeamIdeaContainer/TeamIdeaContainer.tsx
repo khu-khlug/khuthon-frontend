@@ -4,21 +4,23 @@ import { useEvent } from "../../EventProvider/EventProvider";
 import { useMyTeam } from "../MyTeamProvider/MyTeamProvider";
 import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
+import { toast } from "react-toastify";
+import Button from "@khlug/components/Button";
 
 export default function TeamIdeaContainer() {
   const event = useEvent();
   const client = useClient();
   const [myTeam] = useMyTeam();
 
-  const [message, setMessage] = useState<string | null>(null);
   const [idea, setIdea] = useState<string>(myTeam.idea);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const canEditIdea =
     event.eventRange === "BETWEEN" && event.judgeRange === "BEFORE";
 
   const validate = () => {
     if (idea.length < 1 || idea.length > 100) {
-      setMessage("아이디어는 1자 이상, 500자 이하여야 합니다.");
+      toast.error("아이디어는 1자 이상, 500자 이하여야 합니다.");
       return false;
     }
     return true;
@@ -26,21 +28,24 @@ export default function TeamIdeaContainer() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     if (!validate()) return;
+
+    if (loading) return;
+    setLoading(true);
 
     try {
       await client.put(`/teams/${myTeam.id}/ideas`, { idea });
-      setMessage("아이디어가 지정되었습니다.");
+      toast.success("아이디어가 지정되었습니다.");
     } catch (e) {
-      setMessage(extractErrorMessage(e));
+      toast.error(extractErrorMessage(e));
     }
+
+    setLoading(false);
   };
 
   return (
-    <Container>
+    <Container className="!pb-4">
       <h4>아이디어</h4>
-      {message && <div className="error">{message}</div>}
       <form onSubmit={handleSubmit}>
         <div className="input_wrap">
           <input
@@ -53,10 +58,10 @@ export default function TeamIdeaContainer() {
           />
         </div>
         {canEditIdea && (
-          <div className="btnArea">
-            <button type="submit" className="blue">
-              <span>아이디어 지정</span>
-            </button>
+          <div className="text-right mt-2">
+            <Button loading={loading} formSubmit>
+              저장
+            </Button>
           </div>
         )}
       </form>

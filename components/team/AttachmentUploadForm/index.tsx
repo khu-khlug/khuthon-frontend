@@ -11,13 +11,13 @@ import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 
 import { UploadFileResponseDto } from "@khlug/transport/UploadFileResponseDto";
 import { GetAttachmentResponseDto } from "@khlug/transport/GetAttachmentResponseDto";
+import { toast } from "react-toastify";
 
 export default function AttachmentUploadForm() {
   const event = useEvent();
   const client = useClient();
   const [myTeam] = useMyTeam();
 
-  const [message, setMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [attachment, setAttachment] = useState<GetAttachmentResponseDto | null>(
     null
@@ -43,9 +43,10 @@ export default function AttachmentUploadForm() {
       const teamId = myTeam.id;
       const fileId = file.id;
       await client.post(`/teams/${teamId}/attachments`, { fileId });
+      toast.success("발표 자료가 등록되었습니다.");
       fetchAttachment();
     } catch (e) {
-      setMessage(extractErrorMessage(e));
+      toast.error(extractErrorMessage(e));
     }
   };
 
@@ -56,7 +57,6 @@ export default function AttachmentUploadForm() {
   return (
     <div>
       <Subtitle>발표 자료</Subtitle>
-      {message && <div className="error">{message}</div>}
       <ul className="!m-0">
         <li>
           발표 자료는 해커톤 시작({formatDate(event.eventStartAt)})부터 발표
@@ -80,7 +80,7 @@ export default function AttachmentUploadForm() {
           <FileUploader
             initial={attachment ?? undefined}
             onUpload={handleUpload}
-            onError={setMessage}
+            onError={toast.error}
           />
         </div>
       ) : (
