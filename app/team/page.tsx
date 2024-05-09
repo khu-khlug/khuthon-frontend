@@ -49,11 +49,6 @@ export default function TeamPage() {
     fetchTeam();
   }, [fetchTeam]);
 
-  const myTeam = {
-    id: "teamId",
-    isVoted: false,
-  };
-
   return (
     <>
       {message && <div className="error">{message}</div>}
