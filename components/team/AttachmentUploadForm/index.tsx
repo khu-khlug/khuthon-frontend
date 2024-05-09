@@ -75,16 +75,18 @@ export default function AttachmentUploadForm() {
           일부 가공된 형태로 제공될 수 있습니다.
         </li>
       </ul>
-      {canUploadAttachment && !loading ? (
+      {!canUploadAttachment && (
+        <div className="error">제출 기간이 아닙니다.</div>
+      )}
+      {!loading && (
         <div className="mt-4">
           <FileUploader
             initial={attachment ?? undefined}
+            disabled={!canUploadAttachment}
             onUpload={handleUpload}
             onError={toast.error}
           />
         </div>
-      ) : (
-        <div className="error">제출 기간이 아닙니다.</div>
       )}
     </div>
   );

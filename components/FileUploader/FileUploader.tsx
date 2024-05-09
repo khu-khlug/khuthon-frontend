@@ -11,11 +11,17 @@ type Props = {
     fileName: string;
     fileUrl: string;
   };
+  disabled?: boolean;
   onUpload: (file: UploadFileResponseDto) => void;
   onError: (message: string) => void;
 };
 
-export default function FileUploader({ initial, onUpload, onError }: Props) {
+export default function FileUploader({
+  initial,
+  disabled,
+  onUpload,
+  onError,
+}: Props) {
   const client = useClient();
 
   const hiddenFileInput = useRef<HTMLInputElement>(null);
@@ -23,10 +29,14 @@ export default function FileUploader({ initial, onUpload, onError }: Props) {
 
   const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    if (disabled) return;
+
     hiddenFileInput.current!.click();
   };
 
   const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    if (disabled) return;
+
     const selectedFile = e.target.files?.[0];
     if (!selectedFile) {
       return;
@@ -61,7 +71,7 @@ export default function FileUploader({ initial, onUpload, onError }: Props) {
         </a>
       )}
       <div className="mt-2 text-right">
-        <Button onClick={handleClick} loading={loading}>
+        <Button onClick={handleClick} disabled={disabled} loading={loading}>
           새 파일 업로드
         </Button>
       </div>
