@@ -3,14 +3,7 @@ import { useEvent } from "../../EventProvider/EventProvider";
 import { formatDate } from "@khlug/util/formaDate";
 import VoteForm from "../VoteForm/VoteForm";
 
-type Props = {
-  myTeam: {
-    id: string;
-    isVoted: boolean;
-  };
-};
-
-export default function VoteContainer({ myTeam }: Props) {
+export default function VoteContainer() {
   const event = useEvent();
 
   return (
