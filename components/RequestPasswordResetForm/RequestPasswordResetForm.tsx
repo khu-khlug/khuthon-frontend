@@ -5,17 +5,23 @@ import { useClient, useToken } from "../ClientProvider/ClientProvider";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 import { LoginAsMemberResponseDto } from "@khlug/transport/LoginAsMemberResponseDto";
 import Callout from "../Callout/Callout";
+import { toast } from "react-toastify";
+import Button from "../Button";
 
 export default function RequestPasswordResetForm() {
-  const [message, setMessage] = useState<string | null>(null);
-  const [email, setEmail] = useState<string>("");
-  const [submitted, setSubmitted] = useState<boolean>(false);
-
   const client = useClient();
   const [, setToken] = useToken();
 
+  const [email, setEmail] = useState<string>("");
+  const [submitted, setSubmitted] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (loading) return;
+    setLoading(true);
+
     try {
       const response = await client.post<LoginAsMemberResponseDto>(
         "/member/password-reset/request",
@@ -24,8 +30,10 @@ export default function RequestPasswordResetForm() {
       setToken(response.data.token);
       setSubmitted(true);
     } catch (e) {
-      setMessage(extractErrorMessage(e));
+      toast.error(extractErrorMessage(e));
     }
+
+    setLoading(false);
   };
 
   return submitted ? (
@@ -38,8 +46,6 @@ export default function RequestPasswordResetForm() {
     </Callout>
   ) : (
     <form onSubmit={handleSubmit}>
-      {message && <div className="error">{message}</div>}
-
       <label>비밀번호 재설정</label>
       <div className="description">
         비밀번호를 재설정할 이메일을 입력해주세요.
@@ -53,11 +59,9 @@ export default function RequestPasswordResetForm() {
           required
         />
       </div>
-      <div className="btnArea">
-        <button type="submit" className="black w-full">
-          <span className="text-lg p-4">재설정 요청</span>
-        </button>
-      </div>
+      <Button className="w-full py-2.5 my-4" formSubmit loading={loading}>
+        재설정 요청
+      </Button>
     </form>
   );
 }
