@@ -15,6 +15,18 @@ export default function TotalCounter({ statistics }: Props) {
           </p>
         </div>
         <div>
+          <p className="text-base">총 대회 참가자 수</p>
+          <p className="Text__Main-Color text-4xl font-bold !leading-8">
+            {statistics.totalActiveMemberCount}
+          </p>
+        </div>
+        <div>
+          <p className="text-base">총 참가 확인된 수</p>
+          <p className="Text__Main-Color text-4xl font-bold !leading-8">
+            {statistics.totalAttendedMemberCount}
+          </p>
+        </div>
+        <div>
           <p className="text-base">총 팀 수</p>
           <p className="Text__Main-Color text-4xl font-bold !leading-8">
             {statistics.totalTeamCount}
