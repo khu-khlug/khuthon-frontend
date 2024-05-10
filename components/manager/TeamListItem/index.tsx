@@ -6,6 +6,8 @@ import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 import { useState } from "react";
 import { useTeamListReloader } from "../TeamListContainer";
 import { formatDate } from "@khlug/util/formaDate";
+import Badge from "@khlug/components/Badge/Badge";
+import TextLink from "@khlug/components/TextLink";
 
 type Props = {
   team: ManagerListTeamResponseTeam;
@@ -18,6 +20,8 @@ export default function TeamListItem({ team }: Props) {
   const [message, setMessage] = useState<string | null>(null);
   const [prize, setPrize] = useState<string>("");
   const [isUpdatingPrize, setIsUpdatingPrize] = useState<boolean>(false);
+
+  const canPresent = team.attachment && team.idea;
 
   const cancelTeamRegister = async () => {
     const really = confirm(
@@ -52,12 +56,28 @@ export default function TeamListItem({ team }: Props) {
       <p className="!m-0">
         <strong className="text-2xl">{team.name}</strong>
       </p>
+      <p className="!m-0 !mt-2">
+        {canPresent ? (
+          <Badge className="!bg-green-400">발표 가능</Badge>
+        ) : (
+          <Badge className="!bg-red-400">발표 불가능</Badge>
+        )}
+      </p>
       <p className="!m-0 !mt-2 text-gray-500">
         <span>아이디어: {team.idea || "(아이디어 없음)"}</span>
         <br />
         <span>수상 정보: {team.prize || "(수상 정보 없음)"}</span>
         <br />
         <span>등록 일시: {formatDate(team.createdAt)}</span>
+        <br />
+        <span>
+          제품 링크:{" "}
+          {team.productUrl ? (
+            <TextLink href={team.productUrl}>{team.productUrl}</TextLink>
+          ) : (
+            "(제품 링크 없음)"
+          )}
+        </span>
       </p>
       <div className="!m-0 !mt-2">
         <ul className="!m-0">

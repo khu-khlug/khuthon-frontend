@@ -36,6 +36,7 @@ export interface ManagerListTeamResponseTeam {
   createdAt: Date;
   updatedAt: Date;
   attachment: ManagerListTeamResponseAttachmentFile | null;
+  productUrl: string | null;
   members: ManagerListTeamResponseMember[];
   invitations: ManagerListTeamResponseInvitation[];
 }
