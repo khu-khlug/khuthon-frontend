@@ -20,60 +20,63 @@ import {
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 import { useGlobalSpinner } from "@khlug/components/GlobalSpinnerProvider/GlobalSpinnerProvider";
 import DeleteTeamContainer from "@khlug/components/team/DeleteTeamContainer/DeleteTeamContainer";
+import { toast } from "react-toastify";
+import Callout from "@khlug/components/Callout/Callout";
 
 const SpinnerContext = "Khuthon/TeamLoader" as const;
 
 export default function TeamPage() {
-  const [message, setMessage] = useState<string | null>(null);
-  const [team, setTeam] = useState<GetMyTeamResponseDto | null>(null);
-
   const [addContext, removeContext] = useGlobalSpinner();
   const [token] = useToken();
   const client = useClient();
   const event = useEvent();
 
+  const [team, setTeam] = useState<GetMyTeamResponseDto | null>(null);
+
   const fetchTeam = useCallback(async () => {
     if (!token) return;
     addContext(SpinnerContext);
     try {
-      const response = await client.get<GetMyTeamResponseDto>("/team");
-      setTeam(response.data);
+      // const response = await client.get<GetMyTeamResponseDto>("/team");
+      // setTeam(response.data);
     } catch (e) {
-      setMessage(extractErrorMessage(e));
+      toast.error(extractErrorMessage(e));
     }
     removeContext(SpinnerContext);
   }, [token, addContext, removeContext, client]);
 
   useEffect(() => {
-    setMessage(null);
     fetchTeam();
   }, [fetchTeam]);
 
-  return (
-    <>
-      {message && <div className="error">{message}</div>}
-      {team ? (
-        <MyTeamProvider team={team} reload={fetchTeam}>
-          {event.eventRange === "BETWEEN" ? (
-            <>
-              <TeamIdeaContainer />
-              <ResultContainer />
-              <VoteContainer />
-            </>
-          ) : (
-            <>
-              <EditTeamContainer />
-              <MemberListContainer />
-              {event.registerRange === "BETWEEN" && <InvitationContainer />}
-              {event.registerRange === "BETWEEN" && <DeleteTeamContainer />}
-            </>
-          )}
-        </MyTeamProvider>
+  return event.eventRange === "AFTER" ? (
+    <Container>
+      <Callout>
+        <strong>올해 대회가 종료되었습니다.</strong>
+        <br />
+        <span className="text-xl">내년 행사에서 만나요!</span>
+      </Callout>
+    </Container>
+  ) : team ? (
+    <MyTeamProvider team={team} reload={fetchTeam}>
+      {event.eventRange === "BETWEEN" ? (
+        <>
+          <TeamIdeaContainer />
+          <ResultContainer />
+          <VoteContainer />
+        </>
       ) : (
-        <Container>
-          <LoginForm />
-        </Container>
+        <>
+          <EditTeamContainer />
+          <MemberListContainer />
+          {event.registerRange === "BETWEEN" && <InvitationContainer />}
+          {event.registerRange === "BETWEEN" && <DeleteTeamContainer />}
+        </>
       )}
-    </>
+    </MyTeamProvider>
+  ) : (
+    <Container>
+      <LoginForm />
+    </Container>
   );
 }
