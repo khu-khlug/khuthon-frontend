@@ -19,7 +19,6 @@ export default async function Home() {
   return (
     <div id="index">
       <Banner event={event} />
-      {new Date().toISOString()}
       <div className="registering">
         {eventYear === thisYear ? (
           <>

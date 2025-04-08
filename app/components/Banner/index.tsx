@@ -11,8 +11,6 @@ export default function Banner({ event }: Props) {
   const eventYear = event.eventStartAt.getFullYear();
   const thisYear = new Date().getFullYear();
 
-  console.log(eventYear, thisYear, event.registerRange);
-
   return (
     <div className={styles.banner}>
       경희대학교 소프트웨어 해커톤 khu<b>thon</b>,<br />
