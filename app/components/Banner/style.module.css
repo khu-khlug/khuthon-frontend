@@ -1,0 +1,18 @@
+.banner {
+  float: left;
+  color: #fff;
+  padding: 200px 0 0 40px;
+  font-size: 30px;
+  line-height: 1.7;
+  width: calc(100% - 550px);
+}
+
+@media only screen and (max-width: 800px) {
+  .banner {
+    float: none;
+    padding: 50px 15px 25px 15px;
+    text-align: right;
+    width: auto;
+    line-height: 1.5;
+  }
+}

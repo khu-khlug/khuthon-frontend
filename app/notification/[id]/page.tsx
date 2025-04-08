@@ -1,4 +1,5 @@
 "use client";
+import { use } from "react";
 
 import Callout from "@khlug/components/Callout/Callout";
 import Container from "@khlug/components/Container/Container";
@@ -6,12 +7,13 @@ import NotificationContainer from "@khlug/components/notification/NotificationCo
 import { useSearchParams } from "next/navigation";
 
 type Props = {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 };
 
-export default function NotificationPage({ params }: Props) {
+export default function NotificationPage(props: Props) {
+  const params = use(props.params);
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
 

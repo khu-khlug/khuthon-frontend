@@ -1,6 +1,7 @@
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import classNames from "classnames";
+import Link from "next/link";
 
 import { fetchNotice } from "@khlug/util/fetchNotice";
 import { formatDate } from "@khlug/util/formaDate";
@@ -8,9 +9,9 @@ import { getDateDiffText } from "@khlug/util/getDateDiffText";
 import { fetchNoticeList } from "@khlug/util/fetchNoticeList";
 
 type NoticeDetailPageProps = {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 };
 
 export async function generateStaticParams() {
@@ -20,9 +21,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function NoticeDetailPage({
-  params,
-}: NoticeDetailPageProps) {
+export default async function NoticeDetailPage(props0: NoticeDetailPageProps) {
+  const params = await props0.params;
   const { id: noticeId } = params;
   const notice = await fetchNotice(noticeId);
 
@@ -75,10 +75,9 @@ export default async function NoticeDetailPage({
           </div>
         )} */}
       </div>
-
       <div className="btnArea">
         <button type="button">
-          <a href="/notice">목록</a>
+          <Link href="/notice">목록</Link>
         </button>
       </div>
     </div>

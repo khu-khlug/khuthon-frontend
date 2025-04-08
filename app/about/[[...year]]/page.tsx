@@ -3,12 +3,13 @@ import Container from "@khlug/components/Container/Container";
 import { redirect } from "next/navigation";
 
 type Props = {
-  params: {
+  params: Promise<{
     year?: string;
-  };
+  }>;
 };
 
-export default function NotFound({ params }: Props) {
+export default async function NotFound(props: Props) {
+  const params = await props.params;
   if (!params.year) {
     const thisYear = new Date().getFullYear();
     redirect(`/about/${thisYear}`);

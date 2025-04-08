@@ -1,8 +1,13 @@
 import Image from "next/image";
+import Link from "next/link";
+
+import Banner from "@khlug/app/components/Banner";
 
 import { createEvent } from "@khlug/util/createEvent";
 import { fetchNoticeList } from "@khlug/util/fetchNoticeList";
 import { formatDate } from "@khlug/util/formaDate";
+
+export const revalidate = 60;
 
 export default async function Home() {
   const event = await createEvent();
@@ -13,21 +18,8 @@ export default async function Home() {
 
   return (
     <div id="index">
-      <div className="banner">
-        경희대학교 소프트웨어 해커톤 khu<b>thon</b>,<br />
-        {eventYear === thisYear
-          ? event.registerRange === "BETWEEN"
-            ? "지금 참가 접수 하세요!"
-            : event.registerRange === "AFTER" && event.eventRange === "BEFORE"
-            ? "잠시 후에 시작됩니다!"
-            : event.eventRange === "BETWEEN"
-            ? "모두가 개발에 빠져있습니다!"
-            : event.eventRange === "AFTER"
-            ? "내년에 또 만나요!"
-            : "여러분과 함께 하고 싶습니다!"
-          : "여러분과 함께 하고 싶습니다!"}
-      </div>
-
+      <Banner event={event} />
+      {new Date().toISOString()}
       <div className="registering">
         {eventYear === thisYear ? (
           <>
@@ -88,7 +80,7 @@ export default async function Home() {
       <div className="relative">
         <div className="notice">
           <h4 className="m-0">
-            <a href="/notice">공지사항</a>
+            <Link href="/notice">공지사항</Link>
           </h4>
           <ul className="m-0">
             {notices.slice(0, 5).map((notice) => (
