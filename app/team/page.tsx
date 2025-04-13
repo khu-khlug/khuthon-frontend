@@ -37,8 +37,8 @@ export default function TeamPage() {
     if (!token) return;
     addContext(SpinnerContext);
     try {
-      // const response = await client.get<GetMyTeamResponseDto>("/team");
-      // setTeam(response.data);
+      const response = await client.get<GetMyTeamResponseDto>("/team");
+      setTeam(response.data);
     } catch (e) {
       toast.error(extractErrorMessage(e));
     }

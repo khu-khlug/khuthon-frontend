@@ -34,12 +34,12 @@ export default function RegisterPage() {
     <>
       <RegisterGuideContainer />
       <AlimtalkGuideContainer />
-      <Container>
+      {/* <Container>
         <Callout>
           <strong>대회 접수가 마감되었습니다.</strong>
         </Callout>
-      </Container>
-      {/* <Container>
+      </Container> */}
+      <Container>
         {message && <div className="error">{message}</div>}
         {event.registerRange === "BEFORE" ? (
           <Callout>접수 기간이 아닙니다.</Callout>
@@ -50,7 +50,7 @@ export default function RegisterPage() {
             <RegisterCrossroad />
           </MemberRegisterInfoProvider>
         )}
-      </Container> */}
+      </Container>
     </>
   );
 }
