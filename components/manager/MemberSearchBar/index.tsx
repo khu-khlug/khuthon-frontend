@@ -57,7 +57,6 @@ export default function MemberSearchBar({ onSearch }: Props) {
       >
         <option value="NotSelected">선택 안 함</option>
         <option value="NEED_VERIFICATION">이메일 인증 필요</option>
-        <option value="NEED_STUDENT_INFO">정보 입력 필요</option>
         <option value="NEED_TEAM">팀 필요</option>
         <option value="ACTIVE">접수 완료</option>
       </select>
