@@ -1,5 +1,5 @@
 import Callout from "@khlug/components/Callout/Callout";
-import EmailVerificationRequestForm from "@khlug/app/register/components/EmailVerificationRequestForm/EmailVerificationRequestForm";
+import EmailVerificationRequestForm from "@khlug/app/register/components/EmailVerificationRequestForm";
 import { useRegister } from "@khlug/app/register/components/MemberRegisterInfoProvider/MemberRegisterInfoProvider";
 import { MemberState } from "@khlug/constant";
 import CreateTeamForm from "@khlug/app/register/components/CreateTeamForm/CreateTeamForm";

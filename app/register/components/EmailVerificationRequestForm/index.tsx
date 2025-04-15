@@ -1,15 +1,16 @@
 "use client";
 
+import { useState } from "react";
+
+import { EmailDomain } from "@khlug/constant";
+import { RegisterMemberResponseDto } from "@khlug/transport/RegisterMemberResponseDto";
 import {
   useClient,
   useToken,
 } from "@khlug/components/ClientProvider/ClientProvider";
-import { EmailDomain } from "@khlug/constant";
-import { RegisterMemberResponseDto } from "@khlug/transport/RegisterMemberResponseDto";
-import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
-import { useState } from "react";
-import { useRegister } from "../MemberRegisterInfoProvider/MemberRegisterInfoProvider";
 import Button from "@khlug/components/Button";
+import { useRegister } from "@khlug/app/register/components/MemberRegisterInfoProvider/MemberRegisterInfoProvider";
+import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 
 export default function EmailVerificationRequestForm() {
   const [message, setMessage] = useState<string | null>(null);
@@ -93,13 +94,8 @@ export default function EmailVerificationRequestForm() {
 
       <label>참가자 정보 입력</label>
       <div className="description">
-        참가자의 본인 확인을 위해 학교 이메일과 비밀번호를 입력해주세요.
-        <br />
         참가 신청한 적이 없는 이메일이라면 처음부터 접수 절차가 진행되고, 절차를
         진행하던 중에 어떠한 이유로 중단된 경우에는 이어서 진행할 수 있습니다.
-        <br />
-        <br />
-        비밀번호는 10자 이상 100자 이하여야 합니다.
       </div>
 
       <label>학번</label>
@@ -139,6 +135,11 @@ export default function EmailVerificationRequestForm() {
         />
       </div>
 
+      <label>이메일</label>
+      <div className="description">
+        참가자의 학교 재학 여부를 판단할 때 사용됩니다. 학교 이메일로
+        입력해주세요.
+      </div>
       <div className="input_wrap">
         <input
           type="email"
@@ -147,6 +148,11 @@ export default function EmailVerificationRequestForm() {
           placeholder="이메일"
           required
         />
+      </div>
+
+      <label>비밀번호</label>
+      <div className="description">
+        비밀번호는 10자 이상 100자 이하여야 합니다.
       </div>
       <div className="input_wrap">
         <input
