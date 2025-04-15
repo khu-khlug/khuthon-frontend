@@ -12,7 +12,7 @@ import Button from "@khlug/components/Button";
 import { useRegister } from "@khlug/app/register/components/MemberRegisterInfoProvider/MemberRegisterInfoProvider";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 
-export default function EmailVerificationRequestForm() {
+export default function MemberRegisterForm() {
   const [message, setMessage] = useState<string | null>(null);
   const client = useClient();
   const [, setToken] = useToken();
@@ -94,8 +94,13 @@ export default function EmailVerificationRequestForm() {
 
       <label>참가자 정보 입력</label>
       <div className="description">
-        참가 신청한 적이 없는 이메일이라면 처음부터 접수 절차가 진행되고, 절차를
-        진행하던 중에 어떠한 이유로 중단된 경우에는 이어서 진행할 수 있습니다.
+        참가자의 정보를 입력해주세요. 입력한 참가자 정보는 참가자 식별 및 연략
+        용도로 사용됩니다.
+        <br />
+        <strong>
+          모든 정보를 정확하게 입력해주세요. 잘못된 정보를 입력했을 때 발생하는
+          모든 불이익은 쿠러그에서 책임지지 않습니다.
+        </strong>
       </div>
 
       <label>학번</label>
