@@ -12,6 +12,7 @@ export default function _2025About() {
 
         <h4>장소</h4>
         <p>경희대학교 국제캠퍼스 전자정보대학관 205호, 211-1호, 211-2호</p>
+        <p className="text-gray-500">오후 5시부터 205호에서 현장 접수</p>
 
         <h4>주제</h4>
         <ul className="!m-0">
@@ -51,7 +52,7 @@ export default function _2025About() {
             </ul>
           </li>
           <li>
-            초대한 팀원이 모두 수락하면, 팀원 중 한 명이 <b>인원 확정</b>을 할 수 있다.
+            초대한 팀원이 모두 수락하면, 팀원 중 한 명이 <b>인원 확정</b>을 할 수 있다. (팀장 구분 없음)
             <ul className="!ml-0">
               <li>
                 인원 확정을 통해 팀의 참가 등록이 완료되며, 인원 확정을 하지
