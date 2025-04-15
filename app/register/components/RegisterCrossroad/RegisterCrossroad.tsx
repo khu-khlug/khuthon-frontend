@@ -1,9 +1,9 @@
 import Callout from "@khlug/components/Callout/Callout";
-import EmailVerificationRequestForm from "@khlug/components/register/EmailVerificationRequestForm/EmailVerificationRequestForm";
-import { useRegister } from "@khlug/components/register/MemberRegisterInfoProvider/MemberRegisterInfoProvider";
+import EmailVerificationRequestForm from "@khlug/app/register/components/EmailVerificationRequestForm/EmailVerificationRequestForm";
+import { useRegister } from "@khlug/app/register/components/MemberRegisterInfoProvider/MemberRegisterInfoProvider";
 import { MemberState } from "@khlug/constant";
-import CreateTeamForm from "@khlug/components/register/CreateTeamForm/CreateTeamForm";
-import EmailOtpVerifyForm from "@khlug/components/register/EmailOtpVerifyForm/EmailOtpVerifyForm";
+import CreateTeamForm from "@khlug/app/register/components/CreateTeamForm/CreateTeamForm";
+import EmailOtpVerifyForm from "@khlug/app/register/components/EmailOtpVerifyForm/EmailOtpVerifyForm";
 
 export default function RegisterCrossroad() {
   const [memberRegisterInfo] = useRegister();
