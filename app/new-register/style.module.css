@@ -1,0 +1,13 @@
+/* text-lg */
+.container p,
+.container ol,
+.container ul {
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.container a {
+  color: black;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
