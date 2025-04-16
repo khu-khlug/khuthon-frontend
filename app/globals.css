@@ -1301,35 +1301,6 @@ form .btnArea {
   margin-top: 0;
 }
 
-#footer {
-  position: relative;
-  margin: 15px 25px 20px 25px;
-  line-height: 1.7;
-  z-index: 4;
-}
-#footer address {
-  font-style: normal;
-  color: #fff;
-}
-#footer a {
-  color: #fff;
-  text-decoration: none;
-}
-#footer .sponsor {
-  float: right;
-  text-align: right;
-  white-space: nowrap;
-}
-#footer .sponsor img {
-  vertical-align: top;
-  height: 14px;
-  margin-top: 5px;
-}
-#footer .sponsor a {
-  margin-left: 15px;
-  white-space: nowrap;
-}
-
 .pdf_button {
   display: inline-block;
   color: #fff !important;
@@ -1473,9 +1444,5 @@ form .btnArea {
     right: auto;
     width: auto;
     margin-top: 30px;
-  }
-
-  #footer {
-    margin: 15px 18px 17px 18px;
   }
 }
