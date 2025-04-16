@@ -86,12 +86,6 @@ table {
   background-color: #00a0e9;
 }
 
-body {
-  background: url("/images/background.jpg") #eee repeat center center;
-  background-attachment: fixed;
-  background-size: cover;
-}
-
 #header {
   position: relative;
   background: #eee;
@@ -133,6 +127,9 @@ body {
 #body {
   position: relative;
   padding: 27px 20px;
+  background: url("/images/background.jpg") #eee repeat center center;
+  background-attachment: fixed;
+  background-size: cover;
 }
 #body .navigation {
   margin: 20px 0px;
