@@ -130,6 +130,8 @@ table {
   background: url("/images/background.jpg") #eee repeat center center;
   background-attachment: fixed;
   background-size: cover;
+  min-height: calc(100vh - 105px - 50px);
+  box-sizing: border-box;
 }
 #body .navigation {
   margin: 20px 0px;
@@ -1308,8 +1310,11 @@ form .btnArea {
 }
 
 @media only screen and (max-width: 800px) {
+  #body {
+    min-height: calc(100vh - 80px - 50px);
+  }
   #header .logo {
-    padding: 24px 0 25px 17px;
+    padding: 25px 0 25px 17px;
   }
   #header .logo a {
     width: 137px;
