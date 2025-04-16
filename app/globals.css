@@ -1,6 +1,6 @@
-@import url("https://fonts.googleapis.com/earlyaccess/notosanskr.css");
 @import url("https://khlug.org/styles/content.css");
-@import url("https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css");
+@import url("https://cdn.jsdelivr.net/xeicon/2/xeicon.min.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.9/variable/pretendardvariable-dynamic-subset.min.css");
 
 @tailwind utilities;
 
@@ -20,8 +20,8 @@ textarea,
 keygen,
 select,
 button {
-  font-family: "Spoqa Han Sans", "Noto Sans KR", "맑은 고딕", "Malgun Gothic",
-    "나눔고딕", "NanumGothic", "돋움", "Dotum", "Sans-serif" !important;
+  font-family: "Pretendard Variable", "Spoqa Han Sans", "맑은 고딕",
+    "Malgun Gothic", "나눔고딕", "NanumGothic", "돋움", "Dotum", "Sans-serif" !important;
   border-radius: 0;
 }
 html {
@@ -31,8 +31,8 @@ body {
   line-height: 1;
   min-height: 100%;
   font-size: 13px;
-  font-family: "Spoqa Han Sans", "Noto Sans KR", "맑은 고딕", "Malgun Gothic",
-    "나눔고딕", "NanumGothic", "돋움", "Dotum", "Sans-serif";
+  font-family: "Pretendard Variable", "Spoqa Han Sans", "맑은 고딕",
+    "Malgun Gothic", "나눔고딕", "NanumGothic", "돋움", "Dotum", "Sans-serif";
   background: #fff;
   color: #000;
   word-break: keep-all;
