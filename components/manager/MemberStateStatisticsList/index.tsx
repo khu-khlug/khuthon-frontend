@@ -13,7 +13,6 @@ export default function MemberStateStatisticsList({ statistics }: Props) {
   const states = [
     MemberState.ACTIVE,
     MemberState.NEED_TEAM,
-    MemberState.NEED_STUDENT_INFO,
     MemberState.NEED_VERIFICATION,
   ];
   const statisticsGroup: Record<MemberState, MemberStateStatistics> =
@@ -26,7 +25,6 @@ export default function MemberStateStatisticsList({ statistics }: Props) {
       {
         [MemberState.ACTIVE]: [],
         [MemberState.NEED_TEAM]: [],
-        [MemberState.NEED_STUDENT_INFO]: [],
         [MemberState.NEED_VERIFICATION]: [],
       } as Record<MemberState, MemberStateStatistics>
     );

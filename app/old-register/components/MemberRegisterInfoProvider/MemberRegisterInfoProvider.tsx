@@ -47,7 +47,7 @@ export default function MemberRegisterInfoProvider({
     onMessage(null);
 
     try {
-      const { data } = await client.get<MemberRegisterInfo>("/member");
+      const { data } = await client.get<MemberRegisterInfo>("/members/@me");
 
       setMemberRegisterInfo({
         id: data.id,

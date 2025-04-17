@@ -1,5 +1,5 @@
 import { Header } from "@khlug/components/Header/Header";
-import { Footer } from "@khlug/components/Footer/Footer";
+import { Footer } from "@khlug/components/Footer";
 import { Flip, ToastContainer } from "react-toastify";
 
 import "./globals.css";

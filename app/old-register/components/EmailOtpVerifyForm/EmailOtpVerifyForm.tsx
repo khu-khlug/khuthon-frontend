@@ -27,7 +27,7 @@ export default function EmailOtpVerifyForm() {
     if (loading) return;
 
     try {
-      await client.post("/members/verify", { otp });
+      await client.post("/members/@me/verify", { otp });
       load();
     } catch (e) {
       setMessage(extractErrorMessage(e));
@@ -42,7 +42,7 @@ export default function EmailOtpVerifyForm() {
     if (retryLoading) return;
 
     try {
-      await client.post("/members/verify-email");
+      await client.post("/members/@me/resend-verify-email");
     } catch (e) {
       setMessage(extractErrorMessage(e));
     }

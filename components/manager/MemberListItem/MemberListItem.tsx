@@ -23,17 +23,6 @@ function NeedVerificationMemberListItem({ member }: Props) {
   );
 }
 
-function NeedStudentInfoMemberListItem({ member }: Props) {
-  return (
-    <div>
-      <p>
-        <span className="ml-2">{member.email}</span>
-        <Badge className="ml-2 !bg-orange-400">정보 입력 필요</Badge>
-      </p>
-    </div>
-  );
-}
-
 function NeedTeamMemberListItem({ member }: Props) {
   return (
     <div className="!m-4">
@@ -105,6 +94,9 @@ function ActiveMemberListItem({ member }: Props) {
         <strong className="text-2xl">{member.name}</strong>
         <span className="ml-2">{member.email}</span>
         <Badge className="ml-2">접수 완료</Badge>
+        {(!member.college || !member.grade) && (
+          <Badge className="ml-2 !bg-orange-300">추가 정보 입력 필요</Badge>
+        )}
         {member.attendedAt ? (
           <Badge className="ml-2 !bg-green-600">참석함</Badge>
         ) : (
@@ -152,8 +144,6 @@ function ActiveMemberListItem({ member }: Props) {
 export default function MemberListItem({ member }: Props) {
   return member.state === MemberState.NEED_VERIFICATION ? (
     <NeedVerificationMemberListItem member={member} />
-  ) : member.state === MemberState.NEED_STUDENT_INFO ? (
-    <NeedStudentInfoMemberListItem member={member} />
   ) : member.state === MemberState.NEED_TEAM ? (
     <NeedTeamMemberListItem member={member} />
   ) : (
