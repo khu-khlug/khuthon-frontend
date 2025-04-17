@@ -3,13 +3,16 @@
 import { useRef } from "react";
 import classNames from "classnames";
 import KhuthonText from "@khlug/components/KhuthonText";
+import { useEvent } from "@khlug/components/EventProvider/EventProvider";
 
 import StepNumber from "./components/StepNumber";
 
 import styles from "./style.module.css";
 import Link from "next/link";
+import Callout from "@khlug/components/Callout/Callout";
 
 export default function NewRegisterPage() {
+  const event = useEvent();
   const loginSectionRef = useRef<HTMLDivElement>(null);
 
   const moveToBottom = () => {
@@ -18,7 +21,7 @@ export default function NewRegisterPage() {
 
   return (
     <div className={classNames("max-w-3xl px-4 py-8 m-auto", styles.container)}>
-      <h1 className="text-4xl">참가 접수</h1>
+      <h1 className="text-4xl">참가 접수 안내</h1>
       <section>
         <p>
           <KhuthonText />에 오신 여러분을 환영합니다!
@@ -31,7 +34,10 @@ export default function NewRegisterPage() {
             아래 설명은 접수를 진행하는 중에도 확인할 수 있어요!
             <br />
             만약 이미 절차를 진행하던 중이거나, 현재 접수 상태를 확인하고 싶다면{" "}
-            <a onClick={moveToBottom}>아래에서</a> 로그인해주세요!
+            <a className="cursor-pointer" onClick={moveToBottom}>
+              아래에서
+            </a>{" "}
+            로그인해주세요!
           </span>
         </p>
         <p>
@@ -105,6 +111,10 @@ export default function NewRegisterPage() {
             </li>
             <li>팀원 모두가 3번 단계까지 진행해야 인원 확정이 가능해요.</li>
             <li>한 번 인원 확정이 되면 팀원을 변경할 수 없어요.</li>
+            <li>
+              인원 확정을 진행해도 최대 인원 또는 최대 팀 수가 초과되면 대회
+              참가가 불가능해요.
+            </li>
             <li className="text-red-500">
               인원 확정을 진행하지 않으면 대회 참가가 불가능해요.
             </li>
@@ -118,7 +128,16 @@ export default function NewRegisterPage() {
           <p>이제 대회에 참가할 수 있어요. 당일에 뵙겠습니다!</p>
         </div>
       </section>
-      <section ref={loginSectionRef}></section>
+      <h1 className="text-4xl mt-20">참가 접수</h1>
+      <section ref={loginSectionRef}>
+        {event.registerRange === "BEFORE" ? (
+          <Callout>접수 기간이 아닙니다.</Callout>
+        ) : event.registerRange === "AFTER" ? (
+          <Callout>접수가 마감되었습니다.</Callout>
+        ) : (
+          <div>TODO</div>
+        )}
+      </section>
     </div>
   );
 }
