@@ -52,7 +52,8 @@ export default function _2025About() {
             </ul>
           </li>
           <li>
-            초대한 팀원이 모두 수락하면, 팀원 중 한 명이 <b>인원 확정</b>을 할 수 있다. (팀장 구분 없음)
+            초대한 팀원이 모두 수락하면, 팀원 중 한 명이 <b>인원 확정</b>을 할
+            수 있다. (팀장 구분 없음)
             <ul className="!ml-0">
               <li>
                 인원 확정을 통해 팀의 참가 등록이 완료되며, 인원 확정을 하지
@@ -167,44 +168,16 @@ export default function _2025About() {
         </p>
         <p>
           <a
-            href="https://swuniv.kyonggi.ac.kr/"
+            href="https://software.khu.ac.kr/"
             target="_blank"
             className="favicon"
           >
             <img
-              src="https://cdn.khlug.org/images/kgu-univ-logo.png"
+              src="https://khlug.org/images/khu.png"
               className="favicon"
               alt=""
             />{" "}
-            경기대학교 <strong>SW중심대학사업단</strong>
-          </a>
-        </p>
-        <p>
-          <a
-            href="https://swcu.dankook.ac.kr/"
-            target="_blank"
-            className="favicon"
-          >
-            <img
-              src="https://cdn.khlug.org/images/dku-univ-logo.png"
-              className="favicon"
-              alt=""
-            />{" "}
-            단국대학교 <strong>SW중심대학</strong>
-          </a>
-        </p>
-        <p>
-          <a
-            href="https://www.ajou.ac.kr/sw/"
-            target="_blank"
-            className="favicon"
-          >
-            <img
-              src="https://cdn.khlug.org/images/ajou-univ.png"
-              className="favicon"
-              alt=""
-            />{" "}
-            아주대학교 <strong>SW중심대학사업</strong>
+            경희대학교 <strong>소프트웨어융합대학</strong>
           </a>
         </p>
 
@@ -245,6 +218,48 @@ export default function _2025About() {
               alt=""
             />{" "}
             경희대학교 <strong>실감미디어 혁신융합대학 사업단</strong>
+          </a>
+        </p>
+        <p>
+          <a
+            href="https://swuniv.kyonggi.ac.kr/"
+            target="_blank"
+            className="favicon"
+          >
+            <img
+              src="https://cdn.khlug.org/images/kgu-univ-logo.png"
+              className="favicon"
+              alt=""
+            />{" "}
+            경기대학교 <strong>SW중심대학사업단</strong>
+          </a>
+        </p>
+        <p>
+          <a
+            href="https://swcu.dankook.ac.kr/"
+            target="_blank"
+            className="favicon"
+          >
+            <img
+              src="https://cdn.khlug.org/images/dku-univ-logo.png"
+              className="favicon"
+              alt=""
+            />{" "}
+            단국대학교 <strong>SW중심대학</strong>
+          </a>
+        </p>
+        <p>
+          <a
+            href="https://www.ajou.ac.kr/sw/"
+            target="_blank"
+            className="favicon"
+          >
+            <img
+              src="https://cdn.khlug.org/images/ajou-univ.png"
+              className="favicon"
+              alt=""
+            />{" "}
+            아주대학교 <strong>SW중심대학사업</strong>
           </a>
         </p>
 
