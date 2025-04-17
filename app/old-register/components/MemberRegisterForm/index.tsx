@@ -9,7 +9,7 @@ import {
   useToken,
 } from "@khlug/components/ClientProvider/ClientProvider";
 import Button from "@khlug/components/Button";
-import { useRegister } from "@khlug/app/register/components/MemberRegisterInfoProvider/MemberRegisterInfoProvider";
+import { useRegister } from "@khlug/app/old-register/components/MemberRegisterInfoProvider/MemberRegisterInfoProvider";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 
 export default function MemberRegisterForm() {

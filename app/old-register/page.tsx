@@ -7,13 +7,13 @@ import { useEffect, useState } from "react";
 
 import { useEvent } from "@khlug/components/EventProvider/EventProvider";
 import Container from "@khlug/components/Container/Container";
-import RegisterGuideContainer from "@khlug/app/register/components/RegisterGuideContainer";
-import RegisterCrossroad from "@khlug/app/register/components/RegisterCrossroad";
-import MemberRegisterInfoProvider from "@khlug/app/register/components/MemberRegisterInfoProvider/MemberRegisterInfoProvider";
+import RegisterGuideContainer from "@khlug/app/old-register/components/RegisterGuideContainer";
+import RegisterCrossroad from "@khlug/app/old-register/components/RegisterCrossroad";
+import MemberRegisterInfoProvider from "@khlug/app/old-register/components/MemberRegisterInfoProvider/MemberRegisterInfoProvider";
 import Callout from "@khlug/components/Callout/Callout";
 import { useToken } from "@khlug/components/ClientProvider/ClientProvider";
 import { isTokenFor } from "@khlug/util/isTokenFor";
-import AlimtalkGuideContainer from "@khlug/app/register/components/AlimtalkGuideContainer";
+import AlimtalkGuideContainer from "@khlug/app/old-register/components/AlimtalkGuideContainer";
 
 dayjs.extend(timezone);
 dayjs.extend(utc);

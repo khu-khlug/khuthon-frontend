@@ -1,9 +1,9 @@
 import Callout from "@khlug/components/Callout/Callout";
-import MemberRegisterForm from "@khlug/app/register/components/MemberRegisterForm";
-import { useRegister } from "@khlug/app/register/components/MemberRegisterInfoProvider/MemberRegisterInfoProvider";
+import MemberRegisterForm from "@khlug/app/old-register/components/MemberRegisterForm";
+import { useRegister } from "@khlug/app/old-register/components/MemberRegisterInfoProvider/MemberRegisterInfoProvider";
 import { MemberState } from "@khlug/constant";
-import CreateTeamForm from "@khlug/app/register/components/CreateTeamForm/CreateTeamForm";
-import EmailOtpVerifyForm from "@khlug/app/register/components/EmailOtpVerifyForm/EmailOtpVerifyForm";
+import CreateTeamForm from "@khlug/app/old-register/components/CreateTeamForm/CreateTeamForm";
+import EmailOtpVerifyForm from "@khlug/app/old-register/components/EmailOtpVerifyForm/EmailOtpVerifyForm";
 import { useState } from "react";
 import LoginForm from "../LoginForm";
 import Button from "@khlug/components/Button";
