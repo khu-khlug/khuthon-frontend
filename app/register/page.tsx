@@ -2,14 +2,15 @@
 
 import { useRef } from "react";
 import classNames from "classnames";
+import Link from "next/link";
+
+import Callout from "@khlug/components/Callout/Callout";
 import KhuthonText from "@khlug/components/KhuthonText";
 import { useEvent } from "@khlug/components/EventProvider/EventProvider";
 
 import StepNumber from "./components/StepNumber";
 
 import styles from "./style.module.css";
-import Link from "next/link";
-import Callout from "@khlug/components/Callout/Callout";
 
 export default function NewRegisterPage() {
   const event = useEvent();
@@ -112,8 +113,8 @@ export default function NewRegisterPage() {
             <li>팀원 모두가 3번 단계까지 진행해야 인원 확정이 가능해요.</li>
             <li>한 번 인원 확정이 되면 팀원을 변경할 수 없어요.</li>
             <li>
-              인원 확정을 진행해도 최대 인원 또는 최대 팀 수가 초과되면 대회
-              참가가 불가능해요.
+              인원 확정 진행 시점에 이미 최대 인원 또는 최대 팀 수를 초과했다면
+              대회에 참가할 수 없어요.
             </li>
             <li className="text-red-500">
               인원 확정을 진행하지 않으면 대회 참가가 불가능해요.
