@@ -95,6 +95,17 @@ export default function NewRegisterPage() {
               팀원이 초대해줄 때까지 기다려요.
             </li>
           </ol>
+          <p>팀 생성 시, 아래 사항을 참고해주세요.</p>
+          <ol className="list-decimal">
+            <li>
+              팀원은 같은 학교 재학생만 가능하며, 다른 대학 간 팀을 구성할 수는
+              없어요.
+            </li>
+            <li>
+              1인 팀으로 참가하시는 것이라면, 팀 생성 후 바로 4번 단계로
+              넘어가면 돼요.
+            </li>
+          </ol>
         </div>
         <div className="mt-8">
           <p>
