@@ -11,6 +11,8 @@ import { useEvent } from "@khlug/components/EventProvider/EventProvider";
 import StepNumber from "./components/StepNumber";
 
 import styles from "./style.module.css";
+import MemberRegisterInfoProvider from "../old-register/components/MemberRegisterInfoProvider/MemberRegisterInfoProvider";
+import RegisterCrossroad from "../old-register/components/RegisterCrossroad";
 
 export default function NewRegisterPage() {
   const event = useEvent();
