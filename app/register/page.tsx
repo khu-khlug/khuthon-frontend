@@ -138,7 +138,18 @@ export default function NewRegisterPage() {
         ) : event.registerRange === "AFTER" ? (
           <Callout>접수가 마감되었습니다.</Callout>
         ) : (
-          <div>TODO</div>
+          <div className={styles["register-buttons"]}>
+            <button>
+              접수가 처음이라면 처음부터,
+              <br />
+              <span>시작하기</span>
+            </button>
+            <button>
+              이미 접수 절차를 진행 중이라면,
+              <br />
+              <span>이어하기</span>
+            </button>
+          </div>
         )}
       </section>
     </div>

@@ -4,6 +4,10 @@
 
 @tailwind utilities;
 
+:root {
+  --main-color: #00a0e9;
+}
+
 sup {
   position: relative;
   top: -7px;
