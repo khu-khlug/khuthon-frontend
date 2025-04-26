@@ -127,8 +127,8 @@ export default function NewRegisterPage() {
             <span className="ml-2 text-2xl font-semibold">인원 확정</span>
           </p>
           <p>
-            인원 확정을 진행해야 대회 접수가 완료돼요. 인원 확정은{" "}
-            <Link href="/team">팀 페이지</Link>에서 할 수 있어요.
+            인원 확정을 진행해야 대회 접수가 완료돼요. 꼭 이번 단계까지
+            완료해주세요!
           </p>
           <ul className="list-disc">
             <li>
