@@ -10,15 +10,11 @@ import { toast } from "react-toastify";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 
 interface EmailOtpVerifyFormProps {
-  email?: string;
   onSuccess: () => void;
-  onError: (error: string) => void;
 }
 
 export default function EmailOtpVerifyForm({
-  email,
   onSuccess,
-  onError,
 }: EmailOtpVerifyFormProps) {
   const client = useClient();
 
@@ -27,6 +23,11 @@ export default function EmailOtpVerifyForm({
 
   const [loading, setLoading] = useState(false);
   const [resendLoading, setResendLoading] = useState(false);
+
+  const handleChangeOtp = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setOtp(e.target.value);
+    setOtpError(undefined);
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -63,9 +64,9 @@ export default function EmailOtpVerifyForm({
 
   return (
     <div>
-      <h1 className="text-4xl">학교 이메일 인증</h1>
+      <h1 className="text-4xl">이메일 인증</h1>
       <p className="text-lg">
-        앞서 입력한 이메일 주소로 전송된 인증 코드를 입력해서 인증해요. 이
+        앞서 입력한 학교 이메일 주소로 전송된 인증 코드를 입력해서 인증해요. 이
         단계를 통해 입력한 이메일 주소가 본인 것인지 확인하고, 재학 중인 학교를
         판단해요.
       </p>
@@ -89,10 +90,10 @@ export default function EmailOtpVerifyForm({
         <FancyInput
           label="인증 코드"
           description="입력하신 이메일로 전송된 인증 코드를 입력해주세요."
-          value={otp}
-          onChange={(e) => setOtp(e.target.value)}
           placeholder="메일로 받은 인증 코드를 입력하세요"
           error={otpError}
+          value={otp}
+          onChange={handleChangeOtp}
         />
 
         <Button
