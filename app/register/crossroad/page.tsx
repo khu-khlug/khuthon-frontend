@@ -1,6 +1,5 @@
 "use client";
 
-import React, { useState } from "react";
 import { MemberState } from "@khlug/constant";
 
 import { useMemberInfo } from "../hooks/useMemberInfo";
@@ -13,15 +12,9 @@ import styles from "./style.module.css";
 
 export default function RegisterCrossroadPage() {
   const [memberInfo, reloadMemberInfo, loadError] = useMemberInfo();
-  const [error, setError] = useState<string | null>(null);
 
   const handleSuccess = () => {
     reloadMemberInfo();
-    setError(null);
-  };
-
-  const handleError = (errorMessage: string) => {
-    setError(errorMessage);
   };
 
   const renderContent = () => {
@@ -50,37 +43,13 @@ export default function RegisterCrossroadPage() {
 
     switch (memberInfo.state) {
       case MemberState.NEED_VERIFICATION:
-        return (
-          <EmailOtpVerifyForm
-            email={memberInfo.email}
-            onSuccess={handleSuccess}
-            onError={handleError}
-          />
-        );
+        return <EmailOtpVerifyForm onSuccess={handleSuccess} />;
       case MemberState.NEED_TEAM:
-        return (
-          <CreateTeamForm onSuccess={handleSuccess} onError={handleError} />
-        );
+        return <CreateTeamForm onSuccess={handleSuccess} />;
       case MemberState.ACTIVE:
         return <RegisterCompleted />;
     }
   };
 
-  return (
-    <div className={styles.pageContainer}>
-      {error && (
-        <div className={styles.globalError}>
-          <p className="text-lg m-0">{error}</p>
-          <button
-            className={styles.closeErrorButton}
-            onClick={() => setError(null)}
-          >
-            ×
-          </button>
-        </div>
-      )}
-
-      {renderContent()}
-    </div>
-  );
+  return <div className={styles.pageContainer}>{renderContent()}</div>;
 }
