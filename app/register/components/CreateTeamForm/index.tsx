@@ -69,8 +69,8 @@ export default function CreateTeamForm({ onSuccess }: CreateTeamFormProps) {
       </p>
 
       <p className="text-lg text-red-500">
-        만약 팀원의 초대를 기다리고 있다면, 팀을 생성하지 마세요. 팀을 생성하면
-        초대가 불가능해요.
+        팀을 생성하면 초대가 불가능해요. 따라서, 팀을 생성하는 역할이 아니라면
+        이 단계에서 더 이상 진행하지 않고 초대를 기다려주세요.
       </p>
 
       <form onSubmit={handleSubmit}>

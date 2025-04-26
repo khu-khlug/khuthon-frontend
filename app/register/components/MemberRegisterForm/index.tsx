@@ -185,7 +185,7 @@ export default function MemberRegisterForm({ onSuccess }: Props) {
           name="password"
           value={formData.password}
           onChange={handleChange}
-          placeholder="비밀번호를 입력하세요 (8자 이상)"
+          placeholder="비밀번호를 입력하세요 (10자 이상, 100자 이하)"
           error={errors.password}
         />
 
