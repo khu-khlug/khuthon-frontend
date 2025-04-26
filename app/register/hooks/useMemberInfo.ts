@@ -6,16 +6,17 @@ import {
   useClient,
   useToken,
 } from "@khlug/components/ClientProvider/ClientProvider";
+import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 
-export interface MemberRegisterInfo {
+type MemberRegisterInfo = {
   id: string;
-  email: string;
-  university: string;
   state: MemberState;
-  name: string;
-  phone: string;
-  studentNumber: string;
-}
+  team: {
+    id: string;
+    name: string;
+    confirmed: boolean;
+  } | null;
+};
 
 export function useMemberInfo(): [
   MemberRegisterInfo | null,
@@ -38,11 +39,7 @@ export function useMemberInfo(): [
       const { data } = await client.get<MemberRegisterInfo>("/members/@me");
       setMemberInfo(data);
     } catch (err) {
-      const errorMessage =
-        err instanceof Error
-          ? err.message
-          : "회원 정보를 불러오는데 실패했습니다.";
-      setError(errorMessage);
+      setError(extractErrorMessage(err));
     }
   }, [token, client]);
 
