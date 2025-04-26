@@ -199,7 +199,11 @@ export default function MemberRegisterForm({ onSuccess }: Props) {
           error={errors.confirmPassword}
         />
 
-        <Button className="mt-8 h-12 w-full" loading={loading} formSubmit>
+        <Button
+          className="mt-8 h-12 w-full text-lg"
+          loading={loading}
+          formSubmit
+        >
           다음 단계로
         </Button>
       </form>
