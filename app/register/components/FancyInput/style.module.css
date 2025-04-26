@@ -1,5 +1,4 @@
-.inputContainer {
-  margin-bottom: 1.5rem;
+.input-container {
   width: 100%;
 }
 
@@ -7,27 +6,16 @@
   display: block;
   font-size: 18px;
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.25rem;
+  border: none;
 }
 
 .description {
   font-size: 16px;
-  color: #666;
+  color: #888;
   margin-bottom: 0.5rem;
   line-height: 1.5;
-}
-
-.inputWrapper {
-  position: relative;
-  border: 2px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
-  transition: all 0.2s ease;
-}
-
-.inputWrapper:focus-within {
-  border-color: #00a0e9;
-  box-shadow: 0 0 0 2px rgba(0, 160, 233, 0.2);
 }
 
 .input {
@@ -39,11 +27,24 @@
   background: transparent;
 }
 
-.inputWrapper.error {
+.input-wrapper {
+  position: relative;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.input-wrapper:focus-within {
+  border-color: #00a0e9;
+  box-shadow: 0 0 0 1px rgba(0, 160, 233, 0.2);
+}
+
+.input-wrapper.error {
   border-color: #f44336;
 }
 
-.errorMessage {
+.error-message {
   color: #f44336;
   font-size: 14px;
   margin-top: 0.5rem;

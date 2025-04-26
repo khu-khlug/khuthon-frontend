@@ -7,15 +7,14 @@ import {
   useToken,
 } from "@khlug/components/ClientProvider/ClientProvider";
 
-// MemberRegisterInfo 타입 정의
 export interface MemberRegisterInfo {
   id: string;
   email: string;
   university: string;
   state: MemberState;
-  name?: string;
-  phone?: string;
-  studentNumber?: string;
+  name: string;
+  phone: string;
+  studentNumber: string;
 }
 
 export function useMemberInfo(): [

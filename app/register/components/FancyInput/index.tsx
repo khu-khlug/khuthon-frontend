@@ -13,11 +13,13 @@ export interface FancyInputProps extends InputHTMLAttributes<HTMLInputElement> {
 const FancyInput = forwardRef<HTMLInputElement, FancyInputProps>(
   ({ label, description, error, className, ...props }, ref) => {
     return (
-      <div className={styles.inputContainer}>
+      <div className={styles["input-container"]}>
         {label && <label className={styles.label}>{label}</label>}
-        {description && <div className={styles.description}>{description}</div>}
+        {description && (
+          <div className={styles.description}>{description.split("\n")}</div>
+        )}
         <div
-          className={classNames(styles.inputWrapper, {
+          className={classNames(styles["input-wrapper"], {
             [styles.error]: !!error,
           })}
         >
@@ -27,7 +29,7 @@ const FancyInput = forwardRef<HTMLInputElement, FancyInputProps>(
             {...props}
           />
         </div>
-        {error && <div className={styles.errorMessage}>{error}</div>}
+        {error && <div className={styles["error-message"]}>{error}</div>}
       </div>
     );
   }

@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import classNames from "classnames";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import Callout from "@khlug/components/Callout/Callout";
 import KhuthonText from "@khlug/components/KhuthonText";
@@ -11,15 +12,25 @@ import { useEvent } from "@khlug/components/EventProvider/EventProvider";
 import StepNumber from "./components/StepNumber";
 
 import styles from "./style.module.css";
-import MemberRegisterInfoProvider from "../old-register/components/MemberRegisterInfoProvider/MemberRegisterInfoProvider";
-import RegisterCrossroad from "../old-register/components/RegisterCrossroad";
+import { useToken } from "@khlug/components/ClientProvider/ClientProvider";
 
 export default function NewRegisterPage() {
+  const router = useRouter();
   const event = useEvent();
   const loginSectionRef = useRef<HTMLDivElement>(null);
+  const [, setToken] = useToken();
 
   const moveToBottom = () => {
     loginSectionRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleStart = () => {
+    setToken(null);
+    router.push("/register/crossroad");
+  };
+
+  const handleContinue = () => {
+    router.push("/register/login");
   };
 
   return (
@@ -139,12 +150,12 @@ export default function NewRegisterPage() {
           <Callout>접수가 마감되었습니다.</Callout>
         ) : (
           <div className={styles["register-buttons"]}>
-            <button>
+            <button onClick={handleStart}>
               접수가 처음이라면 처음부터,
               <br />
               <span>시작하기</span>
             </button>
-            <button>
+            <button onClick={handleContinue}>
               이미 접수 절차를 진행 중이라면,
               <br />
               <span>이어하기</span>
