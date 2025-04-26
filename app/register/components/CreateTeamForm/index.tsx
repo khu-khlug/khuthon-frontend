@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
 import Button from "@khlug/components/Button";
 import FancyInput from "../FancyInput";
@@ -46,6 +46,17 @@ export default function CreateTeamForm({ onSuccess }: CreateTeamFormProps) {
     }
   };
 
+  const joinTeam = useCallback(async () => {
+    try {
+      await client.post("/teams/join");
+      onSuccess();
+    } catch (e) {}
+  }, [client]);
+
+  useEffect(() => {
+    joinTeam();
+  }, [joinTeam]);
+
   return (
     <div>
       <h1 className="text-4xl">학교 이메일 인증</h1>
@@ -69,8 +80,8 @@ export default function CreateTeamForm({ onSuccess }: CreateTeamFormProps) {
       </p>
 
       <p className="text-lg text-red-500">
-        팀을 생성하면 초대가 불가능해요. 따라서, 팀을 생성하는 역할이 아니라면
-        이 단계에서 더 이상 진행하지 않고 초대를 기다려주세요.
+        팀을 생성하면 초대가 불가능해요. 팀을 생성하는 역할이 아니라면 이
+        단계에서 더 이상 진행하지 않고 초대를 기다려주세요.
       </p>
 
       <form onSubmit={handleSubmit}>
