@@ -54,10 +54,7 @@ export default function RegisterCrossroadPage() {
             return team.confirmed ? (
               <RegisterCompleted />
             ) : (
-              <TeamConfirmNeeded
-                teamName={team.name}
-                onSuccess={handleSuccess}
-              />
+              <TeamConfirmNeeded onSuccess={handleSuccess} />
             );
         }
       })()}
