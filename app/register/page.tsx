@@ -151,7 +151,9 @@ export default function NewRegisterPage() {
             <StepNumber step={5} />
             <span className="ml-2 text-2xl font-semibold">완료!</span>
           </p>
-          <p>이제 대회에 참가할 수 있어요. 당일에 뵙겠습니다!</p>
+          <p>
+            이제 대회 참가에 필요한 모든 절차를 완료했어요. 당일에 뵙겠습니다!
+          </p>
         </div>
       </section>
       <h1 className="text-4xl mt-20">참가 접수</h1>
