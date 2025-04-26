@@ -73,7 +73,7 @@ export default function NewRegisterPage() {
             <li>학번</li>
             <li>이름</li>
             <li>전화번호</li>
-            <li>이메일 주소</li>
+            <li>학교 이메일 주소</li>
             <li>비밀번호</li>
           </ol>
           <p>
@@ -100,14 +100,26 @@ export default function NewRegisterPage() {
           <p>팀에 참가하는 방법은 두 가지가 있어요.</p>
           <ol className="list-decimal">
             <li>
-              <strong>팀 생성하기</strong>: 팀을 생성하여 팀원들을 초대해요.
-              팀원 초대는 <Link href="/team">팀 페이지</Link>에서 할 수 있어요.
+              팀 생성하기: 팀을 생성한 후, <Link href="/team">팀 페이지</Link>
+              에서 팀원들의 <strong>학번</strong>을 입력하여 팀원들을 초대할 수
+              있어요.
             </li>
             <li>
-              <strong>초대 기다리기</strong>: 이 단계에서 팀을 생성하지 않고,
-              팀원이 초대해줄 때까지 기다려요.
+              초대 기다리기: 이 단계에서 팀을 생성하지 않고, 팀원이 초대해줄
+              때까지 기다려요.
             </li>
           </ol>
+          <p>팀 생성 시, 아래 사항을 참고해주세요.</p>
+          <ul className="list-disc">
+            <li>
+              팀원은 같은 학교 재학생만 가능하며, 다른 대학 간 팀을 구성할 수는
+              없어요.
+            </li>
+            <li>
+              1인 팀으로 참가하시는 것이라면, 팀 생성 후 바로 4번 단계로
+              넘어가면 돼요.
+            </li>
+          </ul>
         </div>
         <div className="mt-8">
           <p>
