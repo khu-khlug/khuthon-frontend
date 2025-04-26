@@ -5,7 +5,9 @@ import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
 import Button from "@khlug/components/Button";
 import FancyInput from "../FancyInput";
 
-import styles from "./style.module.css";
+import TextButton from "@khlug/components/TextButton";
+import { toast } from "react-toastify";
+import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 
 interface EmailOtpVerifyFormProps {
   email?: string;
@@ -21,30 +23,26 @@ export default function EmailOtpVerifyForm({
   const client = useClient();
 
   const [otp, setOtp] = useState("");
+  const [otpError, setOtpError] = useState<string | undefined>();
+
   const [loading, setLoading] = useState(false);
   const [resendLoading, setResendLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [resendSuccess, setResendSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!otp) {
-      setError("인증 코드를 입력해주세요");
+      setOtpError("인증 코드를 입력해주세요");
       return;
     }
 
     setLoading(true);
-    setError(null);
 
     try {
       await client.post("/members/@me/verify", { otp });
       onSuccess();
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "인증에 실패했습니다";
-      setError(errorMessage);
-      onError(errorMessage);
+      toast.error(extractErrorMessage(err));
     } finally {
       setLoading(false);
     }
@@ -52,72 +50,58 @@ export default function EmailOtpVerifyForm({
 
   const handleResend = async () => {
     setResendLoading(true);
-    setResendSuccess(false);
-    setError(null);
 
     try {
       await client.post("/members/@me/resend-verify-email");
-      setResendSuccess(true);
-      setTimeout(() => {
-        setResendSuccess(false);
-      }, 5000); // 5초 후 성공 메시지 사라짐
+      toast.success("인증 메일을 다시 보냈어요.");
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "인증 메일 재전송에 실패했습니다";
-      setError(errorMessage);
-      onError(errorMessage);
+      toast.error(extractErrorMessage(err));
     } finally {
       setResendLoading(false);
     }
   };
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>이메일 인증</h1>
-
-      <p className={styles.description}>
-        {email ? (
-          <>
-            <strong>{email}</strong>로
-          </>
-        ) : (
-          "입력하신 이메일로"
-        )}{" "}
-        인증 코드가 전송되었습니다. 메일함에서 확인해주세요.
+    <div>
+      <h1 className="text-4xl">학교 이메일 인증</h1>
+      <p className="text-lg">
+        앞서 입력한 이메일 주소로 전송된 인증 코드를 입력해서 인증해요. 이
+        단계를 통해 입력한 이메일 주소가 본인 것인지 확인하고, 재학 중인 학교를
+        판단해요.
       </p>
-
-      <p className={styles.hint}>
+      <p className="text-lg">
+        전송된 인증 코드는 <strong>5분 동안</strong> 유효해요. 인증 코드를
+        재전송하고 싶다면{" "}
+        <TextButton
+          className="text-lg font-bold"
+          loading={resendLoading}
+          onClick={handleResend}
+        >
+          여기
+        </TextButton>
+        를 눌러주세요.
+      </p>
+      <p className="text-lg italic">
         메일을 찾을 수 없다면 스팸 메일함을 확인해주세요.
       </p>
 
-      {resendSuccess && (
-        <div className={styles.successAlert}>
-          인증 메일이 재전송되었습니다. 메일함을 확인해주세요.
-        </div>
-      )}
-
-      {error && <div className={styles.errorAlert}>{error}</div>}
-
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <FancyInput
           label="인증 코드"
+          description="입력하신 이메일로 전송된 인증 코드를 입력해주세요."
           value={otp}
           onChange={(e) => setOtp(e.target.value)}
           placeholder="메일로 받은 인증 코드를 입력하세요"
+          error={otpError}
         />
 
-        <Button className={styles.submitButton} loading={loading} formSubmit>
-          인증 확인
-        </Button>
-
-        <button
-          type="button"
-          className={styles.resendButton}
-          onClick={handleResend}
-          disabled={resendLoading}
+        <Button
+          className="mt-8 h-12 w-full text-lg"
+          loading={loading}
+          formSubmit
         >
-          {resendLoading ? "재전송 중..." : "인증 코드 다시 보내기"}
-        </button>
+          다음 단계로
+        </Button>
       </form>
     </div>
   );
