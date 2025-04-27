@@ -23,6 +23,7 @@ import DeleteTeamContainer from "@khlug/app/team/components/DeleteTeamContainer/
 import { toast } from "react-toastify";
 import Callout from "@khlug/components/Callout/Callout";
 import ConfirmTeamContainer from "@khlug/app/team/components/ConfirmTeamContainer";
+import EditStudentInfoForm from "./components/EditStudentInfoForm";
 
 const SpinnerContext = "Khuthon/TeamLoader" as const;
 
@@ -70,6 +71,7 @@ export default function TeamPage() {
       ) : (
         <>
           <EditTeamContainer />
+          <EditStudentInfoForm />
           <MemberListContainer />
           {event.registerRange === "BETWEEN" && !teamConfirmed && (
             <>
