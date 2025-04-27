@@ -94,7 +94,7 @@ export default async function Home() {
         <div className="gallery">
           <div className="image_wrap image relative">
             <Image
-              src="https://cdn.khlug.org/images/2018/01.jpg"
+              src="https://cdn.khlug.org/images/khuthon2024/khuthon-2024-01.jpeg"
               alt="첫번째 이미지"
               fill
               sizes="100%"
@@ -103,7 +103,7 @@ export default async function Home() {
           </div>
           <div className="image_wrap image relative">
             <Image
-              src="https://cdn.khlug.org/images/2017/01.jpg"
+              src="https://cdn.khlug.org/images/khuthon2024/khuthon-2024-02.jpeg"
               alt="두번째 이미지"
               fill
               sizes="100%"
@@ -112,7 +112,7 @@ export default async function Home() {
           </div>
           <div className="image_wrap image relative">
             <Image
-              src="https://cdn.khlug.org/images/2018/06.jpg"
+              src="https://cdn.khlug.org/images/khuthon2024/khuthon-2024-03.jpeg"
               alt="세번째 이미지"
               fill
               sizes="100%"
@@ -121,7 +121,7 @@ export default async function Home() {
           </div>
           <div className="image_wrap image relative">
             <Image
-              src="https://cdn.khlug.org/images/2018/07.jpg"
+              src="https://cdn.khlug.org/images/khuthon2024/khuthon-2024-04.jpeg"
               alt="네번째 이미지"
               fill
               sizes="100%"
@@ -130,7 +130,7 @@ export default async function Home() {
           </div>
           <div className="image_wrap image relative">
             <Image
-              src="https://cdn.khlug.org/images/2017/04.jpg"
+              src="https://cdn.khlug.org/images/khuthon2024/khuthon-2024-05.jpeg"
               alt="다섯번째 이미지"
               fill
               sizes="100%"
@@ -139,7 +139,7 @@ export default async function Home() {
           </div>
           <div className="image_wrap image relative">
             <Image
-              src="https://cdn.khlug.org/images/2018/08.jpg"
+              src="https://cdn.khlug.org/images/khuthon2024/khuthon-2024-06.jpeg"
               alt="여섯번째 이미지"
               fill
               sizes="100%"
@@ -148,7 +148,7 @@ export default async function Home() {
           </div>
           <div className="image_wrap image relative">
             <Image
-              src="https://cdn.khlug.org/images/2018/03.jpg"
+              src="https://cdn.khlug.org/images/khuthon2024/khuthon-2024-07.jpeg"
               alt="일곱번째 이미지"
               fill
               sizes="100%"
@@ -157,7 +157,7 @@ export default async function Home() {
           </div>
           <div className="image_wrap image relative">
             <Image
-              src="https://cdn.khlug.org/images/2017/09.jpg"
+              src="https://cdn.khlug.org/images/khuthon2024/khuthon-2024-08.jpeg"
               alt="여덟번째 이미지"
               fill
               sizes="100%"
@@ -166,7 +166,7 @@ export default async function Home() {
           </div>
           <div className="image_wrap image relative">
             <Image
-              src="https://cdn.khlug.org/images/2018/10.jpg"
+              src="https://cdn.khlug.org/images/khuthon2024/khuthon-2024-09.jpeg"
               alt="아홉번째 이미지"
               fill
               sizes="100%"

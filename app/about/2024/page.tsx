@@ -1,6 +1,93 @@
+import Image from "next/image";
+
 export default function _2024About() {
   return (
     <>
+      <div className="gallery">
+        <div className="image_wrap image relative">
+          <Image
+            src="https://cdn.khlug.org/images/khuthon2024/khuthon-2024-01.jpeg"
+            alt="첫번째 이미지"
+            fill
+            sizes="100%"
+            className="object-cover"
+          />
+        </div>
+        <div className="image_wrap image relative">
+          <Image
+            src="https://cdn.khlug.org/images/khuthon2024/khuthon-2024-02.jpeg"
+            alt="두번째 이미지"
+            fill
+            sizes="100%"
+            className="object-cover"
+          />
+        </div>
+        <div className="image_wrap image relative">
+          <Image
+            src="https://cdn.khlug.org/images/khuthon2024/khuthon-2024-03.jpeg"
+            alt="세번째 이미지"
+            fill
+            sizes="100%"
+            className="object-cover"
+          />
+        </div>
+        <div className="image_wrap image relative">
+          <Image
+            src="https://cdn.khlug.org/images/khuthon2024/khuthon-2024-04.jpeg"
+            alt="네번째 이미지"
+            fill
+            sizes="100%"
+            className="object-cover"
+          />
+        </div>
+        <div className="image_wrap image relative">
+          <Image
+            src="https://cdn.khlug.org/images/khuthon2024/khuthon-2024-05.jpeg"
+            alt="다섯번째 이미지"
+            fill
+            sizes="100%"
+            className="object-cover"
+          />
+        </div>
+        <div className="image_wrap image relative">
+          <Image
+            src="https://cdn.khlug.org/images/khuthon2024/khuthon-2024-06.jpeg"
+            alt="여섯번째 이미지"
+            fill
+            sizes="100%"
+            className="object-cover"
+          />
+        </div>
+        <div className="image_wrap image relative">
+          <Image
+            src="https://cdn.khlug.org/images/khuthon2024/khuthon-2024-07.jpeg"
+            alt="일곱번째 이미지"
+            fill
+            sizes="100%"
+            className="object-cover"
+          />
+        </div>
+        <div className="image_wrap image relative">
+          <Image
+            src="https://cdn.khlug.org/images/khuthon2024/khuthon-2024-08.jpeg"
+            alt="여덟번째 이미지"
+            fill
+            sizes="100%"
+            className="object-cover"
+          />
+        </div>
+        <div className="image_wrap image relative">
+          <Image
+            src="https://cdn.khlug.org/images/khuthon2024/khuthon-2024-09.jpeg"
+            alt="아홉번째 이미지"
+            fill
+            sizes="100%"
+            className="object-cover"
+          />
+        </div>
+        <div className="clear"></div>
+      </div>
+
       <div className="container about">
         <h4>일시</h4>
         <p>
@@ -9,6 +96,7 @@ export default function _2024About() {
             2일)
           </strong>
         </p>
+        <div className="desc">행사가 끝났습니다.</div>
 
         <h4>장소</h4>
         <p>경희대학교 국제캠퍼스 전자정보대학관 205호</p>
