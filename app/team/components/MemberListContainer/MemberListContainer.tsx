@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Container from "../../Container/Container";
+import Container from "@khlug/components/Container/Container";
 import MemberItem from "../MemberItem/MemberItem";
 import { useMyTeam } from "../MyTeamProvider/MyTeamProvider";
 

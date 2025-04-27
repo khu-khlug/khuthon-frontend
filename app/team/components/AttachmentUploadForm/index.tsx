@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 
 import { useEvent } from "@khlug/components/EventProvider/EventProvider";
 import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
-import { useMyTeam } from "@khlug/components/team/MyTeamProvider/MyTeamProvider";
+import { useMyTeam } from "@khlug/app/team/components/MyTeamProvider/MyTeamProvider";
 import Subtitle from "@khlug/components/Title/Subtitle";
 import FileUploader from "@khlug/components/FileUploader/FileUploader";
 

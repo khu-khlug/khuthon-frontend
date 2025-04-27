@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Container from "../../Container/Container";
-import { useEvent } from "../../EventProvider/EventProvider";
+import Container from "@khlug/components/Container/Container";
+import { useEvent } from "@khlug/components/EventProvider/EventProvider";
 import { useMyTeam } from "../MyTeamProvider/MyTeamProvider";
 import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";

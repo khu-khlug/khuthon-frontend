@@ -2,7 +2,7 @@ import classNames from "classnames";
 import Link from "next/link";
 
 import Subtitle from "@khlug/components/Title/Subtitle";
-import { useMyTeam } from "@khlug/components/team/MyTeamProvider/MyTeamProvider";
+import { useMyTeam } from "@khlug/app/team/components/MyTeamProvider/MyTeamProvider";
 
 type Props = {
   team: {

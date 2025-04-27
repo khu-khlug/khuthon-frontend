@@ -1,5 +1,5 @@
-import Container from "../../Container/Container";
-import { useEvent } from "../../EventProvider/EventProvider";
+import Container from "@khlug/components/Container/Container";
+import { useEvent } from "@khlug/components/EventProvider/EventProvider";
 import { formatDate } from "@khlug/util/formaDate";
 import VoteForm from "../VoteForm/VoteForm";
 
