@@ -7,8 +7,8 @@ export type GetMyTeamResponseMember = {
   state: MemberState;
   studentNumber: string;
   name: string;
-  college: string;
-  grade: number;
+  college: string | null;
+  attendedSemesters: number | null;
   phone: string;
   createdAt: Date;
   updatedAt: Date;

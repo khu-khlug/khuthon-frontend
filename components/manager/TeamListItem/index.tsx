@@ -86,8 +86,8 @@ export default function TeamListItem({ team }: Props) {
               {member.name}
               <span className="text-gray-400 ml-2">
                 {UniversityName[member.university]} {member.college}{" "}
-                {member.grade}
-                학년 ({member.studentNumber})
+                {member.attendedSemesters}
+                학기 ({member.studentNumber})
               </span>
               <span className="text-gray-400 ml-2">{member.email}</span>
               <span className="text-gray-400 ml-2">{member.phone}</span>

@@ -3,13 +3,13 @@ import { MemberState, University } from "@khlug/constant";
 export type ListMemberResponseMember = {
   id: string;
   email: string;
+  phone: string;
   university: University;
   state: MemberState;
-  studentNumber: string | null;
-  name: string | null;
+  studentNumber: string;
+  name: string;
   college: string | null;
-  grade: number | null;
-  phone: string | null;
+  attendedSemesters: number | null;
   isRelevantMajor: boolean | null;
   attendedAt: Date | null;
   createdAt: Date;

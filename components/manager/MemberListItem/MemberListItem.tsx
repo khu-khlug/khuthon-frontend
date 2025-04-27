@@ -33,8 +33,9 @@ function NeedTeamMemberListItem({ member }: Props) {
       </p>
       <p className="!m-0 !mt-2">
         <span className="text-gray-500">
-          {UniversityName[member.university]} {member.college} {member.grade}
-          학년 ({member.studentNumber})
+          {UniversityName[member.university]} {member.college}{" "}
+          {member.attendedSemesters}
+          학기 ({member.studentNumber})
           <br />
           {member.phone}
         </span>
@@ -94,7 +95,7 @@ function ActiveMemberListItem({ member }: Props) {
         <strong className="text-2xl">{member.name}</strong>
         <span className="ml-2">{member.email}</span>
         <Badge className="ml-2">접수 완료</Badge>
-        {(!member.college || !member.grade) && (
+        {(!member.college || !member.attendedSemesters) && (
           <Badge className="ml-2 !bg-orange-300">추가 정보 입력 필요</Badge>
         )}
         {member.attendedAt ? (
@@ -112,8 +113,9 @@ function ActiveMemberListItem({ member }: Props) {
       </p>
       <p className="!m-0 !mt-2">
         <span className="text-gray-500">
-          {UniversityName[member.university]} {member.college} {member.grade}
-          학년 ({member.studentNumber})
+          {UniversityName[member.university]} {member.college}{" "}
+          {member.attendedSemesters}
+          학기 ({member.studentNumber})
           <br />
           {member.phone}
         </span>

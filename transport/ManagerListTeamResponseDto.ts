@@ -16,7 +16,7 @@ interface ManagerListTeamResponseMember {
   studentNumber: string;
   name: string;
   college: string;
-  grade: number;
+  attendedSemesters: number;
   phone: string | null;
   attendedAt: Date | null;
   createdAt: Date;

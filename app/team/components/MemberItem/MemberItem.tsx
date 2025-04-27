@@ -49,7 +49,9 @@ export default function MemberItem({ member, onMessage }: Props) {
           <tr>
             <th>학적</th>
             <td>
-              {member.college} {member.grade}학년
+              {member.college && member.attendedSemesters
+                ? `${member.college} ${member.attendedSemesters}학기`
+                : "(정보 입력 필요)"}
             </td>
           </tr>
           <tr>
