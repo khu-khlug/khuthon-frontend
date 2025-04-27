@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import classNames from "classnames";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import Callout from "@khlug/components/Callout/Callout";
 import KhuthonText from "@khlug/components/KhuthonText";
@@ -11,13 +12,25 @@ import { useEvent } from "@khlug/components/EventProvider/EventProvider";
 import StepNumber from "./components/StepNumber";
 
 import styles from "./style.module.css";
+import { useToken } from "@khlug/components/ClientProvider/ClientProvider";
 
 export default function NewRegisterPage() {
+  const router = useRouter();
   const event = useEvent();
   const loginSectionRef = useRef<HTMLDivElement>(null);
+  const [, setToken] = useToken();
 
   const moveToBottom = () => {
     loginSectionRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleStart = () => {
+    setToken(null);
+    router.push("/register/crossroad");
+  };
+
+  const handleContinue = () => {
+    router.push("/register/login");
   };
 
   return (
@@ -114,8 +127,8 @@ export default function NewRegisterPage() {
             <span className="ml-2 text-2xl font-semibold">인원 확정</span>
           </p>
           <p>
-            인원 확정을 진행해야 대회 접수가 완료돼요. 인원 확정은{" "}
-            <Link href="/team">팀 페이지</Link>에서 할 수 있어요.
+            인원 확정을 진행해야 대회 접수가 완료돼요. 꼭 이번 단계까지
+            완료해주세요!
           </p>
           <ul className="list-disc">
             <li>
@@ -138,7 +151,9 @@ export default function NewRegisterPage() {
             <StepNumber step={5} />
             <span className="ml-2 text-2xl font-semibold">완료!</span>
           </p>
-          <p>이제 대회에 참가할 수 있어요. 당일에 뵙겠습니다!</p>
+          <p>
+            이제 대회 참가에 필요한 모든 절차를 완료했어요. 당일에 뵙겠습니다!
+          </p>
         </div>
       </section>
       <h1 className="text-4xl mt-20">참가 접수</h1>
@@ -148,7 +163,18 @@ export default function NewRegisterPage() {
         ) : event.registerRange === "AFTER" ? (
           <Callout>접수가 마감되었습니다.</Callout>
         ) : (
-          <div>TODO</div>
+          <div className={styles["register-buttons"]}>
+            <button onClick={handleStart}>
+              접수가 처음이라면 처음부터,
+              <br />
+              <span>시작하기</span>
+            </button>
+            <button onClick={handleContinue}>
+              이미 접수 절차를 진행 중이라면,
+              <br />
+              <span>이어하기</span>
+            </button>
+          </div>
         )}
       </section>
     </div>

@@ -1,4 +1,11 @@
 .reset-white-bg {
   background-color: white;
   margin: -27px -20px;
+  min-height: calc(100vh - 105px - 50px);
+}
+
+@media only screen and (max-width: 800px) {
+  .reset-white-bg {
+    min-height: calc(100vh - 80px - 50px);
+  }
 }

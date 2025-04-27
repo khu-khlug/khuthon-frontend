@@ -23,7 +23,7 @@ export default function TextButton({
       type="button"
       className={classNames(
         "text-black hover:text-black/70 underline underline-offset-2 cursor-pointer border-0 bg-none bg-transparent p-0",
-        { "cursor-wait": loading },
+        { "cursor-wait text-black/40 hover:text-black/40": loading },
         className
       )}
       onClick={handleClick}
