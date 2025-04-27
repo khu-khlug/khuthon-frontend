@@ -90,8 +90,13 @@ export default function TeamConfirmNeeded({ onSuccess }: Props) {
               </li>
             ))}
           </ul>
+          {team.invitations.length > 0 && (
+            <p className="text-lg">
+              현재는 진행 중인 초대가 있어 인원 확정을 할 수 없어요.
+            </p>
+          )}
           <Button
-            className="mt-8 h-12 w-full text-lg"
+            className="mt-4 h-12 w-full text-lg"
             loading={confirmLoading}
             disabled={confirmDisabled}
             onClick={() => handleConfirmClick(team.id)}

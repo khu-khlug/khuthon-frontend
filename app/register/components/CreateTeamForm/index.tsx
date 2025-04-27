@@ -59,7 +59,7 @@ export default function CreateTeamForm({ onSuccess }: CreateTeamFormProps) {
 
   return (
     <div>
-      <h1 className="text-4xl">학교 이메일 인증</h1>
+      <h1 className="text-4xl">팀 생성</h1>
 
       <p className="text-lg">팀에 참가하는 방법은 두 가지가 있어요.</p>
       <ol className="list-decimal text-lg">
@@ -71,7 +71,8 @@ export default function CreateTeamForm({ onSuccess }: CreateTeamFormProps) {
         </li>
         <li>
           초대 기다리기: 이 단계에서 팀을 생성하지 않고, 팀원이 초대해줄 때까지
-          기다려요.
+          기다려요. 만약 팀원이 초대했는데도 단계가 넘어가지 않는다면 새로고침을
+          한 번 해주세요.
         </li>
       </ol>
       <p className="text-lg">

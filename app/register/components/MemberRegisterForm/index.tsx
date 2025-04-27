@@ -52,7 +52,7 @@ export default function MemberRegisterForm({ onSuccess }: Props) {
 
     if (!formData.studentNumber) {
       newErrors.studentNumber = "학번을 입력해주세요";
-    } else if (!/^\d{8,10}$/.test(formData.studentNumber)) {
+    } else if (!/^\d{6,20}$/.test(formData.studentNumber)) {
       newErrors.studentNumber =
         "올바른 학번 형식이 아니에요. 학번은 8~10자리 숫자여야 해요.";
     }
