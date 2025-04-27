@@ -5,6 +5,7 @@ import { useMyTeam } from "../MyTeamProvider/MyTeamProvider";
 import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 import { toast } from "react-toastify";
+import Button from "@khlug/components/Button";
 
 export default function EditTeamContainer() {
   const event = useEvent();
@@ -51,10 +52,10 @@ export default function EditTeamContainer() {
             readOnly={event.eventRange !== "BEFORE"}
           />
         </div>
-        <div className="btnArea" style={{ marginTop: "10px !important" }}>
-          <button type="submit" disabled={event.eventRange !== "BEFORE"}>
-            <span>수정</span>
-          </button>
+        <div className="text-right mt-3">
+          <Button formSubmit disabled={event.eventRange !== "BEFORE"}>
+            수정
+          </Button>
         </div>
       </form>
     </Container>

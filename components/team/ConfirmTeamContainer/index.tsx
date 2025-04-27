@@ -2,6 +2,7 @@ import Container from "@khlug/components/Container/Container";
 import { useMyTeam } from "../MyTeamProvider/MyTeamProvider";
 import { useRouter } from "next/navigation";
 import KhuthonText from "@khlug/components/KhuthonText";
+import Button from "@khlug/components/Button";
 
 export default function ConfirmTeamContainer() {
   const [myTeam] = useMyTeam();
@@ -28,10 +29,8 @@ export default function ConfirmTeamContainer() {
           <br />
           인원 확정까지 완료하면, <KhuthonText /> 참가 신청이 완료됩니다.
         </div>
-        <div className="btnArea">
-          <button type="submit" className="white">
-            <span>인원 확정</span>
-          </button>
+        <div className="text-right mt-3">
+          <Button formSubmit>인원 확정</Button>
         </div>
       </form>
     </Container>

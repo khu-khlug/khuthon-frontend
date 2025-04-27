@@ -4,6 +4,7 @@ import { useMyTeam } from "../MyTeamProvider/MyTeamProvider";
 import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 import { toast } from "react-toastify";
+import Button from "@khlug/components/Button";
 
 type Props = {
   member: GetMyTeamResponseMember;
@@ -38,7 +39,7 @@ export default function MemberItem({ member, onMessage }: Props) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="mt-6" onSubmit={handleSubmit}>
       <table>
         <tbody>
           <tr>
@@ -64,14 +65,10 @@ export default function MemberItem({ member, onMessage }: Props) {
         </tbody>
       </table>
       {!myTeam.confirmed && (
-        <div className="btnArea">
-          <button
-            type="submit"
-            style={{ marginTop: "10px !important" }}
-            disabled={event.eventRange !== "BEFORE"}
-          >
-            <span>내보내기</span>
-          </button>
+        <div className="text-right mt-3">
+          <Button formSubmit disabled={event.eventRange !== "BEFORE"}>
+            내보내기
+          </Button>
         </div>
       )}
     </form>

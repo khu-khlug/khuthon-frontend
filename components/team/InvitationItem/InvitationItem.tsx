@@ -3,6 +3,7 @@ import { useMyTeam } from "../MyTeamProvider/MyTeamProvider";
 import { useState } from "react";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
+import Button from "@khlug/components/Button";
 
 type Props = {
   invitation: {
@@ -44,10 +45,10 @@ export default function InvitationItem({ invitation, onMessage }: Props) {
           </tr>
         </tbody>
       </table>
-      <div className="btnArea">
-        <button type="submit" disabled={event.eventRange !== "BEFORE"}>
-          <span>초대 취소하기</span>
-        </button>
+      <div className="text-right mt-3">
+        <Button formSubmit disabled={event.eventRange !== "BEFORE"}>
+          초대 취소하기
+        </Button>
       </div>
     </form>
   );

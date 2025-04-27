@@ -5,6 +5,7 @@ import { useMyTeam } from "../MyTeamProvider/MyTeamProvider";
 import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 import InvitationItem from "../InvitationItem/InvitationItem";
+import Button from "@khlug/components/Button";
 
 export default function InvitationContainer() {
   const [invitationNumber, setInvitationNumber] = useState<string>("");
@@ -75,10 +76,10 @@ export default function InvitationContainer() {
               />
             </div>
 
-            <div className="btnArea" style={{ marginTop: "10px !important" }}>
-              <button type="submit">
-                <span>초대</span>
-              </button>
+            <div className="text-right mt-3">
+              <Button formSubmit disabled={event.eventRange !== "BEFORE"}>
+                초대
+              </Button>
             </div>
           </form>
         </>
