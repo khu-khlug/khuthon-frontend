@@ -12,16 +12,10 @@ export default function EditTeamContainer() {
   const client = useClient();
 
   const [name, setName] = useState<string>(myTeam.name);
-  const [note, setNote] = useState<string>(myTeam.note);
 
   const validate = () => {
     if (name.length < 1 || name.length > 100) {
       toast.error("팀 이름은 1자 이상, 100자 이하여야 합니다.");
-      return false;
-    }
-
-    if (note.length > 1000) {
-      toast.error("메모는 1000자 이하여야 합니다.");
       return false;
     }
     return true;
@@ -34,8 +28,8 @@ export default function EditTeamContainer() {
 
     try {
       const teamId = myTeam.id;
-      await client.patch(`/teams/${teamId}`, { name, note });
-      toast.success("팀 정보가 수정되었습니다.");
+      await client.put(`/teams/${teamId}/name`, { name });
+      toast.success("팀 이름이 수정되었습니다.");
     } catch (e) {
       toast.error(extractErrorMessage(e));
     }
@@ -43,27 +37,17 @@ export default function EditTeamContainer() {
 
   return (
     <Container>
-      <h4>팀 정보 수정</h4>
+      <h4>팀 이름 수정</h4>
       <form onSubmit={handleSubmit}>
         <div className="description">
-          팀 이름, 참가자는 접수 마감 전까지 수정할 수 있습니다.
+          팀 이름은 접수 마감 전까지 수정할 수 있습니다.
         </div>
-        <label>팀 이름</label>
         <div className="input_wrap">
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
-            readOnly={event.eventRange !== "BEFORE"}
-          />
-        </div>
-        <label>메모</label>
-        <div className="input_wrap">
-          <input
-            type="text"
-            value={note}
-            onChange={(e) => setNote(e.target.value)}
             readOnly={event.eventRange !== "BEFORE"}
           />
         </div>

@@ -29,6 +29,7 @@ export type GetMyTeamResponseDto = {
   members: GetMyTeamResponseMember[];
   invitations: GetMyTeamResponseInvitation[];
   productUrl: string | null;
+  confirmed: boolean;
   createdAt: Date;
   updatedAt: Date;
 };

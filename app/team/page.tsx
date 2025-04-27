@@ -22,6 +22,7 @@ import { useGlobalSpinner } from "@khlug/components/GlobalSpinnerProvider/Global
 import DeleteTeamContainer from "@khlug/components/team/DeleteTeamContainer/DeleteTeamContainer";
 import { toast } from "react-toastify";
 import Callout from "@khlug/components/Callout/Callout";
+import ConfirmTeamContainer from "@khlug/components/team/ConfirmTeamContainer";
 
 const SpinnerContext = "Khuthon/TeamLoader" as const;
 
@@ -32,6 +33,7 @@ export default function TeamPage() {
   const event = useEvent();
 
   const [team, setTeam] = useState<GetMyTeamResponseDto | null>(null);
+  const teamConfirmed = team?.confirmed ?? false;
 
   const fetchTeam = useCallback(async () => {
     if (!token) return;
@@ -69,7 +71,12 @@ export default function TeamPage() {
         <>
           <EditTeamContainer />
           <MemberListContainer />
-          {event.registerRange === "BETWEEN" && <InvitationContainer />}
+          {event.registerRange === "BETWEEN" && !teamConfirmed && (
+            <>
+              <InvitationContainer />
+              <ConfirmTeamContainer />
+            </>
+          )}
           {event.registerRange === "BETWEEN" && <DeleteTeamContainer />}
         </>
       )}

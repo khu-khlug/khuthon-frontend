@@ -3,6 +3,7 @@ import { GetMyTeamResponseMember } from "@khlug/transport/GetMyTeamResponseDto";
 import { useMyTeam } from "../MyTeamProvider/MyTeamProvider";
 import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
+import { toast } from "react-toastify";
 
 type Props = {
   member: GetMyTeamResponseMember;
@@ -16,6 +17,11 @@ export default function MemberItem({ member, onMessage }: Props) {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (myTeam.confirmed) {
+      toast.error("인원이 확정되어 팀원을 수정할 수 없습니다.");
+      return;
+    }
 
     const check = confirm("정말로 팀원을 내보내시겠습니까?");
     if (!check) return;
@@ -57,15 +63,17 @@ export default function MemberItem({ member, onMessage }: Props) {
           </tr>
         </tbody>
       </table>
-      <div className="btnArea">
-        <button
-          type="submit"
-          style={{ marginTop: "10px !important" }}
-          disabled={event.eventRange !== "BEFORE"}
-        >
-          <span>내보내기</span>
-        </button>
-      </div>
+      {!myTeam.confirmed && (
+        <div className="btnArea">
+          <button
+            type="submit"
+            style={{ marginTop: "10px !important" }}
+            disabled={event.eventRange !== "BEFORE"}
+          >
+            <span>내보내기</span>
+          </button>
+        </div>
+      )}
     </form>
   );
 }

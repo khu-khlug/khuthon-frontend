@@ -57,9 +57,12 @@ export default function TeamConfirmNeeded({ onSuccess }: Props) {
       </ul>
       <h2 className="text-3xl mt-12">팀 정보</h2>
       <p className="text-lg">
-        아래 팀 정보를 확인하고, 인원을 확정해주세요. 한 번 인원 확정이 진행되면
-        되돌릴 수 없으며, 이후에는 팀원 변경이 불가능하니, 팀원 모두가
-        참여했는지 다시 한 번 확인하고 확정해주세요.
+        아래 팀 정보를 확인하고, 인원을 확정해주세요.{" "}
+        <span className="text-red-500">
+          한 번 인원 확정이 진행되면 되돌릴 수 없으며
+        </span>
+        , 이후에는 팀원 변경이 불가능하니, 팀원 모두가 참여했는지 다시 한 번
+        확인하고 확정해주세요.
       </p>
       <p className="text-lg">
         팀원은{" "}
