@@ -51,7 +51,7 @@ export default function CreateTeamForm({ onSuccess }: CreateTeamFormProps) {
       await client.post("/teams/join");
       onSuccess();
     } catch (e) {}
-  }, [client]);
+  }, [client, onSuccess]);
 
   useEffect(() => {
     joinTeam();
