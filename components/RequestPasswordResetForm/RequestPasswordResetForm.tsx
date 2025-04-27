@@ -24,7 +24,7 @@ export default function RequestPasswordResetForm() {
 
     try {
       const response = await client.post<LoginAsMemberResponseDto>(
-        "/member/password-reset/request",
+        "/members/@me/request-password-reset",
         { email }
       );
       setToken(response.data.token);
