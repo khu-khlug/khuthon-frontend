@@ -21,8 +21,8 @@ export default function EditStudentInfoForm() {
         attendedSemesters: number;
       }>("/members/@me");
 
-      setCollege(data.college);
-      setAttendedSemesters(data.attendedSemesters.toString());
+      setCollege(data.college ?? "");
+      setAttendedSemesters(data.attendedSemesters?.toString() ?? "");
     } catch (err) {
       toast.error(extractErrorMessage(err));
     }
