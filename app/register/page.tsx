@@ -158,7 +158,8 @@ export default function NewRegisterPage() {
       </section>
       <h1 className="text-4xl mt-20">참가 접수</h1>
       <section ref={loginSectionRef}>
-        {event.registerRange === "BEFORE" ? (
+        <Callout>접수가 마감되었습니다.</Callout>
+        {/* {event.registerRange === "BEFORE" ? (
           <Callout>접수 기간이 아닙니다.</Callout>
         ) : event.registerRange === "AFTER" ? (
           <Callout>접수가 마감되었습니다.</Callout>
@@ -175,7 +176,7 @@ export default function NewRegisterPage() {
               <span>이어하기</span>
             </button>
           </div>
-        )}
+        )} */}
       </section>
     </div>
   );
