@@ -10,7 +10,7 @@ import {
   useToken,
 } from "@khlug/components/ClientProvider/ClientProvider";
 import Button from "@khlug/components/Button";
-import FancyInput from "../components/FancyInput";
+import TextField from "@khlug/components/TextField";
 import { LoginAsMemberResponseDto } from "@khlug/transport/LoginAsMemberResponseDto";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 
@@ -74,7 +74,7 @@ export default function LoginPage() {
 
       <div>
         <form onSubmit={handleSubmit}>
-          <FancyInput
+          <TextField
             label="이메일"
             type="email"
             value={email}
@@ -83,7 +83,7 @@ export default function LoginPage() {
             required
           />
 
-          <FancyInput
+          <TextField
             label="비밀번호"
             type="password"
             value={password}

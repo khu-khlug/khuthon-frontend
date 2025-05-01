@@ -6,7 +6,7 @@ import {
   useToken,
 } from "@khlug/components/ClientProvider/ClientProvider";
 import Button from "@khlug/components/Button";
-import FancyInput from "../FancyInput";
+import TextField from "@khlug/components/TextField";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 import { EmailDomain, UniversityName } from "@khlug/constant";
 import { toast } from "react-toastify";
@@ -141,7 +141,7 @@ export default function MemberRegisterForm({ onSuccess }: Props) {
       </p>
 
       <form onSubmit={handleSubmit}>
-        <FancyInput
+        <TextField
           label="학번"
           name="studentNumber"
           value={formData.studentNumber}
@@ -150,7 +150,7 @@ export default function MemberRegisterForm({ onSuccess }: Props) {
           error={errors.studentNumber}
         />
 
-        <FancyInput
+        <TextField
           label="이름"
           name="name"
           value={formData.name}
@@ -159,7 +159,7 @@ export default function MemberRegisterForm({ onSuccess }: Props) {
           error={errors.name}
         />
 
-        <FancyInput
+        <TextField
           label="휴대폰 번호"
           name="phone"
           value={formData.phone}
@@ -168,7 +168,7 @@ export default function MemberRegisterForm({ onSuccess }: Props) {
           error={errors.phone}
         />
 
-        <FancyInput
+        <TextField
           label="학교 이메일 주소"
           description={`${availableUnivNames}의 이메일만 가능해요.`}
           type="email"
@@ -179,7 +179,7 @@ export default function MemberRegisterForm({ onSuccess }: Props) {
           error={errors.email}
         />
 
-        <FancyInput
+        <TextField
           label="비밀번호"
           type="password"
           name="password"
@@ -189,7 +189,7 @@ export default function MemberRegisterForm({ onSuccess }: Props) {
           error={errors.password}
         />
 
-        <FancyInput
+        <TextField
           label="비밀번호 확인"
           type="password"
           name="confirmPassword"

@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
 import Button from "@khlug/components/Button";
-import FancyInput from "../FancyInput";
+import TextField from "@khlug/components/TextField";
 
 import TextButton from "@khlug/components/TextButton";
 import { toast } from "react-toastify";
@@ -87,7 +87,7 @@ export default function EmailOtpVerifyForm({
       </p>
 
       <form onSubmit={handleSubmit}>
-        <FancyInput
+        <TextField
           label="인증 코드"
           description="입력하신 이메일로 전송된 인증 코드를 입력해주세요."
           placeholder="메일로 받은 인증 코드를 입력하세요"

@@ -2,15 +2,16 @@
 
 import React, { InputHTMLAttributes, forwardRef } from "react";
 import classNames from "classnames";
+
 import styles from "./style.module.css";
 
-export interface FancyInputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   description?: string;
   error?: string;
 }
 
-const FancyInput = forwardRef<HTMLInputElement, FancyInputProps>(
+const TextField = forwardRef<HTMLInputElement, Props>(
   ({ label, description, error, className, ...props }, ref) => {
     return (
       <div className={styles["input-container"]}>
@@ -35,6 +36,6 @@ const FancyInput = forwardRef<HTMLInputElement, FancyInputProps>(
   }
 );
 
-FancyInput.displayName = "FancyInput";
+TextField.displayName = "TextField";
 
-export default FancyInput;
+export default TextField;

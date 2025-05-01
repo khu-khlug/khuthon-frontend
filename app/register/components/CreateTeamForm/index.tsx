@@ -3,7 +3,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
 import Button from "@khlug/components/Button";
-import FancyInput from "../FancyInput";
+import TextField from "@khlug/components/TextField";
 
 import { toast } from "react-toastify";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
@@ -86,7 +86,7 @@ export default function CreateTeamForm({ onSuccess }: CreateTeamFormProps) {
       </p>
 
       <form onSubmit={handleSubmit}>
-        <FancyInput
+        <TextField
           label="팀 이름"
           placeholder="팀 이름을 입력하세요"
           error={teamNameError}
