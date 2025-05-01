@@ -11,15 +11,14 @@ import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
 import Container from "@khlug/components/Container/Container";
 import Divider from "@khlug/components/Divider/Divider";
 import Pager from "@khlug/components/Pager/Pager";
-import TeamListItem from "@khlug/components/manager/TeamListItem";
-import TeamSearchBar, {
-  SearchParams,
-} from "@khlug/components/manager/TeamSearchBar";
 
 import { ManagerListTeamRequestDto } from "@khlug/transport/ManagerListTeamRequestDto";
 import { ManagerListTeamResponseDto } from "@khlug/transport/ManagerListTeamResponseDto";
 
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
+
+import TeamListItem from "../TeamListItem";
+import TeamSearchBar, { SearchParams } from "../TeamSearchBar";
 
 type TeamListReloader = () => void;
 const TeamListReloaderContext = createContext<TeamListReloader>(() => {});
