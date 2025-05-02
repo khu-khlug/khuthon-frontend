@@ -14,7 +14,7 @@ interface Props extends InputHTMLAttributes<HTMLSelectElement> {
 const Dropdown = forwardRef<HTMLSelectElement, Props>(
   ({ label, description, error, className, children, ...props }, ref) => {
     return (
-      <div className={styles["input-container"]}>
+      <div className={classNames(styles["input-container"], className)}>
         {label && <label className={styles.label}>{label}</label>}
         {description && (
           <div className={styles.description}>{description.split("\n")}</div>
@@ -24,11 +24,7 @@ const Dropdown = forwardRef<HTMLSelectElement, Props>(
             [styles.error]: !!error,
           })}
         >
-          <select
-            ref={ref}
-            className={classNames(styles.input, className)}
-            {...props}
-          >
+          <select ref={ref} className={styles.input} {...props}>
             {children}
           </select>
         </div>
