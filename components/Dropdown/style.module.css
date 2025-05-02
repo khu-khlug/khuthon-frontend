@@ -19,12 +19,14 @@
 }
 
 .input {
+  box-sizing: border-box;
   width: calc(100% - 12px);
   padding: 12px 16px;
   font-size: 16px;
   border: none;
   outline: none;
   background: transparent;
+  margin: -1px 0px; /* text field와 높이를 맞추기 위해 사용 */
 }
 
 .input-wrapper {

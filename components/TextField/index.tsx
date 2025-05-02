@@ -14,7 +14,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 const TextField = forwardRef<HTMLInputElement, Props>(
   ({ label, description, error, className, ...props }, ref) => {
     return (
-      <div className={styles["input-container"]}>
+      <div className={classNames(styles["input-container"], className)}>
         {label && <label className={styles.label}>{label}</label>}
         {description && (
           <div className={styles.description}>{description.split("\n")}</div>
@@ -24,11 +24,7 @@ const TextField = forwardRef<HTMLInputElement, Props>(
             [styles.error]: !!error,
           })}
         >
-          <input
-            ref={ref}
-            className={classNames(styles.input, className)}
-            {...props}
-          />
+          <input ref={ref} className={styles.input} {...props} />
         </div>
         {error && <div className={styles["error-message"]}>{error}</div>}
       </div>
