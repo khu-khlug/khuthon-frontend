@@ -78,3 +78,9 @@ export const LogType = {
   MANAGER_DELETED_TEAM: "MANAGER_DELETED_TEAM",
 } as const;
 export type LogType = (typeof LogType)[keyof typeof LogType];
+
+export const Group = {
+  A: "A",
+  B: "B",
+} as const;
+export type Group = (typeof Group)[keyof typeof Group];

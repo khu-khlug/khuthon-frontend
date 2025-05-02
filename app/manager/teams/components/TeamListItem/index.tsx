@@ -1,4 +1,5 @@
 import { useState } from "react";
+import classNames from "classnames";
 
 import { UniversityName } from "@khlug/constant";
 import { ManagerListTeamResponseTeam } from "@khlug/transport/ManagerListTeamResponseDto";
@@ -11,6 +12,10 @@ import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 import { formatDate } from "@khlug/util/formaDate";
 
 import { useTeamListReloader } from "../TeamListContainer";
+import { useTeamManageModal } from "../TeamManageModalProvider";
+import TeamGroupChangeModal from "../TeamGroupChangeModal";
+
+import styles from "./style.module.css";
 
 type Props = {
   team: ManagerListTeamResponseTeam;
@@ -19,6 +24,7 @@ type Props = {
 export default function TeamListItem({ team }: Props) {
   const client = useClient();
   const reload = useTeamListReloader();
+  const { show } = useTeamManageModal();
 
   const [message, setMessage] = useState<string | null>(null);
   const [prize, setPrize] = useState<string>("");
@@ -59,7 +65,12 @@ export default function TeamListItem({ team }: Props) {
       <p className="!m-0">
         <strong className="text-2xl">{team.name}</strong>
       </p>
-      <p className="!m-0 !mt-2">
+      <p className={classNames("!m-0 !mt-2", styles["badge-container"])}>
+        {team.group ? (
+          <Badge className="!bg-blue-400">{team.group} 그룹</Badge>
+        ) : (
+          <Badge className="!bg-gray-400 ">그룹 없음</Badge>
+        )}
         {canPresent ? (
           <Badge className="!bg-green-400">발표 가능</Badge>
         ) : (
@@ -155,6 +166,14 @@ export default function TeamListItem({ team }: Props) {
             수상 등록
           </Button>
         )}
+        <Button
+          className="ml-2"
+          onClick={() =>
+            show(<TeamGroupChangeModal team={team} onConfirm={reload} />)
+          }
+        >
+          그룹 변경
+        </Button>
         <Button
           className="ml-2 bg-rose-700 hover:bg-rose-500"
           onClick={() => cancelTeamRegister()}

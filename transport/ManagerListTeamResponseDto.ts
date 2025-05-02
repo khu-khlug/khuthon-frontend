@@ -1,4 +1,4 @@
-import { MemberState, University } from "@khlug/constant";
+import { Group, MemberState, University } from "@khlug/constant";
 
 interface ManagerListTeamResponseAttachmentFile {
   id: string;
@@ -30,6 +30,7 @@ interface ManagerListTeamResponseInvitation {
 
 export interface ManagerListTeamResponseTeam {
   id: string;
+  group: Group | null;
   name: string;
   idea: string;
   prize: string | null;
