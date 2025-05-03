@@ -1,6 +1,6 @@
 "use client";
 
-import LogListContainer from "@khlug/components/manager/LogListContainer";
+import LogListContainer from "./components/LogListContainer";
 
 export default function LogPage() {
   return <LogListContainer />;
