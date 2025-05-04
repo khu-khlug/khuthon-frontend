@@ -15,7 +15,7 @@ import Divider from "@khlug/components/Divider/Divider";
 const ConfigLabelMap: Record<string, string> = {
   voteEnabled: "투표",
   judgeEnabled: "심사",
-  ideaEditEnabled: "팀의 주제 변경",
+  ideaEditEnabled: "팀 아이디어 변경",
   attachmentEditEnabled: "발표 자료 추가 / 변경 / 삭제",
   productUrlEditEnabled: "작품 URL 변경",
 };
