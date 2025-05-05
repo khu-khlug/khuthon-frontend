@@ -1,4 +1,4 @@
-type GetMemberConfigsResponseDto = {
+export type GetMemberConfigsResponseDto = {
   voteEnabled: boolean;
   ideaEditEnabled: boolean;
   attachmentEditEnabled: boolean;

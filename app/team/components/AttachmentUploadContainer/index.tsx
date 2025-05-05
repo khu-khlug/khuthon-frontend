@@ -1,21 +1,20 @@
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-import { useEvent } from "@khlug/components/EventProvider/EventProvider";
 import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
 import { useMyTeam } from "@khlug/app/team/components/MyTeamProvider/MyTeamProvider";
 import Subtitle from "@khlug/components/Title/Subtitle";
 import FileUploader from "@khlug/components/FileUploader/FileUploader";
 import Container from "@khlug/components/Container/Container";
 
-import { formatDate } from "@khlug/util/formaDate";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 import { UploadFileResponseDto } from "@khlug/transport/UploadFileResponseDto";
 import { GetAttachmentResponseDto } from "@khlug/transport/GetAttachmentResponseDto";
+import { useMemberConfigs } from "../MemberConfigProvider";
 
 export default function AttachmentUploadContainer() {
-  const event = useEvent();
   const client = useClient();
+  const configs = useMemberConfigs();
   const [myTeam] = useMyTeam();
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -23,8 +22,7 @@ export default function AttachmentUploadContainer() {
     null
   );
 
-  const canUploadAttachment =
-    event.eventRange === "BETWEEN" && event.judgeRange === "BEFORE";
+  const canEdit = configs?.attachmentEditEnabled ?? false;
 
   const fetchAttachment = useCallback(async () => {
     setLoading(true);
@@ -59,12 +57,8 @@ export default function AttachmentUploadContainer() {
       <Subtitle>발표 자료</Subtitle>
       <ul className="!m-0">
         <li>
-          발표 자료는 해커톤 시작({formatDate(event.eventStartAt)})부터 발표
-          시작(
-          {formatDate(event.judgeStartAt)}) 직전까지 업로드할 수 있습니다.
-        </li>
-        <li>
-          발표 자료는 <strong>표지 제외 6장 이하</strong>가 되도록 만들어주세요.
+          발표 자료는 <strong>표지 제외 10장 이하</strong>가 되도록
+          만들어주세요.
         </li>
         <li>
           프로젝트 산출물을 제출할 필요는 없으며, 발표 자료만{" "}
@@ -75,16 +69,13 @@ export default function AttachmentUploadContainer() {
           일부 가공된 형태로 제공될 수 있습니다.
         </li>
       </ul>
-      {!canUploadAttachment && (
-        <div className="error">제출 기간이 아닙니다.</div>
-      )}
       {!loading && (
         <div className="mt-4">
           <FileUploader
             initial={attachment ?? undefined}
-            disabled={!canUploadAttachment}
             onUpload={handleUpload}
             onError={toast.error}
+            disabled={!canEdit}
           />
         </div>
       )}

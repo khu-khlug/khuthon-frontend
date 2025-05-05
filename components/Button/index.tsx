@@ -33,6 +33,7 @@ export default function Button({
         className
       )}
       onClick={handleClick}
+      disabled={loading || disabled}
     >
       {children}
     </button>

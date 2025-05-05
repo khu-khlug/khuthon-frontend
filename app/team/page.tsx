@@ -36,7 +36,7 @@ export default function TeamPage() {
   const [token] = useToken();
   const client = useClient();
   const event = useEvent();
-  const configs = useMemberConfigs();
+  const memberConfigs = useMemberConfigs();
 
   const [team, setTeam] = useState<GetMyTeamResponseDto | null>(null);
   const teamConfirmed = team?.confirmed ?? false;
@@ -67,11 +67,14 @@ export default function TeamPage() {
     </Container>
   ) : team ? (
     <MyTeamProvider team={team} reload={fetchTeam}>
-      {configs?.ideaEditEnabled && <TeamIdeaContainer />}
-      {configs?.attachmentEditEnabled && <AttachmentUploadContainer />}
-      {configs?.productUrlEditEnabled && <ProductUrlContainer />}
-      {configs?.voteEnabled && <VoteContainer />}
-      {event.eventRange !== "BETWEEN" && (
+      {event.eventRange === "BETWEEN" ? (
+        <>
+          <TeamIdeaContainer />
+          <AttachmentUploadContainer />
+          <ProductUrlContainer />
+          {memberConfigs?.voteEnabled && <VoteContainer />}
+        </>
+      ) : (
         <>
           <EditTeamContainer />
           <EditStudentInfoForm />

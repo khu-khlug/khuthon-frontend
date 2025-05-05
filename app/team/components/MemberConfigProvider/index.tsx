@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useCallback, useEffect, useState } from "react";
+import React, { createContext, useCallback, useEffect } from "react";
 import { toast } from "react-toastify";
 
 import {
@@ -8,7 +8,7 @@ import {
   useToken,
 } from "@khlug/components/ClientProvider/ClientProvider";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
-import { useGlobalSpinner } from "@khlug/components/GlobalSpinnerProvider/GlobalSpinnerProvider";
+import { GetMemberConfigsResponseDto } from "@khlug/transport/GetMemberConfigsResponseDto";
 
 const MemberConfigContext = createContext<GetMemberConfigsResponseDto | null>(
   null

@@ -1,22 +1,21 @@
 import { useState } from "react";
 import Container from "@khlug/components/Container/Container";
-import { useEvent } from "@khlug/components/EventProvider/EventProvider";
 import { useMyTeam } from "../MyTeamProvider/MyTeamProvider";
 import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 import { toast } from "react-toastify";
 import Button from "@khlug/components/Button";
+import { useMemberConfigs } from "../MemberConfigProvider";
 
 export default function TeamIdeaContainer() {
-  const event = useEvent();
   const client = useClient();
+  const configs = useMemberConfigs();
   const [myTeam] = useMyTeam();
 
   const [idea, setIdea] = useState<string>(myTeam.idea);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const canEditIdea =
-    event.eventRange === "BETWEEN" && event.judgeRange === "BEFORE";
+  const canEdit = configs?.ideaEditEnabled ?? false;
 
   const validate = () => {
     if (idea.length < 1 || idea.length > 100) {
@@ -54,16 +53,14 @@ export default function TeamIdeaContainer() {
             value={idea}
             onChange={(e) => setIdea(e.target.value)}
             placeholder="아이디어를 입력해주세요."
-            readOnly={!canEditIdea}
+            readOnly={!canEdit}
           />
         </div>
-        {canEditIdea && (
-          <div className="text-right mt-2">
-            <Button loading={loading} formSubmit>
-              저장
-            </Button>
-          </div>
-        )}
+        <div className="text-right mt-2">
+          <Button loading={loading} formSubmit disabled={!canEdit}>
+            저장
+          </Button>
+        </div>
       </form>
     </Container>
   );
