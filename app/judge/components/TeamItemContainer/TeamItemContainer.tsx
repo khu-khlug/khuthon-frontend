@@ -10,6 +10,7 @@ import { useDoJudge } from "../JudgeProvider/JudgeProvider";
 import Subtitle from "@khlug/components/Title/Subtitle";
 import { ListTeamResponseTeam } from "@khlug/transport/ListTeamResponseDto";
 import Link from "next/link";
+import { useExaminerConfigs } from "../ExaminerConfigProvider";
 
 type Props = {
   team: ListTeamResponseTeam;
@@ -26,8 +27,11 @@ export default function TeamItemContainer({
 }: Props) {
   const event = useEvent();
   const doJudge = useDoJudge();
+  const configs = useExaminerConfigs();
 
-  const enabled = team.idea && team.attachmentUrl;
+  const canJudge = configs?.judgeEnabled ?? false;
+  const resultSubmitted = team.idea && team.attachmentUrl;
+  const enabled = canJudge && resultSubmitted;
 
   const handleClick = () => {
     if (!enabled) return;
@@ -49,11 +53,11 @@ export default function TeamItemContainer({
       <Container className="!p-0">
         <section className="!px-5 !py-8">
           <Subtitle>{team.name}</Subtitle>
-          {event.judgeRange === "BEFORE" ? (
+          {!canJudge ? (
             <p className="!m-0 !mt-2 text-gray-400">
-              아직 심사 시간이 아닙니다.
+              지금은 심사할 수 없습니다.
             </p>
-          ) : enabled ? (
+          ) : resultSubmitted ? (
             <>
               <p className="!m-0 !mt-2">{team.idea}</p>
               <Link
@@ -75,12 +79,8 @@ export default function TeamItemContainer({
             expand: expand,
           })}
         >
-          {event.judgeRange === "BETWEEN" && (
-            <>
-              <Subtitle>심사</Subtitle>
-              <JudgingForm teamId={team.id} />
-            </>
-          )}
+          <Subtitle>심사</Subtitle>
+          <JudgingForm teamId={team.id} />
         </section>
       </Container>
     </div>
