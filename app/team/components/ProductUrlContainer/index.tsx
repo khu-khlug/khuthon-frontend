@@ -1,13 +1,17 @@
+import { useState } from "react";
+import { toast } from "react-toastify";
+
 import Button from "@khlug/components/Button";
 import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
 import TextLink from "@khlug/components/TextLink";
 import Subtitle from "@khlug/components/Title/Subtitle";
-import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
-import { useState } from "react";
-import { useMyTeam } from "../MyTeamProvider/MyTeamProvider";
-import { toast } from "react-toastify";
+import Container from "@khlug/components/Container/Container";
 
-export default function ProductUrlForm() {
+import { useMyTeam } from "../MyTeamProvider/MyTeamProvider";
+
+import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
+
+export default function ProductUrlContainer() {
   const client = useClient();
   const [myTeam] = useMyTeam();
 
@@ -49,7 +53,7 @@ export default function ProductUrlForm() {
   };
 
   return (
-    <div>
+    <Container>
       <Subtitle>작품 링크</Subtitle>
       <ul className="!m-0">
         <li>여러분이 만든 작품을 소개할 수 있는 링크를 제출해주세요.</li>
@@ -75,6 +79,6 @@ export default function ProductUrlForm() {
           </Button>
         </div>
       </form>
-    </div>
+    </Container>
   );
 }

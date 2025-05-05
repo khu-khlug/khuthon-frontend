@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 
 import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
 import Container from "@khlug/components/Container/Container";
-import TextButton from "@khlug/components/TextButton";
 import Subtitle from "@khlug/components/Title/Subtitle";
 import { GetManagerConfigsResponseDto } from "@khlug/transport/GetManagerConfigsResponseDto";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";

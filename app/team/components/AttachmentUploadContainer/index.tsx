@@ -1,19 +1,19 @@
 import { useCallback, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 import { useEvent } from "@khlug/components/EventProvider/EventProvider";
 import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
 import { useMyTeam } from "@khlug/app/team/components/MyTeamProvider/MyTeamProvider";
 import Subtitle from "@khlug/components/Title/Subtitle";
 import FileUploader from "@khlug/components/FileUploader/FileUploader";
+import Container from "@khlug/components/Container/Container";
 
 import { formatDate } from "@khlug/util/formaDate";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
-
 import { UploadFileResponseDto } from "@khlug/transport/UploadFileResponseDto";
 import { GetAttachmentResponseDto } from "@khlug/transport/GetAttachmentResponseDto";
-import { toast } from "react-toastify";
 
-export default function AttachmentUploadForm() {
+export default function AttachmentUploadContainer() {
   const event = useEvent();
   const client = useClient();
   const [myTeam] = useMyTeam();
@@ -55,7 +55,7 @@ export default function AttachmentUploadForm() {
   }, [fetchAttachment]);
 
   return (
-    <div>
+    <Container>
       <Subtitle>발표 자료</Subtitle>
       <ul className="!m-0">
         <li>
@@ -88,6 +88,6 @@ export default function AttachmentUploadForm() {
           />
         </div>
       )}
-    </div>
+    </Container>
   );
 }

@@ -1,29 +1,33 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 import Container from "@khlug/components/Container/Container";
 import LoginForm from "@khlug/components/LoginForm/LoginForm";
-import EditTeamContainer from "@khlug/app/team/components/EditTeamContainer/EditTeamContainer";
-import InvitationContainer from "@khlug/app/team/components/InvitationContainer/InvitationContainer";
-import MemberListContainer from "@khlug/app/team/components/MemberListContainer/MemberListContainer";
-import TeamIdeaContainer from "@khlug/app/team/components/TeamIdeaContainer/TeamIdeaContainer";
-import ResultContainer from "@khlug/app/team/components/ResultContainer";
-import VoteContainer from "@khlug/app/team/components/VoteContainer/VoteContainer";
 import { useEvent } from "@khlug/components/EventProvider/EventProvider";
-import MyTeamProvider from "@khlug/app/team/components/MyTeamProvider/MyTeamProvider";
-import { GetMyTeamResponseDto } from "@khlug/transport/GetMyTeamResponseDto";
 import {
   useClient,
   useToken,
 } from "@khlug/components/ClientProvider/ClientProvider";
-import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 import { useGlobalSpinner } from "@khlug/components/GlobalSpinnerProvider/GlobalSpinnerProvider";
-import DeleteTeamContainer from "@khlug/app/team/components/DeleteTeamContainer/DeleteTeamContainer";
-import { toast } from "react-toastify";
 import Callout from "@khlug/components/Callout/Callout";
-import ConfirmTeamContainer from "@khlug/app/team/components/ConfirmTeamContainer";
+
+import EditTeamContainer from "./components/EditTeamContainer/EditTeamContainer";
+import InvitationContainer from "./components/InvitationContainer/InvitationContainer";
+import MemberListContainer from "./components/MemberListContainer/MemberListContainer";
+import TeamIdeaContainer from "./components/TeamIdeaContainer/TeamIdeaContainer";
+import VoteContainer from "./components/VoteContainer/VoteContainer";
+import MyTeamProvider from "./components/MyTeamProvider/MyTeamProvider";
+import DeleteTeamContainer from "./components/DeleteTeamContainer/DeleteTeamContainer";
+import ConfirmTeamContainer from "./components/ConfirmTeamContainer";
 import EditStudentInfoForm from "./components/EditStudentInfoForm";
+import AttachmentUploadContainer from "./components/AttachmentUploadContainer";
+import ProductUrlContainer from "./components/ProductUrlContainer";
+import { useMemberConfigs } from "./components/MemberConfigProvider";
+
+import { GetMyTeamResponseDto } from "@khlug/transport/GetMyTeamResponseDto";
+import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 
 const SpinnerContext = "Khuthon/TeamLoader" as const;
 
@@ -32,6 +36,7 @@ export default function TeamPage() {
   const [token] = useToken();
   const client = useClient();
   const event = useEvent();
+  const configs = useMemberConfigs();
 
   const [team, setTeam] = useState<GetMyTeamResponseDto | null>(null);
   const teamConfirmed = team?.confirmed ?? false;
@@ -62,13 +67,11 @@ export default function TeamPage() {
     </Container>
   ) : team ? (
     <MyTeamProvider team={team} reload={fetchTeam}>
-      {event.eventRange === "BETWEEN" ? (
-        <>
-          <TeamIdeaContainer />
-          <ResultContainer />
-          <VoteContainer />
-        </>
-      ) : (
+      {configs?.ideaEditEnabled && <TeamIdeaContainer />}
+      {configs?.attachmentEditEnabled && <AttachmentUploadContainer />}
+      {configs?.productUrlEditEnabled && <ProductUrlContainer />}
+      {configs?.voteEnabled && <VoteContainer />}
+      {event.eventRange !== "BETWEEN" && (
         <>
           <EditTeamContainer />
           <EditStudentInfoForm />

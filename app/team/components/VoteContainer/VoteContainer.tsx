@@ -1,11 +1,7 @@
 import Container from "@khlug/components/Container/Container";
-import { useEvent } from "@khlug/components/EventProvider/EventProvider";
-import { formatDate } from "@khlug/util/formaDate";
 import VoteForm from "../VoteForm/VoteForm";
 
 export default function VoteContainer() {
-  const event = useEvent();
-
   return (
     <Container>
       <h4>투표</h4>
@@ -25,17 +21,9 @@ export default function VoteContainer() {
         </li>
         <li>이미 한 투표는 되돌릴 수 없습니다.</li>
         <li>아래 팀 목록의 순서는 발표 순서와 동일합니다.</li>
-        <li>
-          최종 순위는 투표 기간이 끝난 후({formatDate(event.judgeEndAt)})
-          공개됩니다.
-        </li>
+        <li>최종 순위는 투표 기간이 끝난 후 공개됩니다.</li>
       </ul>
-
-      {event.judgeRange === "BETWEEN" ? (
-        <VoteForm />
-      ) : (
-        <div className="error">투표 기간이 아닙니다.</div>
-      )}
+      <VoteForm />
     </Container>
   );
 }
