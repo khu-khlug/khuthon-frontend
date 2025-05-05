@@ -1,5 +1,6 @@
 import Container from "@khlug/components/Container/Container";
 
+// TODO[2025]: 변경된 심사 기준 반영 필요
 export default function AboutJudge() {
   return (
     <Container>

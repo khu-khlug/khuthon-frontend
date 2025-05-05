@@ -5,7 +5,7 @@ import { Judge } from "@khlug/types/Judge";
 import {
   useDoJudge,
   useJudge,
-} from "@khlug/components/judge/JudgeProvider/JudgeProvider";
+} from "@khlug/app/judge/components/JudgeProvider/JudgeProvider";
 import { toast } from "react-toastify";
 import Button from "@khlug/components/Button";
 

@@ -1,7 +1,7 @@
 "use client";
 
 import JudgingForm from "../JudgingForm/JudgingForm";
-import Container from "../../Container/Container";
+import Container from "@khlug/components/Container/Container";
 import classNames from "classnames";
 
 import "./TeamItemContainer.css";

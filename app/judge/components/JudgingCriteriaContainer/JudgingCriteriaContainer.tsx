@@ -1,4 +1,4 @@
-import Container from "../../Container/Container";
+import Container from "@khlug/components/Container/Container";
 
 export default function JudgingCriteriaContainer() {
   return (
