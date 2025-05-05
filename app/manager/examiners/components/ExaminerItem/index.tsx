@@ -1,3 +1,4 @@
+import Badge from "@khlug/components/Badge/Badge";
 import Button from "@khlug/components/Button";
 import { ListExaminerResponseExaminer } from "@khlug/transport/ListExaminerResponseDto";
 import { formatDate } from "@khlug/util/formaDate";
@@ -14,6 +15,7 @@ export default function ExaminerItem({ examiner, onRemove }: Props) {
         <span>
           {examiner.name}({examiner.code})
         </span>
+        <Badge className="ml-2">{examiner.group} 그룹</Badge>
         <span className="ml-8 text-gray-500">
           - {formatDate(new Date(examiner.createdAt))}에 생성됨
         </span>

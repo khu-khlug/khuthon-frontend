@@ -1,19 +1,19 @@
+import { useState, useCallback, useEffect } from "react";
+
 import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
 import Container from "@khlug/components/Container/Container";
 import Subtitle from "@khlug/components/Title/Subtitle";
-import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
-import { useState, useCallback, useEffect } from "react";
-import ManagerInvitationItem from "../ManagerInvitationItem";
-import InviteManagerForm from "../CreateExaminerForm";
-import { InviteManagerRequestDto } from "@khlug/transport/InviteManagerRequestDto";
 import { useEvent } from "@khlug/components/EventProvider/EventProvider";
-import { ListExaminerResponseDto } from "@khlug/transport/ListExaminerResponseDto";
-import { CreateExaminerRequestDto } from "@khlug/transport/CreateExaminerRequestDto";
+
 import ExaminerItem from "../ExaminerItem";
 import CreateExaminerForm from "../CreateExaminerForm";
 
+import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
+import { ListExaminerResponseDto } from "@khlug/transport/ListExaminerResponseDto";
+import { CreateExaminerRequestDto } from "@khlug/transport/CreateExaminerRequestDto";
+import { Group } from "@khlug/constant";
+
 export default function ExaminerManageContainer() {
-  const event = useEvent();
   const client = useClient();
 
   const [examinerList, setExaminerList] =
@@ -45,10 +45,10 @@ export default function ExaminerManageContainer() {
   );
 
   const handleCreate = useCallback(
-    async (name: string, code: string) => {
+    async (name: string, code: string, group: Group) => {
       setMessage(null);
       try {
-        const dto: CreateExaminerRequestDto = { name, code };
+        const dto: CreateExaminerRequestDto = { name, code, group };
         await client.post("/manager/examiners", dto);
         fetchExaminerList();
       } catch (e) {
@@ -63,7 +63,7 @@ export default function ExaminerManageContainer() {
   }, [fetchExaminerList]);
 
   return (
-    <Container>
+    <Container className="!bg-white !bg-none">
       <Subtitle>심사위원 목록</Subtitle>
       <div className="text-gray-400 text-sm">
         올해 심사위원만 목록에 나타납니다.
