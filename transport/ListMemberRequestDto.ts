@@ -1,9 +1,13 @@
-import { MemberState } from "@khlug/constant";
+import { MemberStateForQuery } from "@khlug/app/manager/members/components/MemberSearchBar";
+import { Group } from "@khlug/constant";
 
 export type ListMemberRequestDto = {
   studentNumber?: string;
   name?: string;
-  state?: MemberState;
+  email?: string;
+  phone?: string;
+  state?: MemberStateForQuery;
+  group?: Group;
   limit: number;
   offset: number;
 };
