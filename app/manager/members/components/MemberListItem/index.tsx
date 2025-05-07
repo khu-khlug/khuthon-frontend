@@ -1,11 +1,14 @@
+import { useState } from "react";
+
 import Badge from "@khlug/components/Badge/Badge";
 import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
+import Button from "@khlug/components/Button";
+
+import { useMemberListReloader } from "../MemberListContainer";
+
 import { MemberState, UniversityName } from "@khlug/constant";
 import { ListMemberResponseMember } from "@khlug/transport/ListMemberResponseDto";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
-import { useState } from "react";
-import { useMemberListReloader } from "../MemberListContainer/MemberListContainer";
-import Button from "@khlug/components/Button";
 import { UpdateMemberMajorFlagRequestDto } from "@khlug/transport/UpdateMemberMajorFlagRequestDto";
 
 type Props = {
@@ -17,7 +20,7 @@ function NeedVerificationMemberListItem({ member }: Props) {
     <div>
       <p>
         <span className="ml-2">{member.email}</span>
-        <Badge className="ml-2 !bg-gray-700">이메일 인증 필요</Badge>
+        <Badge className="ml-2 !bg-red-400">이메일 인증 필요</Badge>
       </p>
     </div>
   );
@@ -40,6 +43,28 @@ function NeedTeamMemberListItem({ member }: Props) {
           {member.phone}
         </span>
       </p>
+    </div>
+  );
+}
+
+function NeedConfirmMemberListItem({ member }: Props) {
+  return (
+    <div className="!m-4">
+      <p className="!m-0">
+        <strong className="text-2xl">{member.name}</strong>
+        <span className="ml-2">{member.email}</span>
+        <Badge className="ml-2 !bg-red-400">인원 확정 필요</Badge>
+      </p>
+      <p className="!m-0 !mt-2 text-gray-500">
+        {UniversityName[member.university]}{" "}
+        {!member.college || !member.attendedSemesters
+          ? "(세부 정보 입력 필요)"
+          : `${member.college} ${member.attendedSemesters}학기`}{" "}
+        ({member.studentNumber})
+        <br />
+        {member.phone}
+      </p>
+      <p className="!m-0 !mt-2 text-gray-500">소속 팀: {member.team?.name}</p>
     </div>
   );
 }
@@ -94,21 +119,26 @@ function ActiveMemberListItem({ member }: Props) {
       <p className="!m-0">
         <strong className="text-2xl">{member.name}</strong>
         <span className="ml-2">{member.email}</span>
-        <Badge className="ml-2">접수 완료</Badge>
+        <Badge className="ml-2 !bg-sky-400">접수 완료</Badge>
         {(!member.college || !member.attendedSemesters) && (
           <Badge className="ml-2 !bg-orange-300">추가 정보 입력 필요</Badge>
         )}
+        {member.team!.group ? (
+          <Badge className="ml-2 !bg-sky-500">{member.team!.group} 그룹</Badge>
+        ) : (
+          <Badge className="ml-2 !bg-gray-400">그룹 설정 필요</Badge>
+        )}
         {member.attendedAt ? (
-          <Badge className="ml-2 !bg-green-600">참석함</Badge>
+          <Badge className="ml-2 !bg-sky-600">참석함</Badge>
         ) : (
           <Badge className="ml-2 !bg-gray-400">참가 확인 필요</Badge>
         )}
         {member.isRelevantMajor === null ? (
           <Badge className="ml-2 !bg-gray-400">전공자 확인 필요</Badge>
         ) : member.isRelevantMajor ? (
-          <Badge className="ml-2 !bg-amber-400">전공자</Badge>
+          <Badge className="ml-2 !bg-sky-700">전공자</Badge>
         ) : (
-          <Badge className="ml-2 !bg-amber-400">비전공자</Badge>
+          <Badge className="ml-2 !bg-sky-700">비전공자</Badge>
         )}
       </p>
       <p className="!m-0 !mt-2">
@@ -120,6 +150,7 @@ function ActiveMemberListItem({ member }: Props) {
           {member.phone}
         </span>
       </p>
+      <p className="!m-0 !mt-2 text-gray-500">소속 팀: {member.team?.name}</p>
       <div className="flex justify-end !mt-2">
         {!member.attendedAt && <Button onClick={checkAttend}>참가 확인</Button>}
         {member.isRelevantMajor !== false && (
@@ -144,11 +175,15 @@ function ActiveMemberListItem({ member }: Props) {
 }
 
 export default function MemberListItem({ member }: Props) {
-  return member.state === MemberState.NEED_VERIFICATION ? (
-    <NeedVerificationMemberListItem member={member} />
+  return member.state === MemberState.ACTIVE ? (
+    member.team?.confirmed ? (
+      <ActiveMemberListItem member={member} />
+    ) : (
+      <NeedConfirmMemberListItem member={member} />
+    )
   ) : member.state === MemberState.NEED_TEAM ? (
     <NeedTeamMemberListItem member={member} />
   ) : (
-    <ActiveMemberListItem member={member} />
+    <NeedVerificationMemberListItem member={member} />
   );
 }

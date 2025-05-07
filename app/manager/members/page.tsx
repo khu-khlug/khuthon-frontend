@@ -1,6 +1,6 @@
 "use client";
 
-import MemberListContainer from "@khlug/components/manager/MemberListContainer/MemberListContainer";
+import MemberListContainer from "./components/MemberListContainer";
 
 export default function MemberListPage() {
   return <MemberListContainer />;

@@ -9,12 +9,11 @@ import {
 
 import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
 import Container from "@khlug/components/Container/Container";
-import MemberListItem from "@khlug/components/manager/MemberListItem/MemberListItem";
 import Divider from "@khlug/components/Divider/Divider";
 import Pager from "@khlug/components/Pager/Pager";
-import MemberSearchBar, {
-  SearchParams,
-} from "@khlug/components/manager/MemberSearchBar";
+
+import MemberListItem from "../MemberListItem";
+import MemberSearchBar, { SearchParams } from "../MemberSearchBar";
 
 import { ListMemberRequestDto } from "@khlug/transport/ListMemberRequestDto";
 import { ListMemberResponseDto } from "@khlug/transport/ListMemberResponseDto";
