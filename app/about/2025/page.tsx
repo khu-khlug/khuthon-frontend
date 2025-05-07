@@ -1,3 +1,5 @@
+import Subject from "./components/Subject";
+
 export default function _2025About() {
   return (
     <>
@@ -15,9 +17,7 @@ export default function _2025About() {
         <p className="text-gray-500">오후 5시부터 205호에서 현장 접수</p>
 
         <h4>주제</h4>
-        <ul className="!m-0">
-          <li className="text-gray-500">D-1 오후 12시에 공개</li>
-        </ul>
+        <Subject />
         <p>
           다양한 분야로 도전할 수 있습니다.
           <br />
