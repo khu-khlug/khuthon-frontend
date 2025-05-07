@@ -82,15 +82,22 @@ export default function Judge() {
         <JudgeAutosaver selectedTeamId={selectedTeamId} />
         <JudgingCriteriaContainer />
         <AboutJudge />
-        {teamList.teams.map((team) => (
-          <TeamItemContainer
-            key={team.id}
-            team={team}
-            selectedTeamId={selectedTeamId}
-            expand={team.id === selectedTeamId}
-            onClick={handleTeamItemClick}
-          />
-        ))}
+        {teamList.teams.length > 0 ? (
+          teamList.teams.map((team) => (
+            <TeamItemContainer
+              key={team.id}
+              team={team}
+              selectedTeamId={selectedTeamId}
+              expand={team.id === selectedTeamId}
+              onClick={handleTeamItemClick}
+            />
+          ))
+        ) : (
+          <div className="error">
+            심사할 팀이 없습니다. 이 에러 메시지가 보인다면 운영진에게
+            문의해주세요!
+          </div>
+        )}
       </JudgeProvider>
     )
   );

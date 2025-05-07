@@ -102,14 +102,21 @@ export default function VoteForm() {
           <div className="error">투표가 완료되었습니다.</div>
         )}
         <form className="vote" onSubmit={handleSubmit}>
-          {teamList.teams.map((team) => (
-            <VoteItem
-              active={selectedTeamIds.includes(team.id)}
-              key={team.id}
-              team={team}
-              onClick={() => handleClick(team.id)}
-            />
-          ))}
+          {teamList.teams.length > 0 ? (
+            teamList.teams.map((team) => (
+              <VoteItem
+                active={selectedTeamIds.includes(team.id)}
+                key={team.id}
+                team={team}
+                onClick={() => handleClick(team.id)}
+              />
+            ))
+          ) : (
+            <div className="error">
+              투표할 팀이 없습니다. 이 에러 메시지가 보인다면 운영진에게
+              문의해주세요!
+            </div>
+          )}
 
           {prevVote.teamIds.length === 0 && (
             <div
