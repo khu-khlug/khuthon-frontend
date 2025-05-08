@@ -38,6 +38,7 @@ export interface ManagerListTeamResponseTeam {
   updatedAt: Date;
   attachment: ManagerListTeamResponseAttachmentFile | null;
   productUrl: string | null;
+  confirmed: boolean;
   members: ManagerListTeamResponseMember[];
   invitations: ManagerListTeamResponseInvitation[];
 }

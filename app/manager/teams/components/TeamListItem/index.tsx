@@ -66,15 +66,20 @@ export default function TeamListItem({ team }: Props) {
         <strong className="text-2xl">{team.name}</strong>
       </p>
       <p className={classNames("!m-0 !mt-2", styles["badge-container"])}>
+        {team.confirmed ? (
+          <Badge className="!bg-sky-400">인원 확정됨</Badge>
+        ) : (
+          <Badge className="!bg-gray-400">인원 미확정</Badge>
+        )}
         {team.group ? (
-          <Badge className="!bg-blue-400">{team.group} 그룹</Badge>
+          <Badge className="!bg-sky-500">{team.group} 그룹</Badge>
         ) : (
           <Badge className="!bg-gray-400 ">그룹 없음</Badge>
         )}
         {canPresent ? (
-          <Badge className="!bg-green-400">발표 가능</Badge>
+          <Badge className="!bg-sky-600">발표 가능</Badge>
         ) : (
-          <Badge className="!bg-red-400">발표 불가능</Badge>
+          <Badge className="!bg-gray-400">발표 불가능</Badge>
         )}
       </p>
       <p className="!m-0 !mt-2 text-gray-500">
