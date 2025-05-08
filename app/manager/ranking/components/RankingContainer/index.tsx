@@ -1,15 +1,19 @@
+import { useRef, useState } from "react";
+
 import { useClient } from "@khlug/components/ClientProvider/ClientProvider";
 import Container from "@khlug/components/Container/Container";
 import Subtitle from "@khlug/components/Title/Subtitle";
+import Callout from "@khlug/components/Callout/Callout";
+
 import RankingAlignSelector, {
   JudgeCriteria,
   QueryMethod,
-} from "@khlug/components/manager/RankingAlignSelector";
+} from "../RankingAlignSelector";
+import RankingItem from "../RankingItem";
+
 import { CalcTeamRankingResponseDto } from "@khlug/transport/CalcTeamRankingResponseDto";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
-import { useRef, useState } from "react";
-import RankingItem from "../RankingItem";
-import Callout from "@khlug/components/Callout/Callout";
+import { Group } from "@khlug/constant";
 
 export default function RankingContainer() {
   const client = useClient();
@@ -22,7 +26,8 @@ export default function RankingContainer() {
 
   const handleSearch = async (
     queryMethod: QueryMethod,
-    judgeCriteriaObj: JudgeCriteria | null
+    judgeCriteriaObj: JudgeCriteria | null,
+    group: Group | null
   ) => {
     if (loading.current) return;
 
@@ -36,7 +41,7 @@ export default function RankingContainer() {
             .join(",")
         : undefined;
       const response = await client.get("/manager/teams/ranking", {
-        params: { queryMethod, judgeCriteria },
+        params: { queryMethod, judgeCriteria, group: group ?? undefined },
       });
       setRanking(response.data);
     } catch (e) {
@@ -53,6 +58,8 @@ export default function RankingContainer() {
         <br />
         많이 사용하는 경우 참여자 및 심사위원의 사이트 이용에도 영향을 끼칠 수
         있으므로 조심해서 사용해주세요.
+        <br />
+        랭킹 조회는 <strong>인원 확정이 완료된 팀만</strong> 나타납니다.
       </p>
       {message && <div className="error">{message}</div>}
       <RankingAlignSelector onSearch={handleSearch} />

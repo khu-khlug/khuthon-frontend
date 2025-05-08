@@ -1,6 +1,6 @@
 "use client";
 
-import RankingContainer from "@khlug/components/manager/RankingContainer";
+import RankingContainer from "./components/RankingContainer";
 
 export default function RankingPage() {
   return <RankingContainer />;
