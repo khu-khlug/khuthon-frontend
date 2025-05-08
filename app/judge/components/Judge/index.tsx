@@ -3,7 +3,7 @@ import { ListTeamResponseDto } from "@khlug/transport/ListTeamResponseDto";
 import { useCallback, useEffect, useState } from "react";
 import JudgeProvider, { useDoJudge } from "../JudgeProvider/JudgeProvider";
 import JudgingCriteriaContainer from "../JudgingCriteriaContainer/JudgingCriteriaContainer";
-import TeamItemContainer from "../TeamItemContainer/TeamItemContainer";
+import TeamItemContainer from "../TeamItemContainer";
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 import { useGlobalSpinner } from "@khlug/components/GlobalSpinnerProvider/GlobalSpinnerProvider";
 import { GetPrevJudgeResponseDto } from "@khlug/transport/GetPrevJudgeResponseDto";

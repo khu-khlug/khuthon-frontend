@@ -4,13 +4,13 @@ import JudgingForm from "../JudgingForm/JudgingForm";
 import Container from "@khlug/components/Container/Container";
 import classNames from "classnames";
 
-import "./TeamItemContainer.css";
-import { useEvent } from "@khlug/components/EventProvider/EventProvider";
 import { useDoJudge } from "../JudgeProvider/JudgeProvider";
 import Subtitle from "@khlug/components/Title/Subtitle";
 import { ListTeamResponseTeam } from "@khlug/transport/ListTeamResponseDto";
 import Link from "next/link";
 import { useExaminerConfigs } from "../ExaminerConfigProvider";
+
+import styles from "./style.module.css";
 
 type Props = {
   team: ListTeamResponseTeam;
@@ -25,7 +25,6 @@ export default function TeamItemContainer({
   expand,
   onClick,
 }: Props) {
-  const event = useEvent();
   const doJudge = useDoJudge();
   const configs = useExaminerConfigs();
 
@@ -75,8 +74,8 @@ export default function TeamItemContainer({
         </section>
         <section
           id="HelloWorld"
-          className={classNames("!px-5", "TeamItemContainer__Expandable", {
-            expand: expand,
+          className={classNames("!px-5", styles.expandable, {
+            [styles.expand]: expand,
           })}
         >
           <Subtitle>심사</Subtitle>

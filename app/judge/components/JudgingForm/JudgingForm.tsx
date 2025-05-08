@@ -74,10 +74,10 @@ export default function JudgingForm({ teamId }: Props) {
               독창성<span>(10)</span>
             </th>
             <th>
-              실용도<span>(10)</span>
+              효용성<span>(10)</span>
             </th>
             <th>
-              기술력<span>(10)</span>
+              적절성<span>(10)</span>
             </th>
             <th>
               디자인<span>(10)</span>
