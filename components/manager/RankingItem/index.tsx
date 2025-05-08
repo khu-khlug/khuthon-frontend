@@ -29,7 +29,13 @@ export default function RankingItem({ team }: Props) {
           label="비전공자 수"
           value={team.notRelevantMajorCount}
         />
-        <ValueWithLabel label="평균 학년" value={team.averageGrade} />
+        <ValueWithLabel
+          label="평균 재학 학기 수"
+          value={team.averageAttendedSemesters}
+        />
+      </p>
+      <p className="!m-0 !mt-1 text-gray-700">
+        <ValueWithLabel label="총 받은 투표 수" value={team.voteCount} />
       </p>
       <p className="!m-0 !mt-1 text-gray-700">
         <ValueWithLabel label="독창성" value={team.judge.creativity} />

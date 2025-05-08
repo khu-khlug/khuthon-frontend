@@ -5,7 +5,7 @@ export type CalcTeamRankingResponseTeam = {
   memberCount: number;
   relevantMajorCount: number;
   notRelevantMajorCount: number;
-  averageGrade: number;
+  averageAttendedSemesters: number;
   voteCount: number;
   judge: {
     creativity: number;
