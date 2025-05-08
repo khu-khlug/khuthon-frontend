@@ -5,7 +5,7 @@ export type QueryMethod = "VOTE" | "JUDGE";
 export type JudgeCriteria = {
   creativity: boolean;
   practicality: boolean;
-  skill: boolean;
+  suitability: boolean;
   design: boolean;
   completeness: boolean;
 };
@@ -22,7 +22,7 @@ export default function RankingAlignSelector({ onSearch }: Props) {
   const [judgeCriteria, setJudgeCriteria] = useState<JudgeCriteria>({
     creativity: true,
     practicality: true,
-    skill: true,
+    suitability: true,
     design: true,
     completeness: true,
   });
@@ -34,7 +34,7 @@ export default function RankingAlignSelector({ onSearch }: Props) {
       if (
         !judgeCriteria.creativity &&
         !judgeCriteria.practicality &&
-        !judgeCriteria.skill &&
+        !judgeCriteria.suitability &&
         !judgeCriteria.design &&
         !judgeCriteria.completeness
       ) {
@@ -97,21 +97,21 @@ export default function RankingAlignSelector({ onSearch }: Props) {
           disabled={queryMethod !== "JUDGE"}
           defaultChecked={judgeCriteria.practicality}
         />
-        <label htmlFor="QueryMethod-JUDGE-Practicality">실용도</label>
+        <label htmlFor="QueryMethod-JUDGE-Practicality">효용성</label>
         <input
-          id="QueryMethod-JUDGE-Skill"
+          id="QueryMethod-JUDGE-suitability"
           type="checkbox"
           className="ml-4"
           onChange={(e) =>
             setJudgeCriteria((prev) => ({
               ...prev,
-              skill: e.target.checked,
+              suitability: e.target.checked,
             }))
           }
           disabled={queryMethod !== "JUDGE"}
-          defaultChecked={judgeCriteria.skill}
+          defaultChecked={judgeCriteria.suitability}
         />
-        <label htmlFor="QueryMethod-JUDGE-Skill">기술력</label>
+        <label htmlFor="QueryMethod-JUDGE-suitability">적절성</label>
         <input
           id="QueryMethod-JUDGE-Design"
           type="checkbox"

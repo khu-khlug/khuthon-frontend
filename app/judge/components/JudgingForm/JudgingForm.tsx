@@ -43,7 +43,7 @@ export default function JudgingForm({ teamId }: Props) {
     if (
       normalizeScore(judge.creativity) === null ||
       normalizeScore(judge.practicality) === null ||
-      normalizeScore(judge.skill) === null ||
+      normalizeScore(judge.suitability) === null ||
       normalizeScore(judge.design) === null ||
       normalizeScore(judge.completeness) === null
     ) {
@@ -111,9 +111,9 @@ export default function JudgingForm({ teamId }: Props) {
             <td>
               <div className="input_wrap">
                 <input
-                  name="skill"
+                  name="suitability"
                   type="number"
-                  value={judge.skill}
+                  value={judge.suitability}
                   onChange={handleChange}
                 />
               </div>

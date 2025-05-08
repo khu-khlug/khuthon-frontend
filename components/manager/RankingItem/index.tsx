@@ -33,8 +33,8 @@ export default function RankingItem({ team }: Props) {
       </p>
       <p className="!m-0 !mt-1 text-gray-700">
         <ValueWithLabel label="독창성" value={team.judge.creativity} />
-        <ValueWithLabel label="실용도" value={team.judge.practicality} />
-        <ValueWithLabel label="기술력" value={team.judge.skill} />
+        <ValueWithLabel label="효용성" value={team.judge.practicality} />
+        <ValueWithLabel label="적절성" value={team.judge.suitability} />
         <ValueWithLabel label="디자인" value={team.judge.design} />
         <ValueWithLabel label="완성도" value={team.judge.completeness} />
         <ValueWithLabel
@@ -42,7 +42,7 @@ export default function RankingItem({ team }: Props) {
           value={
             team.judge.creativity +
             team.judge.practicality +
-            team.judge.skill +
+            team.judge.suitability +
             team.judge.design +
             team.judge.completeness
           }

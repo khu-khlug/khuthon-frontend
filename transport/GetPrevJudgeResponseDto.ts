@@ -2,7 +2,7 @@ export type GetPrevJudgeResponseJudge = {
   teamId: string;
   creativity: number;
   practicality: number;
-  skill: number;
+  suitability: number;
   design: number;
   completeness: number;
 };

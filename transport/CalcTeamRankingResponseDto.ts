@@ -10,7 +10,7 @@ export type CalcTeamRankingResponseTeam = {
   judge: {
     creativity: number;
     practicality: number;
-    skill: number;
+    suitability: number;
     design: number;
     completeness: number;
   };

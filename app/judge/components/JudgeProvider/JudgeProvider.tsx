@@ -72,7 +72,7 @@ export function useJudge(teamId: string) {
   const emptyJudge = {
     creativity: 0,
     practicality: 0,
-    skill: 0,
+    suitability: 0,
     design: 0,
     completeness: 0,
   } as const;

@@ -67,7 +67,7 @@ export default function Judge() {
             [cur.teamId]: {
               creativity: cur.creativity,
               practicality: cur.practicality,
-              skill: cur.skill,
+              suitability: cur.suitability,
               design: cur.design,
               completeness: cur.completeness,
             },
