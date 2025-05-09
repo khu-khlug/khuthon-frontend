@@ -20,11 +20,15 @@ export default function JudgingCriteriaContainer() {
         </li>
         <li>
           <strong>산출물의 완성도</strong>: 마무리가 되었는가
+        </li>
+        <li>
+          <strong>주제와의 적합성</strong>: 주제에 부합하는 산출물이 아닌 경우
+          모두 0점으로 부여합니다.
+        </li>
+        <li>
+          <strong>산출물 시연 여부</strong>: 산출물을 시연하지 않은 경우에는
+          디자인 점수와 완성도 점수를 0점으로 부여합니다.
           <ul className="!m-0">
-            <li>
-              산출물을 <strong>시연하지 않은 경우</strong>에는 완성도 점수를
-              0점으로 부여합니다.
-            </li>
             <li>
               데이터 분석에서는 분석 결과를 제시해야 하는 등, 설계가 아닌{" "}
               <strong>구체적인 결과</strong>가 보여져야 합니다.
@@ -34,10 +38,6 @@ export default function JudgingCriteriaContainer() {
               판단합니다.
             </li>
           </ul>
-        </li>
-        <li>
-          <strong>주제와의 적합성</strong>: (주제에 부합하는 산출물이 아닌 경우
-          모두 0점 부여)
         </li>
       </ul>
     </Container>
