@@ -131,31 +131,177 @@ export default function _2024About() {
 
         <h4>수상</h4>
 
-        <div>
-          <h5>대상 (1팀)</h5>
-          <ul className="!m-0">
-            <li>상장 및 상금 200만원</li>
+        <h5>대상 (1팀)</h5>
+        <ul className="!m-0">
+          <li>상장 및 상금 200만원</li>
+        </ul>
+        <div className="list" style={{ marginBottom: "50px" }}>
+          <ul>
+            <li className="item" style={{ paddingLeft: "60px" }}>
+              <div className="name">USB</div>
+              <div className="idea">
+                디지털 트윈을 활용한 교통체증 해결 아이디어
+              </div>
+              <div className="member"></div>
+              <div className="clear"></div>
+            </li>
           </ul>
         </div>
 
-        <div className="mt-16">
-          <h5>최우수상 (3팀)</h5>
-          <ul className="!m-0">
-            <li>상장 및 각 상금 100만원</li>
+        <h5>최우수상 (3팀)</h5>
+        <ul className="!m-0">
+          <li>상장 및 각 상금 100만원</li>
+        </ul>
+        <div className="list" style={{ marginBottom: "50px" }}>
+          <ul>
+            <li className="item" style={{ paddingLeft: "60px" }}>
+              <div className="name">개추다방</div>
+              <div className="idea">
+                환경 친화적인 도시를 설계할 수 있는 능력을 키우는 학습 도구
+              </div>
+              <div className="member"></div>
+              <div className="clear"></div>
+            </li>
+            <li className="item" style={{ paddingLeft: "60px" }}>
+              <div className="name">015B</div>
+              <div className="idea">
+                도시텃밭 중개 및 AI를 활용한 도시농부 육성 플랫폼,
+                &quot;CiFarm&quot;
+              </div>
+              <div className="member"></div>
+              <div className="clear"></div>
+            </li>
+            <li className="item" style={{ paddingLeft: "60px" }}>
+              <div className="name">AID</div>
+              <div className="idea">
+                쉽고 재미있게 하는 에너지 절약 게임
+              </div>
+              <div className="member"></div>
+              <div className="clear"></div>
+            </li>
           </ul>
         </div>
 
-        <div className="mt-16">
-          <h5>우수상 (6팀)</h5>
-          <ul className="!m-0">
-            <li>상장 및 각 상금 50만원</li>
+        <h5>우수상 (6팀)</h5>
+        <ul className="!m-0">
+          <li>상장 및 각 상금 50만원</li>
+        </ul>
+        <div className="list" style={{ marginBottom: "50px" }}>
+          <ul>
+            <li className="item" style={{ paddingLeft: "60px" }}>
+              <div className="name">일단</div>
+              <div className="idea">
+                결제내역 기반 탄소발자국 측정 애플리케이션
+              </div>
+              <div className="member"></div>
+              <div className="clear"></div>
+            </li>
+            <li className="item" style={{ paddingLeft: "60px" }}>
+              <div className="name">한늦대눈멋</div>
+              <div className="idea">
+                소형화 및 간편화된 전력 모니터링 시스템
+              </div>
+              <div className="member"></div>
+              <div className="clear"></div>
+            </li>
+            <li className="item" style={{ paddingLeft: "60px" }}>
+              <div className="name">원숭이 셋 채리 하나</div>
+              <div className="idea">
+                HowGreen: 내가 쓰는 제품이 얼마나 친환경적인가?
+              </div>
+              <div className="member"></div>
+              <div className="clear"></div>
+            </li>
+            <li className="item" style={{ paddingLeft: "60px" }}>
+              <div className="name">감귤굴러옵서예</div>
+              <div className="idea">
+                지능형 교통 시스템을 통한 미래 계획 도시 구현
+              </div>
+              <div className="member"></div>
+              <div className="clear"></div>
+            </li>
+            <li className="item" style={{ paddingLeft: "60px" }}>
+              <div className="name">CSIA</div>
+              <div className="idea">
+                분리배출 도우미 앱 &lt;그린 아카이브&gt;
+              </div>
+              <div className="member"></div>
+              <div className="clear"></div>
+            </li>
+            <li className="item" style={{ paddingLeft: "60px" }}>
+              <div className="name">ALT F4</div>
+              <div className="idea">
+                장애인의 이동권 보장 프로젝트 : 나 휠 수 이써!
+              </div>
+              <div className="member"></div>
+              <div className="clear"></div>
+            </li>
           </ul>
         </div>
 
-        <div className="mt-16">
-          <h5>특별상 (4팀)</h5>
-          <ul className="!m-0">
-            <li>상장 및 상품</li>
+        <h5>인기상 (1팀)</h5>
+        <ul className="!m-0">
+          <li>상장 및 상품</li>
+        </ul>
+        <div className="list" style={{ marginBottom: "50px" }}>
+          <ul>
+            <li className="item" style={{ paddingLeft: "60px" }}>
+              <div className="name">한늦대눈멋</div>
+              <div className="idea">
+                소형화 및 간편화된 전력 모니터링 시스템
+              </div>
+              <div className="member"></div>
+              <div className="clear"></div>
+            </li>
+          </ul>
+        </div>
+
+        <h5>격려상 (1팀)</h5>
+        <ul className="!m-0">
+          <li>상장 및 상품</li>
+        </ul>
+        <div className="list" style={{ marginBottom: "50px" }}>
+          <ul>
+            <li className="item" style={{ paddingLeft: "60px" }}>
+              <div className="name">다솜사랑</div>
+              <div className="idea">
+                탄소 배출을 줄이기 위해 대중교통 이용을 장려하는 프로그램(정책)
+              </div>
+              <div className="member"></div>
+              <div className="clear"></div>
+            </li>
+          </ul>
+        </div>
+
+        <h5>창의상 (1팀)</h5>
+        <ul className="!m-0">
+          <li>상장 및 상품</li>
+        </ul>
+        <div className="list" style={{ marginBottom: "50px" }}>
+          <ul>
+            <li className="item" style={{ paddingLeft: "60px" }}>
+              <div className="name">재원이맥북고치기프로젝트</div>
+              <div className="idea">
+                개인 맞춤형 리폼 레시피 제공 서비스
+              </div>
+              <div className="member"></div>
+              <div className="clear"></div>
+            </li>
+          </ul>
+        </div>
+
+        <h5>기술상 (1팀)</h5>
+        <ul className="!m-0">
+          <li>상장 및 상품</li>
+        </ul>
+        <div className="list" style={{ marginBottom: "50px" }}>
+          <ul>
+            <li className="item" style={{ paddingLeft: "60px" }}>
+              <div className="name">파카와친구들</div>
+              <div className="idea">No more Album:1인1앨범</div>
+              <div className="member"></div>
+              <div className="clear"></div>
+            </li>
           </ul>
         </div>
 

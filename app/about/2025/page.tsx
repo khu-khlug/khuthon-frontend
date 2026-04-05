@@ -11,6 +11,7 @@ export default function _2025About() {
             2일)
           </strong>
         </p>
+        <div className="desc">행사가 끝났습니다.</div>
 
         <h4>장소</h4>
         <p>경희대학교 국제캠퍼스 전자정보대학관 205호, 211-1호, 211-2호</p>
@@ -72,31 +73,165 @@ export default function _2025About() {
         </ol>
 
         <h4>수상</h4>
-        <div>
-          <h5>대상 (1팀)</h5>
-          <ul className="!m-0">
-            <li>상장 및 상금 200만원</li>
+
+        <h5>대상 (1팀)</h5>
+        <ul className="!m-0">
+          <li>상장 및 상금 200만원</li>
+        </ul>
+        <div className="list" style={{ marginBottom: "50px" }}>
+          <ul>
+            <li className="item" style={{ paddingLeft: "60px" }}>
+              <div className="name">콜드플레이</div>
+              <div className="idea">
+                FARM:ON - 농업을 ON하다, 가능성을 심다. (참여형 농업 펀딩
+                플랫폼)
+              </div>
+              <div className="member"></div>
+              <div className="clear"></div>
+            </li>
           </ul>
         </div>
 
-        <div className="mt-16">
-          <h5>최우수상 (3팀)</h5>
-          <ul className="!m-0">
-            <li>상장 및 각 상금 100만원</li>
+        <h5>최우수상 (3팀)</h5>
+        <ul className="!m-0">
+          <li>상장 및 각 상금 100만원</li>
+        </ul>
+        <div className="list" style={{ marginBottom: "50px" }}>
+          <ul>
+            <li className="item" style={{ paddingLeft: "60px" }}>
+              <div className="name">평균연령1등</div>
+              <div className="idea">
+                내손안의 반려식물, Planttalk
+              </div>
+              <div className="member"></div>
+              <div className="clear"></div>
+            </li>
+            <li className="item" style={{ paddingLeft: "60px" }}>
+              <div className="name">소원을 말해봐</div>
+              <div className="idea">
+                SEEDO (씨앗으로 시작하는 농업 투자 플랫폼)
+              </div>
+              <div className="member"></div>
+              <div className="clear"></div>
+            </li>
+            <li className="item" style={{ paddingLeft: "60px" }}>
+              <div className="name">팀이름</div>
+              <div className="idea">
+                잔반을 거름으로 → 마이크로 비료 거래 플랫폼
+                &quot;잔반걸음&quot;
+              </div>
+              <div className="member"></div>
+              <div className="clear"></div>
+            </li>
           </ul>
         </div>
 
-        <div className="mt-16">
-          <h5>우수상 (6팀)</h5>
-          <ul className="!m-0">
-            <li>상장 및 각 상금 50만원</li>
+        <h5>우수상 (6팀)</h5>
+        <ul className="!m-0">
+          <li>상장 및 각 상금 50만원</li>
+        </ul>
+        <div className="list" style={{ marginBottom: "50px" }}>
+          <ul>
+            <li className="item" style={{ paddingLeft: "60px" }}>
+              <div className="name">돌아가면_냅두자</div>
+              <div className="idea">
+                실시간 영상과 음성을 기반으로 특정 조류만 식별하고, 농업에 대한
+                유해조류를 퇴치할 수 있는 저비용 스마트 시스템
+              </div>
+              <div className="member"></div>
+              <div className="clear"></div>
+            </li>
+            <li className="item" style={{ paddingLeft: "60px" }}>
+              <div className="name">Zero</div>
+              <div className="idea">
+                식물을 키우기 위한 최적의 환경을 관리하는 어플
+              </div>
+              <div className="member"></div>
+              <div className="clear"></div>
+            </li>
+            <li className="item" style={{ paddingLeft: "60px" }}>
+              <div className="name">21맨</div>
+              <div className="idea">
+                팜링크(FarmLink): 입지 조건과 개인 정보를 기반으로 스마트팜 설치
+                가능성과 지원 정책 안내
+              </div>
+              <div className="member"></div>
+              <div className="clear"></div>
+            </li>
+            <li className="item" style={{ paddingLeft: "60px" }}>
+              <div className="name">우왕쿠왕</div>
+              <div className="idea">
+                가지 하나하나에 담긴 최적의 성장 솔루션: AI 이미지 처리 기반
+                가지치기 가이드 &apos;프루닝&apos;
+              </div>
+              <div className="member"></div>
+              <div className="clear"></div>
+            </li>
+            <li className="item" style={{ paddingLeft: "60px" }}>
+              <div className="name">쿠다닥</div>
+              <div className="idea">윤작 작물 추천</div>
+              <div className="member"></div>
+              <div className="clear"></div>
+            </li>
+            <li className="item" style={{ paddingLeft: "60px" }}>
+              <div className="name">ByteCrew</div>
+              <div className="idea">
+                축산을 똑똑하게 연결하다 : Piggo
+              </div>
+              <div className="member"></div>
+              <div className="clear"></div>
+            </li>
           </ul>
         </div>
 
-        <div className="mt-16">
-          <h5>특별상 (4팀)</h5>
-          <ul className="!m-0">
-            <li>상장 및 상품</li>
+        <h5>인기상 (2팀)</h5>
+        <ul className="!m-0">
+          <li>상장 및 상품</li>
+        </ul>
+        <div className="list" style={{ marginBottom: "50px" }}>
+          <ul>
+            <li className="item" style={{ paddingLeft: "60px" }}>
+              <div className="name">콜드플레이</div>
+              <div className="idea">
+                FARM:ON - 농업을 ON하다, 가능성을 심다. (참여형 농업 펀딩
+                플랫폼)
+              </div>
+              <div className="member"></div>
+              <div className="clear"></div>
+            </li>
+            <li className="item" style={{ paddingLeft: "60px" }}>
+              <div className="name">소원을 말해봐</div>
+              <div className="idea">
+                SEEDO (씨앗으로 시작하는 농업 투자 플랫폼)
+              </div>
+              <div className="member"></div>
+              <div className="clear"></div>
+            </li>
+          </ul>
+        </div>
+
+        <h5>격려상 (2팀)</h5>
+        <ul className="!m-0">
+          <li>상장 및 상품</li>
+        </ul>
+        <div className="list" style={{ marginBottom: "50px" }}>
+          <ul>
+            <li className="item" style={{ paddingLeft: "60px" }}>
+              <div className="name">KHU크다스</div>
+              <div className="idea">
+                작물픽 - 농작물 품종 맞춤 추천 / 작물 관리 서비스
+              </div>
+              <div className="member"></div>
+              <div className="clear"></div>
+            </li>
+            <li className="item" style={{ paddingLeft: "60px" }}>
+              <div className="name">나리는 외계인</div>
+              <div className="idea">
+                노지 농업을 위한 스마트 관개 시스템
+              </div>
+              <div className="member"></div>
+              <div className="clear"></div>
+            </li>
           </ul>
         </div>
 
