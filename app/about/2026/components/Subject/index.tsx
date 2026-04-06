@@ -19,7 +19,14 @@ export default async function Subject() {
           <strong>{subject}</strong>
         </li>
       ) : (
-        <li className="text-gray-500">D-1 오후 12시에 공개</li>
+        <>
+          <li className="text-gray-500">
+            사전 주제 공개: 2026.05.06 오후 12시에 공개 (가주제 3개)
+          </li>
+          <li className="text-gray-500">
+            실제 주제 공개: 대회 시작 시점 (1개)
+          </li>
+        </>
       )}
     </ul>
   );
