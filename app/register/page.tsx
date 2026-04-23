@@ -60,6 +60,10 @@ export default function NewRegisterPage() {
           운영진이 빠르게 답변해드릴게요.
         </p>
       </section>
+      <p className="text-red-500">
+        아주대학교는 내부 사정으로 현재 접수 진행이 불가하오니 참고
+        부탁드립니다.
+      </p>
       <section className="mt-12">
         <div>
           <p>
