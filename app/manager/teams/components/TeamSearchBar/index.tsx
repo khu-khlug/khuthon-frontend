@@ -8,6 +8,7 @@ export type SearchParams = {
   name?: string;
   group?: Group;
   confirmed?: boolean;
+  awardedOnly?: boolean;
 };
 
 type Props = {
@@ -17,11 +18,14 @@ type Props = {
 const ALL = "ALL";
 type GroupSearchParams = Group | typeof ALL;
 type ConfirmedSearchParams = "CONFIRMED" | "NOT_CONFIRMED" | typeof ALL;
+type AwardedOnlySearchParams = "AWARDED_ONLY" | typeof ALL;
 
 export default function TeamSearchBar({ onSearch }: Props) {
   const [keyword, setKeyword] = useState("");
   const [group, setGroup] = useState<GroupSearchParams>(ALL);
   const [confirmed, setConfirmed] = useState<ConfirmedSearchParams>(ALL);
+  const [awardedOnly, setAwardedOnly] =
+    useState<AwardedOnlySearchParams>(ALL);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -29,6 +33,7 @@ export default function TeamSearchBar({ onSearch }: Props) {
       name: !!keyword.length ? keyword : undefined,
       group: group === ALL ? undefined : group,
       confirmed: confirmed === ALL ? undefined : confirmed === "CONFIRMED",
+      awardedOnly: awardedOnly === "AWARDED_ONLY" ? true : undefined,
     });
   };
 
@@ -65,6 +70,17 @@ export default function TeamSearchBar({ onSearch }: Props) {
           <option value={ALL}>전체</option>
           <option value="CONFIRMED">인원 확정됨</option>
           <option value="NOT_CONFIRMED">인원 확정되지 않음</option>
+        </Dropdown>
+        <Dropdown
+          className="max-w-64 inline-block"
+          label="수상 여부"
+          onChange={(e) =>
+            setAwardedOnly(e.target.value as AwardedOnlySearchParams)
+          }
+          value={awardedOnly}
+        >
+          <option value={ALL}>전체</option>
+          <option value="AWARDED_ONLY">수상한 팀만 보기</option>
         </Dropdown>
       </div>
       <Button className="mt-2" formSubmit>

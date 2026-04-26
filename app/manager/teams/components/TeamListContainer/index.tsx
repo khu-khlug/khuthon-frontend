@@ -13,15 +13,34 @@ import Divider from "@khlug/components/Divider/Divider";
 import Pager from "@khlug/components/Pager/Pager";
 
 import { ManagerListTeamRequestDto } from "@khlug/transport/ManagerListTeamRequestDto";
-import { ManagerListTeamResponseDto } from "@khlug/transport/ManagerListTeamResponseDto";
+import {
+  ManagerListTeamResponseDto,
+  ManagerListTeamResponseTeam,
+} from "@khlug/transport/ManagerListTeamResponseDto";
 
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
+import { MANAGER_PRIZE_OPTIONS } from "@khlug/components/manager/TeamPrizeEditor";
 
 import TeamListItem from "../TeamListItem";
 import TeamSearchBar, { SearchParams } from "../TeamSearchBar";
 
 type TeamListReloader = () => void;
 const TeamListReloaderContext = createContext<TeamListReloader>(() => {});
+
+function sortAwardedTeams(
+  teams: ManagerListTeamResponseTeam[]
+): ManagerListTeamResponseTeam[] {
+  return [...teams].sort((a, b) => {
+    const aIndex = MANAGER_PRIZE_OPTIONS.findIndex((prize) => prize === a.prize);
+    const bIndex = MANAGER_PRIZE_OPTIONS.findIndex((prize) => prize === b.prize);
+
+    if (aIndex === -1 && bIndex === -1) return 0;
+    if (aIndex === -1) return 1;
+    if (bIndex === -1) return -1;
+
+    return aIndex - bIndex;
+  });
+}
 
 export function useTeamListReloader(): TeamListReloader {
   return useContext(TeamListReloaderContext);
@@ -50,7 +69,12 @@ export default function TeamListContainer() {
         "/manager/teams",
         { params: dto }
       );
-      setTeamList(response.data);
+      setTeamList({
+        ...response.data,
+        teams: searchParams.awardedOnly
+          ? sortAwardedTeams(response.data.teams)
+          : response.data.teams,
+      });
     } catch (e) {
       setMessage(extractErrorMessage(e));
     }

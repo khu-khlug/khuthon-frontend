@@ -1,7 +1,10 @@
 import { CalcTeamRankingResponseTeam } from "@khlug/transport/CalcTeamRankingResponseDto";
+import TeamPrizeEditor from "@khlug/components/manager/TeamPrizeEditor";
+import Badge from "@khlug/components/Badge/Badge";
 
 type Props = {
   team: CalcTeamRankingResponseTeam;
+  onPrizeUpdated: () => void;
 };
 
 function ValueWithLabel({ label, value }: { label: string; value: number }) {
@@ -13,13 +16,16 @@ function ValueWithLabel({ label, value }: { label: string; value: number }) {
   );
 }
 
-export default function RankingItem({ team }: Props) {
+export default function RankingItem({ team, onPrizeUpdated }: Props) {
   return (
     <div className="my-8">
       <p className="!m-0">
         <span className="text-xl font-bold">
           <strong>{team.name}</strong>
         </span>
+        {team.prize && (
+          <Badge className="!bg-yellow-600 ml-3">{team.prize}</Badge>
+        )}
         <span className="text-gray-500 ml-4">{team.idea}</span>
       </p>
       <p className="!m-0 !mt-2 text-gray-700">
@@ -54,6 +60,13 @@ export default function RankingItem({ team }: Props) {
           }
         />
       </p>
+      <div className="flex items-center justify-end !mt-2">
+        <TeamPrizeEditor
+          teamId={team.id}
+          prize={team.prize}
+          onUpdated={onPrizeUpdated}
+        />
+      </div>
     </div>
   );
 }

@@ -15,6 +15,12 @@ import { CalcTeamRankingResponseDto } from "@khlug/transport/CalcTeamRankingResp
 import { extractErrorMessage } from "@khlug/util/getErrorMessageFromAxiosError";
 import { Group } from "@khlug/constant";
 
+type RankingSearchParams = {
+  queryMethod: QueryMethod;
+  judgeCriteriaObj: JudgeCriteria | null;
+  group: Group | null;
+};
+
 export default function RankingContainer() {
   const client = useClient();
 
@@ -23,6 +29,8 @@ export default function RankingContainer() {
   const [ranking, setRanking] = useState<CalcTeamRankingResponseDto | null>(
     null
   );
+  const [lastSearchParams, setLastSearchParams] =
+    useState<RankingSearchParams | null>(null);
 
   const handleSearch = async (
     queryMethod: QueryMethod,
@@ -33,6 +41,7 @@ export default function RankingContainer() {
 
     setMessage(null);
     loading.current = true;
+    setLastSearchParams({ queryMethod, judgeCriteriaObj, group });
     try {
       const judgeCriteria = judgeCriteriaObj
         ? Object.entries(judgeCriteriaObj)
@@ -50,6 +59,16 @@ export default function RankingContainer() {
     loading.current = false;
   };
 
+  const reloadRanking = () => {
+    if (!lastSearchParams) return;
+
+    handleSearch(
+      lastSearchParams.queryMethod,
+      lastSearchParams.judgeCriteriaObj,
+      lastSearchParams.group
+    );
+  };
+
   return (
     <Container className="!bg-white !bg-none">
       <Subtitle>팀 랭킹</Subtitle>
@@ -65,7 +84,13 @@ export default function RankingContainer() {
       <RankingAlignSelector onSearch={handleSearch} />
       {ranking &&
         (ranking.teams.length > 0 ? (
-          ranking.teams.map((team) => <RankingItem key={team.id} team={team} />)
+          ranking.teams.map((team) => (
+            <RankingItem
+              key={team.id}
+              team={team}
+              onPrizeUpdated={reloadRanking}
+            />
+          ))
         ) : (
           <Callout>조회할 팀이 없습니다.</Callout>
         ))}

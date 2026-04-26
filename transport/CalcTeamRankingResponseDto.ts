@@ -2,6 +2,7 @@ export type CalcTeamRankingResponseTeam = {
   id: string;
   name: string;
   idea: string;
+  prize: string | null;
   memberCount: number;
   relevantMajorCount: number;
   notRelevantMajorCount: number;
