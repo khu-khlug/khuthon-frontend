@@ -110,6 +110,11 @@ export default function _2026About() {
               <th>비고</th>
             </tr>
             <tr>
+              <td className="time">17:00</td>
+              <td>현장 접수 시작</td>
+              <td> </td>
+            </tr>
+            <tr>
               <td className="time">18:00</td>
               <td>개회식 및 개발 시작</td>
               <td> </td>
@@ -145,7 +150,7 @@ export default function _2026About() {
               <td> </td>
             </tr>
             <tr>
-              <td className="time">13:00</td>
+              <td className="time">12:00</td>
               <td>시상 및 폐회</td>
               <td> </td>
             </tr>
