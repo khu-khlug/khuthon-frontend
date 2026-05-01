@@ -102,7 +102,55 @@ export default function _2026About() {
           모든 일정은 오프라인으로 진행되며, 상세 일정은 예고 없이 변경될 수
           있습니다.
         </h5>
-        <p className="italic text-gray-500">추후 공개</p>
+        <table className="timetable">
+          <tbody>
+            <tr>
+              <th>시간</th>
+              <th>일정</th>
+              <th>비고</th>
+            </tr>
+            <tr>
+              <td className="time">18:00</td>
+              <td>개회식 및 개발 시작</td>
+              <td> </td>
+            </tr>
+            <tr>
+              <td className="time">19:00</td>
+              <td>석식</td>
+              <td> </td>
+            </tr>
+            <tr>
+              <td className="time">21:00</td>
+              <td>현장 접수 마감</td>
+              <td> </td>
+            </tr>
+            <tr>
+              <td className="time">23:00</td>
+              <td>야식</td>
+              <td> </td>
+            </tr>
+            <tr>
+              <td className="time">06:30</td>
+              <td>조식</td>
+              <td> </td>
+            </tr>
+            <tr>
+              <td className="time">08:30</td>
+              <td>발표</td>
+              <td> </td>
+            </tr>
+            <tr>
+              <td className="time">11:40</td>
+              <td>심사</td>
+              <td> </td>
+            </tr>
+            <tr>
+              <td className="time">13:00</td>
+              <td>시상 및 폐회</td>
+              <td> </td>
+            </tr>
+          </tbody>
+        </table>
 
         <h4>주최</h4>
         <p>
