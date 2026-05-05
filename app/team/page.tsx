@@ -24,6 +24,7 @@ import ConfirmTeamContainer from "./components/ConfirmTeamContainer";
 import EditStudentInfoForm from "./components/EditStudentInfoForm";
 import AttachmentUploadContainer from "./components/AttachmentUploadContainer";
 import ProductUrlContainer from "./components/ProductUrlContainer";
+import InquiryContainer from "./components/InquiryContainer";
 import { useMemberConfigs } from "./components/MemberConfigProvider";
 
 import { GetMyTeamResponseDto } from "@khlug/transport/GetMyTeamResponseDto";
@@ -69,6 +70,7 @@ export default function TeamPage() {
     <MyTeamProvider team={team} reload={fetchTeam}>
       {event.eventRange === "BETWEEN" ? (
         <>
+          <InquiryContainer />
           <TeamIdeaContainer />
           <AttachmentUploadContainer />
           <ProductUrlContainer />
