@@ -1,0 +1,1230 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>자리표 검색</title>
+    <style>
+      :root {
+        --line: #2f2f2f;
+        --team: #ffe894;
+        --team-blue: #72d3d8;
+        --team-green: #4fd585;
+        --team-active: #ffb347;
+        --surface: #ffffff;
+        --muted: #f5f5f5;
+        --text: #222222;
+        --error: #b42318;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--text);
+        background: #ffffff;
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+      }
+
+      main {
+        padding: 20px;
+      }
+
+      .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+        max-width: 1040px;
+        margin: 0 auto 16px;
+      }
+
+      .toolbar label {
+        font-weight: 700;
+      }
+
+      .toolbar input {
+        flex: 1 1 220px;
+        min-width: 0;
+        height: 40px;
+        padding: 0 12px;
+        border: 1px solid #999999;
+        font-size: 15px;
+      }
+
+      .toolbar button {
+        height: 40px;
+        padding: 0 16px;
+        border: 1px solid #222222;
+        color: #ffffff;
+        background: #222222;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .status {
+        flex-basis: 100%;
+        min-height: 18px;
+        color: #555555;
+        line-height: 1.4;
+      }
+
+      .status.error {
+        color: var(--error);
+      }
+
+      .suggestions {
+        display: none;
+        flex-basis: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+        border: 1px solid #999999;
+        background: var(--surface);
+      }
+
+      .suggestions.visible {
+        display: block;
+      }
+
+      .suggestions li {
+        list-style: none;
+      }
+
+      .suggestions button {
+        display: block;
+        width: 100%;
+        height: auto;
+        padding: 10px 12px;
+        border: 0;
+        border-bottom: 1px solid #dddddd;
+        color: var(--text);
+        background: var(--surface);
+        text-align: left;
+        font-size: 15px;
+        font-weight: 500;
+      }
+
+      .suggestions li:last-child button {
+        border-bottom: 0;
+      }
+
+      .suggestions button:hover,
+      .suggestions button:focus {
+        background: var(--muted);
+        outline: 2px solid #005fcc;
+        outline-offset: -2px;
+      }
+
+      .scroll-area {
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        margin-bottom: 36px;
+        padding-bottom: 12px;
+      }
+
+      .seat-map {
+        min-width: 1040px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        margin: 0 0 10px;
+        text-align: center;
+        font-size: 24px;
+        letter-spacing: 0;
+      }
+
+      .stage {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 34px;
+        margin-bottom: 14px;
+        border: 1px solid var(--line);
+        color: #555555;
+        background: var(--surface);
+        font-size: 18px;
+      }
+
+      .sections {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr 1fr;
+        gap: 64px;
+      }
+
+      .sections.room-211-1 {
+        grid-template-columns: 1fr 1.2fr 1fr;
+        gap: 44px;
+      }
+
+      .sections.room-211-2 {
+        grid-template-columns: 0.8fr 1fr 0.8fr;
+        gap: 56px;
+      }
+
+      .section {
+        display: grid;
+        grid-auto-rows: 34px;
+        gap: 14px 0;
+      }
+
+      .section.left,
+      .section.right {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .section.center {
+        grid-template-columns: repeat(6, 1fr);
+      }
+
+      .section.columns-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .section.columns-4 {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .section.columns-6 {
+        grid-template-columns: repeat(6, 1fr);
+      }
+
+      .section.columns-7 {
+        grid-template-columns: repeat(7, 1fr);
+      }
+
+      .seat {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 0;
+        min-height: 34px;
+        padding: 0 8px;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        text-align: center;
+        font-size: 14px;
+        line-height: 1.15;
+        overflow-wrap: anywhere;
+      }
+
+      .seat.team {
+        background: var(--team);
+      }
+
+      .seat.tone-blue {
+        background: var(--team-blue);
+      }
+
+      .seat.tone-green {
+        background: var(--team-green);
+      }
+
+      .seat.staff,
+      .seat.label {
+        background: var(--surface);
+        color: #555555;
+      }
+
+      .seat.empty {
+        color: transparent;
+      }
+
+      .seat.active {
+        position: relative;
+        z-index: 1;
+        background: var(--team-active);
+        outline: 4px solid #db3a00;
+        outline-offset: 2px;
+        color: #111111;
+        font-weight: 800;
+      }
+
+      .seat:focus {
+        outline: 4px solid #005fcc;
+        outline-offset: 2px;
+      }
+
+      .seat.active:focus {
+        outline-color: #db3a00;
+      }
+
+      @media (max-width: 720px) {
+        main {
+          padding: 12px;
+        }
+
+        .toolbar {
+          align-items: stretch;
+        }
+
+        .toolbar label,
+        .toolbar input,
+        .toolbar button {
+          width: 100%;
+        }
+
+        .seat-map {
+          min-width: 960px;
+        }
+
+        .sections {
+          gap: 42px;
+        }
+
+        .sections.room-211-1,
+        .sections.room-211-2 {
+          gap: 34px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <form class="toolbar" id="search-form">
+        <label for="team-search">팀 이름</label>
+        <input
+          id="team-search"
+          name="team"
+          type="search"
+          autocomplete="off"
+          placeholder="예: Articode, open CH, IIT, 베드락에디션"
+        />
+        <button type="submit">검색</button>
+        <ul class="suggestions" id="suggestions"></ul>
+        <div class="status" id="status" role="status" aria-live="polite"></div>
+      </form>
+
+      <div class="scroll-area" id="scroll-area">
+        <div class="seat-map">
+          <h1>205호 자리표</h1>
+          <div class="stage">무대</div>
+          <div class="sections">
+            <section
+              class="section left"
+              id="section-left"
+              aria-label="왼쪽 좌석"
+            ></section>
+            <section
+              class="section center"
+              id="section-center"
+              aria-label="중앙 좌석"
+            ></section>
+            <section
+              class="section right"
+              id="section-right"
+              aria-label="오른쪽 좌석"
+            ></section>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll-area">
+        <div class="seat-map">
+          <h1>211-1호 자리표</h1>
+          <div class="sections room-211-1">
+            <section
+              class="section columns-6"
+              id="section-211-1-left"
+              aria-label="211-1호 왼쪽 좌석"
+            ></section>
+            <section
+              class="section columns-7"
+              id="section-211-1-center"
+              aria-label="211-1호 중앙 좌석"
+            ></section>
+            <section
+              class="section columns-6"
+              id="section-211-1-right"
+              aria-label="211-1호 오른쪽 좌석"
+            ></section>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll-area">
+        <div class="seat-map">
+          <h1>211-2호 자리표</h1>
+          <div class="sections room-211-2">
+            <section
+              class="section columns-3"
+              id="section-211-2-left"
+              aria-label="211-2호 왼쪽 좌석"
+            ></section>
+            <section
+              class="section columns-4"
+              id="section-211-2-center"
+              aria-label="211-2호 중앙 좌석"
+            ></section>
+            <section
+              class="section columns-3"
+              id="section-211-2-right"
+              aria-label="211-2호 오른쪽 좌석"
+            ></section>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script type="application/json" id="seat-data">
+      [
+        {
+          "id": "left-1",
+          "section": "left",
+          "row": 1,
+          "colStart": 1,
+          "colSpan": 4,
+          "type": "team",
+          "name": "KHUREKA"
+        },
+        {
+          "id": "left-2",
+          "section": "left",
+          "row": 3,
+          "colStart": 1,
+          "colSpan": 4,
+          "type": "team",
+          "name": "💕다솜과 종현💕"
+        },
+        {
+          "id": "left-3",
+          "section": "left",
+          "row": 5,
+          "colStart": 1,
+          "colSpan": 4,
+          "type": "team",
+          "name": "나이런거진짜못정해"
+        },
+        {
+          "id": "left-4",
+          "section": "left",
+          "row": 7,
+          "colStart": 1,
+          "colSpan": 4,
+          "type": "team",
+          "name": "낭만세모"
+        },
+        {
+          "id": "left-5",
+          "section": "left",
+          "row": 9,
+          "colStart": 1,
+          "colSpan": 4,
+          "type": "team",
+          "name": "단테크"
+        },
+        {
+          "id": "left-6",
+          "section": "left",
+          "row": 10,
+          "colStart": 3,
+          "colSpan": 2,
+          "type": "team",
+          "name": "쿠페인"
+        },
+        {
+          "id": "left-staff",
+          "section": "left",
+          "row": 11,
+          "colStart": 1,
+          "colSpan": 4,
+          "type": "staff",
+          "name": "스태프 [간식바]",
+          "searchable": false
+        },
+
+        {
+          "id": "center-judges",
+          "section": "center",
+          "row": 1,
+          "colStart": 1,
+          "colSpan": 6,
+          "type": "label",
+          "name": "심사위원석",
+          "searchable": false
+        },
+        {
+          "id": "center-1",
+          "section": "center",
+          "row": 2,
+          "colStart": 1,
+          "colSpan": 3,
+          "type": "team",
+          "name": "Articode"
+        },
+        {
+          "id": "center-staff-judge",
+          "section": "center",
+          "row": 2,
+          "colStart": 5,
+          "colSpan": 2,
+          "type": "staff",
+          "name": "스태프 [심사]",
+          "searchable": false
+        },
+        {
+          "id": "center-2",
+          "section": "center",
+          "row": 3,
+          "colStart": 4,
+          "colSpan": 3,
+          "type": "team",
+          "name": "쿡"
+        },
+        {
+          "id": "center-3",
+          "section": "center",
+          "row": 4,
+          "colStart": 1,
+          "colSpan": 3,
+          "type": "team",
+          "name": "FEPSI"
+        },
+        {
+          "id": "center-4",
+          "section": "center",
+          "row": 4,
+          "colStart": 5,
+          "colSpan": 1,
+          "type": "team",
+          "name": "비전공자"
+        },
+        {
+          "id": "center-5",
+          "section": "center",
+          "row": 4,
+          "colStart": 6,
+          "colSpan": 1,
+          "type": "team",
+          "name": "최고의 공룡 스피노사우루스"
+        },
+        {
+          "id": "center-6",
+          "section": "center",
+          "row": 5,
+          "colStart": 3,
+          "colSpan": 4,
+          "type": "team",
+          "name": "해오름 1군"
+        },
+        {
+          "id": "center-7",
+          "section": "center",
+          "row": 6,
+          "colStart": 1,
+          "colSpan": 2,
+          "type": "team",
+          "name": "도미새"
+        },
+        {
+          "id": "center-8",
+          "section": "center",
+          "row": 7,
+          "colStart": 3,
+          "colSpan": 4,
+          "type": "team",
+          "name": "찹추"
+        },
+        {
+          "id": "center-9",
+          "section": "center",
+          "row": 8,
+          "colStart": 1,
+          "colSpan": 3,
+          "type": "team",
+          "name": "open CH"
+        },
+        {
+          "id": "center-10",
+          "section": "center",
+          "row": 9,
+          "colStart": 4,
+          "colSpan": 3,
+          "type": "team",
+          "name": "얄레!"
+        },
+        {
+          "id": "center-11",
+          "section": "center",
+          "row": 10,
+          "colStart": 1,
+          "colSpan": 3,
+          "type": "team",
+          "name": "Six Sense"
+        },
+        {
+          "id": "center-staff",
+          "section": "center",
+          "row": 11,
+          "colStart": 1,
+          "colSpan": 6,
+          "type": "staff",
+          "name": "스태프",
+          "searchable": false
+        },
+
+        {
+          "id": "right-1",
+          "section": "right",
+          "row": 1,
+          "colStart": 1,
+          "colSpan": 4,
+          "type": "team",
+          "name": "맥도날드좋아해요"
+        },
+        {
+          "id": "right-2",
+          "section": "right",
+          "row": 3,
+          "colStart": 1,
+          "colSpan": 4,
+          "type": "team",
+          "name": "멋진돈코츠"
+        },
+        {
+          "id": "right-3",
+          "section": "right",
+          "row": 5,
+          "colStart": 1,
+          "colSpan": 4,
+          "type": "team",
+          "name": "불멸물고기"
+        },
+        {
+          "id": "right-4",
+          "section": "right",
+          "row": 7,
+          "colStart": 1,
+          "colSpan": 4,
+          "type": "team",
+          "name": "어쩌려고 그런 말을 해"
+        },
+        {
+          "id": "right-5",
+          "section": "right",
+          "row": 9,
+          "colStart": 1,
+          "colSpan": 4,
+          "type": "team",
+          "name": "우아한남매들"
+        },
+        {
+          "id": "right-6",
+          "section": "right",
+          "row": 10,
+          "colStart": 1,
+          "colSpan": 2,
+          "type": "team",
+          "name": "Endro"
+        },
+        {
+          "id": "right-staff",
+          "section": "right",
+          "row": 11,
+          "colStart": 1,
+          "colSpan": 4,
+          "type": "staff",
+          "name": "스태프 [간식바]",
+          "searchable": false
+        },
+
+        {
+          "id": "211-1-left-1",
+          "section": "211-1-left",
+          "room": "211-1호",
+          "row": 1,
+          "colStart": 2,
+          "colSpan": 5,
+          "type": "team",
+          "tone": "blue",
+          "name": "AI-Powered Rangers"
+        },
+        {
+          "id": "211-1-left-2",
+          "section": "211-1-left",
+          "room": "211-1호",
+          "row": 2,
+          "colStart": 1,
+          "colSpan": 4,
+          "type": "team",
+          "tone": "blue",
+          "name": "취준즈"
+        },
+        {
+          "id": "211-1-left-3",
+          "section": "211-1-left",
+          "room": "211-1호",
+          "row": 3,
+          "colStart": 3,
+          "colSpan": 4,
+          "type": "team",
+          "tone": "blue",
+          "name": "Team KHM"
+        },
+        {
+          "id": "211-1-left-4",
+          "section": "211-1-left",
+          "room": "211-1호",
+          "row": 4,
+          "colStart": 1,
+          "colSpan": 4,
+          "type": "team",
+          "tone": "blue",
+          "name": "소음"
+        },
+        {
+          "id": "211-1-left-5",
+          "section": "211-1-left",
+          "room": "211-1호",
+          "row": 5,
+          "colStart": 4,
+          "colSpan": 3,
+          "type": "team",
+          "tone": "blue",
+          "name": "코딩햄"
+        },
+
+        {
+          "id": "211-1-center-1",
+          "section": "211-1-center",
+          "room": "211-1호",
+          "row": 2,
+          "colStart": 1,
+          "colSpan": 4,
+          "type": "team",
+          "tone": "blue",
+          "name": "이름이??"
+        },
+        {
+          "id": "211-1-center-2",
+          "section": "211-1-center",
+          "room": "211-1호",
+          "row": 2,
+          "colStart": 5,
+          "colSpan": 3,
+          "type": "team",
+          "tone": "blue",
+          "name": "21맨"
+        },
+        {
+          "id": "211-1-center-3",
+          "section": "211-1-center",
+          "room": "211-1호",
+          "row": 4,
+          "colStart": 1,
+          "colSpan": 3,
+          "type": "team",
+          "tone": "blue",
+          "name": "뚝딱코딩"
+        },
+        {
+          "id": "211-1-center-4",
+          "section": "211-1-center",
+          "room": "211-1호",
+          "row": 4,
+          "colStart": 4,
+          "colSpan": 4,
+          "type": "team",
+          "tone": "blue",
+          "name": "까몽이"
+        },
+        {
+          "id": "211-1-center-staff",
+          "section": "211-1-center",
+          "room": "211-1호",
+          "row": 5,
+          "colStart": 5,
+          "colSpan": 3,
+          "type": "staff",
+          "name": "스태프 [간식바]",
+          "searchable": false
+        },
+
+        {
+          "id": "211-1-right-1",
+          "section": "211-1-right",
+          "room": "211-1호",
+          "row": 1,
+          "colStart": 3,
+          "colSpan": 4,
+          "type": "team",
+          "tone": "blue",
+          "name": "IIT"
+        },
+        {
+          "id": "211-1-right-2",
+          "section": "211-1-right",
+          "room": "211-1호",
+          "row": 2,
+          "colStart": 1,
+          "colSpan": 4,
+          "type": "team",
+          "tone": "blue",
+          "name": "큐리언트"
+        },
+        {
+          "id": "211-1-right-3",
+          "section": "211-1-right",
+          "room": "211-1호",
+          "row": 3,
+          "colStart": 4,
+          "colSpan": 3,
+          "type": "team",
+          "tone": "blue",
+          "name": "경희대_상해캠퍼스"
+        },
+        {
+          "id": "211-1-right-4",
+          "section": "211-1-right",
+          "room": "211-1호",
+          "row": 4,
+          "colStart": 1,
+          "colSpan": 4,
+          "type": "team",
+          "tone": "blue",
+          "name": "티닷컴"
+        },
+        {
+          "id": "211-1-right-staff",
+          "section": "211-1-right",
+          "room": "211-1호",
+          "row": 5,
+          "colStart": 1,
+          "colSpan": 2,
+          "type": "staff",
+          "name": "스태프",
+          "searchable": false
+        },
+        {
+          "id": "211-1-right-5",
+          "section": "211-1-right",
+          "room": "211-1호",
+          "row": 5,
+          "colStart": 4,
+          "colSpan": 3,
+          "type": "team",
+          "tone": "blue",
+          "name": "네잎클로버"
+        },
+
+        {
+          "id": "211-2-left-1",
+          "section": "211-2-left",
+          "room": "211-2호",
+          "row": 1,
+          "colStart": 1,
+          "colSpan": 3,
+          "type": "team",
+          "tone": "green",
+          "name": "베드락에디션"
+        },
+        {
+          "id": "211-2-left-2",
+          "section": "211-2-left",
+          "room": "211-2호",
+          "row": 2,
+          "colStart": 1,
+          "colSpan": 1,
+          "type": "team",
+          "tone": "green",
+          "name": "당긴준"
+        },
+        {
+          "id": "211-2-left-3",
+          "section": "211-2-left",
+          "room": "211-2호",
+          "row": 2,
+          "colStart": 3,
+          "colSpan": 1,
+          "type": "team",
+          "tone": "green",
+          "name": "독고다이"
+        },
+        {
+          "id": "211-2-left-4",
+          "section": "211-2-left",
+          "room": "211-2호",
+          "row": 3,
+          "colStart": 2,
+          "colSpan": 2,
+          "type": "team",
+          "tone": "green",
+          "name": "은수 없는 은수팀"
+        },
+
+        {
+          "id": "211-2-center-1",
+          "section": "211-2-center",
+          "room": "211-2호",
+          "row": 1,
+          "colStart": 1,
+          "colSpan": 3,
+          "type": "team",
+          "tone": "green",
+          "name": "야금야금"
+        },
+        {
+          "id": "211-2-center-2",
+          "section": "211-2-center",
+          "room": "211-2호",
+          "row": 3,
+          "colStart": 1,
+          "colSpan": 4,
+          "type": "team",
+          "tone": "green",
+          "name": "아카츠키"
+        },
+        {
+          "id": "211-2-center-staff",
+          "section": "211-2-center",
+          "room": "211-2호",
+          "row": 4,
+          "colStart": 1,
+          "colSpan": 4,
+          "type": "staff",
+          "name": "스태프",
+          "searchable": false
+        },
+
+        {
+          "id": "211-2-right-1",
+          "section": "211-2-right",
+          "room": "211-2호",
+          "row": 1,
+          "colStart": 1,
+          "colSpan": 3,
+          "type": "team",
+          "tone": "green",
+          "name": "쿠카프"
+        },
+        {
+          "id": "211-2-right-2",
+          "section": "211-2-right",
+          "room": "211-2호",
+          "row": 3,
+          "colStart": 1,
+          "colSpan": 3,
+          "type": "team",
+          "tone": "green",
+          "name": "쏘삼"
+        },
+        {
+          "id": "211-2-right-staff",
+          "section": "211-2-right",
+          "room": "211-2호",
+          "row": 4,
+          "colStart": 1,
+          "colSpan": 3,
+          "type": "staff",
+          "name": "스태프 [간식바]",
+          "searchable": false
+        }
+      ]
+    </script>
+
+    <script>
+      const SECTION_CONFIG = {
+        left: { columns: 4, rows: 11, elementId: "section-left" },
+        center: { columns: 6, rows: 11, elementId: "section-center" },
+        right: { columns: 4, rows: 11, elementId: "section-right" },
+        "211-1-left": { columns: 6, rows: 5, elementId: "section-211-1-left" },
+        "211-1-center": {
+          columns: 7,
+          rows: 5,
+          elementId: "section-211-1-center",
+        },
+        "211-1-right": {
+          columns: 6,
+          rows: 5,
+          elementId: "section-211-1-right",
+        },
+        "211-2-left": { columns: 3, rows: 3, elementId: "section-211-2-left" },
+        "211-2-center": {
+          columns: 4,
+          rows: 4,
+          elementId: "section-211-2-center",
+        },
+        "211-2-right": {
+          columns: 3,
+          rows: 4,
+          elementId: "section-211-2-right",
+        },
+      };
+
+      const statusElement = document.querySelector("#status");
+      const searchForm = document.querySelector("#search-form");
+      const searchInput = document.querySelector("#team-search");
+      const suggestionsElement = document.querySelector("#suggestions");
+      let activeSeat = null;
+      let seatItems = [];
+
+      function normalizeSearchValue(value) {
+        return value.trim().replace(/\s+/g, " ").toLocaleLowerCase("ko-KR");
+      }
+
+      function setStatus(message, isError) {
+        statusElement.textContent = message;
+        statusElement.classList.toggle("error", Boolean(isError));
+      }
+
+      function createSeatElement(item) {
+        const seat = document.createElement("button");
+        seat.type = "button";
+        seat.className = `seat ${item.type || "team"}${item.tone ? ` tone-${item.tone}` : ""}`;
+        seat.textContent = item.name || "";
+        seat.dataset.id = item.id || "";
+        seat.dataset.name = item.name || "";
+        seat.style.gridRow = String(item.row);
+        seat.style.gridColumn = `${item.colStart} / span ${item.colSpan || 1}`;
+        seat.setAttribute(
+          "aria-label",
+          item.name ? `${item.name} 좌석` : "빈 좌석",
+        );
+        return seat;
+      }
+
+      function createEmptySeat(section, row, colStart, colSpan) {
+        return createSeatElement({
+          id: `${section}-empty-${row}-${colStart}`,
+          section,
+          row,
+          colStart,
+          colSpan,
+          type: "empty",
+          name: "",
+          searchable: false,
+        });
+      }
+
+      function readSeatData() {
+        const dataElement = document.querySelector("#seat-data");
+        return JSON.parse(dataElement.textContent);
+      }
+
+      function validateAndBuildOccupancy(items) {
+        const errors = [];
+        const occupied = {};
+
+        Object.keys(SECTION_CONFIG).forEach((section) => {
+          occupied[section] = new Map();
+        });
+
+        items.forEach((item) => {
+          const config = SECTION_CONFIG[item.section];
+          const colSpan = item.colSpan || 1;
+
+          if (!config) {
+            errors.push(
+              `${item.id || item.name}: 알 수 없는 section "${item.section}"`,
+            );
+            return;
+          }
+
+          if (
+            item.row < 1 ||
+            item.row > config.rows ||
+            item.colStart < 1 ||
+            item.colStart + colSpan - 1 > config.columns
+          ) {
+            errors.push(`${item.id || item.name}: grid 범위를 벗어난 위치`);
+            return;
+          }
+
+          for (
+            let column = item.colStart;
+            column < item.colStart + colSpan;
+            column += 1
+          ) {
+            const key = `${item.row}:${column}`;
+            if (occupied[item.section].has(key)) {
+              errors.push(
+                `${item.id || item.name}: ${item.section} ${item.row}행 ${column}열 위치 중복`,
+              );
+            }
+            occupied[item.section].set(key, item);
+          }
+        });
+
+        return { errors, occupied };
+      }
+
+      function renderSection(section, items, occupied) {
+        const config = SECTION_CONFIG[section];
+        const container = document.querySelector(`#${config.elementId}`);
+        container.innerHTML = "";
+
+        const itemByStartCell = new Map(
+          items
+            .filter((item) => item.section === section)
+            .map((item) => [`${item.row}:${item.colStart}`, item]),
+        );
+
+        for (let row = 1; row <= config.rows; row += 1) {
+          let col = 1;
+          while (col <= config.columns) {
+            const key = `${row}:${col}`;
+            const item = itemByStartCell.get(key);
+
+            if (item) {
+              container.appendChild(createSeatElement(item));
+              col += item.colSpan || 1;
+              continue;
+            }
+
+            if (occupied[section].has(key)) {
+              col += 1;
+              continue;
+            }
+
+            let span = 1;
+            while (
+              col + span <= config.columns &&
+              !occupied[section].has(`${row}:${col + span}`)
+            ) {
+              span += 1;
+            }
+            container.appendChild(createEmptySeat(section, row, col, span));
+            col += span;
+          }
+        }
+      }
+
+      function renderSeatMap() {
+        try {
+          const items = readSeatData();
+          const { errors, occupied } = validateAndBuildOccupancy(items);
+          seatItems = items;
+
+          Object.keys(SECTION_CONFIG).forEach((section) => {
+            renderSection(section, items, occupied);
+          });
+
+          if (errors.length > 0) {
+            console.warn("Seat map data errors:", errors);
+            setStatus(
+              `데이터 오류: ${errors[0]}${errors.length > 1 ? ` 외 ${errors.length - 1}건` : ""}`,
+              true,
+            );
+          }
+        } catch (error) {
+          console.error(error);
+          setStatus("좌석 JSON을 읽을 수 없습니다.", true);
+        }
+      }
+
+      function clearActiveSeat() {
+        if (activeSeat) {
+          activeSeat.classList.remove("active");
+          activeSeat = null;
+        }
+      }
+
+      function isSearchableTeam(item) {
+        return item.searchable !== false && item.type === "team";
+      }
+
+      function getRoomLabel(item) {
+        return item.room || "205호";
+      }
+
+      function findMatchingSeats(query) {
+        const normalizedQuery = normalizeSearchValue(query);
+
+        if (!normalizedQuery) {
+          return [];
+        }
+
+        return seatItems.filter((item) => {
+          const normalizedName = normalizeSearchValue(item.name || "");
+          return (
+            isSearchableTeam(item) && normalizedName.includes(normalizedQuery)
+          );
+        });
+      }
+
+      function focusSeat(item) {
+        const seat = document.querySelector(
+          `.seat[data-id="${CSS.escape(item.id)}"]`,
+        );
+
+        if (!seat) {
+          setStatus("좌석 요소를 찾을 수 없습니다.", true);
+          return;
+        }
+
+        clearActiveSeat();
+        activeSeat = seat;
+        seat.classList.add("active");
+        seat.focus({ preventScroll: true });
+        seat.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+          inline: "center",
+        });
+        setStatus(
+          `${getRoomLabel(item)} ${item.name} 위치로 이동했습니다.`,
+          false,
+        );
+      }
+
+      function renderSuggestions(matches) {
+        suggestionsElement.innerHTML = "";
+
+        if (matches.length === 0) {
+          suggestionsElement.classList.remove("visible");
+          return;
+        }
+
+        matches.slice(0, 5).forEach((item) => {
+          const listItem = document.createElement("li");
+          const button = document.createElement("button");
+          button.type = "button";
+          button.textContent = `${item.name} (${getRoomLabel(item)})`;
+          button.addEventListener("click", () => {
+            searchInput.value = item.name;
+            suggestionsElement.classList.remove("visible");
+            focusSeat(item);
+          });
+          listItem.appendChild(button);
+          suggestionsElement.appendChild(listItem);
+        });
+
+        suggestionsElement.classList.add("visible");
+      }
+
+      function updateSuggestions() {
+        const query = searchInput.value;
+        const matches = findMatchingSeats(query);
+        renderSuggestions(matches);
+      }
+
+      searchInput.addEventListener("input", updateSuggestions);
+
+      searchForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const match = findMatchingSeats(searchInput.value)[0];
+        suggestionsElement.classList.remove("visible");
+
+        if (!match) {
+          clearActiveSeat();
+          setStatus("검색 결과 없음", Boolean(searchInput.value.trim()));
+          return;
+        }
+
+        focusSeat(match);
+      });
+
+      renderSeatMap();
+    </script>
+  </body>
+</html>
