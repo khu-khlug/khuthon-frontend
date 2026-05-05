@@ -1,5 +1,3 @@
-import Subject from "./components/Subject";
-
 export default function _2025About() {
   return (
     <>
@@ -100,9 +98,7 @@ export default function _2025About() {
           <ul>
             <li className="item" style={{ paddingLeft: "60px" }}>
               <div className="name">평균연령1등</div>
-              <div className="idea">
-                내손안의 반려식물, Planttalk
-              </div>
+              <div className="idea">내손안의 반려식물, Planttalk</div>
               <div className="member"></div>
               <div className="clear"></div>
             </li>
@@ -117,8 +113,7 @@ export default function _2025About() {
             <li className="item" style={{ paddingLeft: "60px" }}>
               <div className="name">팀이름</div>
               <div className="idea">
-                잔반을 거름으로 → 마이크로 비료 거래 플랫폼
-                &quot;잔반걸음&quot;
+                잔반을 거름으로 → 마이크로 비료 거래 플랫폼 &quot;잔반걸음&quot;
               </div>
               <div className="member"></div>
               <div className="clear"></div>
@@ -175,9 +170,7 @@ export default function _2025About() {
             </li>
             <li className="item" style={{ paddingLeft: "60px" }}>
               <div className="name">ByteCrew</div>
-              <div className="idea">
-                축산을 똑똑하게 연결하다 : Piggo
-              </div>
+              <div className="idea">축산을 똑똑하게 연결하다 : Piggo</div>
               <div className="member"></div>
               <div className="clear"></div>
             </li>
@@ -226,9 +219,7 @@ export default function _2025About() {
             </li>
             <li className="item" style={{ paddingLeft: "60px" }}>
               <div className="name">나리는 외계인</div>
-              <div className="idea">
-                노지 농업을 위한 스마트 관개 시스템
-              </div>
+              <div className="idea">노지 농업을 위한 스마트 관개 시스템</div>
               <div className="member"></div>
               <div className="clear"></div>
             </li>
