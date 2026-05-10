@@ -4,10 +4,12 @@ type SubjectData = {
 };
 
 export default async function Subject() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/subject`, {
-    cache: "no-cache",
-  });
-  const { opened, subjects }: SubjectData = await res.json();
+  // const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/subject`, {
+  //   cache: "no-cache",
+  // });
+  // const { opened, subjects }: SubjectData = await res.json();
+  const opened = true;
+  const subjects = ["대중문화의 구조적 문제"];
 
   return (
     <ul className="!m-0">
